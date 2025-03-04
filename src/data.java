@@ -34,10 +34,18 @@ public class data {
     }
 
     //moods: happy, sad, tired, determined, demotivated
-    String[] moods = {"happy", "sad", "tired", "determined", "demotivated"};
+    String[] moods = {"happy", "sad", "tired", "determined", "demotivated", "cancel"};
 
+    //gets mood of the person before and after
     public String getMood(int num){
-        return moods[num-1];
+        if(num > 5 || num < 0){
+            System.out.println("you have entered an invalid mood :( ");
+        }else if(num == 5){
+            return null;
+        }else{
+            return moods[num-1];
+        }
+        return null;
     }
 
     public int timeStudied(int startHour, int startMin, int endHour, int endMin){
