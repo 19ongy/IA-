@@ -1,4 +1,4 @@
-public class data {
+public class Session {
     public String month;
     public int day;
     public int startHour;
@@ -10,7 +10,7 @@ public class data {
     public String subject;
 
     //constructor
-    public data(String month, int day, int starthour, int startmin, int endhour, int endMinute, int moodbefore, int moodAfter, String subject){
+    public Session(String month, int day, int starthour, int startmin, int endhour, int endMinute, int moodbefore, int moodAfter, String subject){
         this.month = month;
         this.day = day;
         this.startHour = starthour;
@@ -31,21 +31,6 @@ public class data {
     public void setEndTime(int endHour, int endMin){
         this.endHour = endHour;
         this.endMin = endMin;
-    }
-
-    //moods: happy, sad, tired, determined, demotivated
-    String[] moods = {"happy", "sad", "tired", "determined", "demotivated", "cancel"};
-
-    //gets mood of the person before and after
-    public String getMood(int num){
-        if(num > 5 || num < 0){
-            System.out.println("you have entered an invalid mood :( ");
-        }else if(num == 5){
-            return null;
-        }else{
-            return moods[num-1];
-        }
-        return null;
     }
 
     public int timeStudied(int startHour, int startMin, int endHour, int endMin){
@@ -77,16 +62,6 @@ public class data {
         return((hoursStudied*60) + minStudied);
     }
 
-    public void sessionOverview(){
-        System.out.println("-----------------");
-        System.out.println("Date: " + day + " . " + month);
-        System.out.println("Time begun: " + startHour + ":" + startMin);
-        System.out.println("Time ended: " + endHour + ":" + endMin);
-        System.out.println("Total time studied: " + timeStudied(startHour, startMin, endHour, endMin));
-        System.out.println("Subject: " + subject);
-        System.out.println("Mood before: " + getMood(moodBefore));
-        System.out.println("Mood after: " + getMood(moodAfter));
-    }
 
 
 }
