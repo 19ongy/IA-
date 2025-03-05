@@ -32,36 +32,4 @@ public class Session {
         this.endHour = endHour;
         this.endMin = endMin;
     }
-
-    public int timeStudied(int startHour, int startMin, int endHour, int endMin){
-        int hoursStudied = 0;
-        int minStudied = 0;
-
-        //have to enter it in 24 hour format
-        //20:00 - 04:00
-        //28:00 - 20:00 = 8 hours
-        //27:00 - 20:00 = 7 hours
-
-        if(endHour == startHour){
-            hoursStudied = 0;
-        }else if(endHour > startHour){
-            hoursStudied = endHour - startHour;
-        }else if(endHour < startHour){
-            endHour = endHour + 24;
-            hoursStudied = endHour - startHour;
-        }
-
-        if(endMin == startMin){
-            minStudied = 0;
-        }else if(endMin > startMin){
-            minStudied = endMin - startMin;
-        }else if(endMin < startMin){
-            minStudied = (endMin + 60) - startMin;
-        }
-
-        return((hoursStudied*60) + minStudied);
-    }
-
-
-
 }

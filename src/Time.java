@@ -17,8 +17,25 @@ public class Time {
     }
 
     //gets the amount of time studied for an already existing schedule
-    public void ExistingTime(int startHour, int startMin, int endHour, int endMin){
+    public int ExistingTime(int startHour, int startMin, int endHour, int endMin){
+        if(endHour == startHour){
+            hourStudied = 0;
+        }else if(endHour > startHour){
+            hourStudied = endHour - startHour;
+        }else if(endHour < startHour){
+            endHour = endHour + 24;
+            hourStudied = endHour - startHour;
+        }
 
+        if(endMin == startMin){
+            minStudied = 0;
+        }else if(endMin > startMin){
+            minStudied = endMin - startMin;
+        }else if(endMin < startMin){
+            minStudied = (endMin + 60) - startMin;
+        }
+
+        return((hourStudied*60) + minStudied);
     }
 
 }
