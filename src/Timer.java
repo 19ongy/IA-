@@ -1,7 +1,6 @@
-import java.util.Timer;
 // to get the amount of time spent on the study session
 
-public class Time {
+public class Timer {
     private int startHour = 0;
     private int startMin = 0;
     private int endHour = 0;
@@ -9,7 +8,7 @@ public class Time {
     int hourStudied = 0;
     int minStudied = 0;
 
-    public Time(int startHour, int startMin, int endHour, int endMin){
+    public Timer(int startHour, int startMin, int endHour, int endMin){
         this.startHour = startHour;
         this.startMin = startMin;
         this.endHour = endHour;

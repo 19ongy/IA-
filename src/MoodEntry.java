@@ -1,13 +1,25 @@
 import java.util.Scanner;
 
-public class Mood{
+public class MoodEntry {
     int num;
     Scanner input = new Scanner(System.in);
+
+    public MoodEntry(){
+
+    }
 
     //setter
     public int setNum(int num){
         this.num = num;
         return num;
+    }
+
+    enum Test{
+        HAPPY, SAD, TIRED, DETERMINED, DEMOTIVATED
+    }
+
+    public void MoodTest(Test mood){
+        System.out.println(mood);
     }
 
     //moods: happy, sad, tired, determined, demotivated

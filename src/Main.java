@@ -1,8 +1,6 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Mood mood = new Mood();
+        MoodEntry mood = new MoodEntry();
         System.out.println("Before session - enter your mood");
         String moodBefore = mood.getMood();
 
