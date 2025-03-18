@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         MoodEntry mood = new MoodEntry();
+        mood.MoodTest(MoodEntry.Test.HAPPY);
         System.out.println("Before session - enter your mood");
         String moodBefore = mood.getMood();
 
