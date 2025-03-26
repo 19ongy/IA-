@@ -13,11 +13,17 @@ public class SetTimer {
     int hourStudied = 0;
     int minStudied = 0;
 
+    int timeElapsed;
+    int timeRemaining;
+
     public SetTimer(int startHour, int startMin, int endHour, int endMin){
         this.startHour = startHour;
         this.startMin = startMin;
         this.endHour = endHour;
         this.endMin = endMin;
+
+        timeElapsed = 0;
+        timeRemaining = 0;
     }
 
     public int timeForTimer(){
@@ -28,18 +34,23 @@ public class SetTimer {
     }
 
     public void startTimer(){
-        final int[] count = {0};
+        timeRemaining = 10;
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
-                System.out.println(count[0]);
-                count[0] = count[0] + 1;
+                System.out.println(returnTimeLeft());
             }
         };
         //period parameter is measured in milliseconds
-        int timeInMinutes = timeForTimer();
-        int timeInMilliseconds = timeInMinutes * 60 * 1000;
+
+
+        //question: how to limit the seconds? how to make it go down
+        //how to format it so its like 00: 00
+
+
         timer.schedule(task, 0, 1000);
+
+        //System.out.println(count);
 
         /*
         for(int i = 0; i<timeInMinutes; i++){
@@ -47,6 +58,12 @@ public class SetTimer {
         }
 
          */
+    }
+
+    public int returnTimeLeft(){
+        System.out.println("test");
+        timeElapsed = timeElapsed + 1;
+        return timeRemaining - timeElapsed;
     }
 
     //gets the a;mount of time studied for an already existing schedule
