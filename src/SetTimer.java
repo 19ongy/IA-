@@ -1,9 +1,6 @@
-import java.sql.SQLOutput;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Scanner;
-// to get the amount of time spent on the study session
-
 
 public class SetTimer {
     private int startHour = 0;
@@ -23,16 +20,73 @@ public class SetTimer {
         this.timeRemaining = 0;
     }
 
-    //method to set timer duration
-    public int setTimerDuration(){
+    //decides if countdown or stopwatch
+    public void setType(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How long is your timer? enter in minutes: ");
-        timeRemaining = scanner.nextInt() * 60;
-        return timeRemaining;
+        System.out.println("What type of timer would you like to set: ");
+        System.out.println("1. Countdown \n2. Stopwatch");;
+        int answer = scanner.nextInt();
+        if(answer == 2){
+            startStopwatch();
+        }else if(answer == 1){
+            //calls method that sets countdown duration
+            int time = setCountdownDuration();
+            //starts countdown
+            startCountdown(time);
+        }else{
+            System.out.println("Invalid input. Try again.");
+            //setType();
+        }
     }
 
-    //starts timer and displays how much time is left
-    public void startTimer(int timeRemaining){
+    //STOPWATCH METHODS ------------------------------->
+    public void startStopwatch(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run(){
+                System.out.println(formatTime(timeElapsed));
+                timeElapsed = timeElapsed + 1;
+            }
+        };
+
+        //period parameter is measured in milliseconds
+        timer.schedule(task, 0, 1000);
+    }
+
+    // <-------------------------------
+
+    //COUNTDOWN METHODS ------------------------------->
+    //method to set countdown duration
+    //time returned aka timeRemaining is in seconds
+    public int setCountdownDuration(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How long is your timer? \n(Format HHMMSS or MMSS or SS) ");
+        String formattedAmt = scanner.next();
+
+        //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
+        if(formattedAmt.length() <= 2){ // if SS , so just seconds
+            int timeInSecs = Integer.parseInt(formattedAmt);
+            return timeInSecs;
+        }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
+            //takes the first two characers (MM) and converts the minutes to seconds
+            int minutes = Integer.parseInt(formattedAmt.substring(0,2));
+            int seconds = Integer.parseInt(formattedAmt.substring(2,4));
+            timeRemaining = (minutes * 60) + seconds;
+            return timeRemaining;
+        }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
+            int hours = Integer.parseInt(formattedAmt.substring(0,2));
+            int minutes = Integer.parseInt(formattedAmt.substring(2,4));
+            int seconds = Integer.parseInt(formattedAmt.substring(4,6));
+            timeRemaining = (hours * 3600) + (minutes * 60) + seconds;
+            return timeRemaining;
+        }else{
+            System.out.println("INVALID INPUT");
+            return 0;
+        }
+    }
+
+    //starts countdown and displays how much time is left
+    public void startCountdown(int timeRemaining){
         //makes sure you entered a proper time
         if(timeRemaining <= 0){
             System.out.println("Make set a valid time. ");
@@ -62,11 +116,14 @@ public class SetTimer {
         return timeRemaining - timeElapsed;
     }
 
+    // <-------------------------------
+
+
     //formats time left in countdown as HH:MM:SS
-    private String formatTime(int secondsLeft){
-        int hoursLeft = secondsLeft/3600;
-        int minsLeft = (secondsLeft%3600)/60;
-        int secsLeft = secondsLeft%60;
+    private String formatTime(int amtSeconds){
+        int hoursLeft = amtSeconds /3600;
+        int minsLeft = (amtSeconds %3600)/60;
+        int secsLeft = amtSeconds %60;
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
     }

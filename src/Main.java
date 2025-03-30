@@ -11,8 +11,13 @@ public class Main {
 
          */
 
+
+        //String number = "11223344";
+        //System.out.println(number.substring(2, 4));
+
         SetTimer timer = new SetTimer();
-        timer.startTimer(timer.setTimerDuration());
+        timer.setType();
+
 
 
     }
