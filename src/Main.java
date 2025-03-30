@@ -11,8 +11,9 @@ public class Main {
 
          */
 
-        SetTimer timer = new SetTimer(0, 0, 0, 0);
-        timer.startTimer();
+        SetTimer timer = new SetTimer();
+        timer.startTimer(timer.setTimerDuration());
+
 
     }
 }

@@ -13,60 +13,66 @@ public class SetTimer {
     int hourStudied = 0;
     int minStudied = 0;
 
-    int timeElapsed;
-    int timeRemaining;
+    private int timeElapsed;
+    private int timeRemaining;
+    private Timer timer;
 
-    public SetTimer(int startHour, int startMin, int endHour, int endMin){
-        this.startHour = startHour;
-        this.startMin = startMin;
-        this.endHour = endHour;
-        this.endMin = endMin;
-
-        timeElapsed = 0;
-        timeRemaining = 0;
+    //constructor
+    public SetTimer(){
+        this.timeElapsed = 0;
+        this.timeRemaining = 0;
     }
 
-    public int timeForTimer(){
+    //method to set timer duration
+    public int setTimerDuration(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("How long is your timer? enter in minutes: ");
-        //returns the time wanted in minutes
-        return scanner.nextInt();
+        timeRemaining = scanner.nextInt() * 60;
+        return timeRemaining;
     }
 
-    public void startTimer(){
-        timeRemaining = 10;
+    //starts timer and displays how much time is left
+    public void startTimer(int timeRemaining){
+        //makes sure you entered a proper time
+        if(timeRemaining <= 0){
+            System.out.println("Make set a valid time. ");
+            return;
+        }
+
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
-                System.out.println(returnTimeLeft());
+                //checks if there's still time left
+                if(timeElapsed < timeRemaining){
+                    System.out.println("TIME LEFT: "  + formatTime(returnTimeLeft()));
+                }else{
+                    System.out.println("Good job!! Timer finished! ");
+                    timer.cancel();
+                }
             }
         };
+
         //period parameter is measured in milliseconds
-
-
-        //question: how to limit the seconds? how to make it go down
-        //how to format it so its like 00: 00
-
-
         timer.schedule(task, 0, 1000);
-
-        //System.out.println(count);
-
-        /*
-        for(int i = 0; i<timeInMinutes; i++){
-            timer.schedule(countdown, 0, 1000);
-        }
-
-         */
     }
 
-    public int returnTimeLeft(){
-        System.out.println("test");
+    //method calculates how much time is left in countdown
+    private int returnTimeLeft(){
         timeElapsed = timeElapsed + 1;
         return timeRemaining - timeElapsed;
     }
 
-    //gets the a;mount of time studied for an already existing schedule
+    //formats time left in countdown as HH:MM:SS
+    private String formatTime(int secondsLeft){
+        int hoursLeft = secondsLeft/3600;
+        int minsLeft = (secondsLeft%3600)/60;
+        int secsLeft = secondsLeft%60;
+        String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
+        return timeDisplay;
+    }
+
+
+    //gets the amount of time studied for an already existing schedule
     public int ExistingTime(int startHour, int startMin, int endHour, int endMin){
         if(endHour == startHour){
             hourStudied = 0;
