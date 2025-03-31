@@ -31,14 +31,14 @@ public class SetTimer {
         System.out.println("1. Countdown \n2. Stopwatch");;
         int answer = scanner.nextInt();
         if(answer == 2){
-            preTimer();
-            //ready = true;
+            //preTimer();
+            ready = true;
             if(ready) {
                 startStopwatch();
             }
         }else if(answer == 1){
-            preTimer();
-            //ready = true;
+            //preTimer();
+            ready = true;
             if(ready) {
                 //calls method that sets countdown duration
                 int time = setCountdownDuration();
@@ -101,7 +101,10 @@ public class SetTimer {
         //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
         if(formattedAmt.length() <= 2){ // if SS , so just seconds
             int timeInSecs = Integer.parseInt(formattedAmt);
+            System.out.println(timeInSecs);
             return timeInSecs;
+            //ISSUE - When i enter 05, for 5 seconds it goes 00:00:-1 to 00:00:-5
+            //it is the same with any amount of SS i enter
         }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
             //takes the first two characers (MM) and converts the minutes to seconds
             int minutes = Integer.parseInt(formattedAmt.substring(0,2));
