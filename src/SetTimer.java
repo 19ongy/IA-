@@ -13,11 +13,15 @@ public class SetTimer {
     private int timeElapsed;
     private int timeRemaining;
     private Timer timer;
+    boolean ready;
+    private int preTimeRemaining;
 
     //constructor
     public SetTimer(){
         this.timeElapsed = 0;
         this.timeRemaining = 0;
+        ready = false;
+        preTimeRemaining = 3;
     }
 
     //decides if countdown or stopwatch
@@ -27,17 +31,48 @@ public class SetTimer {
         System.out.println("1. Countdown \n2. Stopwatch");;
         int answer = scanner.nextInt();
         if(answer == 2){
-            startStopwatch();
+            preTimer();
+            //ready = true;
+            if(ready) {
+                startStopwatch();
+            }
         }else if(answer == 1){
-            //calls method that sets countdown duration
-            int time = setCountdownDuration();
-            //starts countdown
-            startCountdown(time);
+            preTimer();
+            //ready = true;
+            if(ready) {
+                //calls method that sets countdown duration
+                int time = setCountdownDuration();
+                //starts countdown
+                startCountdown(time);
+            }
         }else{
             System.out.println("Invalid input. Try again.");
             //setType();
         }
     }
+
+    //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
+    public void preTimer(){
+        System.out.println("STUDY SESSION BEGINNING IN: ");
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run(){
+                if (preTimeRemaining > 0) {
+                    System.out.println(preTimeRemaining);
+                    preTimeRemaining = preTimeRemaining - 1;
+                } else {
+                    System.out.println("TIMER STARTS NOW!!!!!");
+                    timer.cancel();
+                    ready = true;
+                }
+            }
+        };
+
+        //period parameter is measured in milliseconds
+        timer.schedule(task, 0, 1000);
+    }
+
 
     //STOPWATCH METHODS ------------------------------->
     public void startStopwatch(){

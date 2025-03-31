@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixed my timer class &#10;added formatting and stuff">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740576832318</updated>
-      <workItem from="1743372873765" duration="4969000" />
+      <workItem from="1743372873765" duration="6318000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -130,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743375207831</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS">
+      <option name="closed" value="true" />
+      <created>1743377991116</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743377991116</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +150,7 @@
     <MESSAGE value="added classes" />
     <MESSAGE value="changed timer class to setTimer&#10;started working on timer countdown" />
     <MESSAGE value="fixed my timer class &#10;added formatting and stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed my timer class &#10;added formatting and stuff" />
+    <MESSAGE value="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS" />
+    <option name="LAST_COMMIT_MESSAGE" value="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS" />
   </component>
 </project>
