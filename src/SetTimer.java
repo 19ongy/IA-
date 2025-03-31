@@ -31,17 +31,22 @@ public class SetTimer {
         System.out.println("1. Countdown \n2. Stopwatch");;
         int answer = scanner.nextInt();
         if(answer == 2){
-            //preTimer();
-            ready = true;
+            preTimer();
+            //ready = true;
             if(ready) {
                 startStopwatch();
             }
         }else if(answer == 1){
-            //preTimer();
-            ready = true;
+            //ready = true;
+            //calls method that sets countdown duration
+            int time = setCountdownDuration();
+            preTimer();
+
+            while(!ready){
+                System.out.println("helloo");
+            }
+
             if(ready) {
-                //calls method that sets countdown duration
-                int time = setCountdownDuration();
                 //starts countdown
                 startCountdown(time);
             }
@@ -161,7 +166,12 @@ public class SetTimer {
     private String formatTime(int amtSeconds){
         int hoursLeft = amtSeconds /3600;
         int minsLeft = (amtSeconds %3600)/60;
-        int secsLeft = amtSeconds %60;
+
+        //problem with the seconds
+        //originally was printing the countdown as a stopwatch and negative
+        //put Math.abs() but thats wrong
+
+        int secsLeft = Math.abs(amtSeconds %60);
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
     }
