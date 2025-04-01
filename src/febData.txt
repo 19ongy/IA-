@@ -1,1 +1,4 @@
-//month, day , startHour, startMin, endHour, endMin, subject, moodBefore, moodAfter
+//month, day, startHour, startMin, endHour, endMin, subject, moodBefore, moodAfter
+02, 05, 12, 30, 13, 30, Math, Tired, Energized
+02, 20, 16, 00, 18, 00, English, Sad, Motivated
+

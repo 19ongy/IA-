@@ -37,8 +37,11 @@ public class SetTimer {
         }else if(answer == 1){
             //sets the amount of time before running the pre countdown
             int time = setCountdownDuration();
-            preTimer();
-            startCountdown(time);
+            //System.out.println(time);
+            if(time != 0){
+                preTimer();
+                startCountdown(time);
+            }
         }else{
             System.out.println("Invalid input. Try again.");
             //setType();
@@ -102,10 +105,16 @@ public class SetTimer {
         System.out.println("How long is your timer? \n(Format HHMMSS or MMSS or SS) ");
         String formattedAmt = scanner.next();
 
+        //makes sure that user didn't enter all 0s
+        if(formattedAmt.matches("0+")){
+            System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
+            return 0;
+        }
+
         //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
         if(formattedAmt.length() <= 2){ // if SS , so just seconds
             int timeInSecs = Integer.parseInt(formattedAmt);
-            System.out.println(timeInSecs);
+            //System.out.println(timeInSecs);
             return timeInSecs;
             //ISSUE - When i enter 05, for 5 seconds it goes 00:00:-1 to 00:00:-5
             //it is the same with any amount of SS i enter
@@ -140,6 +149,8 @@ public class SetTimer {
             public void run(){
                 //checks if there's still time left
                 if(timeElapsed < timeRemaining){
+                    //System.out.println(timeElapsed);
+                    //System.out.println(timeRemaining);
                     System.out.println("TIME LEFT: "  + formatTime(returnTimeLeft()));
                 }else{
                     System.out.println("Good job!! Timer finished! ");
@@ -163,6 +174,7 @@ public class SetTimer {
 
     //formats time left in countdown as HH:MM:SS
     private String formatTime(int amtSeconds){
+        System.out.println(amtSeconds);
         int hoursLeft = amtSeconds /3600;
         int minsLeft = (amtSeconds %3600)/60;
 
@@ -170,7 +182,8 @@ public class SetTimer {
         //originally was printing the countdown as a stopwatch and negative
         //put Math.abs() but thats wrong
 
-        int secsLeft = Math.abs(amtSeconds %60);
+        int secsLeft = amtSeconds %60;
+        System.out.println(secsLeft);
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
     }

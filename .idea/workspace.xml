@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="tried setting a pre timer countdown but it doesnt work">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="PRE TIMER WORKS">
+      <change afterPath="$PROJECT_DIR$/src/StudySessionFileHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MoodEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoodEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Session.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/febData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/febData.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743379437522</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="PRE TIMER WORKS">
+      <option name="closed" value="true" />
+      <created>1743544264760</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1743544264760</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +173,7 @@
     <MESSAGE value="fixed my timer class &#10;added formatting and stuff" />
     <MESSAGE value="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS" />
     <MESSAGE value="tried setting a pre timer countdown but it doesnt work" />
-    <option name="LAST_COMMIT_MESSAGE" value="tried setting a pre timer countdown but it doesnt work" />
+    <MESSAGE value="PRE TIMER WORKS" />
+    <option name="LAST_COMMIT_MESSAGE" value="PRE TIMER WORKS" />
   </component>
 </project>

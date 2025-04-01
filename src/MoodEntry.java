@@ -1,46 +1,36 @@
 import java.util.Scanner;
 
 public class MoodEntry {
-    int num;
-    Scanner input = new Scanner(System.in);
-
-    public MoodEntry(){
-
-    }
-
-    //setter
-    public int setNum(int num){
-        this.num = num;
-        return num;
-    }
-
-    enum Test{
+    enum Mood{
         HAPPY, SAD, TIRED, DETERMINED, DEMOTIVATED
     }
 
-    public void MoodTest(Test mood){
-        System.out.println(mood);
-    }
+    Scanner scanner = new Scanner(System.in);
 
-    //moods: happy, sad, tired, determined, demotivated
-    String[] moods = {"happy", "sad", "tired", "determined", "demotivated", "cancel"};
-
-    //gets mood of the person before and after
-    public String getMood(){
+    public Mood getMood(){
+        System.out.println("-----------------------------------------------");
         System.out.println("How are you feeling?");
-        System.out.println("1. Happy \n2. Sad \n3. Tired \n4. Determined \n5. Demotivated \n6. Cancel");
-        System.out.println("enter number: ");
-        int num = input.nextInt();
-        if(num > 5 || num < 0){
-            System.out.println("you have entered an invalid mood :( ");
-        }else if(num == 5){
+        System.out.println("1. Happy\n2. Sad\n3. Tired\n4. Determined\n5. Demotivated\n6. Skip");
+        System.out.print("Enter number: ");
+        int num = scanner.nextInt();
+        System.out.println("-----------------------------------------------");
+
+        if((num < 1) || (num > 6)){
+            System.out.println("Invalid input :( ");
             return null;
-        }else{
-            return moods[num-1];
+        }else if(num == 6){
+            return null;
         }
-        return null;
+
+        return Mood.values()[num - 1];
+        //returns the mood corresponding to num - 1 in the mood array
     }
 
+    public void displayMood(Mood mood){
+        if(mood != null) {
+            System.out.println("You are feeling " + mood + " today.");
+        }
+    }
 
 
 
