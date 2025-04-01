@@ -163,15 +163,4 @@
     <MESSAGE value="tried setting a pre timer countdown but it doesnt work" />
     <option name="LAST_COMMIT_MESSAGE" value="tried setting a pre timer countdown but it doesnt work" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SetTimer.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>

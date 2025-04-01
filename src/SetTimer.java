@@ -30,26 +30,15 @@ public class SetTimer {
         System.out.println("What type of timer would you like to set: ");
         System.out.println("1. Countdown \n2. Stopwatch");;
         int answer = scanner.nextInt();
+
         if(answer == 2){
             preTimer();
-            //ready = true;
-            if(ready) {
-                startStopwatch();
-            }
+            startStopwatch();
         }else if(answer == 1){
-            //ready = true;
-            //calls method that sets countdown duration
+            //sets the amount of time before running the pre countdown
             int time = setCountdownDuration();
             preTimer();
-
-            while(!ready){
-                System.out.println("helloo");
-            }
-
-            if(ready) {
-                //starts countdown
-                startCountdown(time);
-            }
+            startCountdown(time);
         }else{
             System.out.println("Invalid input. Try again.");
             //setType();
@@ -75,7 +64,17 @@ public class SetTimer {
         };
 
         //period parameter is measured in milliseconds
-        timer.schedule(task, 0, 1000);
+        timer.scheduleAtFixedRate(task, 0, 1000);
+
+        //prevents the separate threads issue
+        while (!ready) {
+            try {
+                //creates a small delay
+                Thread.sleep(500); // Small delay to prevent CPU overuse
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
