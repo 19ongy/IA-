@@ -86,7 +86,11 @@ public class SetTimer {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
-                System.out.println(formatTime(timeElapsed));
+
+                //get it to print on the same line
+                System.out.printf(formatTime(timeElapsed));
+
+
                 timeElapsed = timeElapsed + 1;
             }
         };
@@ -152,7 +156,7 @@ public class SetTimer {
                 if(timeElapsed < timeRemaining){
                     //System.out.println(timeElapsed);
                     //System.out.println(timeRemaining);
-                    System.out.println("TIME LEFT: "  + formatTime(returnTimeLeft()));
+                    System.out.printf("TIME LEFT:"  + formatTime(returnTimeLeft()));
                 }else{
                     System.out.println("Good job!! Timer finished! ");
                     timer.cancel();
@@ -175,16 +179,11 @@ public class SetTimer {
 
     //formats time left in countdown as HH:MM:SS
     private String formatTime(int amtSeconds){
-        System.out.println(amtSeconds);
         int hoursLeft = amtSeconds /3600;
         int minsLeft = (amtSeconds %3600)/60;
-
-        //problem with the seconds
-        //originally was printing the countdown as a stopwatch and negative
-        //put Math.abs() but thats wrong
-
         int secsLeft = amtSeconds %60;
-        System.out.println(secsLeft);
+
+
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
     }
