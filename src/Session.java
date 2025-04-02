@@ -1,3 +1,4 @@
+import java.time.Month;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -76,6 +77,11 @@ public class Session {
         this.endMin = endMin;
     }
 
+    public int getMonthNow(){
+        LocalDate date = LocalDate.now();
+        Month month = date.getMonth();
+        return date.getMonth();
+    }
     public void getDateAndTime(){
         LocalDate myObj = LocalDate.now();
         System.out.println(myObj);
