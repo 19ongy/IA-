@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Session {
     private int month;
@@ -74,8 +76,20 @@ public class Session {
         this.endMin = endMin;
     }
 
+    public void getDateAndTime(){
+        LocalDate myObj = LocalDate.now();
+        System.out.println(myObj);
+        LocalTime time = LocalTime.now();
+        int hour = time.getHour();
+        int min = time.getMinute();
+        System.out.println(hour + " : " + min);
+
+    }
+
     public void setSession(){
         Scanner scanner = new Scanner(System.in);
 
     }
+
+
 }

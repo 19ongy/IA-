@@ -16,6 +16,7 @@ public class SetTimer {
     boolean ready;
     private int preTimeRemaining;
 
+
     //constructor
     public SetTimer(){
         this.timeElapsed = 0;
@@ -88,7 +89,7 @@ public class SetTimer {
             public void run(){
 
                 //get it to print on the same line
-                System.out.printf(formatTime(timeElapsed));
+                System.out.printf("\r TIME ELAPSED: %s", formatTime(timeElapsed));
 
 
                 timeElapsed = timeElapsed + 1;
@@ -156,7 +157,7 @@ public class SetTimer {
                 if(timeElapsed < timeRemaining){
                     //System.out.println(timeElapsed);
                     //System.out.println(timeRemaining);
-                    System.out.printf("TIME LEFT:"  + formatTime(returnTimeLeft()));
+                    System.out.printf("\r TIME LEFT: %s", formatTime(returnTimeLeft()));
                 }else{
                     System.out.println("Good job!! Timer finished! ");
                     timer.cancel();

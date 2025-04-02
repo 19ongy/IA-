@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="THE SECONDS WORK YAYAY">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="tried setting a pre timer countdown but it doesnt work">
+      <change afterPath="$PROJECT_DIR$/src/startSessionCurrent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MoodEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoodEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Session.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +34,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/19ongy/IA-",
-    "accountId": "c367e849-289c-46c1-ab08-3b4656975b88"
+    "url": "https://github.com/19ongy/IA-.git",
+    "accountId": "d4b3e327-3e72-483e-ad05-abe80606d974"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -139,27 +140,22 @@
       <option name="project" value="LOCAL" />
       <updated>1743379437522</updated>
     </task>
-    <task id="LOCAL-00009" summary="PRE TIMER WORKS">
-      <option name="closed" value="true" />
-      <created>1743544264760</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1743544264760</updated>
-    </task>
-    <task id="LOCAL-00010" summary="THE SECONDS WORK YAYAY">
-      <option name="closed" value="true" />
-      <created>1743590305261</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1743590305261</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -170,8 +166,6 @@
     <MESSAGE value="fixed my timer class &#10;added formatting and stuff" />
     <MESSAGE value="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS" />
     <MESSAGE value="tried setting a pre timer countdown but it doesnt work" />
-    <MESSAGE value="PRE TIMER WORKS" />
-    <MESSAGE value="THE SECONDS WORK YAYAY" />
-    <option name="LAST_COMMIT_MESSAGE" value="THE SECONDS WORK YAYAY" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried setting a pre timer countdown but it doesnt work" />
   </component>
 </project>
