@@ -115,7 +115,8 @@ public class SetTimer {
         if(formattedAmt.length() <= 2){ // if SS , so just seconds
             int timeInSecs = Integer.parseInt(formattedAmt);
             //System.out.println(timeInSecs);
-            return timeInSecs;
+            timeRemaining = timeInSecs;
+            return timeRemaining;
             //ISSUE - When i enter 05, for 5 seconds it goes 00:00:-1 to 00:00:-5
             //it is the same with any amount of SS i enter
         }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
