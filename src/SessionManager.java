@@ -1,8 +1,10 @@
+import java.io.*;
 import java.util.Scanner;
 import java.time.Month;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 
 public class SessionManager {
     private Scanner scanner = new Scanner(System.in);
@@ -91,6 +93,38 @@ public class SessionManager {
         Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
                 startMonth, startDay, endMonth, endDay,
                 startHour, startMinute, endHour, endMinute);
+
+        saveSession(session);
+    }
+
+
+    //attempts at reading and writing to the data file
+    public void saveSession(Session session){
+        try{
+            FileWriter writer = new FileWriter("session_data.txt", true);
+            writer.write(session.toFileString() + "\n");
+            System.out.println("nice");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readSessions() {
+        try {
+            FileReader fr = new FileReader("session_data.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String line = br.readLine();
+            while (line != null) {
+                System.out.println("hello");
+                System.out.println(line);
+                line = br.readLine();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

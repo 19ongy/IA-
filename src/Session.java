@@ -87,7 +87,16 @@ public class Session {
     public void setSession(){
         Scanner scanner = new Scanner(System.in);
 
+
     }
+
+    //method that formats the information to be stored in the text file
+    public String toFileString() {
+        return moodBefore + ", " + moodAfter + ", " + sessionLength + ", " + subject + ", " +
+                startMonth + ", " + startDay + ", " + endMonth + ", " + endDay + ", " +
+                startHour + ", " + startMinute + ", " + endHour + ", " + endMinute;
+    }
+
 
 
 

@@ -63,6 +63,7 @@ public class SetTimer {
         TimerTask task = new TimerTask() {
             public void run(){
                 if (preTimeRemaining > 0) {
+                    //prints on the same line
                     System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
                     preTimeRemaining = preTimeRemaining - 1;
                 } else {
@@ -128,8 +129,6 @@ public class SetTimer {
             timeRemaining = timeInSecs;
             setTimerDuration = timeRemaining;
             return timeRemaining;
-            //ISSUE - When i enter 05, for 5 seconds it goes 00:00:-1 to 00:00:-5
-            //it is the same with any amount of SS i enter
         }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
             //takes the first two characers (MM) and converts the minutes to seconds
             int minutes = Integer.parseInt(formattedAmt.substring(0,2));
@@ -165,6 +164,7 @@ public class SetTimer {
                 if(timeElapsed < timeRemaining){
                     //System.out.println(timeElapsed);
                     //System.out.println(timeRemaining);
+                    //makes sure it prints on one line
                     System.out.printf("\rTIME LEFT: %s", formatTime(returnTimeLeft()));
                 }else{
                     System.out.println();
