@@ -15,6 +15,7 @@ public class SetTimer {
     private Timer timer;
     boolean ready;
     private int preTimeRemaining;
+    public int setTimerDuration;
 
 
     //constructor
@@ -23,6 +24,12 @@ public class SetTimer {
         this.timeRemaining = 0;
         ready = false;
         preTimeRemaining = 3;
+        setTimerDuration = 0;
+    }
+
+    //setters and getters
+    public int getSetTimerDuration() {
+        return setTimerDuration;
     }
 
     //decides if countdown or stopwatch
@@ -51,16 +58,15 @@ public class SetTimer {
 
     //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
     public void preTimer(){
-        System.out.println("STUDY SESSION BEGINNING IN: ");
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
                 if (preTimeRemaining > 0) {
-                    System.out.println(preTimeRemaining);
+                    System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
                     preTimeRemaining = preTimeRemaining - 1;
                 } else {
-                    System.out.println("TIMER STARTS NOW!!!!!");
+                    System.out.println("\rTIMER STARTS NOW!!!!!");
                     timer.cancel();
                     ready = true;
                 }
@@ -89,8 +95,7 @@ public class SetTimer {
             public void run(){
 
                 //get it to print on the same line
-                System.out.printf("\r TIME ELAPSED: %s", formatTime(timeElapsed));
-
+                System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
 
                 timeElapsed = timeElapsed + 1;
             }
@@ -121,6 +126,7 @@ public class SetTimer {
             int timeInSecs = Integer.parseInt(formattedAmt);
             //System.out.println(timeInSecs);
             timeRemaining = timeInSecs;
+            setTimerDuration = timeRemaining;
             return timeRemaining;
             //ISSUE - When i enter 05, for 5 seconds it goes 00:00:-1 to 00:00:-5
             //it is the same with any amount of SS i enter
@@ -129,12 +135,14 @@ public class SetTimer {
             int minutes = Integer.parseInt(formattedAmt.substring(0,2));
             int seconds = Integer.parseInt(formattedAmt.substring(2,4));
             timeRemaining = (minutes * 60) + seconds;
+            setTimerDuration = timeRemaining;
             return timeRemaining;
         }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
             int hours = Integer.parseInt(formattedAmt.substring(0,2));
             int minutes = Integer.parseInt(formattedAmt.substring(2,4));
             int seconds = Integer.parseInt(formattedAmt.substring(4,6));
             timeRemaining = (hours * 3600) + (minutes * 60) + seconds;
+            setTimerDuration = timeRemaining;
             return timeRemaining;
         }else{
             System.out.println("INVALID INPUT");
@@ -157,8 +165,9 @@ public class SetTimer {
                 if(timeElapsed < timeRemaining){
                     //System.out.println(timeElapsed);
                     //System.out.println(timeRemaining);
-                    System.out.printf("\r TIME LEFT: %s", formatTime(returnTimeLeft()));
+                    System.out.printf("\rTIME LEFT: %s", formatTime(returnTimeLeft()));
                 }else{
+                    System.out.println();
                     System.out.println("Good job!! Timer finished! ");
                     timer.cancel();
                 }
