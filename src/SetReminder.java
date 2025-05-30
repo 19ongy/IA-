@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class User {
+public class SetReminder {
     private Scanner scanner = new Scanner(System.in);
     private int numReminders;
     private ArrayList<ReminderTime> studyRems = new ArrayList<>();
 
     //constructor
-    public User(){
+    public SetReminder(){
         numReminders = 0;
     }
 
@@ -26,11 +26,11 @@ public class User {
             scanner.nextLine();
             menu();
         }else if(answer ==2){
-            addReminder();
+            addReminder("What time would you like to set the study reminder at?");
         }else if(answer ==4) {
             deleteReminder();
         }else if( answer == 3) {
-
+            replaceReminder();
         }else if(answer == 7){
             //will direct to home page ish / menu type thing in the future
         }
@@ -51,9 +51,11 @@ public class User {
     }
 
     //adds the time for reminder onto the array list
-    public void addReminder(){
-        System.out.println("What time do you want to set this reminder at? (FORMAT HHMM) ");
+    //reminder messages is optional
+    public void addReminder(String question){
+        System.out.println(question + "FORMAT HHMM");
         String time = scanner.next();
+        String reminderMessage = scanner.next();
         //makes sure its HHMM
         if(time.length() != 4){
             System.out.println("INVALID INPUT");
@@ -64,7 +66,10 @@ public class User {
             //checks whether hour is above 24 and min is above 60
             if((hourInput > 24) || (minInput >= 60)){
                 System.out.println("INVALID INPUT");
+                menu();
             }else{
+                System.out.println("Message: ");
+
                 studyRems.add(new ReminderTime(hourInput, minInput));
                 menu();
             }
@@ -82,5 +87,44 @@ public class User {
         menu();
     }
 
+    //removes the reminder selected by user
+    //uses previous addReminder method to replace the old reminder
+    public void replaceReminder(){
+        displayReminders();
+        if(studyRems.isEmpty()) {
+            System.out.println("Please set a reminder first");
+            menu();
+        }else{
+            System.out.println("Which reminder do you want to replace");
+            int remToReplace = scanner.nextInt();
+            if(remToReplace >= 1 && remToReplace <= studyRems.size()){
+                studyRems.remove(remToReplace -1);
+                //uses previous addReminder method
+                addReminder("What time do you want to replace it with?");
+            }else{
+                System.out.println("You have entered an invalid number.");
+                menu();
+            }
+        }
+    }
+
+    //deletes all reminders set previously
+    //sends confirmation message asking whether they intended to delete all messages
+    public void deleteAllReminders(){
+        displayReminders();
+        System.out.println("Are you sure you want to delete all reminders? (y/n)");
+        String confirmation = scanner.next();
+        if(confirmation.equals("y")){
+            for(int i = 0; i < studyRems.size(); i++){
+                //uses previous delete method
+                deleteReminder();
+            }
+        }else if(confirmation.equals("n")){
+            menu();
+        }else{
+            System.out.println("invalid");
+            menu();
+        }
+    }
 
 }
