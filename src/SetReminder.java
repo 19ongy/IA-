@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class SetReminder {
     private Scanner scanner = new Scanner(System.in);
     private int numReminders;
-    private ArrayList<ReminderTime> studyRems = new ArrayList<>();
+    private ArrayList<ReminderTime> studyReminders = new ArrayList<>();
 
     //constructor
     public SetReminder(){
@@ -13,7 +13,7 @@ public class SetReminder {
 
     //delete all study reminders
     public void resetStudyRems(){
-        studyRems.clear();
+        studyReminders.clear();
     }
 
     //menu for study reminders
@@ -38,11 +38,11 @@ public class SetReminder {
 
     //displays all the reminders set with a number ( i ) next to it
     public void displayReminders(){
-        if(studyRems.size() != 0) {
+        if(studyReminders.size() != 0) {
             System.out.println("STUDY REMINDERS SET AT: ");
-            for (int i = 0; i < studyRems.size(); i++) {
-                int hour = studyRems.get(i).getHour();
-                int min = studyRems.get(i).getMin();
+            for (int i = 0; i < studyReminders.size(); i++) {
+                int hour = studyReminders.get(i).getHour();
+                int min = studyReminders.get(i).getMin();
                 System.out.println("( " + (i + 1) + " ) " + hour + " : " + min);
             }
         }else{
@@ -70,7 +70,7 @@ public class SetReminder {
             }else{
                 System.out.println("Message: ");
 
-                studyRems.add(new ReminderTime(hourInput, minInput));
+                studyReminders.add(new ReminderTime(hourInput, minInput));
                 menu();
             }
         }
@@ -81,7 +81,7 @@ public class SetReminder {
         displayReminders();
         System.out.println("Which reminder would you like to delete? ");
         int remToDelete = scanner.nextInt();
-        studyRems.remove(remToDelete -1);
+        studyReminders.remove(remToDelete -1);
         System.out.println("deleted");
         scanner.nextLine();
         menu();
@@ -91,14 +91,14 @@ public class SetReminder {
     //uses previous addReminder method to replace the old reminder
     public void replaceReminder(){
         displayReminders();
-        if(studyRems.isEmpty()) {
+        if(studyReminders.isEmpty()) {
             System.out.println("Please set a reminder first");
             menu();
         }else{
             System.out.println("Which reminder do you want to replace");
             int remToReplace = scanner.nextInt();
-            if(remToReplace >= 1 && remToReplace <= studyRems.size()){
-                studyRems.remove(remToReplace -1);
+            if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
+                studyReminders.remove(remToReplace -1);
                 //uses previous addReminder method
                 addReminder("What time do you want to replace it with?");
             }else{
@@ -115,7 +115,7 @@ public class SetReminder {
         System.out.println("Are you sure you want to delete all reminders? (y/n)");
         String confirmation = scanner.next();
         if(confirmation.equals("y")){
-            for(int i = 0; i < studyRems.size(); i++){
+            for(int i = 0; i < studyReminders.size(); i++){
                 //uses previous delete method
                 deleteReminder();
             }
