@@ -11,6 +11,7 @@ public class ReminderManager {
         this.studyReminders = studyReminders;
     }
 
+    //converts user String input in format HHMM to hour and minute ints
     public ReminderTime convertTime(String time){
         if(time.length() != 4){
             System.out.println("INVALID INPUT");
@@ -29,23 +30,30 @@ public class ReminderManager {
         }
     }
 
+    //checks whether there are reminders set first
+    public boolean hasReminders(){
+        if(studyReminders.size() != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //displays all the reminders set with a number ( i ) next to it
     public String displayReminders() {
-        if (studyReminders.size() != 0) {
-            StringBuilder result = new StringBuilder("STUDY REMINDERS SET AT:\n");
-            for (int i = 0; i < studyReminders.size(); i++) {
-                int hour = studyReminders.get(i).getHour();
-                int min = studyReminders.get(i).getMin();
-                result.append("( ")
-                        .append(i + 1)
-                        .append(" ) ")
-                        .append(String.format("%02d : %02d", hour, min))
-                        .append("\n");
-            }
-            return result.toString();
-        } else {
-            return "No study reminders set yet :<";
+        StringBuilder result = new StringBuilder("STUDY REMINDERS SET AT:\n");
+        for (int i = 0; i < studyReminders.size(); i++) {
+            int hour = studyReminders.get(i).getHour();
+            int min = studyReminders.get(i).getMin();
+            result.append("( ")
+                    .append(i + 1)
+                    .append(" ) ")
+                    .append(String.format("%02d : %02d", hour, min))
+                    .append("\n");
         }
+        return result.toString();
+
+
     }
 
 
@@ -65,25 +73,17 @@ public class ReminderManager {
     }
 
 
-    public void replaceReminder(){
-        displayReminders();
-        if(studyReminders.isEmpty()) {
-            System.out.println("Please set a reminder first");
+    public void replaceReminder(int remToReplace, String time){
+        if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
+            studyReminders.remove(remToReplace -1);
+            //uses previous addReminder method
+            addReminder(time);
         }else{
-            System.out.println("Which reminder do you want to replace");
-            int remToReplace = scanner.nextInt();
-            if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
-                studyReminders.remove(remToReplace -1);
-                //uses previous addReminder method
-                addReminder("What time do you want to replace it with?");
-            }else{
-                System.out.println("You have entered an invalid number.");
-                menu();
-            }
+            System.out.println("You have entered an invalid number.");
         }
     }
 
-    /*
+
     //deletes all reminders set previously
     //sends confirmation message asking whether they intended to delete all messages
     public void deleteAllReminders(){
@@ -96,13 +96,15 @@ public class ReminderManager {
                 deleteReminder();
             }
         }else if(confirmation.equals("n")){
-            menu();
+
         }else{
             System.out.println("invalid");
-            menu();
         }
     }
 
-     */
+    public boolean remVerification(){
+        System.out.println("Are you sure about this? ");
+
+    }
 
 }

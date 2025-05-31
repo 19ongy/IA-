@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added replaceReminder and delete all reminders methods in setReminder class">
-      <change afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ReminderModule.java" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SetReminder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetReminder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReminderModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +88,7 @@
       <workItem from="1743372873765" duration="7634000" />
       <workItem from="1744062713008" duration="893000" />
       <workItem from="1747072333203" duration="562000" />
-      <workItem from="1748641705710" duration="10561000" />
+      <workItem from="1748641705710" duration="15769000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -189,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748649169569</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working">
+      <option name="closed" value="true" />
+      <created>1748662070084</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748662070084</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +224,7 @@
     <MESSAGE value="created session manager" />
     <MESSAGE value="did more user stuff and other thingies" />
     <MESSAGE value="added replaceReminder and delete all reminders methods in setReminder class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added replaceReminder and delete all reminders methods in setReminder class" />
+    <MESSAGE value="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working" />
+    <option name="LAST_COMMIT_MESSAGE" value="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working" />
   </component>
 </project>

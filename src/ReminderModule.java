@@ -15,30 +15,47 @@ public class ReminderModule {
                 "\n4. Delete study reminder \n5. Delete ALL study reminders \n6. Return menu \n7. Exit");
         int answer = scanner.nextInt();
         if(answer == 1){
-            System.out.println(manager.displayReminders());
-            scanner.nextLine();
-            menu();
+            if(!manager.hasReminders()){
+                System.out.println("there are no reminders set; please enter reminders first !");
+                menu();
+            }else {
+                System.out.println(manager.displayReminders());
+                scanner.nextLine();
+                menu();
+            }
         }else if(answer ==2){
             String time = getTime();
             manager.addReminder(time);
             menu();
+        }else if (answer == 3) {
+            if(!manager.hasReminders()){
+                System.out.println("please enter reminders first !");
+                menu();
+            }else{
+                System.out.println(manager.displayReminders());
+                System.out.println("which reminder would you like to replace");
+                int remToDelete = scanner.nextInt();
+                String time = getTime();
+                manager.replaceReminder(remToDelete, time);
+                menu();
+            }
         }else if(answer ==4) {
-            manager.displayReminders();
+            System.out.println(manager.displayReminders());
             System.out.println("Which reminder would you like to delete? ");
             int remToDelete = scanner.nextInt();
             manager.deleteReminder(remToDelete);
 
-        }else if( answer == 3) {
-            //replaceReminder();
-        }else if(answer == 7){
-            //will direct to home page ish / menu type thing in the future
+        }else if(answer == 5){
+
         }
     }
 
     public String getTime(){
         System.out.println("Enter time: (Format HHMM) ");
-        return scanner.next();
+            return scanner.next();
     }
+
+
 
 
 
