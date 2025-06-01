@@ -60,14 +60,16 @@ public class ReminderManager {
     //adds the time for reminder onto the array list
     //reminder messages is optional
     public void addReminder(String time){
-        studyReminders.add(convertTime(time));
-        System.out.println("New reminder added ");
+        if(convertTime(time) != null){
+            studyReminders.add(convertTime(time));
+            System.out.println("New reminder added ");
+        }
     }
 
 
     public void deleteReminder(int remToDelete){
         displayReminders();
-        System.out.println("Which reminder would you like to delete? ");
+
         studyReminders.remove(remToDelete -1);
         System.out.println("deleted");
     }
@@ -76,8 +78,7 @@ public class ReminderManager {
     public void replaceReminder(int remToReplace, String time){
         if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
             studyReminders.remove(remToReplace -1);
-            //uses previous addReminder method
-            addReminder(time);
+            studyReminders.add(remToReplace-1, convertTime(time));
         }else{
             System.out.println("You have entered an invalid number.");
         }
@@ -85,26 +86,14 @@ public class ReminderManager {
 
 
     //deletes all reminders set previously
-    //sends confirmation message asking whether they intended to delete all messages
     public void deleteAllReminders(){
-        displayReminders();
-        System.out.println("Are you sure you want to delete all reminders? (y/n)");
-        String confirmation = scanner.next();
-        if(confirmation.equals("y")){
-            for(int i = 0; i < studyReminders.size(); i++){
-                //uses previous delete method
-                deleteReminder();
-            }
-        }else if(confirmation.equals("n")){
-
-        }else{
-            System.out.println("invalid");
+        //for(int i = 0; i<studyReminders.size();i++){
+        //    deleteReminder(i);
+        for (int i = studyReminders.size() - 1; i >= 0; i--) {
+            deleteReminder(i + 1); // +1 if your method uses 1-based index
         }
-    }
-
-    public boolean remVerification(){
-        System.out.println("Are you sure about this? ");
 
     }
+
 
 }

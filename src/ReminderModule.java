@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ReminderModule {
@@ -44,8 +45,17 @@ public class ReminderModule {
             System.out.println("Which reminder would you like to delete? ");
             int remToDelete = scanner.nextInt();
             manager.deleteReminder(remToDelete);
+            menu();
 
         }else if(answer == 5){
+            System.out.println(manager.displayReminders());
+            if(confirmAction("Are you sure you want to delete all?")){
+                manager.deleteAllReminders();
+                menu();
+            }else{
+                menu();
+            }
+        }else if(answer == 7){
 
         }
     }
@@ -53,6 +63,21 @@ public class ReminderModule {
     public String getTime(){
         System.out.println("Enter time: (Format HHMM) ");
             return scanner.next();
+    }
+
+    public boolean confirmAction(String question){
+        System.out.println(question + "(format y/n)");
+        String answer = scanner.next();
+        if(Objects.equals(answer, "y")){
+            System.out.println("verified");
+            return true;
+        }else if(Objects.equals(answer, "n")){
+            System.out.println("unverified");
+            return false;
+        }else{
+            System.out.println("invalid");
+            return false;
+        }
     }
 
 
