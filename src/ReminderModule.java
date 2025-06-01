@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class ReminderModule {
     Scanner scanner = new Scanner(System.in);
     ReminderManager manager = new ReminderManager();
+    Menu menu = new Menu();
 
     //constructor
     public ReminderModule(){
@@ -13,7 +14,7 @@ public class ReminderModule {
     //displays menu of all reminder operations
     public void menu(){
         System.out.println("1. Display all study reminders \n2. Add study reminder \n3. Replace reminder" +
-                "\n4. Delete study reminder \n5. Delete ALL study reminders \n6. Return menu \n7. Exit");
+                "\n4. Delete study reminder \n5. Delete ALL study reminders \n6. Return");
         int answer = scanner.nextInt();
         if(answer == 1){
             if(!manager.hasReminders()){
@@ -55,8 +56,8 @@ public class ReminderModule {
             }else{
                 menu();
             }
-        }else if(answer == 7){
-
+        }else if(answer == 6){
+            menu.startMenu();
         }
     }
 
