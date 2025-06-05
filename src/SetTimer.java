@@ -184,6 +184,10 @@ public class SetTimer {
         return timeRemaining - timeElapsed;
     }
 
+    public void pause(){
+
+    }
+
     // <-------------------------------
 
 
@@ -220,5 +224,6 @@ public class SetTimer {
 
         return((hourStudied*60) + minStudied);
     }
+
 
 }

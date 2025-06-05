@@ -46,7 +46,6 @@ public class SessionManager {
 
 
     public void createSession(){
-        System.out.println("Welcome to -app-, let's create a study sesh ! ");
         System.out.println("NEW SESSION: ");
 
         //gets date before
@@ -90,15 +89,17 @@ public class SessionManager {
         endHour = localTime.getHour();
         endMinute = localTime.getMinute();
 
-        Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
+        /*Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
                 startMonth, startDay, endMonth, endDay,
                 startHour, startMinute, endHour, endMinute);
 
         saveSession(session);
+
+         */
     }
 
 
-    //attempts at reading and writing to the data file
+    /*attempts at reading and writing to the data file
     public void saveSession(Session session){
         try{
             FileWriter writer = new FileWriter("session_data.txt", true);
@@ -108,6 +109,8 @@ public class SessionManager {
             e.printStackTrace();
         }
     }
+
+
 
     public static void readSessions() {
         try {
@@ -126,5 +129,7 @@ public class SessionManager {
             e.printStackTrace();
         }
     }
+
+     */
 
 }

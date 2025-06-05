@@ -4,100 +4,103 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Session {
-    private MoodEntry.Mood moodBefore;
-    private MoodEntry.Mood moodAfter;
-    private int sessionLength;
-    private String subject;
-    private String startMonth;
-    private int startDay;
-    private String endMonth;
-    private int endDay;
+    private int month;
+    private int day;
     private int startHour;
-    private int startMinute;
+    private int startMin;
     private int endHour;
-    private int endMinute;
+    private int endMin;
+    private String moodBefore;
+    private String moodAfter;
+    private String subject;
+
+    //moodBefore, moodAfter, sessionLength, subject,
+    //                startMonth, startDay, endMonth, endDay,
+    //                startHour, startMinute, endHour, endMinute
+
 
     //constructor
-    public Session(MoodEntry.Mood moodBefore, MoodEntry.Mood moodAfter, int sessionLength, String subject, String startMonth, int startDay, String endMonth, int endDay, int startHour, int startMinute, int endHour, int endMinute) {
-        this.moodBefore = moodBefore;
+    public Session(int month, int day, int starthour, int startmin, int endhour, int endMinute, String moodbefore, String moodAfter, String subject){
+        this.month = month;
+        this.day = day;
+        this.startHour = starthour;
+        this.startMin = startmin;
+        this.endHour = endhour;
+        this.endMin = endMinute;
+        this.moodBefore = moodbefore;
         this.moodAfter = moodAfter;
-        this.sessionLength = sessionLength;
         this.subject = subject;
-        this.startMonth = startMonth;
-        this.startDay = (startDay);
-        this.endMonth = endMonth;
-        this.endDay = (endDay);
-        this.startHour = startHour;
-        this.startMinute = startMinute;
-        this.endHour = endHour;
-        this.endMinute = endMinute;
-
     }
+
 
     //getters
-    public MoodEntry.Mood getMoodBefore() {
-        return moodBefore;
+    public int getMonth() {
+        return month;
     }
 
-    public MoodEntry.Mood getMoodAfter() {
-        return moodAfter;
-    }
-
-    public int getSessionLength() {
-        return sessionLength;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getStartMonth() {
-        return startMonth;
-    }
-
-    public int getStartDay() {
-        return startDay;
-    }
-
-    public String getEndMonth() {
-        return endMonth;
-    }
-
-    public int getEndDay() {
-        return endDay;
+    public int getDay() {
+        return day;
     }
 
     public int getStartHour() {
         return startHour;
     }
 
-    public int getStartMinute() {
-        return startMinute;
+    public int getStartMin() {
+        return startMin;
     }
 
     public int getEndHour() {
         return endHour;
     }
 
-    public int getEndMinute() {
-        return endMinute;
+    public int getEndMin() {
+        return endMin;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getMoodBefore() {
+        return moodBefore;
+    }
+
+    public String getMoodAfter() {
+        return moodAfter;
+    }
+
+
+    //setters
+    public void setStartTime(int startHour, int startMin){
+        this.startHour = startHour;
+        this.startMin = startMin;
+    }
+
+    public void setEndTime(int endHour, int endMin){
+        this.endHour = endHour;
+        this.endMin = endMin;
+    }
+
+    public Month getMonthNow(){
+        LocalDate date = LocalDate.now();
+        Month month = date.getMonth();
+        return date.getMonth();
+    }
+    public void getDateAndTime(){
+        LocalDate myObj = LocalDate.now();
+        System.out.println(myObj);
+        LocalTime time = LocalTime.now();
+        int hour = time.getHour();
+        int min = time.getMinute();
+        System.out.println(hour + " : " + min);
+
+    }
 
     public void setSession(){
         Scanner scanner = new Scanner(System.in);
 
-
     }
-
-    //method that formats the information to be stored in the text file
-    public String toFileString() {
-        return moodBefore + ", " + moodAfter + ", " + sessionLength + ", " + subject + ", " +
-                startMonth + ", " + startDay + ", " + endMonth + ", " + endDay + ", " +
-                startHour + ", " + startMinute + ", " + endHour + ", " + endMinute;
-    }
-
-
 
 
 }

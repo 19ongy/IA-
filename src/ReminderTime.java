@@ -1,7 +1,6 @@
 public class ReminderTime {
-    private int hour;
-    private int min;
-    private int place;
+    int hour;
+    int min;
 
     public ReminderTime(int hour, int min){
         this.hour = hour;
@@ -15,13 +14,5 @@ public class ReminderTime {
 
     public int getMin() {
         return min;
-    }
-
-    public int getPlace(){
-        return place;
-    }
-
-    public String toString() {
-        return String.format("%02d:%02d", hour, min);
     }
 }
