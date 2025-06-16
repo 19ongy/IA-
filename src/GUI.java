@@ -84,7 +84,7 @@ public class GUI extends JFrame{
         setTitle("Grindset: Session Screen");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  // quit the app when we close the window
         setSize(500, 300);
-        setLocation(600,150);
+        setLocation(0,150);
         setLayout(null);
         labelOutput = new JLabel("Let's set a session ! ");
         labelOutput.setBounds(50, 30, 6000, 30);
