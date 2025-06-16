@@ -57,7 +57,7 @@ public class ReminderModule {
                 menu();
             }
         }else if(answer == 6){
-            menu.startMenu();
+            menu.startMenu(6);
         }
     }
 
@@ -81,6 +81,10 @@ public class ReminderModule {
         }
     }
 
+    //good idea from winter
+    //use JOptionPane
+    //for y/n verification when deleting stuff
+    //show input dialogue
 
 
 
