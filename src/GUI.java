@@ -17,6 +17,7 @@ public class GUI extends JFrame{    //card layout thing
         setLocation(25, 25);
         setSize(800, 500);
 
+
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         add(cardPanel);
@@ -31,19 +32,34 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setMenuScreen(){
         menuScreen = new JPanel(null);
-        JLabel labelOutput = new JLabel("Welcome to the Grindset");
-        labelOutput = new JLabel("Welcome to the Grindset");
-        labelOutput.setBounds(50, 110, 6000, 30);
-        labelOutput.setFont(new Font("Arial", Font.BOLD, 20));
+
+        //colours
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        JLabel labelOutput = new JLabel("Welcome to the Grindset", SwingConstants.CENTER);
+        labelOutput.setBounds(50, 50, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(new Color(200, 200, 200));
+
+        //sets the background of the window to like grey
+        menuScreen.setBackground(new Color(46, 46, 46));
 
         JButton setSesh = new JButton("Start new session");
-        setSesh.setBounds(70, 150, 300, 30);
+        setSesh.setBounds(70, 150, 300, 35);
         setSesh.setFont(new Font("Arial", Font.BOLD, 17));
-        setSesh.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
+        setSesh.setBackground(darkGreen);
+        setSesh.setForeground(lightGreen);
+        setSesh.setFocusPainted(false);
+        setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
-            // This code will run when the button is clicked
             System.out.println("nice");
             cardLayout.show(cardPanel, "Session");
             SwingUtilities.invokeLater(() -> {
@@ -52,11 +68,12 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton setRem = new JButton("Set Reminder");
-        setRem.setBounds(70, 190, 300, 30);
+        setRem.setBounds(70, 190, 300, 35);
         setRem.setFont(new Font("Arial", Font.BOLD, 17));
-        setRem.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
+        setRem.setBackground(darkGreen);
+        setRem.setForeground(lightGreen);
+        setRem.setFocusPainted(false);
+        setRem.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setRem.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
@@ -64,11 +81,12 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton studyStats = new JButton("View Study Stats");
-        studyStats.setBounds(70, 230, 300, 30);
+        studyStats.setBounds(70, 230, 300, 35);
         studyStats.setFont(new Font("Arial", Font.BOLD, 17));
-        studyStats.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
+        studyStats.setBackground(darkGreen);
+        studyStats.setForeground(lightGreen);
+        studyStats.setFocusPainted(false);
+        studyStats.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         studyStats.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
@@ -76,11 +94,12 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton settings = new JButton("Settings");
-        settings.setBounds(70, 270, 300, 30);
+        settings.setBounds(70, 270, 300, 35);
         settings.setFont(new Font("Arial", Font.BOLD, 17));
-        settings.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
+        settings.setBackground(darkGreen);
+        settings.setForeground(lightGreen);
+        settings.setFocusPainted(false);
+        settings.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         settings.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
@@ -98,77 +117,61 @@ public class GUI extends JFrame{    //card layout thing
         menuScreen.add(studyStats);
         menuScreen.add(settings);
         menuScreen.add(imageLabel);
+        menuScreen.add(banner);
 
         cardPanel.add(menuScreen, "Menu");
         System.out.println("SEQUENCE: GUI_test created");
     }
 
-    public void setSessionScreen(){
+    public void setSessionScreen() {
         sessionScreen = new JPanel(null);
         System.out.println("hi");
 
-        JLabel labelOutput = new JLabel("Let's set a session!");
-        labelOutput.setBounds(50, 30, 6000, 30);
-        labelOutput.setFont(new Font("Arial", Font.BOLD, 20));
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        sessionScreen.setBackground(backgroundGrey);
 
-        JButton setSesh = new JButton("Start new session");
-        setSesh.setBounds(70, 70, 300, 30);
-        setSesh.setFont(new Font("Arial", Font.BOLD, 17));
-        setSesh.setBackground(Color.GREEN);
-        setSesh.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
-        setSesh.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("nice");
-            menu.startMenu(1);
-        });
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
 
-        JButton setRem = new JButton("Set Reminder");
-        setRem.setBounds(70, 110, 300, 30);
-        setRem.setFont(new Font("Arial", Font.BOLD, 17));
-        setRem.setBackground(Color.GREEN);
-        setRem.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
-        setRem.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("nice");
-            menu.startMenu(2);
-        });
+        //countdown button
+        JButton countdownButton = new JButton("Countdown");
+        countdownButton.setBounds(50, 30, 150, 30);
+        countdownButton.setBackground(darkGreen);
+        countdownButton.setForeground(lightGreen);
+        countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
+        countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        countdownButton.setFocusPainted(false);
 
-        JButton studyStats = new JButton("View Study Stats");
-        studyStats.setBounds(70, 150, 300, 30);
-        studyStats.setFont(new Font("Arial", Font.BOLD, 17));
-        studyStats.setBackground(Color.GREEN);
-        studyStats.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        //METHOD ARGUEMNT = E
-        studyStats.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("nice");
-            menu.startMenu(3);
-        });
+        JButton stopwatchButton = new JButton("Stopwatch");
+        stopwatchButton.setBounds(220, 30, 150, 30);
+        stopwatchButton.setBackground(darkGreen);
+        stopwatchButton.setForeground(lightGreen);
+        stopwatchButton.setFont(new Font("Arial", Font.BOLD, 14));
+        stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        stopwatchButton.setFocusPainted(false);
 
-        JButton settings = new JButton("Settings");
-        settings.setBounds(70, 190, 300, 30);
-        settings.setFont(new Font("Arial", Font.BOLD, 17));
-        settings.setBackground(Color.GREEN);
-        settings.setForeground(Color.BLACK);
-        // Add an ActionListener to the button
-        settings.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("nice");
-            menu.startMenu(4);
-        });
+        JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
+        timerDisplay.setBounds(150, 120, 500, 120);
+        timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
+        timerDisplay.setForeground(lightGreen);
+        timerDisplay.setBackground(borderGreen);
+        timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
 
-        sessionScreen.add(labelOutput);
-        sessionScreen.add(setSesh);
-        sessionScreen.add(setRem);
-        sessionScreen.add(studyStats);
-        sessionScreen.add(settings);
-        cardPanel.add(sessionScreen,"Session");
-        System.out.println("SEQUENCE: GUI_test created");
+
+        sessionScreen.add(countdownButton);
+        sessionScreen.add(stopwatchButton);
+        sessionScreen.add(timerDisplay);
+        sessionScreen.add(banner);
+
+        cardPanel.add(sessionScreen, "Session");
+        System.out.println("session screen created");
+
     }
 }
