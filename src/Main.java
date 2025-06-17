@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        StartMenu gui = new StartMenu();
-        Menu menu = new Menu();
+        GUI gui = new GUI();
+
 
 
         //timer

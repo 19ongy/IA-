@@ -1,27 +1,42 @@
 //GUI CLASS
+//gimem a sec
 import javax.swing.*;
 import java.awt.*;
 
-public class StartMenu extends JFrame{
-    private JLabel labelOutput;
-    private JButton setSesh;
-    private JButton setRem;
-    private JButton studyStats;
-    private JButton settings;
-    Menu menu = new Menu();
-    SessionMenu sessionmenu = new SessionMenu();
+public class GUI extends JFrame{    //card layout thing
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
 
-    public StartMenu() {
+    private JPanel menuScreen;
+    private JPanel sessionScreen;
+    private Menu menu = new Menu();
+
+    public GUI() {
         setTitle("Grindset");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
-        setLocation(25,25);
+        setLocation(25, 25);
         setSize(800, 500);
-        setLayout(null);
+
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        add(cardPanel);
+
+        setMenuScreen();
+        setSessionScreen();
+
+        setVisible(true);
+
+        cardLayout.show(cardPanel,"Menu");
+    }
+
+    public void setMenuScreen(){
+        menuScreen = new JPanel(null);
+        JLabel labelOutput = new JLabel("Welcome to the Grindset");
         labelOutput = new JLabel("Welcome to the Grindset");
         labelOutput.setBounds(50, 110, 6000, 30);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 20));
 
-        setSesh = new JButton("Start new session");
+        JButton setSesh = new JButton("Start new session");
         setSesh.setBounds(70, 150, 300, 30);
         setSesh.setFont(new Font("Arial", Font.BOLD, 17));
         setSesh.setForeground(Color.BLACK);
@@ -30,11 +45,13 @@ public class StartMenu extends JFrame{
         setSesh.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
-            sessionmenu.moodAsker();
-            menu.startMenu(1);
+            cardLayout.show(cardPanel, "Session");
+            SwingUtilities.invokeLater(() -> {
+                menu.startMenu(1);
+            });
         });
 
-        setRem = new JButton("Set Reminder");
+        JButton setRem = new JButton("Set Reminder");
         setRem.setBounds(70, 190, 300, 30);
         setRem.setFont(new Font("Arial", Font.BOLD, 17));
         setRem.setForeground(Color.BLACK);
@@ -46,7 +63,7 @@ public class StartMenu extends JFrame{
             menu.startMenu(2);
         });
 
-        studyStats = new JButton("View Study Stats");
+        JButton studyStats = new JButton("View Study Stats");
         studyStats.setBounds(70, 230, 300, 30);
         studyStats.setFont(new Font("Arial", Font.BOLD, 17));
         studyStats.setForeground(Color.BLACK);
@@ -58,7 +75,7 @@ public class StartMenu extends JFrame{
             menu.startMenu(3);
         });
 
-        settings = new JButton("Settings");
+        JButton settings = new JButton("Settings");
         settings.setBounds(70, 270, 300, 30);
         settings.setFont(new Font("Arial", Font.BOLD, 17));
         settings.setForeground(Color.BLACK);
@@ -70,27 +87,31 @@ public class StartMenu extends JFrame{
             menu.startMenu(4);
         });
 
-        add(labelOutput);
-        add(setSesh);
-        add(setRem);
-        add(studyStats);
-        add(settings);
-        setVisible(true);
+        ImageIcon menuPic = new ImageIcon("study.jpg");
+        JLabel imageLabel = new JLabel(menuPic);
+        imageLabel.setBounds(50, 50, menuPic.getIconWidth(), menuPic.getIconHeight());
+        System.out.println("Image width: " + menuPic.getIconWidth());
+
+        menuScreen.add(labelOutput);
+        menuScreen.add(setSesh);
+        menuScreen.add(setRem);
+        menuScreen.add(studyStats);
+        menuScreen.add(settings);
+        menuScreen.add(imageLabel);
+
+        cardPanel.add(menuScreen, "Menu");
         System.out.println("SEQUENCE: GUI_test created");
     }
 
-    /*
-    public void sessionScreen(){
-        setTitle("Grindset: Session Screen");
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  // quit the app when we close the window
-        setSize(500, 300);
-        setLocation(0,150);
-        setLayout(null);
-        labelOutput = new JLabel("Let's set a session ! ");
+    public void setSessionScreen(){
+        sessionScreen = new JPanel(null);
+        System.out.println("hi");
+
+        JLabel labelOutput = new JLabel("Let's set a session!");
         labelOutput.setBounds(50, 30, 6000, 30);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 20));
 
-        setSesh = new JButton("Start new session");
+        JButton setSesh = new JButton("Start new session");
         setSesh.setBounds(70, 70, 300, 30);
         setSesh.setFont(new Font("Arial", Font.BOLD, 17));
         setSesh.setBackground(Color.GREEN);
@@ -103,7 +124,7 @@ public class StartMenu extends JFrame{
             menu.startMenu(1);
         });
 
-        setRem = new JButton("Set Reminder");
+        JButton setRem = new JButton("Set Reminder");
         setRem.setBounds(70, 110, 300, 30);
         setRem.setFont(new Font("Arial", Font.BOLD, 17));
         setRem.setBackground(Color.GREEN);
@@ -116,7 +137,7 @@ public class StartMenu extends JFrame{
             menu.startMenu(2);
         });
 
-        studyStats = new JButton("View Study Stats");
+        JButton studyStats = new JButton("View Study Stats");
         studyStats.setBounds(70, 150, 300, 30);
         studyStats.setFont(new Font("Arial", Font.BOLD, 17));
         studyStats.setBackground(Color.GREEN);
@@ -129,7 +150,7 @@ public class StartMenu extends JFrame{
             menu.startMenu(3);
         });
 
-        settings = new JButton("Settings");
+        JButton settings = new JButton("Settings");
         settings.setBounds(70, 190, 300, 30);
         settings.setFont(new Font("Arial", Font.BOLD, 17));
         settings.setBackground(Color.GREEN);
@@ -141,17 +162,13 @@ public class StartMenu extends JFrame{
             menu.startMenu(4);
         });
 
-        add(labelOutput);
-        add(setSesh);
-        add(setRem);
-        add(studyStats);
-        add(settings);
-        setVisible(true);
+
+        sessionScreen.add(labelOutput);
+        sessionScreen.add(setSesh);
+        sessionScreen.add(setRem);
+        sessionScreen.add(studyStats);
+        sessionScreen.add(settings);
+        cardPanel.add(sessionScreen,"Session");
         System.out.println("SEQUENCE: GUI_test created");
     }
-
-     */
-
-
-
 }
