@@ -1,5 +1,0 @@
-HAPPY, TIRED, 45, Math, March, 25, March, 25, 14, 30, 15, 15
-SAD, NEUTRAL, 60, Science, April, 10, April, 10, 16, 00, 17, 00
-EXCITED, BORED, 30, History, May, 5, May, 5, 18, 45, 19, 15
-NEUTRAL, HAPPY, 90, English, June, 20, June, 20, 13, 15, 14, 45
-TIRED, ENERGETIC, 120, Computer Science, July, 15, July, 15, 10, 00, 12, 00

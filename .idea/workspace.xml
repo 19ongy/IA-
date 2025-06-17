@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted">
-      <change afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SessionMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Notification.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/session_data.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +70,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
       <recent name="C:\Users\yu0ii\IdeaProjects\IA-\src" />
     </key>
   </component>
