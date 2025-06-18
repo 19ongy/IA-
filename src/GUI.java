@@ -1,7 +1,9 @@
 //GUI CLASS
 //gimem a sec
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class GUI extends JFrame{    //card layout thing
     private CardLayout cardLayout;
@@ -9,6 +11,7 @@ public class GUI extends JFrame{    //card layout thing
 
     private JPanel menuScreen;
     private JPanel sessionScreen;
+    private JPanel moodScreen;
     private Menu menu = new Menu();
 
     public GUI() {
@@ -24,6 +27,7 @@ public class GUI extends JFrame{    //card layout thing
 
         setMenuScreen();
         setSessionScreen();
+        setMoodScreen();
 
         setVisible(true);
 
@@ -61,7 +65,7 @@ public class GUI extends JFrame{    //card layout thing
         setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
             System.out.println("nice");
-            cardLayout.show(cardPanel, "Session");
+            cardLayout.show(cardPanel, "Mood");
             SwingUtilities.invokeLater(() -> {
                 menu.startMenu(1);
             });
@@ -106,9 +110,10 @@ public class GUI extends JFrame{    //card layout thing
             menu.startMenu(4);
         });
 
-        ImageIcon menuPic = new ImageIcon("study.jpg");
+        ImageIcon menuPic = new ImageIcon("OIP.jpg");
         JLabel imageLabel = new JLabel(menuPic);
-        imageLabel.setBounds(50, 50, menuPic.getIconWidth(), menuPic.getIconHeight());
+        imageLabel.setBounds(400, 100, menuPic.getIconWidth(), menuPic.getIconHeight());
+
         System.out.println("Image width: " + menuPic.getIconWidth());
 
         menuScreen.add(labelOutput);
@@ -172,6 +177,35 @@ public class GUI extends JFrame{    //card layout thing
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");
+
+    }
+
+    public void setMoodScreen(){
+        moodScreen = new JPanel(null);
+
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        moodScreen.setBackground(backgroundGrey);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        JLabel labelOutput = new JLabel("How are you feeling today?", SwingConstants.CENTER);
+        labelOutput.setBounds(50, 150, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(lightGreen);
+
+
+
+        moodScreen.add(labelOutput);
+        moodScreen.add(banner);
+
+        cardPanel.add(moodScreen, "Mood");
 
     }
 }
