@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-import java.time.Month;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

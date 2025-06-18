@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class Menu {
     Scanner scanner = new Scanner(System.in);
 
-    public void startMenu(){
+    //welcome menu, similar to home page, allows access to all features
+    public void startMenu(int answer){
         ReminderModule module = new ReminderModule();
 
         SessionManager sessionManager = new SessionManager();
 
         System.out.println("Welcome to study app! ");
-        System.out.println("OPTIONS: \n1. set session \n2. set reminder \n3. settings");
-        int answer = scanner.nextInt();
+        System.out.println("OPTIONS: \n1. set session \n2. set reminder \n3. Study stats \n4. Settings");
 
         switch(answer){
             case 1:
@@ -21,5 +21,10 @@ public class Menu {
             case 2:
                 module.menu();
         }
+
+    }
+
+    public void startWMenu(){
+
     }
 }
