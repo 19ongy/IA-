@@ -13,13 +13,14 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel sessionScreen;
     private JPanel moodScreen;
     private Menu menu = new Menu();
+    private SetTimer timer = new SetTimer();
+    private JLabel timerDisplay;
 
     public GUI() {
         setTitle("Grindset");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
         setLocation(25, 25);
         setSize(800, 500);
-
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -32,6 +33,7 @@ public class GUI extends JFrame{    //card layout thing
         setVisible(true);
 
         cardLayout.show(cardPanel,"Menu");
+        timerDisplay = new JLabel("00:00:00");
     }
 
     public void setMenuScreen(){
@@ -66,9 +68,12 @@ public class GUI extends JFrame{    //card layout thing
         setSesh.addActionListener(e -> {
             System.out.println("nice");
             cardLayout.show(cardPanel, "Mood");
-            SwingUtilities.invokeLater(() -> {
+            //has to call the start of menu, but it causes issues now
+            /*SwingUtilities.invokeLater(() -> {
                 menu.startMenu(1);
             });
+
+             */
         });
 
         JButton setRem = new JButton("Set Reminder");
@@ -169,11 +174,34 @@ public class GUI extends JFrame{    //card layout thing
         timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
 
+        JButton play = new JButton("PLAY");
+        play.setBounds(160, 300, 100, 40);
+        play.setFont(new Font("Arial", Font.BOLD, 17));
+        play.setBackground(darkGreen);
+        play.setForeground(lightGreen);
+        play.setFocusPainted(false);
+        play.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        play.addActionListener(e -> {
+            timer.resume();
+        });
+
+        JButton pause = new JButton("PAUSE");
+        pause.setBounds(300, 300, 100, 40);
+        pause.setFont(new Font("Arial", Font.BOLD, 17));
+        pause.setBackground(darkGreen);
+        pause.setForeground(lightGreen);
+        pause.setFocusPainted(false);
+        pause.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        pause.addActionListener(e -> {
+            timer.pause();
+        });
 
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
         sessionScreen.add(timerDisplay);
         sessionScreen.add(banner);
+        sessionScreen.add(play);
+        sessionScreen.add(pause);
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");
@@ -200,11 +228,41 @@ public class GUI extends JFrame{    //card layout thing
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(lightGreen);
 
+        //making all the mood buttons
+        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Demotivated"};
+        //colours for the buttons
+        Color[] colours = {
+                new Color(255, 255, 153),
+                new Color(77, 148, 255),
+                new Color(163, 163, 194),
+                new Color(255, 51,51),
+                new Color(194, 194, 214)
+        };
 
+        int width = 120;
+        int height = 50;
+        int startX = 50;
+        int startY = 220;
+        int gap = 20;
+
+        for(int i = 0; i< moods.length; i++){
+            JButton moodButton = new JButton((i+1) + ". " + moods[i]);
+            moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
+            moodButton.setBackground(colours[i]);
+            moodButton.setForeground(Color.BLACK);
+            moodButton.setFocusPainted(false);
+            moodButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+            moodButton.addActionListener(e -> {
+                System.out.println("Mood selected = " + moodButton.getText());
+                cardLayout.show(cardPanel, "Session");
+            });
+            moodScreen.add(moodButton);
+
+        }
 
         moodScreen.add(labelOutput);
         moodScreen.add(banner);
-
         cardPanel.add(moodScreen, "Mood");
 
     }

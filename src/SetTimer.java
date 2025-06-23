@@ -13,10 +13,13 @@ public class SetTimer {
     private int timeElapsed;
     private int timeRemaining;
     private Timer timer;
+    private TimerTask timerTask;
     boolean ready;
     private int preTimeRemaining;
     public int setTimerDuration;
+    public boolean isPaused;
 
+    public String guiTime;
 
     //constructor
     public SetTimer(){
@@ -25,6 +28,7 @@ public class SetTimer {
         ready = false;
         preTimeRemaining = 3;
         setTimerDuration = 0;
+        isPaused = false;
     }
 
     //setters and getters
@@ -55,6 +59,23 @@ public class SetTimer {
             //setType();
         }
     }
+
+    //pause the timer
+    public void pause(){
+        if(!isPaused){
+            isPaused = true;
+            System.out.println("\nTimer paused");
+        }
+    }
+
+    //resume the timer
+    public void resume(){
+        if(isPaused){
+            isPaused = false;
+            System.out.println("\nTimer resumed");
+        }
+    }
+
 
     //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
     public void preTimer(){
@@ -88,20 +109,27 @@ public class SetTimer {
         }
     }
 
+    public String tCheck(String time){
+        return time;
+    }
+
 
     //STOPWATCH METHODS ------------------------------->
     public void startStopwatch(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
-
-                //get it to print on the same line
-                System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
-
-                timeElapsed = timeElapsed + 1;
+                if (!isPaused) {
+                        if (timeRemaining > 0) {
+                        System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
+                        timeElapsed = timeElapsed + 1;
+                    } else {
+                        System.out.println("\nGood job!! Timer finished!");
+                        timer.cancel();
+                    }
+                }
             }
         };
-
         //period parameter is measured in milliseconds
         timer.schedule(task, 0, 1000);
     }
@@ -161,15 +189,17 @@ public class SetTimer {
         TimerTask task = new TimerTask() {
             public void run(){
                 //checks if there's still time left
-                if(timeElapsed < timeRemaining){
-                    //System.out.println(timeElapsed);
-                    //System.out.println(timeRemaining);
-                    //makes sure it prints on one line
-                    System.out.printf("\rTIME LEFT: %s", formatTime(returnTimeLeft()));
-                }else{
-                    System.out.println();
-                    System.out.println("Good job!! Timer finished! ");
-                    timer.cancel();
+                if (!isPaused) {
+                    if(timeElapsed < timeRemaining){
+                        //System.out.println(timeElapsed);
+                        //System.out.println(timeRemaining);
+                        //makes sure it prints on one line
+                        System.out.printf("\rTIME LEFT: %s", formatTime(returnTimeLeft()));
+                    }else{
+                        System.out.println();
+                        System.out.println("Good job!! Timer finished! ");
+                        timer.cancel();
+                    }
                 }
             }
         };
@@ -184,9 +214,6 @@ public class SetTimer {
         return timeRemaining - timeElapsed;
     }
 
-    public void pause(){
-
-    }
 
     // <-------------------------------
 
