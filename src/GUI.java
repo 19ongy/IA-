@@ -12,9 +12,16 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel menuScreen;
     private JPanel sessionScreen;
     private JPanel moodScreen;
+    private JPanel remMenu;
     private Menu menu = new Menu();
     private SetTimer timer = new SetTimer();
     private JLabel timerDisplay;
+
+    private Color darkGreen = new Color(27, 77, 62);
+    private Color lightGreen = new Color(200, 200, 200);
+    private Color borderGreen = new Color(15, 50, 40);
+    private Color backgroundGrey = new Color(46, 46, 46);
+
 
     public GUI() {
         setTitle("Grindset");
@@ -29,6 +36,7 @@ public class GUI extends JFrame{    //card layout thing
         setMenuScreen();
         setSessionScreen();
         setMoodScreen();
+        setRemMenu();
 
         setVisible(true);
 
@@ -38,7 +46,6 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setMenuScreen(){
         menuScreen = new JPanel(null);
-
         //colours
         Color darkGreen = new Color(27, 77, 62);
         Color lightGreen = new Color(200, 200, 200);
@@ -86,7 +93,8 @@ public class GUI extends JFrame{    //card layout thing
         setRem.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
-            menu.startMenu(2);
+            cardLayout.show(cardPanel, "Reminder Menu");
+
         });
 
         JButton studyStats = new JButton("View Study Stats");
@@ -136,11 +144,6 @@ public class GUI extends JFrame{    //card layout thing
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
         System.out.println("hi");
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
         sessionScreen.setBackground(backgroundGrey);
 
         //dark green banner at the top
@@ -166,6 +169,7 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
 
+        //possibly refresh every time, with a method for the "" that constnatly changes
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
         timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
@@ -210,11 +214,6 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setMoodScreen(){
         moodScreen = new JPanel(null);
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
         moodScreen.setBackground(backgroundGrey);
 
         //dark green banner at the top
@@ -265,5 +264,53 @@ public class GUI extends JFrame{    //card layout thing
         moodScreen.add(banner);
         cardPanel.add(moodScreen, "Mood");
 
+    }
+
+    public void setRemMenu(){
+        remMenu = new JPanel(null);
+        remMenu.setBackground(backgroundGrey);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        JLabel labelOutput = new JLabel("Reminder Menu", SwingConstants.CENTER);
+        labelOutput.setBounds(50, 60, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(lightGreen);
+
+        String[] remFunc = {"1. Display all study reminders", "2. Add study reminder", "3. Replace reminder",
+                "Delete study reminder", "5. Delete ALL study reminders", "6. Return"};
+
+        int width = 120;
+        int height = 50;
+        int startX = 50;
+        int startY = 220;
+        int gap = 20;
+
+        for(int i = 0; i< 6; i++){
+            JButton moodButton = new JButton((i+1) + ". " + remFunc[i]);
+            moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
+            moodButton.setBackground(colours[i]);
+            moodButton.setForeground(Color.BLACK);
+            moodButton.setFocusPainted(false);
+            moodButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+            moodButton.addActionListener(e -> {
+                System.out.println("Mood selected = " + moodButton.getText());
+                cardLayout.show(cardPanel, "Session");
+            });
+            moodScreen.add(moodButton);
+
+        ImageIcon menuPic = new ImageIcon("image.png");
+        JLabel imageLabel = new JLabel(menuPic);
+        imageLabel.setBounds(400, 150, menuPic.getIconWidth(), menuPic.getIconHeight());
+
+        remMenu.add(imageLabel);
+        remMenu.add(labelOutput);
+        remMenu.add(banner);
+        cardPanel.add(remMenu, "Reminder Menu");
     }
 }

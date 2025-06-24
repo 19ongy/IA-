@@ -19,7 +19,8 @@ public class SetTimer {
     public int setTimerDuration;
     public boolean isPaused;
 
-    public String guiTime;
+    public String time;
+
 
     //constructor
     public SetTimer(){
@@ -29,11 +30,20 @@ public class SetTimer {
         preTimeRemaining = 3;
         setTimerDuration = 0;
         isPaused = false;
+        time = "";
     }
 
     //setters and getters
     public int getSetTimerDuration() {
         return setTimerDuration;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
+    public void setTime(String time){
+        this.time = time;
     }
 
     //decides if countdown or stopwatch
@@ -86,6 +96,7 @@ public class SetTimer {
                 if (preTimeRemaining > 0) {
                     //prints on the same line
                     System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
+                    setTime(formatTime(preTimeRemaining));
                     preTimeRemaining = preTimeRemaining - 1;
                 } else {
                     System.out.println("\rTIMER STARTS NOW!!!!!");
@@ -122,6 +133,7 @@ public class SetTimer {
                 if (!isPaused) {
                         if (timeRemaining > 0) {
                         System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
+                        setTime(formatTime(timeElapsed));
                         timeElapsed = timeElapsed + 1;
                     } else {
                         System.out.println("\nGood job!! Timer finished!");
