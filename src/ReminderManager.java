@@ -1,3 +1,8 @@
+/*
+CLASS SUMMARY:
+- has all of the methods and stuff for handling things in reminders
+ */
+
 import java.util.ArrayList;
 
 public class ReminderManager {

@@ -41,7 +41,6 @@ public class GUI extends JFrame{    //card layout thing
         setVisible(true);
 
         cardLayout.show(cardPanel,"Menu");
-        timerDisplay = new JLabel("00:00:00");
     }
 
     public void setMenuScreen(){
@@ -126,7 +125,6 @@ public class GUI extends JFrame{    //card layout thing
         ImageIcon menuPic = new ImageIcon("OIP.jpg");
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(400, 100, menuPic.getIconWidth(), menuPic.getIconHeight());
-
         System.out.println("Image width: " + menuPic.getIconWidth());
 
         menuScreen.add(labelOutput);
@@ -154,7 +152,7 @@ public class GUI extends JFrame{    //card layout thing
 
         //countdown button
         JButton countdownButton = new JButton("Countdown");
-        countdownButton.setBounds(50, 30, 150, 30);
+        countdownButton.setBounds(50, 40, 150, 30);
         countdownButton.setBackground(darkGreen);
         countdownButton.setForeground(lightGreen);
         countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -162,7 +160,7 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setFocusPainted(false);
 
         JButton stopwatchButton = new JButton("Stopwatch");
-        stopwatchButton.setBounds(220, 30, 150, 30);
+        stopwatchButton.setBounds(220, 40, 150, 30);
         stopwatchButton.setBackground(darkGreen);
         stopwatchButton.setForeground(lightGreen);
         stopwatchButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -179,7 +177,7 @@ public class GUI extends JFrame{    //card layout thing
 
 
         JButton play = new JButton("PLAY");
-        play.setBounds(160, 300, 100, 40);
+        play.setBounds(300, 250, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
         play.setBackground(darkGreen);
         play.setForeground(lightGreen);
@@ -190,7 +188,7 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton pause = new JButton("PAUSE");
-        pause.setBounds(300, 300, 100, 40);
+        pause.setBounds(425, 250, 100, 40);
         pause.setFont(new Font("Arial", Font.BOLD, 17));
         pause.setBackground(darkGreen);
         pause.setForeground(lightGreen);
@@ -200,6 +198,32 @@ public class GUI extends JFrame{    //card layout thing
             timer.pause();
         });
 
+        JButton returnHome = new JButton("Home");
+        returnHome.setBounds(700, 30, 30, 30);
+        returnHome.setFont(new Font("Arial", Font.BOLD, 17));
+        returnHome.setBackground(darkGreen);
+        returnHome.setForeground(lightGreen);
+        returnHome.setFocusPainted(false);
+        returnHome.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        returnHome.addActionListener(e -> {
+            // This code will run when the button is clicked
+            cardLayout.show(cardPanel, "Menu");
+        });
+
+        JButton musicBut = new JButton("MUSIC");
+        musicBut.setBounds(700, 400, 30, 30);
+        musicBut.setFont(new Font("Arial", Font.BOLD, 17));
+        musicBut.setBackground(darkGreen);
+        musicBut.setForeground(lightGreen);
+        musicBut.setFocusPainted(false);
+        musicBut.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        musicBut.addActionListener(e -> {
+            // This code will run when the button is clicked
+            System.out.println("imagine this is playing music");
+        });
+
+        sessionScreen.add(musicBut);
+        sessionScreen.add(returnHome);
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
         sessionScreen.add(timerDisplay);

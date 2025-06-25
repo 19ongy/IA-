@@ -1,3 +1,8 @@
+/*
+CLASS SUMMARY:
+- Handles all of the methods for running timers/ countdowns
+ */
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Scanner;

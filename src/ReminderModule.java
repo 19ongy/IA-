@@ -1,3 +1,9 @@
+/*
+CLASS SUMMARY:
+- Handles all of the functions that link to the gui or console
+- all internal methods called from ReminderManager ( i think )
+ */
+
 import java.util.Objects;
 import java.util.Scanner;
 

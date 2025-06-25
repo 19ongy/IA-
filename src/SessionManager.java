@@ -1,3 +1,8 @@
+/*
+CLASS SUMMARY:
+- in charge of file managing, and storing the data from study sessions in the text files
+ */
+
 import java.io.*;
 import java.util.Scanner;
 import java.time.LocalDate;
