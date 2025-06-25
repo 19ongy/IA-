@@ -281,36 +281,37 @@ public class GUI extends JFrame{    //card layout thing
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(lightGreen);
 
-        String[] remFunc = {"1. Display all study reminders", "2. Add study reminder", "3. Replace reminder",
-                "Delete study reminder", "5. Delete ALL study reminders", "6. Return"};
+        String[] remFunc = {"Display all study reminders", "Add study reminder", "Replace reminder",
+                "Delete study reminder", "Delete ALL study reminders", "Return"};
 
-        int width = 120;
-        int height = 50;
-        int startX = 50;
-        int startY = 220;
-        int gap = 20;
+        int width = 250;
+        int height = 30;
+        int startX = 70;
+        int startY = 130;
+        int gap = 2 ;
 
-        for(int i = 0; i< 6; i++){
-            JButton moodButton = new JButton((i+1) + ". " + remFunc[i]);
-            moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
-            moodButton.setBackground(colours[i]);
+        for(int i = 0; i< 6; i++) {
+            JButton moodButton = new JButton((i + 1) + ". " + remFunc[i]);
+            moodButton.setBounds(startX, startY + (50*i), width, height);
+            //moodButton.setBackground();
             moodButton.setForeground(Color.BLACK);
             moodButton.setFocusPainted(false);
             moodButton.setFont(new Font("Arial", Font.BOLD, 14));
 
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
-                cardLayout.show(cardPanel, "Session");
+                cardLayout.show(cardPanel, "Menu");
             });
-            moodScreen.add(moodButton);
+            remMenu.add(moodButton);
 
-        ImageIcon menuPic = new ImageIcon("image.png");
-        JLabel imageLabel = new JLabel(menuPic);
-        imageLabel.setBounds(400, 150, menuPic.getIconWidth(), menuPic.getIconHeight());
+            ImageIcon menuPic = new ImageIcon("image.png");
+            JLabel imageLabel = new JLabel(menuPic);
+            imageLabel.setBounds(400, 150, menuPic.getIconWidth(), menuPic.getIconHeight());
 
-        remMenu.add(imageLabel);
-        remMenu.add(labelOutput);
-        remMenu.add(banner);
-        cardPanel.add(remMenu, "Reminder Menu");
+            remMenu.add(imageLabel);
+            remMenu.add(labelOutput);
+            remMenu.add(banner);
+            cardPanel.add(remMenu, "Reminder Menu");
+        }
     }
 }
