@@ -56,7 +56,7 @@ public class GUI extends JFrame{    //card layout thing
         banner.setBounds(0, 0, 800, 100);
         banner.setLayout(null);
 
-        JLabel labelOutput = new JLabel("Welcome to the Grindset", SwingConstants.CENTER);
+        JLabel labelOutput = new JLabel("Welcome to the Grindset");
         labelOutput.setBounds(50, 50, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(new Color(200, 200, 200));

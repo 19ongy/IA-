@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted">
-      <change afterPath="$PROJECT_DIR$/src/ReminderGUI.java" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added some more gui stuff and fixed issues">
+      <change afterPath="$PROJECT_DIR$/droplet of water.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/new water.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MoodTracker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/startSessionCurrent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReminderGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +32,12 @@
     &quot;assignee&quot;: &quot;19ongy&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/19ongy/IA-&quot;,
-    &quot;accountId&quot;: &quot;806f6d7b-cc92-4c18-84b3-423fdf3f5bf7&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/19ongy/IA-",
+    "accountId": "c367e849-289c-46c1-ab08-3b4656975b88"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -248,6 +242,7 @@
     <MESSAGE value="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working" />
     <MESSAGE value="fixed the menu problem, made some more methods to check whether array list has anything, fixed the get time thing, delete reminder, replace reminder &#10;is too hot to fix delete all reminders &#10;trying to make a verification method&#10;not sure to split it up between methods or just to keep it in delete all reminders" />
     <MESSAGE value="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted" />
+    <MESSAGE value="added some more gui stuff and fixed issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some more gui stuff and fixed issues" />
   </component>
 </project>
