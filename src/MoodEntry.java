@@ -1,3 +1,5 @@
+//i dont know if this class is necessary anymore
+
 import java.util.Scanner;
 
 public class MoodEntry {

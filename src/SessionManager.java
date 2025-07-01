@@ -11,43 +11,86 @@ import java.time.LocalTime;
 
 public class SessionManager {
     private Scanner scanner = new Scanner(System.in);
-    private MoodEntry moodEntry = new MoodEntry();
-    private LocalDate localDate = LocalDate.now();
-    private LocalTime localTime = LocalTime.now();
-    public SetTimer Timer = new SetTimer();
+    LocalDate localDate = LocalDate.now();
+    LocalTime localTime = LocalTime.now();
     private MoodEntry.Mood moodBefore;
     private MoodEntry.Mood moodAfter;
-    private int sessionLength;
+    //private String moodBefore;
+    //private String moodAfter;
+    private LocalDate startLocalDate;
+    private LocalDate endLocalDate;
+    private LocalTime startLocalTime;
+    private LocalTime endLocalTime;
     private String subject;
-    private String startMonth;
-    private int startDay;
-    private String endMonth;
-    private int endDay;
-    private int startHour;
-    private int startMinute;
-    private int endHour;
-    private int endMinute;
-
+    private int sessionLength;
 
     //constructor
-    //moodBefore, moodAfter, sessionLength, subject, startMonth, startDay, endMonth, endDay, startHour,
-    //startMinute, endHour, endMinute
     public SessionManager(){
-        moodBefore = MoodEntry.Mood.UNSPECIFIED;
-        moodAfter = MoodEntry.Mood.UNSPECIFIED;
-        sessionLength = 0;
-        subject = "";
-        startMonth = null;
-        startDay = 0;
-        endMonth = null;
-        endDay = 0;
-        startHour = 0;
-        startMinute = 0;
-        endHour = 0;
-        endMinute = 0;
+
+
+    }
+
+    //setter methods
+    public String setMoodBefore(String mood){
+        this.moodBefore = MoodEntry.Mood.valueOf(mood);
+        return mood;
+    }
+
+    public String setMoodAfter(String mood){
+        this.moodAfter = MoodEntry.Mood.valueOf(mood);
+        return mood;
+    }
+
+    public String setStartDate(){
+        LocalDate date = localDate.now();
+        this.startLocalDate = date;
+        return String.valueOf(date);
+    }
+
+    public String setEndDate(){
+        LocalDate date = localDate.now();
+        this.endLocalDate = date;
+        return String.valueOf(date);
+    }
+
+    public String setStartTime(){
+        LocalTime time = localTime.now();
+        this.startLocalTime = time;
+        return String.valueOf(time);
+    }
+
+    public String setEndTime(){
+        LocalTime time = localTime.now();
+        this.endLocalTime = time;
+        return String.valueOf(time);
+    }
+
+    public String setSubject(String subject){
+        this.subject = subject;
+        return subject;
+    }
+
+    public String setSessionLength(int length){
+        this.sessionLength = length;
+        return String.valueOf(length);
     }
 
 
+
+
+
+    public String toFileString() {
+        return(moodBefore.toString() + "," + moodAfter.toString() + "," +
+                sessionLength + "," + subject + "," + startLocalDate.toString() + "," +
+                startLocalTime.toString() + "," + endLocalDate.toString() + "," +
+                endLocalTime.toString()
+        );
+
+    }
+
+
+
+    /*
     public void createSession(){
         System.out.println("NEW SESSION: ");
 
@@ -92,14 +135,13 @@ public class SessionManager {
         endHour = localTime.getHour();
         endMinute = localTime.getMinute();
 
-        /*Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
+        Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
                 startMonth, startDay, endMonth, endDay,
                 startHour, startMinute, endHour, endMinute);
 
         saveSession(session);
 
          */
-    }
 
 
     /*attempts at reading and writing to the data file
