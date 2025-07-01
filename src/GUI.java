@@ -12,16 +12,9 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel menuScreen;
     private JPanel sessionScreen;
     private JPanel moodScreen;
-    private JPanel remMenu;
     private Menu menu = new Menu();
     private SetTimer timer = new SetTimer();
     private JLabel timerDisplay;
-
-    private Color darkGreen = new Color(27, 77, 62);
-    private Color lightGreen = new Color(200, 200, 200);
-    private Color borderGreen = new Color(15, 50, 40);
-    private Color backgroundGrey = new Color(46, 46, 46);
-
 
     public GUI() {
         setTitle("Grindset");
@@ -36,15 +29,16 @@ public class GUI extends JFrame{    //card layout thing
         setMenuScreen();
         setSessionScreen();
         setMoodScreen();
-        setRemMenu();
 
         setVisible(true);
 
         cardLayout.show(cardPanel,"Menu");
+        timerDisplay = new JLabel("00:00:00");
     }
 
     public void setMenuScreen(){
         menuScreen = new JPanel(null);
+
         //colours
         Color darkGreen = new Color(27, 77, 62);
         Color lightGreen = new Color(200, 200, 200);
@@ -56,7 +50,7 @@ public class GUI extends JFrame{    //card layout thing
         banner.setBounds(0, 0, 800, 100);
         banner.setLayout(null);
 
-        JLabel labelOutput = new JLabel("Welcome to the Grindset");
+        JLabel labelOutput = new JLabel("Welcome to the Grindset", SwingConstants.CENTER);
         labelOutput.setBounds(50, 50, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(new Color(200, 200, 200));
@@ -92,8 +86,7 @@ public class GUI extends JFrame{    //card layout thing
         setRem.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
-            cardLayout.show(cardPanel, "Reminder Menu");
-
+            menu.startMenu(2);
         });
 
         JButton studyStats = new JButton("View Study Stats");
@@ -125,6 +118,7 @@ public class GUI extends JFrame{    //card layout thing
         ImageIcon menuPic = new ImageIcon("OIP.jpg");
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(400, 100, menuPic.getIconWidth(), menuPic.getIconHeight());
+
         System.out.println("Image width: " + menuPic.getIconWidth());
 
         menuScreen.add(labelOutput);
@@ -142,6 +136,11 @@ public class GUI extends JFrame{    //card layout thing
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
         System.out.println("hi");
+
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
         sessionScreen.setBackground(backgroundGrey);
 
         //dark green banner at the top
@@ -152,7 +151,7 @@ public class GUI extends JFrame{    //card layout thing
 
         //countdown button
         JButton countdownButton = new JButton("Countdown");
-        countdownButton.setBounds(50, 40, 150, 30);
+        countdownButton.setBounds(50, 30, 150, 30);
         countdownButton.setBackground(darkGreen);
         countdownButton.setForeground(lightGreen);
         countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -160,14 +159,13 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setFocusPainted(false);
 
         JButton stopwatchButton = new JButton("Stopwatch");
-        stopwatchButton.setBounds(220, 40, 150, 30);
+        stopwatchButton.setBounds(220, 30, 150, 30);
         stopwatchButton.setBackground(darkGreen);
         stopwatchButton.setForeground(lightGreen);
         stopwatchButton.setFont(new Font("Arial", Font.BOLD, 14));
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
 
-        //possibly refresh every time, with a method for the "" that constnatly changes
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
         timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
@@ -177,7 +175,7 @@ public class GUI extends JFrame{    //card layout thing
 
 
         JButton play = new JButton("PLAY");
-        play.setBounds(300, 250, 100, 40);
+        play.setBounds(160, 300, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
         play.setBackground(darkGreen);
         play.setForeground(lightGreen);
@@ -188,7 +186,7 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton pause = new JButton("PAUSE");
-        pause.setBounds(425, 250, 100, 40);
+        pause.setBounds(300, 300, 100, 40);
         pause.setFont(new Font("Arial", Font.BOLD, 17));
         pause.setBackground(darkGreen);
         pause.setForeground(lightGreen);
@@ -198,32 +196,6 @@ public class GUI extends JFrame{    //card layout thing
             timer.pause();
         });
 
-        JButton returnHome = new JButton("Home");
-        returnHome.setBounds(700, 30, 30, 30);
-        returnHome.setFont(new Font("Arial", Font.BOLD, 17));
-        returnHome.setBackground(darkGreen);
-        returnHome.setForeground(lightGreen);
-        returnHome.setFocusPainted(false);
-        returnHome.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        returnHome.addActionListener(e -> {
-            // This code will run when the button is clicked
-            cardLayout.show(cardPanel, "Menu");
-        });
-
-        JButton musicBut = new JButton("MUSIC");
-        musicBut.setBounds(700, 400, 30, 30);
-        musicBut.setFont(new Font("Arial", Font.BOLD, 17));
-        musicBut.setBackground(darkGreen);
-        musicBut.setForeground(lightGreen);
-        musicBut.setFocusPainted(false);
-        musicBut.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        musicBut.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("imagine this is playing music");
-        });
-
-        sessionScreen.add(musicBut);
-        sessionScreen.add(returnHome);
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
         sessionScreen.add(timerDisplay);
@@ -238,6 +210,11 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setMoodScreen(){
         moodScreen = new JPanel(null);
+
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
         moodScreen.setBackground(backgroundGrey);
 
         //dark green banner at the top
@@ -252,32 +229,35 @@ public class GUI extends JFrame{    //card layout thing
         labelOutput.setForeground(lightGreen);
 
         //making all the mood buttons
-        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Demotivated"};
+        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Demotivated", "Skip"};
+        String[] moodImages = {"😊", "😢", "😴", "💪", "😞", "⏭"};
         //colours for the buttons
         Color[] colours = {
                 new Color(255, 255, 153),
                 new Color(77, 148, 255),
                 new Color(163, 163, 194),
                 new Color(255, 51,51),
-                new Color(194, 194, 214)
+                new Color(194, 194, 214),
+                new Color(17, 77, 55)
         };
 
-        int width = 120;
-        int height = 50;
+        int width = 80;
+        int height = 70;
         int startX = 50;
         int startY = 220;
         int gap = 20;
 
         for(int i = 0; i< moods.length; i++){
-            JButton moodButton = new JButton((i+1) + ". " + moods[i]);
+            JButton moodButton = new JButton(moodImages[i]);
             moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
             moodButton.setBackground(colours[i]);
             moodButton.setForeground(Color.BLACK);
             moodButton.setFocusPainted(false);
-            moodButton.setFont(new Font("Arial", Font.BOLD, 14));
+            moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
 
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
+                //input setter method for the mood towards sessionManager
                 cardLayout.show(cardPanel, "Session");
             });
             moodScreen.add(moodButton);
@@ -288,54 +268,5 @@ public class GUI extends JFrame{    //card layout thing
         moodScreen.add(banner);
         cardPanel.add(moodScreen, "Mood");
 
-    }
-
-    public void setRemMenu(){
-        remMenu = new JPanel(null);
-        remMenu.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
-
-        JLabel labelOutput = new JLabel("Reminder Menu", SwingConstants.CENTER);
-        labelOutput.setBounds(50, 60, 700, 40);
-        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
-        labelOutput.setForeground(lightGreen);
-
-        String[] remFunc = {"Display all study reminders", "Add study reminder", "Replace reminder",
-                "Delete study reminder", "Delete ALL study reminders", "Return"};
-
-        int width = 250;
-        int height = 30;
-        int startX = 70;
-        int startY = 130;
-        int gap = 2 ;
-
-        for(int i = 0; i< 6; i++) {
-            JButton moodButton = new JButton((i + 1) + ". " + remFunc[i]);
-            moodButton.setBounds(startX, startY + (50*i), width, height);
-            //moodButton.setBackground();
-            moodButton.setForeground(Color.BLACK);
-            moodButton.setFocusPainted(false);
-            moodButton.setFont(new Font("Arial", Font.BOLD, 14));
-
-            moodButton.addActionListener(e -> {
-                System.out.println("Mood selected = " + moodButton.getText());
-                cardLayout.show(cardPanel, "Menu");
-            });
-            remMenu.add(moodButton);
-
-            ImageIcon menuPic = new ImageIcon("image.png");
-            JLabel imageLabel = new JLabel(menuPic);
-            imageLabel.setBounds(400, 150, menuPic.getIconWidth(), menuPic.getIconHeight());
-
-            remMenu.add(imageLabel);
-            remMenu.add(labelOutput);
-            remMenu.add(banner);
-            cardPanel.add(remMenu, "Reminder Menu");
-        }
     }
 }

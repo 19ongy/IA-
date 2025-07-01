@@ -4,9 +4,5 @@ public class Main {
         GUI gui = new GUI();
         ReminderGUI reminder = new ReminderGUI();
 
-
-        //timer
-        //SessionManager sessionManager = new SessionManager();
-        //sessionManager.createSession();
     }
 }

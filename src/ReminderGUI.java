@@ -22,7 +22,10 @@ public class ReminderGUI extends JFrame{
 
         setTitle("Reminders ");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
-        setLocation(width-400, height-250);
+        System.out.println(width);
+        System.out.println(height);
+        setLocation(width-900, height-650);
+
         setSize(400, 200);
 
         cardLayout = new CardLayout();
