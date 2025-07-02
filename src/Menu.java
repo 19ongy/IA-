@@ -17,7 +17,7 @@ public class Menu {
 
         switch(answer){
             case 1:
-                sessionManager.createSession();
+                //sessionManager.createSession();
             case 2:
                 module.menu();
         }

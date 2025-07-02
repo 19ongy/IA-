@@ -229,7 +229,7 @@ public class GUI extends JFrame{    //card layout thing
         labelOutput.setForeground(lightGreen);
 
         //making all the mood buttons
-        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Demotivated", "Skip"};
+        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Anguished", "Skip"};
         String[] moodImages = {"😊", "😢", "😴", "💪", "😞", "⏭"};
         //colours for the buttons
         Color[] colours = {
@@ -254,7 +254,7 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setForeground(Color.BLACK);
             moodButton.setFocusPainted(false);
             moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-
+            moodButton.setToolTipText(moods[i]);
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
                 //input setter method for the mood towards sessionManager
