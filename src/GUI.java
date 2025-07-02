@@ -13,8 +13,10 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel sessionScreen;
     private JPanel moodScreen;
     private Menu menu = new Menu();
-    private SetTimer timer = new SetTimer();
     private JLabel timerDisplay;
+
+    SessionManager sessionManager = new SessionManager();
+    private SetTimer timer = new SetTimer();
 
     public GUI() {
         setTitle("Grindset");
@@ -173,6 +175,11 @@ public class GUI extends JFrame{    //card layout thing
         timerDisplay.setBackground(borderGreen);
         timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
+        //changing the timer display in GUI
+        timer.preTimer(timerDisplay);
+        timerDisplay.setText("fin");
+
+
 
         JButton play = new JButton("PLAY");
         play.setBounds(160, 300, 100, 40);
@@ -243,7 +250,7 @@ public class GUI extends JFrame{    //card layout thing
 
         int width = 80;
         int height = 70;
-        int startX = 50;
+        int startX = 80;
         int startY = 220;
         int gap = 20;
 

@@ -26,8 +26,10 @@ public class SessionManager {
 
     //constructor
     public SessionManager(){
-
-
+        this.moodBefore = null;
+        this.moodAfter = null;
+        this.subject = null;
+        this.sessionLength = 0;
     }
 
     //setter methods
@@ -75,7 +77,22 @@ public class SessionManager {
         return String.valueOf(length);
     }
 
+    //getter methods
+    public String getSubject(){
+        return this.subject;
+    }
 
+    public int getLength(){
+        return sessionLength;
+    }
+
+    public MoodEntry.Mood getMoodBefore(){
+        return moodBefore;
+    }
+
+    public MoodEntry.Mood getMoodAfter(){
+        return moodAfter;
+    }
 
 
 

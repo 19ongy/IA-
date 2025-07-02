@@ -3,6 +3,7 @@ CLASS SUMMARY:
 - Handles all of the methods for running timers/ countdowns
  */
 
+import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Scanner;
@@ -25,6 +26,8 @@ public class SetTimer {
     public boolean isPaused;
 
     public String time;
+
+    SessionManager manager = new SessionManager();
 
 
     //constructor
@@ -51,6 +54,7 @@ public class SetTimer {
         this.time = time;
     }
 
+    /*
     //decides if countdown or stopwatch
     public void setType(){
         Scanner scanner = new Scanner(System.in);
@@ -75,6 +79,8 @@ public class SetTimer {
         }
     }
 
+     */
+
     //pause the timer
     public void pause(){
         if(!isPaused){
@@ -93,8 +99,7 @@ public class SetTimer {
 
 
     //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
-    public void preTimer(){
-
+    public void preTimer(JLabel label){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
@@ -103,6 +108,7 @@ public class SetTimer {
                     System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
                     setTime(formatTime(preTimeRemaining));
                     preTimeRemaining = preTimeRemaining - 1;
+                    label.setText(String.valueOf(preTimeRemaining));
                 } else {
                     System.out.println("\rTIMER STARTS NOW!!!!!");
                     timer.cancel();
@@ -140,6 +146,7 @@ public class SetTimer {
                         System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
                         setTime(formatTime(timeElapsed));
                         timeElapsed = timeElapsed + 1;
+
                     } else {
                         System.out.println("\nGood job!! Timer finished!");
                         timer.cancel();
