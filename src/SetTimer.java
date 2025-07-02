@@ -106,13 +106,12 @@ public class SetTimer {
                 if (preTimeRemaining > 0) {
                     //prints on the same line
                     System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
-                    setTime(formatTime(preTimeRemaining));
+                    //setTime(formatTime(preTimeRemaining));
+                    label.setText(formatTime(preTimeRemaining));
                     preTimeRemaining = preTimeRemaining - 1;
-                    label.setText(String.valueOf(preTimeRemaining));
                 } else {
-                    System.out.println("\rTIMER STARTS NOW!!!!!");
+                    label.setText("\rTIMER STARTS NOW!!!!!");
                     timer.cancel();
-                    ready = true;
                 }
             }
         };
@@ -120,33 +119,24 @@ public class SetTimer {
         //period parameter is measured in milliseconds
         timer.scheduleAtFixedRate(task, 0, 1000);
 
-        //prevents the separate threads issue
-        while (!ready) {
-            try {
-                //creates a small delay
-                Thread.sleep(500); // Small delay to prevent CPU overuse
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public String tCheck(String time){
         return time;
     }
 
-
     //STOPWATCH METHODS ------------------------------->
-    public void startStopwatch(){
+    public void startStopwatch(JLabel label){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
                 if (!isPaused) {
+                    System.out.println("time remaning: " + timeRemaining);
                         if (timeRemaining > 0) {
                         System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
                         setTime(formatTime(timeElapsed));
+                        label.setText(formatTime(timeElapsed));
                         timeElapsed = timeElapsed + 1;
-
                     } else {
                         System.out.println("\nGood job!! Timer finished!");
                         timer.cancel();

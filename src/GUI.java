@@ -175,9 +175,29 @@ public class GUI extends JFrame{    //card layout thing
         timerDisplay.setBackground(borderGreen);
         timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
-        //changing the timer display in GUI
-        timer.preTimer(timerDisplay);
-        timerDisplay.setText("fin");
+        JButton session = new JButton("NEW");
+        session.setBounds(400, 300, 100, 40);
+        session.setFont(new Font("Arial", Font.BOLD, 17));
+        session.setBackground(darkGreen);
+        session.setForeground(lightGreen);
+        session.setFocusPainted(false);
+        session.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        session.addActionListener(e -> {
+            //changes the display on the gui
+            timer.preTimer(timerDisplay);
+            //timer.resume();
+            timer.startStopwatch(timerDisplay);
+        });
+
+        JTextField timeInput = new JTextField(6);
+        timeInput.setBounds(500, 300, 200, 40);
+        timeInput.setFont(new Font("Arial", Font.BOLD, 17));
+        timeInput.setBackground(lightGreen);
+        timeInput.setForeground(borderGreen);
+        timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        String value = timeInput.getText();
+        System.out.println(value);
+
 
 
 
@@ -189,7 +209,7 @@ public class GUI extends JFrame{    //card layout thing
         play.setFocusPainted(false);
         play.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         play.addActionListener(e -> {
-            timer.resume();
+            //open up the text field for them to input t heier own times
         });
 
         JButton pause = new JButton("PAUSE");
@@ -209,6 +229,8 @@ public class GUI extends JFrame{    //card layout thing
         sessionScreen.add(banner);
         sessionScreen.add(play);
         sessionScreen.add(pause);
+        sessionScreen.add(session);
+        sessionScreen.add(timeInput);
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");
