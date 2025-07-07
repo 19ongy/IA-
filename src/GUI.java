@@ -12,6 +12,7 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel menuScreen;
     private JPanel sessionScreen;
     private JPanel moodScreen;
+    private JPanel graphMenu;
     private Menu menu = new Menu();
     private JLabel timerDisplay;
 
@@ -31,6 +32,7 @@ public class GUI extends JFrame{    //card layout thing
         setMenuScreen();
         setSessionScreen();
         setMoodScreen();
+        setGraphMenu();
 
         setVisible(true);
 
@@ -101,6 +103,7 @@ public class GUI extends JFrame{    //card layout thing
         studyStats.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
+            cardLayout.show(cardPanel, "graphMenu");
             menu.startMenu(3);
         });
 
@@ -298,4 +301,69 @@ public class GUI extends JFrame{    //card layout thing
         cardPanel.add(moodScreen, "Mood");
 
     }
+
+    public void setGraphMenu(){
+        graphMenu = new JPanel(null);
+
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        graphMenu.setBackground(backgroundGrey);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        //boxing out shapes for sutff
+        JPanel tabBar = new JPanel();
+        tabBar.setBackground(new Color(27, 77, 62));
+        tabBar.setBounds(0, 0, 200, 500);
+        tabBar.setLayout(null);
+
+        //set points
+        int mStartX = 0;
+        int mStartY = 100;
+        int mainTabX = 200;
+        int mainTabY = 50;
+        int amtMainTabs = 0;
+        int amtSideTabs = 0;
+
+        int sideTabX = 150;
+        int sideTabY = 40;
+        int sStartX = 50;
+        int sStartY = (mStartX * amtMainTabs) + (sideTabY * amtSideTabs) + mainTabY;
+
+
+        JButton overviewButton = new JButton();
+        overviewButton.setBounds(mStartX, mStartY, mainTabX, mainTabY);
+        overviewButton.setBackground(darkGreen);
+        overviewButton.setForeground(Color.BLACK);
+        overviewButton.setFocusPainted(false);
+        overviewButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+
+        //have a method that whenever a new side tab is added, it adds to the tab list on the left
+        //whenever a new side button is added, have an arraylist that takes the text of what they clicked
+        //add the actionlistneer through siwtch and case thing
+
+        JButton sideButton = new JButton();
+        sideButton.setBounds(sStartX, sStartY, sideTabX, sideTabY);
+        sideButton.setBackground(darkGreen);
+        sideButton.setForeground(Color.BLACK);
+        sideButton.setFocusPainted(false);
+        sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+
+
+
+        graphMenu.add(banner);
+        graphMenu.add(tabBar);
+
+        graphMenu.add(overviewButton);
+        graphMenu.add(sideButton);
+        cardPanel.add(graphMenu, "graphMenu");
+    }
+
+
 }
