@@ -327,14 +327,14 @@ public class GUI extends JFrame{    //card layout thing
         int mStartX = 0;
         int mStartY = 100;
         int mainTabX = 200;
-        int mainTabY = 50;
+        int mainTabY = 40;
         int amtMainTabs = 0;
         int amtSideTabs = 0;
 
-        int sideTabX = 150;
-        int sideTabY = 40;
-        int sStartX = 50;
-        int sStartY = (mStartX * amtMainTabs) + (sideTabY * amtSideTabs) + mainTabY;
+        int sideTabY = 30;
+        int sStartX = 20;
+        int sideTabX = 200 - sStartX;
+        int sStartY = (mStartX * amtMainTabs) + (sideTabY * amtSideTabs) + mainTabY + 100;
 
 
         JButton overviewButton = new JButton();
