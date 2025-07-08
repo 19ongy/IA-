@@ -1,9 +1,7 @@
 //GUI CLASS
 //gimem a sec
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class GUI extends JFrame{    //card layout thing
     private CardLayout cardLayout;
@@ -11,7 +9,8 @@ public class GUI extends JFrame{    //card layout thing
 
     private JPanel menuScreen;
     private JPanel sessionScreen;
-    private JPanel moodScreen;
+    private JPanel bMoodScreen;
+    private JPanel pMoodScreen;
     private JPanel graphMenu;
     private Menu menu = new Menu();
     private JLabel timerDisplay;
@@ -31,7 +30,8 @@ public class GUI extends JFrame{    //card layout thing
 
         setMenuScreen();
         setSessionScreen();
-        setMoodScreen();
+        setBMoodScreen();
+        setPMoodScreen();
         setGraphMenu();
 
         setVisible(true);
@@ -71,7 +71,7 @@ public class GUI extends JFrame{    //card layout thing
         setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
             System.out.println("nice");
-            cardLayout.show(cardPanel, "Mood");
+            cardLayout.show(cardPanel, "bMood");
             //has to call the start of menu, but it causes issues now
             /*SwingUtilities.invokeLater(() -> {
                 menu.startMenu(1);
@@ -201,9 +201,6 @@ public class GUI extends JFrame{    //card layout thing
         String value = timeInput.getText();
         System.out.println(value);
 
-
-
-
         JButton play = new JButton("PLAY");
         play.setBounds(160, 300, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
@@ -240,14 +237,14 @@ public class GUI extends JFrame{    //card layout thing
 
     }
 
-    public void setMoodScreen(){
-        moodScreen = new JPanel(null);
+    public void setBMoodScreen(){
+        bMoodScreen = new JPanel(null);
 
         Color darkGreen = new Color(27, 77, 62);
         Color lightGreen = new Color(200, 200, 200);
         Color borderGreen = new Color(15, 50, 40);
         Color backgroundGrey = new Color(46, 46, 46);
-        moodScreen.setBackground(backgroundGrey);
+        bMoodScreen.setBackground(backgroundGrey);
 
         //dark green banner at the top
         JPanel banner = new JPanel();
@@ -289,17 +286,42 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setToolTipText(moods[i]);
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
+                sessionManager.setMoodBefore(moodButton.getText());
                 //input setter method for the mood towards sessionManager
                 cardLayout.show(cardPanel, "Session");
             });
-            moodScreen.add(moodButton);
+            bMoodScreen.add(moodButton);
 
         }
 
-        moodScreen.add(labelOutput);
-        moodScreen.add(banner);
-        cardPanel.add(moodScreen, "Mood");
+        bMoodScreen.add(labelOutput);
+        bMoodScreen.add(banner);
+        cardPanel.add(bMoodScreen, "bMood");
+    }
 
+    public void setPMoodScreen(){
+        pMoodScreen = new JPanel(null);
+
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        pMoodScreen.setBackground(backgroundGrey);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        JLabel labelOutput = new JLabel("How are you feeling today?", SwingConstants.CENTER);
+        labelOutput.setBounds(50, 150, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(lightGreen);
+
+        pMoodScreen.add(banner);
+        pMoodScreen.add(labelOutput);
+        cardPanel.add(pMoodScreen, "pMood");
     }
 
     public void setGraphMenu(){
