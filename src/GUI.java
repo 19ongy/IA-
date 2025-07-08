@@ -286,7 +286,7 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setToolTipText(moods[i]);
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
-                sessionManager.setMoodBefore(moodButton.getText());
+                //sessionManager.setMoodBefore(moodButton.getText());
                 //input setter method for the mood towards sessionManager
                 cardLayout.show(cardPanel, "Session");
             });
@@ -377,11 +377,17 @@ public class GUI extends JFrame{    //card layout thing
         sideButton.setFocusPainted(false);
         sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
 
+        GraphMaking graph = new GraphMaking();
 
+        frame.add(graph);
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocation(50,50);
+        frame.setVisible(true);
 
         graphMenu.add(banner);
         graphMenu.add(tabBar);
-
+        graphMenu.add(graph);
         graphMenu.add(overviewButton);
         graphMenu.add(sideButton);
         cardPanel.add(graphMenu, "graphMenu");

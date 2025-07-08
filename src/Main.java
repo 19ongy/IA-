@@ -7,13 +7,5 @@ public class Main {
         System.out.println();
         GUI gui = new GUI();
         ReminderGUI reminder = new ReminderGUI();
-        JFrame frame = new JFrame("Study Time Graph");
-        GraphMaking graph = new GraphMaking();
-
-        frame.add(graph);
-        frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 }
