@@ -7,7 +7,9 @@ import java.io.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SessionManager {
     private Scanner scanner = new Scanner(System.in);
@@ -105,74 +107,15 @@ public class SessionManager {
 
     }
 
-
-
-    /*
-    public void createSession(){
-        System.out.println("NEW SESSION: ");
-
-        //gets date before
-        startMonth = String.valueOf(localDate.getMonth());
-        startDay = localDate.getDayOfMonth();
-
-        //time before session
-        startHour = localTime.getHour();
-        startMinute = localTime.getMinute();
-
-        //gets mood from before the session
-        moodBefore = moodEntry.getMood();
-
-        //gets subject
-
-        System.out.println("Subject being studied: ");
-        subject = scanner.next();
-
-
-        //sets timer
-        Timer.setType();
-
-        //duration is already set in timer class
-        sessionLength = Timer.getSetTimerDuration();
-
+    public void saveSession(Session session) {
         try {
-            //waits until 1 second after the timer is finished before it asks the mood afterwards
-            Thread.sleep(1000*(sessionLength+1));  // Sleep for 1 second
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //mood after
-        moodAfter = moodEntry.getMood();
-
-        //date after ( if they started studying at night and ended in the morning )
-        endMonth = String.valueOf(localDate.getMonth());
-        endDay = localDate.getDayOfMonth();
-
-        //time after
-        endHour = localTime.getHour();
-        endMinute = localTime.getMinute();
-
-        Session session = new Session(moodBefore, moodAfter, sessionLength, subject,
-                startMonth, startDay, endMonth, endDay,
-                startHour, startMinute, endHour, endMinute);
-
-        saveSession(session);
-
-         */
-
-
-    /*attempts at reading and writing to the data file
-    public void saveSession(Session session){
-        try{
             FileWriter writer = new FileWriter("session_data.txt", true);
-            writer.write(session.toFileString() + "\n");
+            writer.write(toFileString() + "\n");
             System.out.println("nice");
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
     public static void readSessions() {
         try {
@@ -191,7 +134,5 @@ public class SessionManager {
             e.printStackTrace();
         }
     }
-
-     */
 
 }
