@@ -125,24 +125,40 @@ public class SetTimer {
         return time;
     }
 
+    /*to do list 08.07
+    make an isEnd to check whether the user has clicked the end button on the gui yet
+    find a way to just pause the timer
+
+     */
+
     //STOPWATCH METHODS ------------------------------->
     public void startStopwatch(JLabel label){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run(){
                 if (!isPaused) {
+                    System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
+                    label.setText(formatTime(timeElapsed));
+                    timeElapsed = timeElapsed + 1;
+                    /*
                     System.out.println("time remaning: " + timeRemaining);
                         if (timeRemaining > 0) {
                         System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
                         setTime(formatTime(timeElapsed));
+                        System.out.println("hi");
                         label.setText(formatTime(timeElapsed));
                         timeElapsed = timeElapsed + 1;
+
+                     */
                     } else {
-                        System.out.println("\nGood job!! Timer finished!");
+                        System.out.println("\ntimer paused ");
                         timer.cancel();
+
+                        //set countdown timer stopwatch timer
+                    //make is p uased true so that it skips over the previous statements
+                    //funsies
                     }
                 }
-            }
         };
         //period parameter is measured in milliseconds
         timer.schedule(task, 0, 1000);

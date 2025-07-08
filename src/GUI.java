@@ -16,6 +16,7 @@ public class GUI extends JFrame{    //card layout thing
     private JLabel timerDisplay;
 
     SessionManager sessionManager = new SessionManager();
+    GraphMaking graph = new GraphMaking();
     private SetTimer timer = new SetTimer();
 
     public GUI() {
@@ -170,6 +171,9 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setFont(new Font("Arial", Font.BOLD, 14));
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
+        stopwatchButton.addActionListener(e -> {
+            timer.startStopwatch(timerDisplay);
+        });
 
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
@@ -198,8 +202,17 @@ public class GUI extends JFrame{    //card layout thing
         timeInput.setBackground(lightGreen);
         timeInput.setForeground(borderGreen);
         timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        String value = timeInput.getText();
-        System.out.println(value);
+
+        //confirmation check for inputting text
+        JButton tick = new JButton("t");
+        tick.setBounds(700, 300, 50, 50);
+        tick.setBackground(darkGreen);
+        tick.setForeground(lightGreen);
+        tick.addActionListener(e -> {
+            String value = timeInput.getText();
+            System.out.println(value);
+            timer.setTime(value);
+        });
 
         JButton play = new JButton("PLAY");
         play.setBounds(160, 300, 100, 40);
@@ -223,6 +236,20 @@ public class GUI extends JFrame{    //card layout thing
             timer.pause();
         });
 
+        JButton end = new JButton("END");
+        end.setBounds(400, 400, 100, 40);
+        end.setFont(new Font("Arial", Font.BOLD, 17));
+        end.setBackground(darkGreen);
+        end.setForeground(lightGreen);
+        end.setFocusPainted(false);
+        end.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        end.addActionListener(e -> {
+            timer.pause();
+        });
+
+
+        sessionScreen.add(tick);
+        sessionScreen.add(end);
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
         sessionScreen.add(timerDisplay);
@@ -358,7 +385,6 @@ public class GUI extends JFrame{    //card layout thing
         int sideTabX = 200 - sStartX;
         int sStartY = (mStartX * amtMainTabs) + (sideTabY * amtSideTabs) + mainTabY + 100;
 
-
         JButton overviewButton = new JButton();
         overviewButton.setBounds(mStartX, mStartY, mainTabX, mainTabY);
         overviewButton.setBackground(darkGreen);
@@ -377,13 +403,11 @@ public class GUI extends JFrame{    //card layout thing
         sideButton.setFocusPainted(false);
         sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
 
-        GraphMaking graph = new GraphMaking();
 
-        frame.add(graph);
-        frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(50,50);
-        frame.setVisible(true);
+        GraphMaking graph = new GraphMaking();
+        graph.setSize(500,300);
+        graph.setLocation(250, 120);
+
 
         graphMenu.add(banner);
         graphMenu.add(tabBar);

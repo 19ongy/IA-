@@ -110,12 +110,14 @@ public class SessionManager {
     public void saveSession(Session session) {
         try {
             FileWriter writer = new FileWriter("session_data.txt", true);
-            writer.write(toFileString() + "\n");
+            writer.write("hello" + "\n");
             System.out.println("nice");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public static void readSessions() {
         try {
