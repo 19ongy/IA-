@@ -14,6 +14,7 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel graphMenu;
     private Menu menu = new Menu();
     private JLabel timerDisplay;
+    private String value;
 
     SessionManager sessionManager = new SessionManager();
     GraphMaking graph = new GraphMaking();
@@ -39,6 +40,7 @@ public class GUI extends JFrame{    //card layout thing
 
         cardLayout.show(cardPanel,"Menu");
         timerDisplay = new JLabel("00:00:00");
+        value = "0";
     }
 
     public void setMenuScreen(){
@@ -162,18 +164,6 @@ public class GUI extends JFrame{    //card layout thing
         timerDisplay.setBackground(borderGreen);
         timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
-        //countdown button
-        JButton countdownButton = new JButton("Countdown");
-        countdownButton.setBounds(50, 30, 150, 30);
-        countdownButton.setBackground(darkGreen);
-        countdownButton.setForeground(lightGreen);
-        countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
-        countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        countdownButton.setFocusPainted(false);
-        countdownButton.addActionListener(e -> {
-            timer.startCountdown(0, timerDisplay);
-        });
-
         JButton stopwatchButton = new JButton("Stopwatch");
         stopwatchButton.setBounds(220, 30, 150, 30);
         stopwatchButton.setBackground(darkGreen);
@@ -211,9 +201,21 @@ public class GUI extends JFrame{    //card layout thing
         tick.setBackground(darkGreen);
         tick.setForeground(lightGreen);
         tick.addActionListener(e -> {
-            String value = timeInput.getText();
+            value = timeInput.getText();
             System.out.println(value);
             timer.setTime(value);
+        });
+
+        //countdown button
+        JButton countdownButton = new JButton("Countdown");
+        countdownButton.setBounds(50, 30, 150, 30);
+        countdownButton.setBackground(darkGreen);
+        countdownButton.setForeground(lightGreen);
+        countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
+        countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        countdownButton.setFocusPainted(false);
+        countdownButton.addActionListener(e -> {
+            timer.startCountdown(Integer.parseInt(value), timerDisplay);
         });
 
         JButton play = new JButton("PLAY");

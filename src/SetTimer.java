@@ -164,17 +164,18 @@ public class SetTimer {
         timeElapsed = 0;
         if(timeRemaining<=0){
             JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "Access Denied", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-
+        System.out.println("countdown has begun");
         countdownTimer.addActionListener(e -> {
             if (isEnded) {
                 label.setText("Timer Ended!");
                 countdownTimer.stop();
             } else if (!isPaused) {
                 int timeLeft = timeRemaining - timeElapsed;
-
+                System.out.println(formatTime(timeLeft));
                 if (timeLeft > 0) {
-                    label.setText("TIME LEFT: " + formatTime(timeLeft));
+                    label.setText(formatTime(timeLeft));
                     timeElapsed = timeElapsed + 1;
                 } else {
                     label.setText("Good job!! Timer finished!");
