@@ -24,7 +24,7 @@ public class ReminderGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
         System.out.println(width);
         System.out.println(height);
-        setLocation(width-500, height-300);
+        setLocation(width-1000, height-600);
 
         setSize(400, 200);
 

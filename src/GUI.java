@@ -155,6 +155,13 @@ public class GUI extends JFrame{    //card layout thing
         banner.setBounds(0, 0, 800, 100);
         banner.setLayout(null);
 
+        JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
+        timerDisplay.setBounds(150, 120, 500, 120);
+        timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
+        timerDisplay.setForeground(lightGreen);
+        timerDisplay.setBackground(borderGreen);
+        timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+
         //countdown button
         JButton countdownButton = new JButton("Countdown");
         countdownButton.setBounds(50, 30, 150, 30);
@@ -163,6 +170,9 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setFont(new Font("Arial", Font.BOLD, 14));
         countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         countdownButton.setFocusPainted(false);
+        countdownButton.addActionListener(e -> {
+            timer.startCountdown(0, timerDisplay);
+        });
 
         JButton stopwatchButton = new JButton("Stopwatch");
         stopwatchButton.setBounds(220, 30, 150, 30);
@@ -175,12 +185,6 @@ public class GUI extends JFrame{    //card layout thing
             timer.startStopwatch(timerDisplay);
         });
 
-        JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
-        timerDisplay.setBounds(150, 120, 500, 120);
-        timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
-        timerDisplay.setForeground(lightGreen);
-        timerDisplay.setBackground(borderGreen);
-        timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
         JButton session = new JButton("NEW");
         session.setBounds(400, 300, 100, 40);
@@ -192,8 +196,6 @@ public class GUI extends JFrame{    //card layout thing
         session.addActionListener(e -> {
             //changes the display on the gui
             timer.preTimer(timerDisplay);
-            //timer.resume();
-            timer.startStopwatch(timerDisplay);
         });
 
         JTextField timeInput = new JTextField(6);

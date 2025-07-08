@@ -1,12 +1,6 @@
-/*
-CLASS SUMMARY:
-- Handles all of the methods for running timers/ countdowns
- */
-
 import javax.swing.*;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.Scanner;
+import javax.swing.Timer;
 
 public class SetTimer {
     private int startHour = 0;
@@ -18,15 +12,15 @@ public class SetTimer {
 
     private int timeElapsed;
     private int timeRemaining;
-    private Timer timer;
-    private TimerTask timerTask;
-    boolean ready;
+    private boolean ready;
     private int preTimeRemaining;
     public int setTimerDuration;
     public boolean isPaused;
+    public boolean isEnded;
 
     public String time;
-
+    Timer stopwatchTimer = new javax.swing.Timer(1000, null);
+    Timer countdownTimer = new javax.swing.Timer(1000, null);
     SessionManager manager = new SessionManager();
 
 
@@ -38,6 +32,7 @@ public class SetTimer {
         preTimeRemaining = 3;
         setTimerDuration = 0;
         isPaused = false;
+        isEnded = false;
         time = "";
     }
 
@@ -53,33 +48,6 @@ public class SetTimer {
     public void setTime(String time){
         this.time = time;
     }
-
-    /*
-    //decides if countdown or stopwatch
-    public void setType(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What type of timer would you like to set: ");
-        System.out.println("1. Countdown \n2. Stopwatch");;
-        int answer = scanner.nextInt();
-
-        if(answer == 2){
-            preTimer();
-            startStopwatch();
-        }else if(answer == 1){
-            //sets the amount of time before running the pre countdown
-            int time = setCountdownDuration();
-            //System.out.println(time);
-            if(time != 0){
-                preTimer();
-                startCountdown(time);
-            }
-        }else{
-            System.out.println("Invalid input. Try again.");
-            //setType();
-        }
-    }
-
-     */
 
     //pause the timer
     public void pause(){
@@ -100,25 +68,20 @@ public class SetTimer {
 
     //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
     public void preTimer(JLabel label){
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run(){
-                if (preTimeRemaining > 0) {
-                    //prints on the same line
-                    System.out.printf("\rSTUDY SESSION BEGINNING IN: : %s", formatTime(preTimeRemaining));
-                    //setTime(formatTime(preTimeRemaining));
-                    label.setText(formatTime(preTimeRemaining));
-                    preTimeRemaining = preTimeRemaining - 1;
-                } else {
-                    label.setText("\rTIMER STARTS NOW!!!!!");
-                    timer.cancel();
-                }
+        javax.swing.Timer[] preTimer = new javax.swing.Timer[1]; //creates an array with 1 slot to hold my timer in
+        preTimer[0] = new javax.swing.Timer(1000, null); //creates the timer instance that counts every second
+
+        preTimer[0].addActionListener(e -> {
+            if (preTimeRemaining > 0) {
+                label.setText(formatTime(preTimeRemaining));
+                preTimeRemaining = preTimeRemaining -1;
+            } else {
+                label.setText("TIMER STARTS NOW!!!!!");
+                preTimer[0].stop(); // stop the timer
             }
-        };
+        });
 
-        //period parameter is measured in milliseconds
-        timer.scheduleAtFixedRate(task, 0, 1000);
-
+        preTimer[0].start();
     }
 
     public String tCheck(String time){
@@ -132,36 +95,25 @@ public class SetTimer {
      */
 
     //STOPWATCH METHODS ------------------------------->
-    public void startStopwatch(JLabel label){
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run(){
-                if (!isPaused) {
-                    System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
-                    label.setText(formatTime(timeElapsed));
-                    timeElapsed = timeElapsed + 1;
-                    /*
-                    System.out.println("time remaning: " + timeRemaining);
-                        if (timeRemaining > 0) {
-                        System.out.printf("\rTIME ELAPSED: %s", formatTime(timeElapsed));
-                        setTime(formatTime(timeElapsed));
-                        System.out.println("hi");
-                        label.setText(formatTime(timeElapsed));
-                        timeElapsed = timeElapsed + 1;
+    public void startStopwatch(JLabel label) {
+        timeElapsed = 0;
+        isEnded = false;
+        isPaused = false;
 
-                     */
-                    } else {
-                        System.out.println("\ntimer paused ");
-                        timer.cancel();
+        System.out.println("stopwatch hs begun");
+        stopwatchTimer.addActionListener(e -> {
+            if (isEnded) {
+                label.setText("Timer Ended!");
+                stopwatchTimer.stop();  // stop the timer permanently
+            } else if (!isPaused) {
+                System.out.println(formatTime(timeElapsed));
+                label.setText(formatTime(timeElapsed));  // update label
+                label.repaint();
+                timeElapsed = timeElapsed + 1;
+            }
+        });
 
-                        //set countdown timer stopwatch timer
-                    //make is p uased true so that it skips over the previous statements
-                    //funsies
-                    }
-                }
-        };
-        //period parameter is measured in milliseconds
-        timer.schedule(task, 0, 1000);
+        stopwatchTimer.start();
     }
 
     // <-------------------------------
@@ -208,34 +160,30 @@ public class SetTimer {
     }
 
     //starts countdown and displays how much time is left
-    public void startCountdown(int timeRemaining){
-        //makes sure you entered a proper time
-        if(timeRemaining <= 0){
-            System.out.println("Make set a valid time. ");
-            return;
+    public void startCountdown(int timeRemaining, JLabel label){
+        timeElapsed = 0;
+        if(timeRemaining<=0){
+            JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "Access Denied", JOptionPane.ERROR_MESSAGE);
         }
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run(){
-                //checks if there's still time left
-                if (!isPaused) {
-                    if(timeElapsed < timeRemaining){
-                        //System.out.println(timeElapsed);
-                        //System.out.println(timeRemaining);
-                        //makes sure it prints on one line
-                        System.out.printf("\rTIME LEFT: %s", formatTime(returnTimeLeft()));
-                    }else{
-                        System.out.println();
-                        System.out.println("Good job!! Timer finished! ");
-                        timer.cancel();
-                    }
+        countdownTimer.addActionListener(e -> {
+            if (isEnded) {
+                label.setText("Timer Ended!");
+                countdownTimer.stop();
+            } else if (!isPaused) {
+                int timeLeft = timeRemaining - timeElapsed;
+
+                if (timeLeft > 0) {
+                    label.setText("TIME LEFT: " + formatTime(timeLeft));
+                    timeElapsed = timeElapsed + 1;
+                } else {
+                    label.setText("Good job!! Timer finished!");
+                    countdownTimer.stop();
                 }
             }
-        };
+        });
 
-        //period parameter is measured in milliseconds
-        timer.schedule(task, 0, 1000);
+        countdownTimer.start();
     }
 
     //method calculates how much time is left in countdown
