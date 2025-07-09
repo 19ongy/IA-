@@ -177,7 +177,7 @@ public class GUI extends JFrame{    //card layout thing
 
 
         JButton session = new JButton("NEW");
-        session.setBounds(400, 300, 100, 40);
+        session.setBounds(200, 300, 100, 40);
         session.setFont(new Font("Arial", Font.BOLD, 17));
         session.setBackground(darkGreen);
         session.setForeground(lightGreen);
@@ -189,21 +189,35 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JTextField timeInput = new JTextField(6);
-        timeInput.setBounds(500, 300, 200, 40);
+        timeInput.setBounds(300, 300, 200, 40);
         timeInput.setFont(new Font("Arial", Font.BOLD, 17));
         timeInput.setBackground(lightGreen);
         timeInput.setForeground(borderGreen);
         timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
         //confirmation check for inputting text
-        JButton tick = new JButton("t");
-        tick.setBounds(700, 300, 50, 50);
+        JButton tick = new JButton("✓");
+        tick.setBounds(500, 300, 40, 40);
+        tick.setFont(new Font("Segoe UI Emoji", Font.BOLD, 12));
         tick.setBackground(darkGreen);
         tick.setForeground(lightGreen);
+        tick.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         tick.addActionListener(e -> {
             value = timeInput.getText();
             //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
+
+        JButton pomo = new JButton("P");
+        pomo.setBounds(560, 300, 40, 40);
+        pomo.setFont(new Font("Segoe UI Emoji", Font.BOLD, 12));
+        pomo.setBackground(darkGreen);
+        pomo.setForeground(lightGreen);
+        pomo.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        pomo.addActionListener(e -> {
+            System.out.println("here i can put pomo optoins ");
+            //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
+        });
+
 
         //countdown button
         JButton countdownButton = new JButton("Countdown");
@@ -214,22 +228,22 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         countdownButton.setFocusPainted(false);
         countdownButton.addActionListener(e -> {
-            timer.startCountdown(Integer.parseInt(value), timerDisplay);
+            timer.startCountdown(timer.formatTime(value), timerDisplay);
         });
 
         JButton play = new JButton("PLAY");
-        play.setBounds(160, 300, 100, 40);
+        play.setBounds(250, 250, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
         play.setBackground(darkGreen);
         play.setForeground(lightGreen);
         play.setFocusPainted(false);
         play.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         play.addActionListener(e -> {
-            //open up the text field for them to input t heier own times
+            timer.resume();
         });
 
         JButton pause = new JButton("PAUSE");
-        pause.setBounds(300, 300, 100, 40);
+        pause.setBounds(360, 250, 100, 40);
         pause.setFont(new Font("Arial", Font.BOLD, 17));
         pause.setBackground(darkGreen);
         pause.setForeground(lightGreen);
@@ -240,14 +254,15 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JButton end = new JButton("END");
-        end.setBounds(400, 400, 100, 40);
+        end.setBounds(470, 250, 100, 40);
         end.setFont(new Font("Arial", Font.BOLD, 17));
         end.setBackground(darkGreen);
         end.setForeground(lightGreen);
         end.setFocusPainted(false);
         end.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         end.addActionListener(e -> {
-            timer.pause();
+            timer.endT(timerDisplay);
+
         });
 
 
@@ -261,6 +276,7 @@ public class GUI extends JFrame{    //card layout thing
         sessionScreen.add(pause);
         sessionScreen.add(session);
         sessionScreen.add(timeInput);
+        sessionScreen.add(pomo);
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");

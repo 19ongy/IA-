@@ -65,6 +65,11 @@ public class SetTimer {
         }
     }
 
+    public void endT(JLabel label){
+        isEnded = true;
+
+    }
+
 
     //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
     public void preTimer(JLabel label){
@@ -127,7 +132,6 @@ public class SetTimer {
             System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
             return 0;
         }
-
         //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
         if(formattedAmt.length() <= 2){ // if SS , so just seconds
             return Integer.parseInt(formattedAmt);
@@ -142,8 +146,6 @@ public class SetTimer {
             int minutes = Integer.parseInt(formattedAmt.substring(2,4));
             int seconds = Integer.parseInt(formattedAmt.substring(4,6));;
             int total = (hours*3600) + (minutes*60) + (seconds);
-
-
             return total;
         }else{
             System.out.println("INVALID INPUT");
@@ -158,7 +160,7 @@ public class SetTimer {
     public void startCountdown(int timeRemaining, JLabel label){
         timeElapsed = 0;
         if(timeRemaining<=0){
-            JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "Access Denied", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "whaaattt", JOptionPane.ERROR_MESSAGE);
             return;
         }
         System.out.println("countdown has begun");
@@ -168,7 +170,6 @@ public class SetTimer {
                 countdownTimer.stop();
             } else if (!isPaused) {
                 int timeLeft = timeRemaining - timeElapsed;
-                System.out.println(formatTime(timeLeft));
                 if (timeLeft > 0) {
                     label.setText(formatTime(timeLeft));
                     timeElapsed = timeElapsed + 1;
@@ -178,7 +179,6 @@ public class SetTimer {
                 }
             }
         });
-
         countdownTimer.start();
     }
 
