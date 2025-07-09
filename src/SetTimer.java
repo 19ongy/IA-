@@ -121,11 +121,7 @@ public class SetTimer {
     //COUNTDOWN METHODS ------------------------------->
     //method to set countdown duration
     //time returned aka timeRemaining is in seconds
-    public int setCountdownDuration(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How long is your timer? \n(Format HHMMSS or MMSS or SS) ");
-        String formattedAmt = scanner.next();
-
+    public int formatTime(String formattedAmt){
         //makes sure that user didn't enter all 0s
         if(formattedAmt.matches("0+")){
             System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
@@ -134,31 +130,30 @@ public class SetTimer {
 
         //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
         if(formattedAmt.length() <= 2){ // if SS , so just seconds
-            int timeInSecs = Integer.parseInt(formattedAmt);
-            //System.out.println(timeInSecs);
-            timeRemaining = timeInSecs;
-            setTimerDuration = timeRemaining;
-            return timeRemaining;
+            return Integer.parseInt(formattedAmt);
         }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
             //takes the first two characers (MM) and converts the minutes to seconds
             int minutes = Integer.parseInt(formattedAmt.substring(0,2));
             int seconds = Integer.parseInt(formattedAmt.substring(2,4));
-            timeRemaining = (minutes * 60) + seconds;
-            setTimerDuration = timeRemaining;
-            return timeRemaining;
+            int total = (minutes*60) + (seconds);
+            return total;
         }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
             int hours = Integer.parseInt(formattedAmt.substring(0,2));
             int minutes = Integer.parseInt(formattedAmt.substring(2,4));
-            int seconds = Integer.parseInt(formattedAmt.substring(4,6));
-            timeRemaining = (hours * 3600) + (minutes * 60) + seconds;
-            setTimerDuration = timeRemaining;
-            return timeRemaining;
+            int seconds = Integer.parseInt(formattedAmt.substring(4,6));;
+            int total = (hours*3600) + (minutes*60) + (seconds);
+
+
+            return total;
         }else{
             System.out.println("INVALID INPUT");
-            return 0;
+               return 0 ;
         }
     }
 
+
+
+    //whats it doing is
     //starts countdown and displays how much time is left
     public void startCountdown(int timeRemaining, JLabel label){
         timeElapsed = 0;

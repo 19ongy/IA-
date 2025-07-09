@@ -202,8 +202,7 @@ public class GUI extends JFrame{    //card layout thing
         tick.setForeground(lightGreen);
         tick.addActionListener(e -> {
             value = timeInput.getText();
-            System.out.println(value);
-            timer.setTime(value);
+            //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
 
         //countdown button
