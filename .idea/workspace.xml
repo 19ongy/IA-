@@ -7,7 +7,6 @@
     <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="add tool tip text fromwinter and &quot;!anguishied!&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +29,12 @@
     &quot;assignee&quot;: &quot;19ongy&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/19ongy/IA-&quot;,
-    &quot;accountId&quot;: &quot;806f6d7b-cc92-4c18-84b3-423fdf3f5bf7&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/19ongy/IA-",
+    "accountId": "c367e849-289c-46c1-ab08-3b4656975b88"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>

@@ -12,6 +12,7 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel bMoodScreen;
     private JPanel pMoodScreen;
     private JPanel graphMenu;
+    private JPanel settingMenu;
     private Menu menu = new Menu();
     private JLabel timerDisplay;
     private String value;
@@ -35,6 +36,7 @@ public class GUI extends JFrame{    //card layout thing
         setBMoodScreen();
         setPMoodScreen();
         setGraphMenu();
+        setSettingMenu();
 
         setVisible(true);
 
@@ -120,6 +122,7 @@ public class GUI extends JFrame{    //card layout thing
         settings.addActionListener(e -> {
             // This code will run when the button is clicked
             System.out.println("nice");
+            cardLayout.show(cardPanel,"setting menu");
             menu.startMenu(4);
         });
 
@@ -434,6 +437,37 @@ public class GUI extends JFrame{    //card layout thing
         graphMenu.add(overviewButton);
         graphMenu.add(sideButton);
         cardPanel.add(graphMenu, "graphMenu");
+    }
+
+    public void setSettingMenu(){
+        settingMenu = new JPanel(null);
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        settingMenu.setBackground(backgroundGrey);
+
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
+
+        String[] settingOptTexts = {"User preference", "Timer settings", "Something settings"};
+
+        for(int i = 0; i < 3; i++){
+            JButton settingOpt = new JButton(settingOptTexts[i]);
+            settingOpt.setBounds(150, (200 + (i*50)), 200,40);
+            settingOpt.setBackground(darkGreen);
+            settingOpt.setForeground(Color.BLACK);
+            settingOpt.setFocusPainted(false);
+            settingOpt.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+            settingMenu.add(settingOpt);
+        }
+
+
+        settingMenu.add(banner);
+        cardPanel.add(settingMenu, "setting menu");
     }
 
 
