@@ -13,6 +13,7 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel pMoodScreen;
     private JPanel graphMenu;
     private JPanel settingMenu;
+    private JPanel remMenu;
     private Menu menu = new Menu();
     private JLabel timerDisplay;
     private String value;
@@ -37,6 +38,7 @@ public class GUI extends JFrame{    //card layout thing
         setPMoodScreen();
         setGraphMenu();
         setSettingMenu();
+        setRemMenu();
 
         setVisible(true);
 
@@ -93,9 +95,7 @@ public class GUI extends JFrame{    //card layout thing
         setRem.setFocusPainted(false);
         setRem.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setRem.addActionListener(e -> {
-            // This code will run when the button is clicked
-            System.out.println("nice");
-            menu.startMenu(2);
+            cardLayout.show(cardPanel, "reminders");
         });
 
         JButton studyStats = new JButton("View Study Stats");
@@ -178,6 +178,27 @@ public class GUI extends JFrame{    //card layout thing
             timer.startStopwatch(timerDisplay);
         });
 
+        JButton breakButton = new JButton("Break");
+        breakButton.setBounds(390, 30, 150, 30);
+        breakButton.setBackground(darkGreen);
+        breakButton.setForeground(lightGreen);
+        breakButton.setFont(new Font("Arial", Font.BOLD, 14));
+        breakButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        breakButton.setFocusPainted(false);
+        breakButton.addActionListener(e -> {
+            System.out.println("break time! ");
+        });
+
+        JButton returnBut = new JButton("⏎");
+        returnBut.setBounds(600, 25, 40,40);
+        returnBut.setBackground(darkGreen);
+        returnBut.setForeground(Color.BLACK);
+        returnBut.setFocusPainted(false);
+        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 9));
+        returnBut.addActionListener(e -> {
+                    cardLayout.show(cardPanel, "Menu");
+                }
+        );
 
         JButton session = new JButton("NEW");
         session.setBounds(200, 300, 100, 40);
@@ -188,7 +209,7 @@ public class GUI extends JFrame{    //card layout thing
         session.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         session.addActionListener(e -> {
             //changes the display on the gui
-            timer.preTimer(timerDisplay);
+
         });
 
         JTextField timeInput = new JTextField(6);
@@ -265,7 +286,6 @@ public class GUI extends JFrame{    //card layout thing
         end.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         end.addActionListener(e -> {
             timer.endT(timerDisplay);
-
         });
 
 
@@ -280,6 +300,8 @@ public class GUI extends JFrame{    //card layout thing
         sessionScreen.add(session);
         sessionScreen.add(timeInput);
         sessionScreen.add(pomo);
+        sessionScreen.add(returnBut);
+        sessionScreen.add(breakButton);
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");
@@ -425,6 +447,17 @@ public class GUI extends JFrame{    //card layout thing
         sideButton.setFocusPainted(false);
         sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
 
+        JButton returnBut = new JButton("⏎");
+        returnBut.setBounds(450, 50, 60,60);
+        returnBut.setBackground(darkGreen);
+        returnBut.setForeground(Color.BLACK);
+        returnBut.setFocusPainted(false);
+        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        returnBut.addActionListener(e -> {
+                    cardLayout.show(cardPanel, "Menu");
+                }
+        );
+
 
         GraphMaking graph = new GraphMaking();
         graph.setSize(500,300);
@@ -436,6 +469,7 @@ public class GUI extends JFrame{    //card layout thing
         graphMenu.add(graph);
         graphMenu.add(overviewButton);
         graphMenu.add(sideButton);
+        graphMenu.add(returnBut);
         cardPanel.add(graphMenu, "graphMenu");
     }
 
@@ -465,10 +499,27 @@ public class GUI extends JFrame{    //card layout thing
             settingMenu.add(settingOpt);
         }
 
+        JButton returnBut = new JButton("⏎");
+        returnBut.setBounds(450, 50, 60,60);
+        returnBut.setBackground(darkGreen);
+        returnBut.setForeground(Color.BLACK);
+        returnBut.setFocusPainted(false);
+        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        returnBut.addActionListener(e -> {
+                    cardLayout.show(cardPanel, "Menu");
+                }
+            );
 
         settingMenu.add(banner);
+        settingMenu.add(returnBut);
         cardPanel.add(settingMenu, "setting menu");
     }
 
+    public void setRemMenu(){
+        remMenu = new JPanel(null);
+
+
+        cardPanel.add(remMenu, "reminders");
+    }
 
 }

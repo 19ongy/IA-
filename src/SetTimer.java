@@ -67,7 +67,6 @@ public class SetTimer {
 
     public void endT(JLabel label){
         isEnded = true;
-
     }
 
 
@@ -82,7 +81,7 @@ public class SetTimer {
                 preTimeRemaining = preTimeRemaining -1;
             } else {
                 label.setText("TIMER STARTS NOW!!!!!");
-                preTimer[0].stop(); // stop the timer
+                //preTimer[0].stop(); // stop the timer
             }
         });
 
@@ -109,7 +108,7 @@ public class SetTimer {
         stopwatchTimer.addActionListener(e -> {
             if (isEnded) {
                 label.setText("Timer Ended!");
-                stopwatchTimer.stop();  // stop the timer permanently
+                stopwatchTimer.stop();
             } else if (!isPaused) {
                 System.out.println(formatTime(timeElapsed));
                 label.setText(formatTime(timeElapsed));  // update label
