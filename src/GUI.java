@@ -16,6 +16,7 @@ public class GUI extends JFrame{    //card layout thing
 
     private JLabel timerDisplay;
     private String value;
+    private int optionChoice;
 
     //set colour theme
     private final Color darkGreen = new Color(27, 77, 62);
@@ -53,6 +54,7 @@ public class GUI extends JFrame{    //card layout thing
         cardLayout.show(cardPanel,"Menu");
         timerDisplay = new JLabel("00:00:00");
         value = "0";
+        optionChoice = 0;
     }
 
     //helper method for default card looks
@@ -499,6 +501,11 @@ public class GUI extends JFrame{    //card layout thing
     public void setRemMenu(){
         remMenu = new JPanel(null);
 
+        JLabel labelOutput = new JLabel("SET REMINDERS", SwingConstants.CENTER);
+        labelOutput.setBounds(50, 50, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(new Color(200, 200, 200));
+
         JPanel reminderPanel = new JPanel();
         reminderPanel.setLayout(new BoxLayout(reminderPanel, BoxLayout.Y_AXIS));
         reminderPanel.setBackground(new Color(35, 35, 35)); // actual scroll content background
@@ -511,12 +518,49 @@ public class GUI extends JFrame{    //card layout thing
             reminderPanel.add(reminderLabel);
         }
 
+        int startX = 35;
+        int startY = 180;
+        int buttonX = 300;
+        int buttonY = 40;
+        int ySpace = 10;
+
+        String[] buttonText = {"Add reminder", "Replace reminder", "Delete reminder", "Delete ALL reminders"};
+        for(int i = 0; i< buttonText.length; i++){
+            final int index = i;
+            JButton remButton = new JButton(buttonText[i]);
+            remButton.setBounds(startX, startY + (ySpace+buttonY)*i, buttonX, buttonY);
+            remButton.setFont(new Font("Arial", Font.BOLD, 17));
+            remButton.setBackground(darkGreen);
+            remButton.setForeground(lightGreen);
+            remButton.setFocusPainted(false);
+            remButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+            remButton.addActionListener(e -> {
+                optionChoice = index + 1;
+                switch(optionChoice){
+                    case 1:
+                        System.out.println("adding..");
+                        break;
+                    case 2:
+                        System.out.println("replacing..");
+                        break;
+                    case 3:
+                        System.out.println("deleting..");
+                        break;
+                    case 4:
+                        System.out.println("deleting all..");
+                        break;
+                }
+            });
+            remMenu.add(remButton);
+        }
+
         JScrollPane scrollPane = new JScrollPane(reminderPanel);
-        scrollPane.setBounds(380, 100, 400, 400);
+        scrollPane.setBounds(360, 140, 400, 300);
         scrollPane.setBorder(BorderFactory.createLineBorder(borderGreen,2));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
         returnBut(remMenu, "reminders");
+        remMenu.add(labelOutput);
         remMenu.add(scrollPane);
         defaultLook(remMenu, "reminders");
         cardPanel.add(remMenu, "reminders");
