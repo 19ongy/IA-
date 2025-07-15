@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,12 +61,16 @@ public class ReminderManager {
         return result.toString();
     }
 
-    //adds the time for reminder onto the array list
-    //reminder messages is optional
-    public void addReminder(String time){
-        if(convertTime(time) != null){
-            studyReminders.add(convertTime(time));
-            System.out.println("New reminder added ");
+    public void addReminder(String time) {
+        ReminderTime rt = convertTime(time);
+        if(rt != null){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data", true))) {
+                String formattedTime = String.format("%02d:%02d", rt.getHour(), rt.getMin());
+                writer.write(formattedTime);
+                writer.newLine(); // Adds a newline after each session
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -92,7 +99,6 @@ public class ReminderManager {
         for (int i = studyReminders.size() - 1; i >= 0; i--) {
             deleteReminder(i + 1); // +1 if your method uses 1-based index
         }
-
     }
 
 
