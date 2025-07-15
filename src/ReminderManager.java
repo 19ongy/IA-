@@ -1,13 +1,12 @@
-/*
-CLASS SUMMARY:
-- has all of the methods and stuff for handling things in reminders
- */
-
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ReminderManager {
     private ArrayList<ReminderTime> studyReminders = new ArrayList<>();
-
+    private Timer waterReminderTimer;
+    private ReminderGUI reminderWindow = null;
     public ArrayList<ReminderTime> getStudyReminders() {
         return studyReminders;
     }
@@ -57,10 +56,7 @@ public class ReminderManager {
                     .append("\n");
         }
         return result.toString();
-
-
     }
-
 
     //adds the time for reminder onto the array list
     //reminder messages is optional
@@ -70,7 +66,6 @@ public class ReminderManager {
             System.out.println("New reminder added ");
         }
     }
-
 
     public void deleteReminder(int remToDelete){
         displayReminders();
@@ -102,8 +97,29 @@ public class ReminderManager {
 
 
     //water reminders
+    public void startWaterReminders(){
+        if (waterReminderTimer != null) {
+            waterReminderTimer.cancel();
+        }
+        waterReminderTimer = new Timer();
+        waterReminderTimer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    if (reminderWindow != null) {
+                        reminderWindow.dispose();
+                    }
+                    reminderWindow = new ReminderGUI();
+                });
+            }
+        }, 0, 60*30*1000);
+    }
 
-
-
+    public void stopWaterReminders(){
+        if(waterReminderTimer != null){
+            waterReminderTimer.cancel();
+            waterReminderTimer = null;
+        }
+    }
 
 }

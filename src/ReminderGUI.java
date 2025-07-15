@@ -21,7 +21,7 @@ public class ReminderGUI extends JFrame{
         int height = gd.getDisplayMode().getHeight();
 
         setTitle("Reminders ");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  // quit the app when we close the window
         System.out.println(width);
         System.out.println(height);
         setLocation(width-1000, height-600);
@@ -35,13 +35,10 @@ public class ReminderGUI extends JFrame{
         sendWaterRem();
 
         setVisible(true);
-        cardLayout.show(cardPanel,"waterRem");
     }
 
     public void sendWaterRem(){
         waterRem = new JPanel(null);
-
-
         JLabel labelOutput = new JLabel("Make sure you drink water !");
         labelOutput.setBounds(0, 0, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));

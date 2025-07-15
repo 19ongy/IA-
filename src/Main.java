@@ -6,7 +6,8 @@ public class Main {
         SessionManager manager = new SessionManager();
 
         GUI gui = new GUI();
-        ReminderGUI reminder = new ReminderGUI();
+        ReminderManager reminderManager = new ReminderManager();
+        reminderManager.startWaterReminders();
 
     }
 }
