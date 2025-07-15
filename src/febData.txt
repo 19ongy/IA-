@@ -1,7 +1,0 @@
-//moodBefore, moodAfter, sessionLength, subject, startMonth, startDay, endMonth, endDay, startHour, startMinute, endHour, endMinute
-HAPPY, TIRED, 90, Math, MARCH, 15, MARCH, 15, 14, 30, 16, 0
-DETERMINED, HAPPY, 120, Physics, APRIL, 3, APRIL, 3, 10, 0, 12, 0
-SAD, DEMOTIVATED, 60, English, MAY, 21, MAY, 21, 18, 15, 19, 15
-TIRED, HAPPY, 45, Chemistry, JUNE, 8, JUNE, 8, 20, 30, 21, 15
-DEMOTIVATED, DETERMINED, 30, History, JULY, 1, JULY, 1, 9, 0, 9, 30
-

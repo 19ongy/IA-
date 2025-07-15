@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MoodEntry {
     enum Mood{
-        HAPPY, SAD, TIRED, DETERMINED, DEMOTIVATED, UNSPECIFIED
+        HAPPY, SAD, TIRED, DETERMINED, ANGUISHED, SKIP
     }
 
     Scanner scanner = new Scanner(System.in);
@@ -12,16 +12,16 @@ public class MoodEntry {
     public Mood getMood(){
         System.out.println("-----------------------------------------------");
         System.out.println("How are you feeling?");
-        System.out.println("1. Happy\n2. Sad\n3. Tired\n4. Determined\n5. Demotivated\n6. Skip");
+        System.out.println("1. Happy\n2. Sad\n3. Tired\n4. Determined\n5. Anguished\n6. Skip");
         System.out.print("Enter number: ");
         int num = scanner.nextInt();
         System.out.println("-----------------------------------------------");
 
         if((num < 1) || (num > 6)){
             System.out.println("Invalid input :( ");
-            return Mood.UNSPECIFIED;
+            return Mood.SKIP;
         }else if(num == 6){
-            return Mood.UNSPECIFIED;
+            return Mood.SKIP;
         }
 
         return Mood.values()[num - 1];
@@ -29,7 +29,7 @@ public class MoodEntry {
     }
 
     public void displayMood(Mood mood){
-        if(mood != Mood.UNSPECIFIED) {
+        if(mood != Mood.SKIP) {
             System.out.println("You are feeling " + mood + " today.");
         }
     }

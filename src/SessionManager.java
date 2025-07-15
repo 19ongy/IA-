@@ -45,28 +45,30 @@ public class SessionManager {
         return mood;
     }
 
-    public String setStartDate(){
-        LocalDate date = localDate.now();
+    //experiment - this one uses LocalData.now() with a capital letter
+    public String setStartDate() {
+        LocalDate date = LocalDate.now();
         this.startLocalDate = date;
-        return String.valueOf(date);
+        return date.toString();
     }
 
+    public String setStartTime() {
+        LocalTime time = LocalTime.now();
+        this.startLocalTime = time;
+        return String.format("%02d:%02d", time.getHour(), time.getMinute());
+    }
+
+    //this one uses it with a lower case
     public String setEndDate(){
-        LocalDate date = localDate.now();
+        LocalDate date = LocalDate.now();
         this.endLocalDate = date;
         return String.valueOf(date);
     }
 
-    public String setStartTime(){
-        LocalTime time = localTime.now();
-        this.startLocalTime = time;
-        return String.valueOf(time);
-    }
-
     public String setEndTime(){
-        LocalTime time = localTime.now();
+        LocalTime time = LocalTime.now();
         this.endLocalTime = time;
-        return String.valueOf(time);
+        return String.format("%02d:%02d", time.getHour(), time.getMinute());
     }
 
     public String setSubject(String subject){
@@ -99,19 +101,22 @@ public class SessionManager {
 
 
     public String toFileString() {
+        String formattedStartTime = String.format("%02d:%02d", startLocalTime.getHour(), startLocalTime.getMinute());
+        String formattedEndTime = String.format("%02d:%02d", endLocalTime.getHour(), endLocalTime.getMinute());
+
         return(moodBefore.toString() + "," + moodAfter.toString() + "," +
                 sessionLength + "," + subject + "," + startLocalDate.toString() + "," +
-                startLocalTime.toString() + "," + endLocalDate.toString() + "," +
-                endLocalTime.toString()
+                formattedStartTime + "," + endLocalDate.toString() + "," +
+                formattedEndTime
         );
 
     }
 
     public void saveSession(Session session) {
-        try {
-            FileWriter writer = new FileWriter("session_data.txt", true);
-            writer.write("hello" + "\n");
-            System.out.println("nice");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
+            writer.write(this.toFileString());
+            writer.newLine(); // Adds a newline after each session
+            System.out.println("Session saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 import javax.swing.Timer;
 
@@ -66,6 +67,8 @@ public class SetTimer {
     }
 
     public void endT(JLabel label){
+        manager.setEndDate();
+        manager.setEndTime();
         isEnded = true;
     }
 
@@ -98,6 +101,10 @@ public class SetTimer {
 
      */
 
+    public int getTimeElapsed(){
+        return timeElapsed;
+    }
+
     //STOPWATCH METHODS ------------------------------->
     public void startStopwatch(JLabel label) {
         timeElapsed = 0;
@@ -110,13 +117,11 @@ public class SetTimer {
                 label.setText("Timer Ended!");
                 stopwatchTimer.stop();
             } else if (!isPaused) {
-                System.out.println(formatTime(timeElapsed));
                 label.setText(formatTime(timeElapsed));  // update label
                 label.repaint();
                 timeElapsed = timeElapsed + 1;
             }
         });
-
         stopwatchTimer.start();
     }
 
@@ -158,14 +163,26 @@ public class SetTimer {
     //starts countdown and displays how much time is left
     public void startCountdown(int timeRemaining, JLabel label){
         timeElapsed = 0;
+        isEnded = false;
+        isPaused = false;
+
         if(timeRemaining<=0){
             JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "whaaattt", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        System.out.println("countdown has begun");
+
+        if (countdownTimer.isRunning()) {
+            countdownTimer.stop();
+            for (ActionListener al : countdownTimer.getActionListeners()) {
+                countdownTimer.removeActionListener(al);
+            }
+        }
+
         countdownTimer.addActionListener(e -> {
             if (isEnded) {
                 label.setText("Timer Ended!");
+                manager.setEndDate();
+                manager.setEndTime();
                 countdownTimer.stop();
             } else if (!isPaused) {
                 int timeLeft = timeRemaining - timeElapsed;
@@ -174,6 +191,8 @@ public class SetTimer {
                     timeElapsed = timeElapsed + 1;
                 } else {
                     label.setText("Good job!! Timer finished!");
+                    manager.setEndDate();
+                    manager.setEndTime();
                     countdownTimer.stop();
                 }
             }

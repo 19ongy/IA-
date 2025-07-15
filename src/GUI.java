@@ -175,6 +175,8 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
+            sessionManager.setStartDate();
+            sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
         });
 
@@ -228,6 +230,7 @@ public class GUI extends JFrame{    //card layout thing
         tick.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         tick.addActionListener(e -> {
             value = timeInput.getText();
+            sessionManager.setSessionLength(timer.formatTime(value));
             //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
 
@@ -252,6 +255,8 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         countdownButton.setFocusPainted(false);
         countdownButton.addActionListener(e -> {
+            sessionManager.setStartDate();
+            sessionManager.setStartTime();
             timer.startCountdown(timer.formatTime(value), timerDisplay);
         });
 
@@ -286,10 +291,13 @@ public class GUI extends JFrame{    //card layout thing
         end.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         end.addActionListener(e -> {
             timer.endT(timerDisplay);
+            cardLayout.show(cardPanel, "pMood");
         });
 
 
         sessionScreen.add(tick);
+        sessionScreen.add(returnBut);
+        sessionScreen.add(breakButton);
         sessionScreen.add(end);
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
@@ -300,8 +308,6 @@ public class GUI extends JFrame{    //card layout thing
         sessionScreen.add(session);
         sessionScreen.add(timeInput);
         sessionScreen.add(pomo);
-        sessionScreen.add(returnBut);
-        sessionScreen.add(breakButton);
 
         cardPanel.add(sessionScreen, "Session");
         System.out.println("session screen created");
@@ -348,17 +354,19 @@ public class GUI extends JFrame{    //card layout thing
         int gap = 20;
 
         for(int i = 0; i< moods.length; i++){
-            JButton moodButton = new JButton(moodImages[i]);
+            String moodName = moods[i];
+            String butText = moodImages[i];
+
+            JButton moodButton = new JButton(butText);
             moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
             moodButton.setBackground(colours[i]);
             moodButton.setForeground(Color.BLACK);
             moodButton.setFocusPainted(false);
             moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-            moodButton.setToolTipText(moods[i]);
+            moodButton.setToolTipText(moodName);
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
-                //sessionManager.setMoodBefore(moodButton.getText());
-                //input setter method for the mood towards sessionManager
+                sessionManager.setMoodBefore(moodName.toUpperCase());
                 cardLayout.show(cardPanel, "Session");
             });
             bMoodScreen.add(moodButton);
@@ -389,6 +397,53 @@ public class GUI extends JFrame{    //card layout thing
         labelOutput.setBounds(50, 150, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(lightGreen);
+
+        //making all the mood buttons
+        String[] moods = {"Happy", "Sad", "Tired", "Determined", "Anguished", "Skip"};
+        String[] moodImages = {"😊", "😢", "😴", "💪", "😞", "⏭"};
+        //colours for the buttons
+        Color[] colours = {
+                new Color(255, 255, 153),
+                new Color(77, 148, 255),
+                new Color(163, 163, 194),
+                new Color(255, 51,51),
+                new Color(194, 194, 214),
+                new Color(17, 77, 55)
+        };
+
+        int width = 80;
+        int height = 70;
+        int startX = 80;
+        int startY = 220;
+        int gap = 20;
+
+        for(int i = 0; i< moods.length; i++){
+            String moodName = moods[i];
+            String butText = moodImages[i];
+
+            JButton moodButton = new JButton(butText);
+            moodButton.setBounds(startX + (width + gap)*i, startY, width, height);
+            moodButton.setBackground(colours[i]);
+            moodButton.setForeground(Color.BLACK);
+            moodButton.setFocusPainted(false);
+            moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+            moodButton.setToolTipText(moodName);
+            moodButton.addActionListener(e -> {
+                System.out.println("Mood selected = " + moodButton.getText());
+                sessionManager.setMoodAfter(moodName.toUpperCase());
+                cardLayout.show(cardPanel, "Session");
+
+                //sets the new session
+                sessionManager.setSessionLength(timer.getTimeElapsed());
+                sessionManager.setEndDate();
+                sessionManager.setEndTime();
+                sessionManager.setSubject("Maths");
+                sessionManager.saveSession(null);
+            });
+            pMoodScreen.add(moodButton);
+
+        }
+
 
         pMoodScreen.add(banner);
         pMoodScreen.add(labelOutput);

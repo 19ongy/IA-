@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="add tool tip text fromwinter and &quot;!anguishied!&quot;">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixed the stopwatch issue, changed a lot of the timer class things in setTimer">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MoodEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoodEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/febData.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +29,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -33,7 +40,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/19ongy/IA-&quot;,
-    &quot;accountId&quot;: &quot;c367e849-289c-46c1-ab08-3b4656975b88&quot;
+    &quot;accountId&quot;: &quot;806f6d7b-cc92-4c18-84b3-423fdf3f5bf7&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -215,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751451165936</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fixed the stopwatch issue, changed a lot of the timer class things in setTimer">
+      <option name="closed" value="true" />
+      <created>1752005936818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1752005936818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +264,7 @@
     <MESSAGE value="fixed the menu problem, made some more methods to check whether array list has anything, fixed the get time thing, delete reminder, replace reminder &#10;is too hot to fix delete all reminders &#10;trying to make a verification method&#10;not sure to split it up between methods or just to keep it in delete all reminders" />
     <MESSAGE value="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted" />
     <MESSAGE value="add tool tip text fromwinter and &quot;!anguishied!&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add tool tip text fromwinter and &quot;!anguishied!&quot;" />
+    <MESSAGE value="fixed the stopwatch issue, changed a lot of the timer class things in setTimer" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the stopwatch issue, changed a lot of the timer class things in setTimer" />
   </component>
 </project>

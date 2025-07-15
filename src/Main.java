@@ -3,9 +3,10 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO delete the print line
-        System.out.println();
+        SessionManager manager = new SessionManager();
+
         GUI gui = new GUI();
         ReminderGUI reminder = new ReminderGUI();
+
     }
 }
