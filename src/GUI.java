@@ -572,8 +572,37 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setRemMenu(){
         remMenu = new JPanel(null);
+        Color darkGreen = new Color(27, 77, 62);
+        Color lightGreen = new Color(200, 200, 200);
+        Color borderGreen = new Color(15, 50, 40);
+        Color backgroundGrey = new Color(46, 46, 46);
+        remMenu.setBackground(backgroundGrey);
 
+        //dark green banner at the top
+        JPanel banner = new JPanel();
+        banner.setBackground(new Color(27, 77, 62));
+        banner.setBounds(0, 0, 800, 100);
+        banner.setLayout(null);
 
+        JPanel reminderPanel = new JPanel();
+        reminderPanel.setLayout(new BoxLayout(reminderPanel, BoxLayout.Y_AXIS));
+        reminderPanel.setBackground(new Color(35, 35, 35)); // actual scroll content background
+
+        for (int i = 1; i <= 20; i++) {
+            JLabel reminderLabel = new JLabel("Reminder " + i + ": 14:00");
+            reminderLabel.setForeground(lightGreen);
+            reminderLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            reminderLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+            reminderPanel.add(reminderLabel);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(reminderPanel);
+        scrollPane.setBounds(380, 100, 400, 400);
+        scrollPane.setBorder(BorderFactory.createLineBorder(borderGreen,2));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15);
+
+        remMenu.add(banner);
+        remMenu.add(scrollPane);
         cardPanel.add(remMenu, "reminders");
     }
 
