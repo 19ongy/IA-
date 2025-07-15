@@ -6,7 +6,6 @@ import java.awt.*;
 public class GUI extends JFrame{    //card layout thing
     private CardLayout cardLayout;
     private JPanel cardPanel;
-
     private JPanel menuScreen;
     private JPanel sessionScreen;
     private JPanel bMoodScreen;
@@ -14,14 +13,23 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel graphMenu;
     private JPanel settingMenu;
     private JPanel remMenu;
-    private Menu menu = new Menu();
+
     private JLabel timerDisplay;
     private String value;
 
+    //set colour theme
+    private final Color darkGreen = new Color(27, 77, 62);
+    private final Color lightGreen = new Color(200, 200, 200);
+    private final Color borderGreen = new Color(15, 50, 40);
+    private final Color backgroundGrey = new Color(46, 46, 46);
+
+    //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
     GraphMaking graph = new GraphMaking();
     private SetTimer timer = new SetTimer();
+    private Menu menu = new Menu();
 
+    //constructor
     public GUI() {
         setTitle("Grindset");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
@@ -47,27 +55,45 @@ public class GUI extends JFrame{    //card layout thing
         value = "0";
     }
 
-    public void setMenuScreen(){
-        menuScreen = new JPanel(null);
+    //helper method for default card looks
+    private void defaultLook(JPanel panel, String returnTo){
+        //default colour
+        panel.setBackground(backgroundGrey);
+        panel.setLayout(null);
 
-        //colours
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-
-        //dark green banner at the top
+        //dark green panel at the top
         JPanel banner = new JPanel();
         banner.setBackground(new Color(27, 77, 62));
         banner.setBounds(0, 0, 800, 100);
         banner.setLayout(null);
 
+        panel.add(banner);
+    }
+
+    //helper method for adding the return button in the top right corner
+    private void returnBut(JPanel panel, String returnTo){
+        //return button
+        JButton returnBut = new JButton("⏎");
+        returnBut.setBounds(700, 20, 40,40);
+        returnBut.setBackground(darkGreen);
+        returnBut.setForeground(Color.BLACK);
+        returnBut.setFocusPainted(false);
+        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 9));
+        returnBut.addActionListener(e -> {
+                    cardLayout.show(cardPanel, "Menu");
+                }
+        );
+
+        panel.add(returnBut);
+    }
+
+    public void setMenuScreen(){
+        menuScreen = new JPanel(null);
+
         JLabel labelOutput = new JLabel("Welcome to the Grindset", SwingConstants.CENTER);
         labelOutput.setBounds(50, 50, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(new Color(200, 200, 200));
-
-        //sets the background of the window to like grey
-        menuScreen.setBackground(new Color(46, 46, 46));
 
         JButton setSesh = new JButton("Start new session");
         setSesh.setBounds(70, 150, 300, 35);
@@ -130,35 +156,18 @@ public class GUI extends JFrame{    //card layout thing
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(400, 100, menuPic.getIconWidth(), menuPic.getIconHeight());
 
-        System.out.println("Image width: " + menuPic.getIconWidth());
-
         menuScreen.add(labelOutput);
         menuScreen.add(setSesh);
         menuScreen.add(setRem);
         menuScreen.add(studyStats);
         menuScreen.add(settings);
         menuScreen.add(imageLabel);
-        menuScreen.add(banner);
-
+        defaultLook(menuScreen, "Menu");
         cardPanel.add(menuScreen, "Menu");
-        System.out.println("SEQUENCE: GUI_test created");
     }
 
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
-        System.out.println("hi");
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        sessionScreen.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
@@ -190,17 +199,6 @@ public class GUI extends JFrame{    //card layout thing
         breakButton.addActionListener(e -> {
             System.out.println("break time! ");
         });
-
-        JButton returnBut = new JButton("⏎");
-        returnBut.setBounds(600, 25, 40,40);
-        returnBut.setBackground(darkGreen);
-        returnBut.setForeground(Color.BLACK);
-        returnBut.setFocusPainted(false);
-        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 9));
-        returnBut.addActionListener(e -> {
-                    cardLayout.show(cardPanel, "Menu");
-                }
-        );
 
         JButton session = new JButton("NEW");
         session.setBounds(200, 300, 100, 40);
@@ -294,40 +292,33 @@ public class GUI extends JFrame{    //card layout thing
             cardLayout.show(cardPanel, "pMood");
         });
 
-
+        returnBut(sessionScreen, "Session");
         sessionScreen.add(tick);
-        sessionScreen.add(returnBut);
         sessionScreen.add(breakButton);
         sessionScreen.add(end);
         sessionScreen.add(countdownButton);
         sessionScreen.add(stopwatchButton);
         sessionScreen.add(timerDisplay);
-        sessionScreen.add(banner);
         sessionScreen.add(play);
         sessionScreen.add(pause);
         sessionScreen.add(session);
         sessionScreen.add(timeInput);
         sessionScreen.add(pomo);
+        defaultLook(sessionScreen, "Session");
 
         cardPanel.add(sessionScreen, "Session");
-        System.out.println("session screen created");
-
     }
 
     public void setBMoodScreen(){
+
+        //button numbers
+        int width = 80;
+        int height = 70;
+        int startX = 80;
+        int startY = 220;
+        int gap = 20;
+
         bMoodScreen = new JPanel(null);
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        bMoodScreen.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         JLabel labelOutput = new JLabel("How are you feeling today?", SwingConstants.CENTER);
         labelOutput.setBounds(50, 150, 700, 40);
@@ -346,12 +337,6 @@ public class GUI extends JFrame{    //card layout thing
                 new Color(194, 194, 214),
                 new Color(17, 77, 55)
         };
-
-        int width = 80;
-        int height = 70;
-        int startX = 80;
-        int startY = 220;
-        int gap = 20;
 
         for(int i = 0; i< moods.length; i++){
             String moodName = moods[i];
@@ -374,24 +359,12 @@ public class GUI extends JFrame{    //card layout thing
         }
 
         bMoodScreen.add(labelOutput);
-        bMoodScreen.add(banner);
+        defaultLook(bMoodScreen, "bMood");
         cardPanel.add(bMoodScreen, "bMood");
     }
 
     public void setPMoodScreen(){
         pMoodScreen = new JPanel(null);
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        pMoodScreen.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         JLabel labelOutput = new JLabel("How are you feeling today?", SwingConstants.CENTER);
         labelOutput.setBounds(50, 150, 700, 40);
@@ -444,26 +417,13 @@ public class GUI extends JFrame{    //card layout thing
 
         }
 
-
-        pMoodScreen.add(banner);
         pMoodScreen.add(labelOutput);
+        defaultLook(pMoodScreen, "pMood");
         cardPanel.add(pMoodScreen, "pMood");
     }
 
     public void setGraphMenu(){
         graphMenu = new JPanel(null);
-
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        graphMenu.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         //boxing out shapes for sutff
         JPanel tabBar = new JPanel();
@@ -502,45 +462,22 @@ public class GUI extends JFrame{    //card layout thing
         sideButton.setFocusPainted(false);
         sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
 
-        JButton returnBut = new JButton("⏎");
-        returnBut.setBounds(450, 50, 60,60);
-        returnBut.setBackground(darkGreen);
-        returnBut.setForeground(Color.BLACK);
-        returnBut.setFocusPainted(false);
-        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-        returnBut.addActionListener(e -> {
-                    cardLayout.show(cardPanel, "Menu");
-                }
-        );
-
-
         GraphMaking graph = new GraphMaking();
         graph.setSize(500,300);
         graph.setLocation(250, 120);
 
 
-        graphMenu.add(banner);
+        returnBut(graphMenu, "graphMenu");
         graphMenu.add(tabBar);
         graphMenu.add(graph);
         graphMenu.add(overviewButton);
         graphMenu.add(sideButton);
-        graphMenu.add(returnBut);
+        defaultLook(graphMenu, "graphMenu");
         cardPanel.add(graphMenu, "graphMenu");
     }
 
     public void setSettingMenu(){
         settingMenu = new JPanel(null);
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        settingMenu.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         String[] settingOptTexts = {"User preference", "Timer settings", "Something settings"};
 
@@ -554,35 +491,13 @@ public class GUI extends JFrame{    //card layout thing
             settingMenu.add(settingOpt);
         }
 
-        JButton returnBut = new JButton("⏎");
-        returnBut.setBounds(450, 50, 60,60);
-        returnBut.setBackground(darkGreen);
-        returnBut.setForeground(Color.BLACK);
-        returnBut.setFocusPainted(false);
-        returnBut.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-        returnBut.addActionListener(e -> {
-                    cardLayout.show(cardPanel, "Menu");
-                }
-            );
-
-        settingMenu.add(banner);
-        settingMenu.add(returnBut);
+        returnBut(settingMenu, "setting menu");
+        defaultLook(settingMenu, "setting menu");
         cardPanel.add(settingMenu, "setting menu");
     }
 
     public void setRemMenu(){
         remMenu = new JPanel(null);
-        Color darkGreen = new Color(27, 77, 62);
-        Color lightGreen = new Color(200, 200, 200);
-        Color borderGreen = new Color(15, 50, 40);
-        Color backgroundGrey = new Color(46, 46, 46);
-        remMenu.setBackground(backgroundGrey);
-
-        //dark green banner at the top
-        JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
-        banner.setBounds(0, 0, 800, 100);
-        banner.setLayout(null);
 
         JPanel reminderPanel = new JPanel();
         reminderPanel.setLayout(new BoxLayout(reminderPanel, BoxLayout.Y_AXIS));
@@ -601,8 +516,9 @@ public class GUI extends JFrame{    //card layout thing
         scrollPane.setBorder(BorderFactory.createLineBorder(borderGreen,2));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
-        remMenu.add(banner);
+        returnBut(remMenu, "reminders");
         remMenu.add(scrollPane);
+        defaultLook(remMenu, "reminders");
         cardPanel.add(remMenu, "reminders");
     }
 
