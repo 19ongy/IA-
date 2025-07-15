@@ -10,6 +10,13 @@ public class ReminderManager {
     private ArrayList<ReminderTime> studyReminders = new ArrayList<>();
     private Timer waterReminderTimer;
     private ReminderGUI reminderWindow = null;
+
+    private int remIndex;
+    private String inputTime;
+    private String message;
+
+
+
     public ArrayList<ReminderTime> getStudyReminders() {
         return studyReminders;
     }
@@ -61,12 +68,21 @@ public class ReminderManager {
         return result.toString();
     }
 
-    public void addReminder(String time) {
+    public String formatData(String inputTime, String message){
+        return inputTime + "," + message;
+    }
+
+    public String formatTime(String time){
         ReminderTime rt = convertTime(time);
-        if(rt != null){
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data", true))) {
-                String formattedTime = String.format("%02d:%02d", rt.getHour(), rt.getMin());
-                writer.write(formattedTime);
+        String formattedTime = String.format("%02d:%02d", rt.getHour(), rt.getMin());
+        return formattedTime;
+    }
+
+    public void addReminder(String time, String message) {
+        String setTime = formatTime(time);
+        if(setTime != null){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt", true))) {
+                writer.write(formatData(setTime, message));
                 writer.newLine(); // Adds a newline after each session
             } catch (IOException e) {
                 e.printStackTrace();

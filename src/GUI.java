@@ -27,6 +27,7 @@ public class GUI extends JFrame{    //card layout thing
     //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
     GraphMaking graph = new GraphMaking();
+    ReminderManager reminder = new ReminderManager();
     private SetTimer timer = new SetTimer();
     private Menu menu = new Menu();
 
@@ -137,7 +138,6 @@ public class GUI extends JFrame{    //card layout thing
             // This code will run when the button is clicked
             System.out.println("nice");
             cardLayout.show(cardPanel, "graphMenu");
-            menu.startMenu(3);
         });
 
         JButton settings = new JButton("Settings");
@@ -151,7 +151,6 @@ public class GUI extends JFrame{    //card layout thing
             // This code will run when the button is clicked
             System.out.println("nice");
             cardLayout.show(cardPanel,"setting menu");
-            menu.startMenu(4);
         });
 
         ImageIcon menuPic = new ImageIcon("OIP.jpg");
@@ -539,6 +538,15 @@ public class GUI extends JFrame{    //card layout thing
                 switch(optionChoice){
                     case 1:
                         System.out.println("adding..");
+                        String timeInput = JOptionPane.showInputDialog(null, "Enter reminder time in format HHMM");
+                        String messageInput = JOptionPane.showInputDialog(null, "Set reminder message");
+                        if(messageInput==null){
+                            messageInput = "null";
+                        }
+
+                        if(timeInput!=null && !timeInput.trim().isEmpty() && !(timeInput.length()>4)){
+                            reminder.addReminder(timeInput, messageInput);
+                        }
                         break;
                     case 2:
                         System.out.println("replacing..");
@@ -554,13 +562,14 @@ public class GUI extends JFrame{    //card layout thing
             remMenu.add(remButton);
         }
 
+
+
         JScrollPane scrollPane = new JScrollPane(reminderPanel);
         scrollPane.setBounds(360, 140, 400, 300);
         scrollPane.setBorder(BorderFactory.createLineBorder(borderGreen,2));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
         returnBut(remMenu, "reminders");
-        remMenu.add(labelOutput);
         remMenu.add(scrollPane);
         defaultLook(remMenu, "reminders");
         cardPanel.add(remMenu, "reminders");
