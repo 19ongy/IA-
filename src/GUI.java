@@ -562,13 +562,17 @@ public class GUI extends JFrame{    //card layout thing
                             List<String> currentR = reminder.loadReminders();
                             reminder.deleteReminder(rIndex, reminderPanel, currentR);
                         }
-
                         break;
                     case 3:
                         System.out.println("replacing...");
                         break;
                     case 4:
                         System.out.println("deleting all..");
+                        String confirmation = JOptionPane.showInputDialog(null, "Are you sure about this?");
+                        if(confirmation.equals("y") || confirmation.equals("yes")){
+                            List<String> reminders = reminder.loadReminders();
+                            reminder.deleteAll(reminderPanel, reminders);
+                        }
                         break;
                 }
             });

@@ -157,6 +157,17 @@ public class ReminderManager {
         updateReminderList(reminderPanel, reminders);
     }
 
+    public void deleteAll(JPanel reminderPanel, List<String> reminders){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
+            writer.write("");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        reminders.clear();
+        reminderPanel.removeAll();
+        updateReminderList(reminderPanel, reminders);
+    }
+
     public String getTimeOfRem(){
         System.out.println(timeOfReminder);
         return this.timeOfReminder;

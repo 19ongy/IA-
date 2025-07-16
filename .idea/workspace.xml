@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="set reminders screen yayyy">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added delete function FINALYY">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
@@ -290,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752624960687</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="added delete function FINALYY">
+      <option name="closed" value="true" />
+      <created>1752627753902</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1752627753903</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +341,8 @@
     <MESSAGE value="added reminder buttons and some switch case stuff" />
     <MESSAGE value="added reminder input" />
     <MESSAGE value="set reminders screen yayyy" />
-    <option name="LAST_COMMIT_MESSAGE" value="set reminders screen yayyy" />
+    <MESSAGE value="added delete function FINALYY" />
+    <option name="LAST_COMMIT_MESSAGE" value="added delete function FINALYY" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
