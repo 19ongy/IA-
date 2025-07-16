@@ -1,7 +1,11 @@
 import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,9 +15,8 @@ public class ReminderManager {
     private Timer waterReminderTimer;
     private ReminderGUI reminderWindow = null;
 
-    private int remIndex;
-    private String inputTime;
-    private String message;
+    private String timeOfReminder;
+    private String remMessage;
 
 
 
@@ -68,6 +71,8 @@ public class ReminderManager {
         return result.toString();
     }
 
+
+    //writing to the data file
     public String formatData(String inputTime, String message){
         return inputTime + "," + message;
     }
@@ -89,6 +94,75 @@ public class ReminderManager {
             }
         }
     }
+
+    //reading from the data file
+    public void readFromFile(){
+        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))){
+            String line;
+            while((line = reader.readLine()) != null){
+                String[] parts = line.split(",", 2);
+                if(parts.length ==2){
+                    this.timeOfReminder = parts[0];
+                    this.remMessage = parts[1];
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //helper method to get all of the reminders into one array list
+    public List<String> loadReminders(){
+        List<String> reminders = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                reminders.add(line);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return reminders;
+    }
+
+    public void updateReminderList(JPanel reminderPanel, List<String> reminders) {
+        reminderPanel.removeAll();
+        int i = 1;
+        for (String reminder : reminders) {
+            JLabel reminderLabel = new JLabel("Reminder " + i + "  :  " + reminder);
+            reminderLabel.setForeground(new Color(200, 200, 200));
+            reminderLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            reminderLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+            reminderPanel.add(reminderLabel);
+            i = i + 1;
+        }
+        reminderPanel.revalidate();
+        reminderPanel.repaint();
+    }
+
+    public String getTimeOfRem(){
+        System.out.println(timeOfReminder);
+        return this.timeOfReminder;
+    }
+
+    public String getRemMessage(){
+        System.out.println("hi" + remMessage);
+        return this.remMessage;
+    }
+
+    public int getDataLength(){
+        int count = 0;
+        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))){
+            while(reader.readLine() != null){
+                count++;
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+
 
     public void deleteReminder(int remToDelete){
         displayReminders();

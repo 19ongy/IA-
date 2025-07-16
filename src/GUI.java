@@ -2,6 +2,8 @@
 //gimem a sec
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class GUI extends JFrame{    //card layout thing
     private CardLayout cardLayout;
@@ -509,8 +511,10 @@ public class GUI extends JFrame{    //card layout thing
         reminderPanel.setLayout(new BoxLayout(reminderPanel, BoxLayout.Y_AXIS));
         reminderPanel.setBackground(new Color(35, 35, 35)); // actual scroll content background
 
-        for (int i = 1; i <= 20; i++) {
-            JLabel reminderLabel = new JLabel("Reminder " + i + ": 14:00");
+        List<String> allReminders = reminder.loadReminders();
+        for (int i = 1; i < allReminders.size(); i++) {
+            String data = allReminders.get(i);
+            JLabel reminderLabel = new JLabel("Reminder " + (i+1) + "  :  " + data);
             reminderLabel.setForeground(lightGreen);
             reminderLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             reminderLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
@@ -540,12 +544,14 @@ public class GUI extends JFrame{    //card layout thing
                         System.out.println("adding..");
                         String timeInput = JOptionPane.showInputDialog(null, "Enter reminder time in format HHMM");
                         String messageInput = JOptionPane.showInputDialog(null, "Set reminder message");
-                        if(messageInput==null){
+                        if(messageInput==null || messageInput.trim().isEmpty()){
                             messageInput = "null";
                         }
 
                         if(timeInput!=null && !timeInput.trim().isEmpty() && !(timeInput.length()>4)){
                             reminder.addReminder(timeInput, messageInput);
+                            List<String> reminders = reminder.loadReminders();
+                            reminder.updateReminderList(reminderPanel, reminders);
                         }
                         break;
                     case 2:
