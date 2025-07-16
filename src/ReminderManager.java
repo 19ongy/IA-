@@ -157,6 +157,24 @@ public class ReminderManager {
         updateReminderList(reminderPanel, reminders);
     }
 
+    public void replaceReminder(int remToReplace, String timeReplace, String messageReplace){
+        List<String> totReminders = loadReminders();
+
+        if(remToReplace >= 1 && remToReplace <= totReminders.size()){
+            String formattedInput = formatTime(timeReplace) + "," + messageReplace;
+            totReminders.set(remToReplace -1, formattedInput);
+        }
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
+            for(String reminder : totReminders){
+                writer.write(reminder);
+                writer.newLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void deleteAll(JPanel reminderPanel, List<String> reminders){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
             writer.write("");
@@ -188,16 +206,6 @@ public class ReminderManager {
             e.printStackTrace();
         }
         return count;
-    }
-
-
-    public void replaceReminder(int remToReplace, String time){
-        if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
-            studyReminders.remove(remToReplace -1);
-            studyReminders.add(remToReplace-1, convertTime(time));
-        }else{
-            System.out.println("You have entered an invalid number.");
-        }
     }
 
 

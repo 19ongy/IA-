@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added delete function FINALYY">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="delete al button works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
     </list>
@@ -298,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752627753903</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="delete al button works">
+      <option name="closed" value="true" />
+      <created>1752628501496</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1752628501498</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +324,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="start" />
     <MESSAGE value="aaa" />
     <MESSAGE value="added classes" />
     <MESSAGE value="changed timer class to setTimer&#10;started working on timer countdown" />
@@ -342,7 +348,8 @@
     <MESSAGE value="added reminder input" />
     <MESSAGE value="set reminders screen yayyy" />
     <MESSAGE value="added delete function FINALYY" />
-    <option name="LAST_COMMIT_MESSAGE" value="added delete function FINALYY" />
+    <MESSAGE value="delete al button works" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete al button works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -565,6 +565,17 @@ public class GUI extends JFrame{    //card layout thing
                         break;
                     case 3:
                         System.out.println("replacing...");
+                        String strReplace = JOptionPane.showInputDialog(null, "Which reminder would you like to replace?");
+                        if(strReplace != null && !strReplace.trim().isEmpty()){
+                            int numReplace = Integer.parseInt(strReplace);
+                            String timeReplace = JOptionPane.showInputDialog(null, "What time HHMM");
+                            String messageReplace = JOptionPane.showInputDialog(null, "What message");
+
+                            reminder.replaceReminder(numReplace, timeReplace, messageReplace);
+                            List<String> reminders = reminder.loadReminders();
+                            reminder.updateReminderList(reminderPanel, reminders);
+
+                        }
                         break;
                     case 4:
                         System.out.println("deleting all..");
