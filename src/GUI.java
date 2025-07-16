@@ -512,7 +512,7 @@ public class GUI extends JFrame{    //card layout thing
         reminderPanel.setBackground(new Color(35, 35, 35)); // actual scroll content background
 
         List<String> allReminders = reminder.loadReminders();
-        for (int i = 1; i < allReminders.size(); i++) {
+        for (int i = 0; i < allReminders.size(); i++) {
             String data = allReminders.get(i);
             JLabel reminderLabel = new JLabel("Reminder " + (i+1) + "  :  " + data);
             reminderLabel.setForeground(lightGreen);
@@ -527,7 +527,7 @@ public class GUI extends JFrame{    //card layout thing
         int buttonY = 40;
         int ySpace = 10;
 
-        String[] buttonText = {"Add reminder", "Replace reminder", "Delete reminder", "Delete ALL reminders"};
+        String[] buttonText = {"Add reminder", "Delete reminder", "Replace reminder", "Delete ALL reminders"};
         for(int i = 0; i< buttonText.length; i++){
             final int index = i;
             JButton remButton = new JButton(buttonText[i]);
@@ -555,10 +555,17 @@ public class GUI extends JFrame{    //card layout thing
                         }
                         break;
                     case 2:
-                        System.out.println("replacing..");
+                        System.out.println("deleting..");
+                        String numDelete = JOptionPane.showInputDialog(null, "Which reminder would you like to delete");
+                        if(numDelete != null && !numDelete.trim().isEmpty()){
+                            int rIndex = Integer.parseInt(numDelete);
+                            List<String> currentR = reminder.loadReminders();
+                            reminder.deleteReminder(rIndex, reminderPanel, currentR);
+                        }
+
                         break;
                     case 3:
-                        System.out.println("deleting..");
+                        System.out.println("replacing...");
                         break;
                     case 4:
                         System.out.println("deleting all..");

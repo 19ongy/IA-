@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -140,6 +141,22 @@ public class ReminderManager {
         reminderPanel.repaint();
     }
 
+    public void deleteReminder(int remToDelete, JPanel reminderPanel, List<String> reminders){
+        if(remToDelete >= 1 && remToDelete <= reminders.size()){
+            reminders.remove(remToDelete - 1);
+        }
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
+            for(String reminder : reminders){
+                writer.write(reminder);
+                writer.newLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        updateReminderList(reminderPanel, reminders);
+    }
+
     public String getTimeOfRem(){
         System.out.println(timeOfReminder);
         return this.timeOfReminder;
@@ -163,15 +180,6 @@ public class ReminderManager {
     }
 
 
-
-    public void deleteReminder(int remToDelete){
-        displayReminders();
-
-        studyReminders.remove(remToDelete -1);
-        System.out.println("deleted");
-    }
-
-
     public void replaceReminder(int remToReplace, String time){
         if(remToReplace >= 1 && remToReplace <= studyReminders.size()){
             studyReminders.remove(remToReplace -1);
@@ -187,7 +195,7 @@ public class ReminderManager {
         //for(int i = 0; i<studyReminders.size();i++){
         //    deleteReminder(i);
         for (int i = studyReminders.size() - 1; i >= 0; i--) {
-            deleteReminder(i + 1); // +1 if your method uses 1-based index
+
         }
     }
 

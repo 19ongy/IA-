@@ -1,4 +1,3 @@
-14:00,null
 13:00,hi
 16:00,sadlgjsa;kldgjk;lsdagsagsd
 14:00,hello
@@ -12,3 +11,6 @@
 02:00,yay its scrollable
 03:00,im super tired
 03:00,still got a lotta work to do 
+19:00,helo
+01:58,listening to sad music 
+01:59,i want to sleep 
