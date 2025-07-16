@@ -491,6 +491,8 @@ public class GUI extends JFrame{    //card layout thing
             settingMenu.add(settingOpt);
         }
 
+
+
         returnBut(settingMenu, "setting menu");
         defaultLook(settingMenu, "setting menu");
         cardPanel.add(settingMenu, "setting menu");
@@ -600,5 +602,7 @@ public class GUI extends JFrame{    //card layout thing
         defaultLook(remMenu, "reminders");
         cardPanel.add(remMenu, "reminders");
     }
+
+
 
 }
