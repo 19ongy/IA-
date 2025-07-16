@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ReminderManager {
     private ArrayList<ReminderTime> studyReminders = new ArrayList<>();
@@ -19,6 +21,18 @@ public class ReminderManager {
     private String timeOfReminder;
     private String remMessage;
 
+
+    //TODO cry cry cry need to find a way to make the times as --:--:00 in text file
+    //ALSO checkTime needs to be cnstnatly running in the background then? to constantly check the time
+    //surely there is a better way
+
+    public void checkTime(){
+        LocalTime timeNow = LocalTime.now();
+        //String formattedTimeNow = String.format("%02d:%02d:", );
+        LocalTime cTime = LocalTime.parse("13:52:00");
+        System.out.println(timeNow);
+
+    }
 
 
     public ArrayList<ReminderTime> getStudyReminders() {

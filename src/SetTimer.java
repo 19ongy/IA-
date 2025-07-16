@@ -84,7 +84,7 @@ public class SetTimer {
                 preTimeRemaining = preTimeRemaining -1;
             } else {
                 label.setText("TIMER STARTS NOW!!!!!");
-                //preTimer[0].stop(); // stop the timer
+                preTimer[0].stop(); // stop the timer
             }
         });
 

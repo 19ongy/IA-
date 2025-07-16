@@ -184,6 +184,9 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                timer.preTimer(timerDisplay);
+            });
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
@@ -310,7 +313,6 @@ public class GUI extends JFrame{    //card layout thing
     }
 
     public void setBMoodScreen(){
-
         //button numbers
         int width = 80;
         int height = 70;
@@ -490,6 +492,7 @@ public class GUI extends JFrame{    //card layout thing
             settingOpt.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
             settingMenu.add(settingOpt);
         }
+
 
 
 
