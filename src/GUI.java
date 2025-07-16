@@ -108,7 +108,6 @@ public class GUI extends JFrame{    //card layout thing
         setSesh.setFocusPainted(false);
         setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
-            System.out.println("nice");
             cardLayout.show(cardPanel, "bMood");
             //has to call the start of menu, but it causes issues now
             /*SwingUtilities.invokeLater(() -> {
@@ -138,7 +137,6 @@ public class GUI extends JFrame{    //card layout thing
         studyStats.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         studyStats.addActionListener(e -> {
             // This code will run when the button is clicked
-            System.out.println("nice");
             cardLayout.show(cardPanel, "graphMenu");
         });
 
@@ -151,7 +149,6 @@ public class GUI extends JFrame{    //card layout thing
         settings.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         settings.addActionListener(e -> {
             // This code will run when the button is clicked
-            System.out.println("nice");
             cardLayout.show(cardPanel,"setting menu");
         });
 
@@ -597,6 +594,7 @@ public class GUI extends JFrame{    //card layout thing
         scrollPane.setBorder(BorderFactory.createLineBorder(borderGreen,2));
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
 
+        remMenu.add(labelOutput);
         returnBut(remMenu, "reminders");
         remMenu.add(scrollPane);
         defaultLook(remMenu, "reminders");
