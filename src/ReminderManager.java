@@ -63,9 +63,9 @@ public class ReminderManager {
         long delayMillis = delay.toMillis();
 
         scheduler.schedule(() -> {
-            // Replace this with your GUI popup method
             System.out.println("🔔 Reminder: " + message + " (" + reminderTime + ")");
         }, delayMillis, TimeUnit.MILLISECONDS);
+        reminderWindow.sendStudyRem(message);
     }
 
     public void shutdown(){

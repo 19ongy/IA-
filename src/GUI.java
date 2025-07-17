@@ -33,6 +33,7 @@ public class GUI extends JFrame{    //card layout thing
     private SetTimer timer = new SetTimer();
     private Menu menu = new Menu();
     ReminderManager rs = new ReminderManager();
+    ReminderGUI rg = new ReminderGUI();
 
     //constructor
     public GUI() {

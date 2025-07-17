@@ -8,6 +8,7 @@ public class ReminderGUI extends JFrame{
     private JPanel cardPanel;
 
     private JPanel waterRem;
+    private JPanel studyRem;
 
     private Color darkGreen = new Color(27, 77, 62);
     private Color lightGreen = new Color(200, 200, 200);
@@ -33,6 +34,7 @@ public class ReminderGUI extends JFrame{
         add(cardPanel);
 
         sendWaterRem();
+        sendStudyRem(null);
 
         setVisible(true);
     }
@@ -61,7 +63,20 @@ public class ReminderGUI extends JFrame{
     }
 
     public void sendStudyRem(String message){
+        studyRem = new JPanel(null);
+        JLabel labelOutput = new JLabel("Time to study !");
+        labelOutput.setBounds(0, 0, 700, 40);
+        labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
+        labelOutput.setForeground(new Color(200, 200, 200));
 
+        ImageIcon menuPic = new ImageIcon("image.png");
+        JLabel imageLabel = new JLabel(menuPic);
+        imageLabel.setBounds(50, 50, menuPic.getIconWidth(), menuPic.getIconHeight());
+        System.out.println("Image width: " + menuPic.getIconWidth());
+
+        studyRem.add(labelOutput);
+        studyRem.add(imageLabel);
+        cardPanel.add(studyRem, "studyRem");
     }
 
     public void sendMotivRem(int intensity){
