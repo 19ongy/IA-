@@ -28,6 +28,15 @@ public class ReminderManager {
     private String timeOfReminder;
     private String remMessage;
 
+    public void startGUI() {
+        if (reminderWindow == null) {
+            reminderWindow = new ReminderGUI();  // <-- your GUI class must have a constructor
+            SwingUtilities.invokeLater(() -> {
+                reminderWindow.setVisible(true); // assuming ReminderGUI extends JFrame
+            });
+        }
+    }
+
     public void loadRemindersFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -55,6 +64,7 @@ public class ReminderManager {
     public void scheduleReminder(LocalTime reminderTime, String message) {
         LocalTime now = LocalTime.now();
         Duration delay = Duration.between(now, reminderTime);
+        startGUI();
 
         if (delay.isNegative()) {
             delay = delay.plusHours(24); // schedule for next day if time has passed

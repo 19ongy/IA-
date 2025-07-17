@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added some more stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +22,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -32,12 +29,12 @@
     &quot;assignee&quot;: &quot;19ongy&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/19ongy/IA-",
-    "accountId": "02e7ed6d-a456-45d6-86a9-d43f657da085"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/19ongy/IA-&quot;,
+    &quot;accountId&quot;: &quot;02e7ed6d-a456-45d6-86a9-d43f657da085&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
