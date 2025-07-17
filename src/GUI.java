@@ -32,6 +32,7 @@ public class GUI extends JFrame{    //card layout thing
     ReminderManager reminder = new ReminderManager();
     private SetTimer timer = new SetTimer();
     private Menu menu = new Menu();
+    ReminderManager rs = new ReminderManager();
 
     //constructor
     public GUI() {
@@ -554,6 +555,7 @@ public class GUI extends JFrame{    //card layout thing
                             reminder.addReminder(timeInput, messageInput);
                             List<String> reminders = reminder.loadReminders();
                             reminder.updateReminderList(reminderPanel, reminders);
+                            rs.loadRemindersFromFile("reminder_data.txt");
                         }
                         break;
                     case 2:

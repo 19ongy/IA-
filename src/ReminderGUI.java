@@ -60,6 +60,10 @@ public class ReminderGUI extends JFrame{
         System.out.println("SEQUENCE: GUI_test created");
     }
 
+    public void sendStudyRem(String message){
+
+    }
+
     public void sendMotivRem(int intensity){
 
     }

@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.concurrent.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -17,9 +22,57 @@ public class ReminderManager {
     private ArrayList<ReminderTime> studyReminders = new ArrayList<>();
     private Timer waterReminderTimer;
     private ReminderGUI reminderWindow = null;
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     private String timeOfReminder;
     private String remMessage;
+
+    public void loadRemindersFromFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",", 2); // limit to 2 parts
+                if (parts.length < 2) continue;
+
+                String timeStr = parts[0].trim();
+                String message = parts[1].trim();
+
+                try {
+                    LocalTime reminderTime = LocalTime.parse(timeStr, timeFormatter);
+                    scheduleReminder(reminderTime, message);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Skipping invalid time format: " + timeStr);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void scheduleReminder(LocalTime reminderTime, String message) {
+        LocalTime now = LocalTime.now();
+        Duration delay = Duration.between(now, reminderTime);
+
+        if (delay.isNegative()) {
+            delay = delay.plusHours(24); // schedule for next day if time has passed
+        }
+
+        long delayMillis = delay.toMillis();
+
+        scheduler.schedule(() -> {
+            // Replace this with your GUI popup method
+            System.out.println("🔔 Reminder: " + message + " (" + reminderTime + ")");
+        }, delayMillis, TimeUnit.MILLISECONDS);
+    }
+
+    public void shutdown(){
+        scheduler.shutdown();
+    }
+
+
 
 
     //TODO cry cry cry need to find a way to make the times as --:--:00 in text file
@@ -223,14 +276,6 @@ public class ReminderManager {
     }
 
 
-    //deletes all reminders set previously
-    public void deleteAllReminders(){
-        //for(int i = 0; i<studyReminders.size();i++){
-        //    deleteReminder(i);
-        for (int i = studyReminders.size() - 1; i >= 0; i--) {
-
-        }
-    }
 
 
     //water reminders
