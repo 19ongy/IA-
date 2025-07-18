@@ -16,7 +16,7 @@ public class ReminderGUI extends JFrame{
     private Color backgroundGrey = new Color(46, 46, 46);
     private Color greenBlue = new Color(45, 84, 83);
 
-    public ReminderGUI() {
+    public ReminderGUI(String mode, String message) {
         GraphicsDevice gd = MouseInfo.getPointerInfo().getDevice();
         int width = gd.getDisplayMode().getWidth();
         int height = gd.getDisplayMode().getHeight();
@@ -36,10 +36,20 @@ public class ReminderGUI extends JFrame{
         sendWaterRem();
         sendStudyRem(null);
 
+        if(mode.equals("study")){
+            cardLayout.show(cardPanel, "studyRem");
+        }else if(mode.equals("waterRem")){
+            cardLayout.show(cardPanel,"waterRem");
+        }
+
         setVisible(true);
     }
 
     public void sendWaterRem(){
+        if(waterRem != null){
+            return;
+        }
+
         waterRem = new JPanel(null);
         JLabel labelOutput = new JLabel("Make sure you drink water !");
         labelOutput.setBounds(0, 0, 700, 40);
@@ -63,6 +73,10 @@ public class ReminderGUI extends JFrame{
     }
 
     public void sendStudyRem(String message){
+        if(studyRem != null){
+            return;
+        }
+
         studyRem = new JPanel(null);
         JLabel labelOutput = new JLabel("Time to study !");
         labelOutput.setBounds(0, 0, 700, 40);

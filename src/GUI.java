@@ -2,8 +2,8 @@
 //gimem a sec
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GUI extends JFrame{    //card layout thing
     private CardLayout cardLayout;
@@ -21,19 +21,19 @@ public class GUI extends JFrame{    //card layout thing
     private int optionChoice;
 
     //set colour theme
-    private final Color darkGreen = new Color(27, 77, 62);
-    private final Color lightGreen = new Color(200, 200, 200);
-    private final Color borderGreen = new Color(15, 50, 40);
-    private final Color backgroundGrey = new Color(46, 46, 46);
+    private static final Color darkGreen = new Color(27, 77, 62);
+    private static final Color lightGreen = new Color(200, 200, 200);
+    private static final Color borderGreen = new Color(15, 50, 40);
+    private static final Color backgroundGrey = new Color(46, 46, 46);
 
     //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
     GraphMaking graph = new GraphMaking();
     ReminderManager reminder = new ReminderManager();
-    private SetTimer timer = new SetTimer();
+    private Timer timer = new Timer();
     private Menu menu = new Menu();
     ReminderManager rs = new ReminderManager();
-    ReminderGUI rg = new ReminderGUI();
+    //ReminderGUI rg = new ReminderGUI();
 
     //constructor
     public GUI() {
@@ -70,7 +70,7 @@ public class GUI extends JFrame{    //card layout thing
 
         //dark green panel at the top
         JPanel banner = new JPanel();
-        banner.setBackground(new Color(27, 77, 62));
+        banner.setBackground(darkGreen);
         banner.setBounds(0, 0, 800, 100);
         banner.setLayout(null);
 
@@ -186,9 +186,11 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
+            /*
             SwingUtilities.invokeLater(() -> {
                 timer.preTimer(timerDisplay);
             });
+             */
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
@@ -430,52 +432,64 @@ public class GUI extends JFrame{    //card layout thing
         graphMenu = new JPanel(null);
 
         //boxing out shapes for sutff
-        JPanel tabBar = new JPanel();
-        tabBar.setBackground(new Color(27, 77, 62));
-        tabBar.setBounds(0, 0, 200, 500);
-        tabBar.setLayout(null);
+        JPanel mainPanel = new JPanel(new CardLayout());
+        JPanel tabPanel = new JPanel();
+        tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
 
-        //set points
-        int mStartX = 0;
-        int mStartY = 100;
-        int mainTabX = 200;
-        int mainTabY = 40;
-        int amtMainTabs = 0;
-        int amtSideTabs = 0;
+        JScrollPane scrollPane = new JScrollPane(tabPanel);
+        scrollPane.setPreferredSize(new Dimension(250, 600));
+        GraphManager graphManager = new GraphManager(tabPanel, mainPanel);
+        graphManager.addMTab("Total Overview", "totalOverviewCard");
+        graphManager.addMTab("Date overview", "dateOverviewCard");
+        graphManager.addMTab("Subject overview", "subjectOverviewCard");
 
-        int sideTabY = 30;
-        int sStartX = 20;
-        int sideTabX = 200 - sStartX;
-        int sStartY = (mStartX * amtMainTabs) + (sideTabY * amtSideTabs) + mainTabY + 100;
+
+        //MAIN TAB BUTTONS RAH
 
         JButton overviewButton = new JButton();
-        overviewButton.setBounds(mStartX, mStartY, mainTabX, mainTabY);
         overviewButton.setBackground(darkGreen);
         overviewButton.setForeground(Color.BLACK);
         overviewButton.setFocusPainted(false);
         overviewButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        overviewButton.addActionListener(e -> {
+            System.out.println("this would show all the study data overview blah balh ");
+        });
+
+        JButton studyDateTab = new JButton();
+        studyDateTab.setBackground(darkGreen);
+        studyDateTab.setForeground(Color.BLACK);
+        studyDateTab.setFocusPainted(false);
+        studyDateTab.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        studyDateTab.addActionListener(e -> {
+            System.out.println("this would show calendar stuff with all the dates to get past study data ");
+            System.out.println("but for the freeze ill do one with like uh a text input thing where they can just search up the date");
+        });
+
+        JButton subjectTab = new JButton();
+        subjectTab.setBackground(darkGreen);
+        subjectTab.setForeground(Color.BLACK);
+        subjectTab.setFocusPainted(false);
+        subjectTab.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        subjectTab.addActionListener(e -> {
+            System.out.println("this would show all the study data");
+        });
+
 
         //have a method that whenever a new side tab is added, it adds to the tab list on the left
         //whenever a new side button is added, have an arraylist that takes the text of what they clicked
         //add the actionlistneer through siwtch and case thing
 
-        JButton sideButton = new JButton();
-        sideButton.setBounds(sStartX, sStartY, sideTabX, sideTabY);
-        sideButton.setBackground(darkGreen);
-        sideButton.setForeground(Color.BLACK);
-        sideButton.setFocusPainted(false);
-        sideButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-
         GraphMaking graph = new GraphMaking();
         graph.setSize(500,300);
         graph.setLocation(250, 120);
 
-
         returnBut(graphMenu, "graphMenu");
-        graphMenu.add(tabBar);
+        graphMenu.add(scrollPane, BorderLayout.WEST);
+        graphMenu.add(mainPanel, BorderLayout.CENTER);
         graphMenu.add(graph);
         graphMenu.add(overviewButton);
-        graphMenu.add(sideButton);
+        graphMenu.add(studyDateTab);
+        graphMenu.add(subjectTab);
         defaultLook(graphMenu, "graphMenu");
         cardPanel.add(graphMenu, "graphMenu");
     }
@@ -483,21 +497,17 @@ public class GUI extends JFrame{    //card layout thing
     public void setSettingMenu(){
         settingMenu = new JPanel(null);
 
+        //setting buttons
         String[] settingOptTexts = {"User preference", "Timer settings", "Something settings"};
-
         for(int i = 0; i < 3; i++){
             JButton settingOpt = new JButton(settingOptTexts[i]);
-            settingOpt.setBounds(150, (200 + (i*50)), 200,40);
+            settingOpt.setBounds(130, (100 + (i*50)), 200,40);
             settingOpt.setBackground(darkGreen);
             settingOpt.setForeground(Color.BLACK);
             settingOpt.setFocusPainted(false);
             settingOpt.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
             settingMenu.add(settingOpt);
         }
-
-
-
-
         returnBut(settingMenu, "setting menu");
         defaultLook(settingMenu, "setting menu");
         cardPanel.add(settingMenu, "setting menu");

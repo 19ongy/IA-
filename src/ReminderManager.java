@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,12 +9,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ReminderManager {
@@ -25,32 +22,19 @@ public class ReminderManager {
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-    private String timeOfReminder;
-    private String remMessage;
-
-    public void startGUI() {
-        if (reminderWindow == null) {
-            reminderWindow = new ReminderGUI();  // <-- your GUI class must have a constructor
-            SwingUtilities.invokeLater(() -> {
-                reminderWindow.setVisible(true); // assuming ReminderGUI extends JFrame
-            });
-        }
-    }
-
     public void loadRemindersFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",", 2); // limit to 2 parts
-                if (parts.length < 2) continue;
 
                 String timeStr = parts[0].trim();
                 String message = parts[1].trim();
 
                 try {
                     LocalTime reminderTime = LocalTime.parse(timeStr, timeFormatter);
-                    scheduleReminder(reminderTime, message);
+                    startStudyReminder(reminderTime, message);
                 } catch (DateTimeParseException e) {
                     System.out.println("Skipping invalid time format: " + timeStr);
                 }
@@ -61,49 +45,29 @@ public class ReminderManager {
         }
     }
 
-    public void scheduleReminder(LocalTime reminderTime, String message) {
+    public void startStudyReminder(LocalTime reminderTime, String message) {
         LocalTime now = LocalTime.now();
         Duration delay = Duration.between(now, reminderTime);
-        startGUI();
 
         if (delay.isNegative()) {
             delay = delay.plusHours(24); // schedule for next day if time has passed
         }
-
         long delayMillis = delay.toMillis();
+        //long stores ints that are very big
 
         scheduler.schedule(() -> {
-            System.out.println("🔔 Reminder: " + message + " (" + reminderTime + ")");
+            SwingUtilities.invokeLater(() -> {
+                if (reminderWindow != null) {
+                    reminderWindow.dispose();
+                }
+                reminderWindow = new ReminderGUI("study", message);
+            });
         }, delayMillis, TimeUnit.MILLISECONDS);
-        reminderWindow.sendStudyRem(message);
     }
+    //why this no make sense
 
     public void shutdown(){
         scheduler.shutdown();
-    }
-
-
-
-
-    //TODO cry cry cry need to find a way to make the times as --:--:00 in text file
-    //ALSO checkTime needs to be cnstnatly running in the background then? to constantly check the time
-    //surely there is a better way
-
-    public void checkTime(){
-        LocalTime timeNow = LocalTime.now();
-        //String formattedTimeNow = String.format("%02d:%02d:", );
-        LocalTime cTime = LocalTime.parse("13:52:00");
-        System.out.println(timeNow);
-
-    }
-
-
-    public ArrayList<ReminderTime> getStudyReminders() {
-        return studyReminders;
-    }
-
-    public void setStudyReminders(ArrayList<ReminderTime> studyReminders) {
-        this.studyReminders = studyReminders;
     }
 
     //converts user String input in format HHMM to hour and minute ints
@@ -134,22 +98,6 @@ public class ReminderManager {
         }
     }
 
-    //displays all the reminders set with a number ( i ) next to it
-    public String displayReminders() {
-        StringBuilder result = new StringBuilder("STUDY REMINDERS SET AT:\n");
-        for (int i = 0; i < studyReminders.size(); i++) {
-            int hour = studyReminders.get(i).getHour();
-            int min = studyReminders.get(i).getMin();
-            result.append("( ")
-                    .append(i + 1)
-                    .append(" ) ")
-                    .append(String.format("%02d : %02d", hour, min))
-                    .append("\n");
-        }
-        return result.toString();
-    }
-
-
     //writing to the data file
     public String formatData(String inputTime, String message){
         return inputTime + "," + message;
@@ -170,22 +118,6 @@ public class ReminderManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    //reading from the data file
-    public void readFromFile(){
-        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))){
-            String line;
-            while((line = reader.readLine()) != null){
-                String[] parts = line.split(",", 2);
-                if(parts.length ==2){
-                    this.timeOfReminder = parts[0];
-                    this.remMessage = parts[1];
-                }
-            }
-        } catch (IOException e){
-            e.printStackTrace();
         }
     }
 
@@ -263,16 +195,6 @@ public class ReminderManager {
         updateReminderList(reminderPanel, reminders);
     }
 
-    public String getTimeOfRem(){
-        System.out.println(timeOfReminder);
-        return this.timeOfReminder;
-    }
-
-    public String getRemMessage(){
-        System.out.println("hi" + remMessage);
-        return this.remMessage;
-    }
-
     public int getDataLength(){
         int count = 0;
         try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))){
@@ -284,8 +206,6 @@ public class ReminderManager {
         }
         return count;
     }
-
-
 
 
     //water reminders
@@ -301,17 +221,10 @@ public class ReminderManager {
                     if (reminderWindow != null) {
                         reminderWindow.dispose();
                     }
-                    reminderWindow = new ReminderGUI();
+                    reminderWindow = new ReminderGUI("water", null);
                 });
             }
-        }, 0, 60*30*1000);
-    }
-
-    public void stopWaterReminders(){
-        if(waterReminderTimer != null){
-            waterReminderTimer.cancel();
-            waterReminderTimer = null;
-        }
+        }, 10000, 60*30*1000);
     }
 
 }

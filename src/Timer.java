@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
-import javax.swing.Timer;
 
-public class SetTimer {
+public class Timer {
     private int startHour = 0;
     private int startMin = 0;
     private int endHour = 0;
@@ -20,13 +18,13 @@ public class SetTimer {
     public boolean isEnded;
 
     public String time;
-    Timer stopwatchTimer = new javax.swing.Timer(1000, null);
-    Timer countdownTimer = new javax.swing.Timer(1000, null);
+    javax.swing.Timer stopwatchTimer = new javax.swing.Timer(1000, null);
+    javax.swing.Timer countdownTimer = new javax.swing.Timer(1000, null);
     SessionManager manager = new SessionManager();
 
 
     //constructor
-    public SetTimer(){
+    public Timer(){
         this.timeElapsed = 0;
         this.timeRemaining = 0;
         ready = false;
