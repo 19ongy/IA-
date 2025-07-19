@@ -429,68 +429,35 @@ public class GUI extends JFrame{    //card layout thing
     }
 
     public void setGraphMenu(){
-        graphMenu = new JPanel(null);
-
-        //boxing out shapes for sutff
-        JPanel mainPanel = new JPanel(new CardLayout());
+        graphMenu = new JPanel(new BorderLayout());
         JPanel tabPanel = new JPanel();
         tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
-
         JScrollPane scrollPane = new JScrollPane(tabPanel);
         scrollPane.setPreferredSize(new Dimension(250, 600));
+
+        JPanel mainPanel = new JPanel(new CardLayout());
+        System.out.println("working 1");
         GraphManager graphManager = new GraphManager(tabPanel, mainPanel);
         graphManager.addMTab("Total Overview", "totalOverviewCard");
         graphManager.addMTab("Date overview", "dateOverviewCard");
         graphManager.addMTab("Subject overview", "subjectOverviewCard");
 
-
-        //MAIN TAB BUTTONS RAH
-
-        JButton overviewButton = new JButton();
-        overviewButton.setBackground(darkGreen);
-        overviewButton.setForeground(Color.BLACK);
-        overviewButton.setFocusPainted(false);
-        overviewButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-        overviewButton.addActionListener(e -> {
-            System.out.println("this would show all the study data overview blah balh ");
-        });
-
-        JButton studyDateTab = new JButton();
-        studyDateTab.setBackground(darkGreen);
-        studyDateTab.setForeground(Color.BLACK);
-        studyDateTab.setFocusPainted(false);
-        studyDateTab.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-        studyDateTab.addActionListener(e -> {
-            System.out.println("this would show calendar stuff with all the dates to get past study data ");
-            System.out.println("but for the freeze ill do one with like uh a text input thing where they can just search up the date");
-        });
-
-        JButton subjectTab = new JButton();
-        subjectTab.setBackground(darkGreen);
-        subjectTab.setForeground(Color.BLACK);
-        subjectTab.setFocusPainted(false);
-        subjectTab.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-        subjectTab.addActionListener(e -> {
-            System.out.println("this would show all the study data");
-        });
-
-
-        //have a method that whenever a new side tab is added, it adds to the tab list on the left
-        //whenever a new side button is added, have an arraylist that takes the text of what they clicked
-        //add the actionlistneer through siwtch and case thing
+        graphMenu.add(scrollPane, BorderLayout.WEST);
+        graphMenu.add(mainPanel, BorderLayout.CENTER);
 
         GraphMaking graph = new GraphMaking();
         graph.setSize(500,300);
         graph.setLocation(250, 120);
 
         returnBut(graphMenu, "graphMenu");
-        graphMenu.add(scrollPane, BorderLayout.WEST);
         graphMenu.add(mainPanel, BorderLayout.CENTER);
-        graphMenu.add(graph);
-        graphMenu.add(overviewButton);
-        graphMenu.add(studyDateTab);
-        graphMenu.add(subjectTab);
+        graphMenu.add(scrollPane, BorderLayout.WEST);
+        //graphMenu.add(graph);
+
+        returnBut(graphMenu, "graphmenu");
         defaultLook(graphMenu, "graphMenu");
+        graphMenu.revalidate();
+        graphMenu.repaint();
         cardPanel.add(graphMenu, "graphMenu");
     }
 
