@@ -30,7 +30,7 @@ public class GUI extends JFrame{    //card layout thing
 
     //pomodoro stuff
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
-    int[] defaultDurations = {5, 300, 1500, 300, 1500, 900};
+    int[] defaultDurations = {5, 5, 1500, 300, 1500, 900};
     String[] defaultTypes = {"Study", "Break", "Study", "Break", "Study", "Break"};
 
     //calling instances of other classes

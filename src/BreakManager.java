@@ -14,22 +14,30 @@ public class BreakManager {
     //la constructor
     public BreakManager(int duration) {
         this.startDate = LocalDate.now();
-        this.endDate = LocalDate.now();
         this.startTime = LocalTime.now();
-        this.endTime = LocalTime.now().plusSeconds(duration);
         this.breakDuration = duration;
+    }
+
+    //ending the break
+    public void endBreak(){
+        this.endDate = LocalDate.now();
+        this.endTime = LocalTime.now();
+        saveBreak();
     }
 
     //converts it to the file
     public String toFileString(){
-        return breakDuration + "," + startDate + "," + startTime.getHour() + ":" + startTime.getMinute() + "," + endDate + "," + endTime.getHour() + ":" + endTime.getMinute();
+        String startTimeStr = startTime.getHour() + ":" + startTime.getMinute();
+        String endTimeStr = endTime.getHour() + ":" + endTime.getMinute();
+        return breakDuration + "," + startDate + "," + startTimeStr + "," + endDate + "," + endTimeStr;
     }
 
     //saves the break to the file
     public void saveBreak(){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("break_data.txt"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("break_data.txt", true))){
             writer.write(toFileString());
             writer.newLine();
+            System.out.print("break saved");
         }catch(IOException e){
             e.printStackTrace();
         }

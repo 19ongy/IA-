@@ -17,7 +17,7 @@ public class Timer {
     public boolean isPaused;
     public boolean isEnded;
 
-    private int breakTimeLeft;
+    public int breakTimeLeft;
 
     private int savedTimeRemaining;
     private int savedTimeElapsed;
@@ -228,24 +228,28 @@ public class Timer {
         isPaused = true;
         onBreak = true;
 
-        String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
-        if (input != null) {
-            try {
-                if (input.length() <= 2) { //
-                    breakTimeLeft = Integer.parseInt(input);
-                } else if ((input.length() > 2) && (input.length() <= 4)) {
-                    int minutes = Integer.parseInt(input.substring(0, 2));
-                    int seconds = Integer.parseInt(input.substring(2, 4));
-                    breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
-                } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
-                    JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
-                    breakTimeLeft = 0;
+        if(breakDuration == 0){
+            String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
+            if (input != null) {
+                try {
+                    if (input.length() <= 2) { //
+                        breakTimeLeft = Integer.parseInt(input);
+                    } else if ((input.length() > 2) && (input.length() <= 4)) {
+                        int minutes = Integer.parseInt(input.substring(0, 2));
+                        int seconds = Integer.parseInt(input.substring(2, 4));
+                        breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
+                    } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
+                        JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
+                        breakTimeLeft = 0;
+                    }
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
                 }
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
             }
-        }
 
+        }else{
+            breakTimeLeft = breakDuration;
+        }
 
         //stops the current counter
         countdownTimer.stop();
@@ -260,6 +264,10 @@ public class Timer {
             }else{
                 label.setText("BREAK OVERR");
                 breakTimer.stop();
+
+                BreakManager breakManager = new BreakManager(savedTimeElapsed + breakTimeLeft);
+                breakManager.saveBreak();
+
                 resumeStudy(label);
 
             }
