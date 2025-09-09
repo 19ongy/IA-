@@ -16,6 +16,8 @@ public class ReminderGUI extends JFrame{
     private Color backgroundGrey = new Color(46, 46, 46);
     private Color greenBlue = new Color(45, 84, 83);
 
+    ReminderManager remMind = new ReminderManager();
+
     public ReminderGUI(String mode, String message) {
         GraphicsDevice gd = MouseInfo.getPointerInfo().getDevice();
         int width = gd.getDisplayMode().getWidth();
@@ -25,7 +27,7 @@ public class ReminderGUI extends JFrame{
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  // quit the app when we close the window
         System.out.println(width);
         System.out.println(height);
-        setLocation(width-1000, height-600);
+        setLocation(width-1050, height-630);
 
         setSize(400, 200);
 
@@ -34,14 +36,17 @@ public class ReminderGUI extends JFrame{
         add(cardPanel);
 
         sendWaterRem();
-        sendStudyRem(null);
+        sendStudyRem(remMind.getMessage());
+        //not sure why its not working - should be displaying the message in black on the popup
+        //when debugging, it says that remMind.getMessage() is null
+        //very much a skill issue :((((((((((((
+
 
         if(mode.equals("study")){
             cardLayout.show(cardPanel, "studyRem");
         }else if(mode.equals("waterRem")){
             cardLayout.show(cardPanel,"waterRem");
         }
-
         setVisible(true);
     }
 
@@ -78,12 +83,14 @@ public class ReminderGUI extends JFrame{
         }
 
         studyRem = new JPanel(null);
-        JLabel labelOutput = new JLabel("Time to study !");
+        System.out.println("this is la thing : " + message);
+        JLabel labelOutput = new JLabel(message);
+        labelOutput.setForeground(Color.BLACK);
         labelOutput.setBounds(0, 0, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
         labelOutput.setForeground(new Color(200, 200, 200));
 
-        ImageIcon menuPic = new ImageIcon("image.png");
+        ImageIcon menuPic = new ImageIcon("winter drawing smaller.png");
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(50, 50, menuPic.getIconWidth(), menuPic.getIconHeight());
         System.out.println("Image width: " + menuPic.getIconWidth());

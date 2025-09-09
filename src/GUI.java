@@ -2,7 +2,6 @@
 //gimem a sec
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends JFrame{    //card layout thing
@@ -15,6 +14,9 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel graphMenu;
     private JPanel settingMenu;
     private JPanel remMenu;
+    private JPanel statScreen;
+    private JPanel dailyOverview;
+    private JPanel calendarAndTrends;
 
     private JLabel timerDisplay;
     private String value;
@@ -25,6 +27,11 @@ public class GUI extends JFrame{    //card layout thing
     private static final Color lightGreen = new Color(200, 200, 200);
     private static final Color borderGreen = new Color(15, 50, 40);
     private static final Color backgroundGrey = new Color(46, 46, 46);
+
+    //pomodoro stuff
+    //25, 5, 25, 5, 25, 15 pomo session in seconds for default
+    int[] defaultDurations = {5, 300, 1500, 300, 1500, 900};
+    String[] defaultTypes = {"Study", "Break", "Study", "Break", "Study", "Break"};
 
     //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
@@ -53,6 +60,9 @@ public class GUI extends JFrame{    //card layout thing
         setGraphMenu();
         setSettingMenu();
         setRemMenu();
+        setTotStatScreen();
+        setDailyOverview();
+        setCalendarAndTrends();
 
         setVisible(true);
 
@@ -94,6 +104,50 @@ public class GUI extends JFrame{    //card layout thing
         panel.add(returnBut);
     }
 
+    //helper method for the graphing buttons
+    private void graphButtons(JPanel panel){
+        JButton totalStats = new JButton("Total Stats");
+        totalStats.setBounds(50, 30, 150, 30);
+        totalStats.setBackground(darkGreen);
+        totalStats.setForeground(lightGreen);
+        totalStats.setFont(new Font("Arial", Font.BOLD, 14));
+        totalStats.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        totalStats.setFocusPainted(false);
+        totalStats.addActionListener(e -> {
+            cardLayout.show(cardPanel, "statScreen");
+            System.out.println("no1");
+
+        });
+
+        JButton dailyOverview = new JButton("Daily Overview");
+        dailyOverview.setBounds(220, 30, 150, 30);
+        dailyOverview.setBackground(darkGreen);
+        dailyOverview.setForeground(lightGreen);
+        dailyOverview.setFont(new Font("Arial", Font.BOLD, 14));
+        dailyOverview.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        dailyOverview.setFocusPainted(false);
+        dailyOverview.addActionListener(e -> {
+            cardLayout.show(cardPanel, "dailyOverview");
+            System.out.println("no2");
+        });
+
+        JButton calNTrends = new JButton("Calendar");
+        calNTrends.setBounds(390, 30, 150, 30);
+        calNTrends.setBackground(darkGreen);
+        calNTrends.setForeground(lightGreen);
+        calNTrends.setFont(new Font("Arial", Font.BOLD, 14));
+        calNTrends.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        calNTrends.setFocusPainted(false);
+        calNTrends.addActionListener(e -> {
+            cardLayout.show(cardPanel, "CalendarAndTrends");
+            System.out.println("No3");
+        });
+
+        panel.add(dailyOverview);
+        panel.add(calNTrends);
+        panel.add(totalStats);
+    }
+
     public void setMenuScreen(){
         menuScreen = new JPanel(null);
 
@@ -110,13 +164,7 @@ public class GUI extends JFrame{    //card layout thing
         setSesh.setFocusPainted(false);
         setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
-            cardLayout.show(cardPanel, "bMood");
-            //has to call the start of menu, but it causes issues now
-            /*SwingUtilities.invokeLater(() -> {
-                menu.startMenu(1);
-            });
-
-             */
+            cardLayout.show(cardPanel, "Session");
         });
 
         JButton setRem = new JButton("Set Reminder");
@@ -186,11 +234,7 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
-            /*
-            SwingUtilities.invokeLater(() -> {
-                timer.preTimer(timerDisplay);
-            });
-             */
+            cardLayout.show(cardPanel, "bMood");
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
@@ -204,9 +248,11 @@ public class GUI extends JFrame{    //card layout thing
         breakButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         breakButton.setFocusPainted(false);
         breakButton.addActionListener(e -> {
-            System.out.println("break time! ");
+            System.out.println("break has started!");
+            timer.startBreak(10, timerDisplay);
         });
 
+        /*
         JButton session = new JButton("NEW");
         session.setBounds(200, 300, 100, 40);
         session.setFont(new Font("Arial", Font.BOLD, 17));
@@ -219,8 +265,10 @@ public class GUI extends JFrame{    //card layout thing
 
         });
 
+         */
+
         JTextField timeInput = new JTextField(6);
-        timeInput.setBounds(300, 300, 200, 40);
+        timeInput.setBounds(230, 300, 200, 40);
         timeInput.setFont(new Font("Arial", Font.BOLD, 17));
         timeInput.setBackground(lightGreen);
         timeInput.setForeground(borderGreen);
@@ -228,7 +276,7 @@ public class GUI extends JFrame{    //card layout thing
 
         //confirmation check for inputting text
         JButton tick = new JButton("✓");
-        tick.setBounds(500, 300, 40, 40);
+        tick.setBounds(430, 300, 40, 40);
         tick.setFont(new Font("Segoe UI Emoji", Font.BOLD, 12));
         tick.setBackground(darkGreen);
         tick.setForeground(lightGreen);
@@ -239,15 +287,22 @@ public class GUI extends JFrame{    //card layout thing
             //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
 
-        JButton pomo = new JButton("P");
-        pomo.setBounds(560, 300, 40, 40);
-        pomo.setFont(new Font("Segoe UI Emoji", Font.BOLD, 12));
+        Pomodoro pomodoro = new Pomodoro(timer, timerDisplay, defaultDurations, defaultTypes);
+
+        JButton pomo = new JButton("POMODORO");
+        pomo.setBounds(480, 300, 100, 40);
+        pomo.setFont(new Font("Arial", Font.BOLD, 14));
         pomo.setBackground(darkGreen);
         pomo.setForeground(lightGreen);
         pomo.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         pomo.addActionListener(e -> {
-            System.out.println("here i can put pomo optoins ");
-            //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
+            if(!timer.isPaused && (timer.timeElapsed > 0) && !timer.isEnded){
+                int pomocheck = JOptionPane.showConfirmDialog(null, "There's already a timer running. Do you want to start pomo?", "Confirm", JOptionPane.YES_NO_OPTION);
+                if(pomocheck != JOptionPane.YES_OPTION){
+                    return;
+                }
+            }
+            pomodoro.startPomo();
         });
 
 
@@ -260,9 +315,12 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         countdownButton.setFocusPainted(false);
         countdownButton.addActionListener(e -> {
+            cardLayout.show(cardPanel, "bMood");
             sessionManager.setStartDate();
             sessionManager.setStartTime();
+            System.out.println("test thing: " + timer.formatTime(value));
             timer.startCountdown(timer.formatTime(value), timerDisplay);
+
         });
 
         JButton play = new JButton("PLAY");
@@ -308,7 +366,7 @@ public class GUI extends JFrame{    //card layout thing
         sessionScreen.add(timerDisplay);
         sessionScreen.add(play);
         sessionScreen.add(pause);
-        sessionScreen.add(session);
+        //sessionScreen.add(session);
         sessionScreen.add(timeInput);
         sessionScreen.add(pomo);
         defaultLook(sessionScreen, "Session");
@@ -417,7 +475,7 @@ public class GUI extends JFrame{    //card layout thing
                 sessionManager.setEndDate();
                 sessionManager.setEndTime();
                 sessionManager.setSubject("Maths");
-                sessionManager.saveSession(null);
+                sessionManager.saveSession();
             });
             pMoodScreen.add(moodButton);
 
@@ -429,36 +487,38 @@ public class GUI extends JFrame{    //card layout thing
     }
 
     public void setGraphMenu(){
-        graphMenu = new JPanel(new BorderLayout());
-        JPanel tabPanel = new JPanel();
-        tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(tabPanel);
-        scrollPane.setPreferredSize(new Dimension(250, 600));
-
-        JPanel mainPanel = new JPanel(new CardLayout());
-        System.out.println("working 1");
-        GraphManager graphManager = new GraphManager(tabPanel, mainPanel);
-        graphManager.addMTab("Total Overview", "totalOverviewCard");
-        graphManager.addMTab("Date overview", "dateOverviewCard");
-        graphManager.addMTab("Subject overview", "subjectOverviewCard");
-
-        graphMenu.add(scrollPane, BorderLayout.WEST);
-        graphMenu.add(mainPanel, BorderLayout.CENTER);
-
-        GraphMaking graph = new GraphMaking();
-        graph.setSize(500,300);
-        graph.setLocation(250, 120);
+        graphMenu = new JPanel(null);
 
         returnBut(graphMenu, "graphMenu");
-        graphMenu.add(mainPanel, BorderLayout.CENTER);
-        graphMenu.add(scrollPane, BorderLayout.WEST);
-        //graphMenu.add(graph);
-
-        returnBut(graphMenu, "graphmenu");
+        graphButtons(graphMenu);
         defaultLook(graphMenu, "graphMenu");
-        graphMenu.revalidate();
-        graphMenu.repaint();
+
         cardPanel.add(graphMenu, "graphMenu");
+    }
+
+    public void setTotStatScreen(){
+        statScreen = new JPanel(null);
+        graphButtons(statScreen);
+        returnBut(statScreen, "statScreen");
+        defaultLook(statScreen, "statScreen");
+        cardPanel.add(statScreen, "statScreen");
+
+    }
+
+    public void setDailyOverview(){
+        dailyOverview = new JPanel(null);
+        graphButtons(dailyOverview);
+        returnBut(dailyOverview, "dailyOverview");
+        defaultLook(dailyOverview, "dailyOverview");
+        cardPanel.add(dailyOverview, "dailyOverview");
+    }
+
+    public void setCalendarAndTrends(){
+        calendarAndTrends = new JPanel(null);
+        graphButtons(calendarAndTrends);
+        returnBut(calendarAndTrends, "calendarAndTrends");
+        defaultLook(calendarAndTrends, "calendarAndTrends");
+        cardPanel.add(calendarAndTrends, "calendarAndTrends");
     }
 
     public void setSettingMenu(){

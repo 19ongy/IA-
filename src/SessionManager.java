@@ -4,6 +4,7 @@ CLASS SUMMARY:
  */
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -112,7 +113,7 @@ public class SessionManager {
 
     }
 
-    public void saveSession(Session session) {
+    public void saveSession() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session
@@ -122,24 +123,30 @@ public class SessionManager {
         }
     }
 
-
-
-    public static void readSessions() {
-        try {
-            FileReader fr = new FileReader("session_data.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-            String line = br.readLine();
-            while (line != null) {
-                System.out.println("hello");
-                System.out.println(line);
-                line = br.readLine();
+    //reading the lines and splitting up the data into their respective categories
+    public static ArrayList<SessionManager> readSessions(){
+        ArrayList<SessionManager> sessions = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("session_data.txt"))){
+            String line;
+            while((line = br.readLine())!= null){
+                String[] parts = line.split(",");
+                //checks whether all the data is there
+                if(parts.length == 8){
+                    SessionManager session = new SessionManager();
+                    session.setMoodBefore(parts[0]);
+                    session.setMoodAfter(parts[1]);
+                    session.setSessionLength(Integer.parseInt(parts[2]));
+                    session.setSubject(parts[3]);
+                    session.startLocalDate = LocalDate.parse(parts[4]);
+                    session.startLocalTime = LocalTime.parse(parts[5]);
+                    session.endLocalDate = LocalDate.parse(parts[6]);
+                    session.endLocalTime = LocalTime.parse(parts[7]);
+                    sessions.add(session);
+                }
             }
-        }
-        catch (IOException e)
-        {
+        }catch (IOException e){
             e.printStackTrace();
         }
+        return sessions;
     }
-
 }

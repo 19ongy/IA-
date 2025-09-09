@@ -9,19 +9,26 @@ public class Timer {
     int hourStudied = 0;
     int minStudied = 0;
 
-    private int timeElapsed;
-    private int timeRemaining;
+    public int timeElapsed;
+    public int timeRemaining;
     private boolean ready;
     private int preTimeRemaining;
     public int setTimerDuration;
     public boolean isPaused;
     public boolean isEnded;
 
+    private int breakTimeLeft;
+
+    private int savedTimeRemaining;
+    private int savedTimeElapsed;
+    private boolean isAStopwatch;
+    private boolean onBreak = false;
+
     public String time;
     javax.swing.Timer stopwatchTimer = new javax.swing.Timer(1000, null);
     javax.swing.Timer countdownTimer = new javax.swing.Timer(1000, null);
+    javax.swing.Timer breakTimer = new javax.swing.Timer(1000, null);
     SessionManager manager = new SessionManager();
-
 
     //constructor
     public Timer(){
@@ -48,7 +55,11 @@ public class Timer {
         this.time = time;
     }
 
-    //pause the timer
+    public int getTimeElapsed(){
+        return timeElapsed;
+    }
+
+    //pauses the timer
     public void pause(){
         if(!isPaused){
             isPaused = true;
@@ -64,6 +75,7 @@ public class Timer {
         }
     }
 
+
     public void endT(JLabel label){
         manager.setEndDate();
         manager.setEndTime();
@@ -71,7 +83,7 @@ public class Timer {
     }
 
 
-    //pre timer coundown 3.. 2.. 1.. TIMER STARTS NOW
+    //starting timer countdown
     public void preTimer(JLabel label){
         javax.swing.Timer[] preTimer = new javax.swing.Timer[1]; //creates an array with 1 slot to hold my timer in
         preTimer[0] = new javax.swing.Timer(1000, null); //creates the timer instance that counts every second
@@ -89,59 +101,50 @@ public class Timer {
         preTimer[0].start();
     }
 
-    public String tCheck(String time){
-        return time;
-    }
-
-    /*to do list 08.07
-    make an isEnd to check whether the user has clicked the end button on the gui yet
-    find a way to just pause the timer
-
-     */
-
-    public int getTimeElapsed(){
-        return timeElapsed;
-    }
-
-    //STOPWATCH METHODS ------------------------------->
+    //setting up a stopwatch
     public void startStopwatch(JLabel label) {
         timeElapsed = 0;
         isEnded = false;
         isPaused = false;
 
+        //clears all previous action listeners/ timers so it doesn't overlap
+        for(ActionListener acli : stopwatchTimer.getActionListeners()){
+            stopwatchTimer.removeActionListener(acli);
+        }
+
+
         System.out.println("stopwatch hs begun");
         stopwatchTimer.addActionListener(e -> {
             if (isEnded) {
+                //checks if the user has ended the timer
                 label.setText("Timer Ended!");
                 stopwatchTimer.stop();
             } else if (!isPaused) {
+                //checks if user has paused the timer
                 label.setText(formatTime(timeElapsed));  // update label
                 label.repaint();
+                //label = GUI display screen --> it's updated every second
                 timeElapsed = timeElapsed + 1;
             }
         });
         stopwatchTimer.start();
     }
 
-    // <-------------------------------
-
-    //COUNTDOWN METHODS ------------------------------->
-    //method to set countdown duration
-    //time returned aka timeRemaining is in seconds
+    //finding total amount of time in seconds, based off what the user inputted
     public int formatTime(String formattedAmt){
         //makes sure that user didn't enter all 0s
         if(formattedAmt.matches("0+")){
             System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
             return 0;
         }
-        //'30' = 30 seconds whilst '150' = 1 minute 50 seconds
-        if(formattedAmt.length() <= 2){ // if SS , so just seconds
+        //'30' = 30 seconds whilst '0150' = 1 minute 50 seconds
+        //splits the string input based on their positions to respective hours, minutes, and seconds
+        if(formattedAmt.length() <= 2){ //
             return Integer.parseInt(formattedAmt);
-        }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){ //if input is MMSS
-            //takes the first two characers (MM) and converts the minutes to seconds
+        }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){
             int minutes = Integer.parseInt(formattedAmt.substring(0,2));
             int seconds = Integer.parseInt(formattedAmt.substring(2,4));
-            int total = (minutes*60) + (seconds);
+            int total = (minutes*60) + (seconds); //converts it all to seconds
             return total;
         }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
             int hours = Integer.parseInt(formattedAmt.substring(0,2));
@@ -155,38 +158,41 @@ public class Timer {
         }
     }
 
-
-
-    //whats it doing is
-    //starts countdown and displays how much time is left
+    //setting up the countdown
     public void startCountdown(int timeRemaining, JLabel label){
+        this.timeRemaining = timeRemaining;
+        System.out.println(timeRemaining);
         timeElapsed = 0;
         isEnded = false;
         isPaused = false;
 
+        //checks whether a countdown timer amount has been set yet
         if(timeRemaining<=0){
             JOptionPane.showMessageDialog(null, "you havne't set a time yet!", "whaaattt", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (countdownTimer.isRunning()) {
-            countdownTimer.stop();
-            for (ActionListener al : countdownTimer.getActionListeners()) {
-                countdownTimer.removeActionListener(al);
-            }
+        //stops the timer
+        countdownTimer.stop();
+
+        //removes all the previous action listeners so it counts down at 1 second intervals after a new countdown
+        for (ActionListener al : countdownTimer.getActionListeners()) {
+            countdownTimer.removeActionListener(al);
         }
 
         countdownTimer.addActionListener(e -> {
             if (isEnded) {
                 label.setText("Timer Ended!");
+                //collects the date and time information to make graphs with
                 manager.setEndDate();
                 manager.setEndTime();
                 countdownTimer.stop();
             } else if (!isPaused) {
-                int timeLeft = timeRemaining - timeElapsed;
+                int timeLeft = this.timeRemaining - this.timeElapsed;
                 if (timeLeft > 0) {
                     label.setText(formatTime(timeLeft));
                     timeElapsed = timeElapsed + 1;
+                    //increments by 1 second
                 } else {
                     label.setText("Good job!! Timer finished!");
                     manager.setEndDate();
@@ -204,21 +210,71 @@ public class Timer {
         return timeRemaining - timeElapsed;
     }
 
-
-    // <-------------------------------
-
-
-    //formats time left in countdown as HH:MM:SS
+    //formats time left in countdown as HH:MM:SS so that it can be displayed in the GUI screen
     private String formatTime(int amtSeconds){
         int hoursLeft = amtSeconds /3600;
         int minsLeft = (amtSeconds %3600)/60;
         int secsLeft = amtSeconds %60;
 
-
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
     }
 
+    //setting up a break
+    public void startBreak(int breakDuration, JLabel label){
+        //saves all the previous timer data
+        savedTimeRemaining = this.timeRemaining;
+        savedTimeElapsed = this.timeElapsed;
+        isPaused = true;
+        onBreak = true;
+
+        String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
+        if (input != null) {
+            try {
+                if (input.length() <= 2) { //
+                    breakTimeLeft = Integer.parseInt(input);
+                } else if ((input.length() > 2) && (input.length() <= 4)) {
+                    int minutes = Integer.parseInt(input.substring(0, 2));
+                    int seconds = Integer.parseInt(input.substring(2, 4));
+                    breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
+                } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
+                    JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
+                    breakTimeLeft = 0;
+                }
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+
+        //stops the current counter
+        countdownTimer.stop();
+        for (ActionListener acli : countdownTimer.getActionListeners()) {
+            countdownTimer.removeActionListener(acli);
+        }
+
+        breakTimer = new javax.swing.Timer(1000, e -> {
+            if(breakTimeLeft > 0){
+                label.setText("Break: " + formatTime(breakTimeLeft));
+                breakTimeLeft = breakTimeLeft - 1;
+            }else{
+                label.setText("BREAK OVERR");
+                breakTimer.stop();
+                resumeStudy(label);
+
+            }
+        });
+        breakTimer.start();
+    }
+
+    //starts the normal countdown/stopwatch timer again after break
+
+    private void resumeStudy(JLabel label){
+        isPaused = false;
+        onBreak = false;
+        startCountdown(savedTimeRemaining, label);
+        this.timeElapsed = savedTimeElapsed;
+    }
 
     //gets the amount of time studied for an already existing schedule
     public int ExistingTime(int startHour, int startMin, int endHour, int endMin){
@@ -241,6 +297,9 @@ public class Timer {
 
         return((hourStudied*60) + minStudied);
     }
+
+    //pomodoro stuff
+
 
 
 }

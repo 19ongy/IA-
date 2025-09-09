@@ -21,6 +21,15 @@ public class ReminderManager {
     private ReminderGUI reminderWindow = null;
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    public String message;
+
+    public void setMessage(String message){
+        this.message = message;
+    }
+
+    public String getMessage(){
+        return this.message;
+    }
 
     public void loadRemindersFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -31,6 +40,7 @@ public class ReminderManager {
 
                 String timeStr = parts[0].trim();
                 String message = parts[1].trim();
+                setMessage(message);
 
                 try {
                     LocalTime reminderTime = LocalTime.parse(timeStr, timeFormatter);
