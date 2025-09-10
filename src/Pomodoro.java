@@ -9,7 +9,10 @@ public class Pomodoro {
     private int[] allDurations;
     private String[] types;
     public int index = 0;
-    SessionManager sesh;
+    private SessionManager sesh;
+
+    private String moodBefore;
+    private String moodAfter;
 
     public Pomodoro(GUI gui, Timer timer, JLabel label, int[] allDurations, String[] studyOrBreak ){
         this.timer = timer;
@@ -17,6 +20,15 @@ public class Pomodoro {
         this.allDurations = allDurations;
         this.types = studyOrBreak;
         this.gui = gui;
+    }
+
+    //setters and getters
+    public void sBeforeMood(String mood){
+        this.moodBefore = mood;
+    }
+
+    public void sMoodAfter(String mood){
+        this.moodAfter = mood;
     }
 
     //pomo start
@@ -28,19 +40,19 @@ public class Pomodoro {
         timer.isPaused = false;
         timer.isEnded = false;
 
-        String type = types[index];
-        int duration = allDurations[index];
-
         if (index < allDurations.length) {
+            String type = types[index];
+            int duration = allDurations[index];
+
             if (type.equals("Study")) {                //saving it in sessionManager data
-                SessionManager sesh = new SessionManager();
+                sesh = new SessionManager();
                 sesh.setSessionLength(duration / 60);
                 sesh.setSubject("Pomodoro");
                 sesh.setStartDate();
                 sesh.setStartTime();
 
-                sesh.setMoodBefore("SKIP");
-                sesh.setMoodAfter("SKIP");
+                //sesh.setMoodBefore("SKIP");
+                //sesh.setMoodAfter("SKIP");
 
                 //timer starts after user selects mood
                 gui.cardLayout.show(gui.cardPanel, "bMood");

@@ -39,23 +39,6 @@ public class Timer {
         isEnded = false;
     }
 
-    //setters and getters
-    public int getSetTimerDuration() {
-        return setTimerDuration;
-    }
-
-    public String getTime(){
-        return time;
-    }
-
-    public void setTime(String time){
-        this.time = time;
-    }
-
-    public int getTimeElapsed(){
-        return timeElapsed;
-    }
-
     //pauses the timer
     public void pause(){
         if(!isPaused){
@@ -73,14 +56,22 @@ public class Timer {
     }
 
     public void endT(JLabel label){
-        manager.setEndDate();
-        manager.setEndTime();
+        if(manager != null){
+            manager.setEndDate();
+            manager.setEndTime();
+        }
         isEnded = true;
+        if(label != null){
+            label.setText("timer ended");
+        }
     }
-
 
     //starting timer countdown
     public void preTimer(JLabel label){
+        if(label == null){
+            return;
+        }
+
         javax.swing.Timer[] preTimer = new javax.swing.Timer[1]; //creates an array with 1 slot to hold my timer in
         preTimer[0] = new javax.swing.Timer(1000, null); //creates the timer instance that counts every second
 
@@ -99,6 +90,10 @@ public class Timer {
 
     //setting up a stopwatch
     public void startStopwatch(JLabel label) {
+        if(label == null){
+            return;
+        }
+
         timeElapsed = 0;
         isEnded = false;
         isPaused = false;
@@ -125,36 +120,12 @@ public class Timer {
         stopwatchTimer.start();
     }
 
-    //finding total amount of time in seconds, based off what the user inputted
-    public int formatTime(String formattedAmt){
-        //makes sure that user didn't enter all 0s
-        if(formattedAmt.matches("0+")){
-            System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
-            return 0;
-        }
-        //'30' = 30 seconds whilst '0150' = 1 minute 50 seconds
-        //splits the string input based on their positions to respective hours, minutes, and seconds
-        if(formattedAmt.length() <= 2){ //
-            return Integer.parseInt(formattedAmt);
-        }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){
-            int minutes = Integer.parseInt(formattedAmt.substring(0,2));
-            int seconds = Integer.parseInt(formattedAmt.substring(2,4));
-            int total = (minutes*60) + (seconds); //converts it all to seconds
-            return total;
-        }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
-            int hours = Integer.parseInt(formattedAmt.substring(0,2));
-            int minutes = Integer.parseInt(formattedAmt.substring(2,4));
-            int seconds = Integer.parseInt(formattedAmt.substring(4,6));;
-            int total = (hours*3600) + (minutes*60) + (seconds);
-            return total;
-        }else{
-            System.out.println("INVALID INPUT");
-               return 0 ;
-        }
-    }
-
     //setting up the countdown
     public void startCountdown(int timeRemaining, JLabel label){
+        if(label == null){
+            return;
+        }
+
         this.timeRemaining = timeRemaining;
         System.out.println(timeRemaining);
         timeElapsed = 0;
@@ -199,6 +170,105 @@ public class Timer {
         countdownTimer.start();
     }
 
+    //setting up a break
+    public void startBreak(int breakDuration, JLabel label) {
+        if (label == null) {
+            return;
+        }
+        //saves all the previous timer data
+        savedTimeRemaining = this.timeRemaining;
+        savedTimeElapsed = this.timeElapsed;
+        isPaused = true;
+        onBreak = true;
+
+        if (breakDuration > 0) {
+            breakTimeLeft = breakDuration;
+        } else {
+            breakTimeLeft = askBreakDuration();
+        }
+
+        //stops the current counter
+        countdownTimer.stop();
+        for (ActionListener acli : countdownTimer.getActionListeners()) {
+            countdownTimer.removeActionListener(acli);
+        }
+
+        breakTimer.stop();
+        breakTimer = new javax.swing.Timer(1000, e -> {
+            if (breakTimeLeft > 0) {
+                label.setText("Break: " + formatTime(breakTimeLeft));
+                breakTimeLeft = breakTimeLeft - 1;
+            } else {
+                label.setText("break over ! ");
+                breakTimer.stop();
+
+                BreakManager breakManager = new BreakManager;
+                breakManager.endBreak();
+                breakManager.saveBreak();
+
+                resumeStudy(label);
+            }
+        });
+        breakTimer.start();
+    }
+
+//        if(breakDuration == 0){
+//            String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
+//            if (input != null) {
+//                try {
+//                    if (input.length() <= 2) { //
+//                        breakTimeLeft = Integer.parseInt(input);
+//                    } else if ((input.length() > 2) && (input.length() <= 4)) {
+//                        int minutes = Integer.parseInt(input.substring(0, 2));
+//                        int seconds = Integer.parseInt(input.substring(2, 4));
+//                        breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
+//                    } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
+//                        JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
+//                        breakTimeLeft = 0;
+//                    }
+//                }catch(NumberFormatException e){
+//                    JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
+//                }
+//            }
+//
+//        }else{
+//            breakTimeLeft = breakDuration;
+//        }
+
+    //rn takes in an input using JOptionPane, but later on should
+    private int askBreakDuration(){
+
+
+    }
+
+    //finding total amount of time in seconds, based off what the user inputted
+    public int formatTime(String formattedAmt){
+        //makes sure that user didn't enter all 0s
+        if(formattedAmt.matches("0+")){
+            System.out.println("Invalid input - Stop slacking and start a proper countdown >:((((DDD");
+            return 0;
+        }
+        //'30' = 30 seconds whilst '0150' = 1 minute 50 seconds
+        //splits the string input based on their positions to respective hours, minutes, and seconds
+        if(formattedAmt.length() <= 2){ //
+            return Integer.parseInt(formattedAmt);
+        }else if((formattedAmt.length() > 2) && (formattedAmt.length() <= 4)){
+            int minutes = Integer.parseInt(formattedAmt.substring(0,2));
+            int seconds = Integer.parseInt(formattedAmt.substring(2,4));
+            int total = (minutes*60) + (seconds); //converts it all to seconds
+            return total;
+        }else if((formattedAmt.length() > 4) && (formattedAmt.length() <= 6)){ //input = HHMMSS
+            int hours = Integer.parseInt(formattedAmt.substring(0,2));
+            int minutes = Integer.parseInt(formattedAmt.substring(2,4));
+            int seconds = Integer.parseInt(formattedAmt.substring(4,6));;
+            int total = (hours*3600) + (minutes*60) + (seconds);
+            return total;
+        }else{
+            System.out.println("INVALID INPUT");
+               return 0 ;
+        }
+    }
+
     //method calculates how much time is left in countdown
     private int returnTimeLeft(){
         timeElapsed = timeElapsed + 1;
@@ -213,63 +283,6 @@ public class Timer {
 
         String timeDisplay = String.format("%02d:%02d:%02d", hoursLeft, minsLeft, secsLeft);
         return timeDisplay;
-    }
-
-    //setting up a break
-    public void startBreak(int breakDuration, JLabel label){
-        //saves all the previous timer data
-        savedTimeRemaining = this.timeRemaining;
-        savedTimeElapsed = this.timeElapsed;
-        isPaused = true;
-        onBreak = true;
-
-        if(breakDuration == 0){
-            String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
-            if (input != null) {
-                try {
-                    if (input.length() <= 2) { //
-                        breakTimeLeft = Integer.parseInt(input);
-                    } else if ((input.length() > 2) && (input.length() <= 4)) {
-                        int minutes = Integer.parseInt(input.substring(0, 2));
-                        int seconds = Integer.parseInt(input.substring(2, 4));
-                        breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
-                    } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
-                        JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
-                        breakTimeLeft = 0;
-                    }
-                }catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-        }else{
-            breakTimeLeft = breakDuration;
-        }
-
-        //stops the current counter
-        countdownTimer.stop();
-        for (ActionListener acli : countdownTimer.getActionListeners()) {
-            countdownTimer.removeActionListener(acli);
-        }
-
-        breakTimer = new javax.swing.Timer(1000, e -> {
-            if(breakTimeLeft > 0){
-                label.setText("Break: " + formatTime(breakTimeLeft));
-                breakTimeLeft = breakTimeLeft - 1;
-            }else{
-                label.setText("BREAK OVERR");
-                breakTimer.stop();
-
-                BreakManager breakManager = new BreakManager(savedTimeElapsed + breakTimeLeft);
-                breakManager.endBreak();
-
-                breakManager.saveBreak();
-
-                resumeStudy(label);
-
-            }
-        });
-        breakTimer.start();
     }
 
     //starts the normal countdown/stopwatch timer again after break

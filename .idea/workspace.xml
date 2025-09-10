@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +121,8 @@
       <workItem from="1756666743310" duration="20693000" />
       <workItem from="1756814698873" duration="4843000" />
       <workItem from="1757428824725" duration="8588000" />
-      <workItem from="1757449442590" duration="9949000" />
+      <workItem from="1757449442590" duration="10180000" />
+      <workItem from="1757544672004" duration="2645000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -382,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757466162768</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons">
+      <option name="closed" value="true" />
+      <created>1757469684454</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1757469684455</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,7 +424,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="tried setting a pre timer countdown but it doesnt work" />
     <MESSAGE value="PRE TIMER WORKS" />
     <MESSAGE value="created session manager" />
     <MESSAGE value="did more user stuff and other thingies" />
@@ -443,7 +448,8 @@
     <MESSAGE value="fasfasf" />
     <MESSAGE value="tried break storing thing" />
     <MESSAGE value="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
+    <MESSAGE value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
