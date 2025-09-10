@@ -183,9 +183,11 @@ public class Timer {
 
         if (breakDuration > 0) {
             breakTimeLeft = breakDuration;
-        } else {
-            breakTimeLeft = askBreakDuration();
         }
+//        } else {
+//            breakTimeLeft = askBreakDuration();
+//            //have to change this it doesnt work anymore
+//        }
 
         //stops the current counter
         countdownTimer.stop();
@@ -202,7 +204,7 @@ public class Timer {
                 label.setText("break over ! ");
                 breakTimer.stop();
 
-                BreakManager breakManager = new BreakManager;
+                BreakManager breakManager = new BreakManager();
                 breakManager.endBreak();
                 breakManager.saveBreak();
 
@@ -236,10 +238,10 @@ public class Timer {
 //        }
 
     //rn takes in an input using JOptionPane, but later on should
-    private int askBreakDuration(){
-
-
-    }
+//    private int askBreakDuration(){
+//
+//
+//    }
 
     //finding total amount of time in seconds, based off what the user inputted
     public int formatTime(String formattedAmt){

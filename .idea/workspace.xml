@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +121,7 @@
       <workItem from="1756814698873" duration="4843000" />
       <workItem from="1757428824725" duration="8588000" />
       <workItem from="1757449442590" duration="10180000" />
-      <workItem from="1757544672004" duration="2645000" />
+      <workItem from="1757544672004" duration="3290000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -388,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757469684455</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input">
+      <option name="closed" value="true" />
+      <created>1757547651162</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1757547651162</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +431,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="PRE TIMER WORKS" />
     <MESSAGE value="created session manager" />
     <MESSAGE value="did more user stuff and other thingies" />
     <MESSAGE value="added replaceReminder and delete all reminders methods in setReminder class" />
@@ -449,7 +455,8 @@
     <MESSAGE value="tried break storing thing" />
     <MESSAGE value="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
     <MESSAGE value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
+    <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input" />
+    <option name="LAST_COMMIT_MESSAGE" value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
