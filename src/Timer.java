@@ -266,6 +266,8 @@ public class Timer {
                 breakTimer.stop();
 
                 BreakManager breakManager = new BreakManager(savedTimeElapsed + breakTimeLeft);
+                breakManager.endBreak();
+
                 breakManager.saveBreak();
 
                 resumeStudy(label);

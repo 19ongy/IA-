@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fasfasf">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="tried break storing thing">
+      <change afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
@@ -34,12 +34,12 @@
     &quot;assignee&quot;: &quot;19ongy&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/19ongy/IA-",
-    "accountId": "5f7a864b-b4e8-410e-8125-afb6b0ef5571"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/19ongy/IA-&quot;,
+    &quot;accountId&quot;: &quot;5f7a864b-b4e8-410e-8125-afb6b0ef5571&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -122,7 +122,8 @@
       <workItem from="1756458009617" duration="2373000" />
       <workItem from="1756666743310" duration="20693000" />
       <workItem from="1756814698873" duration="4843000" />
-      <workItem from="1757428824725" duration="8419000" />
+      <workItem from="1757428824725" duration="8588000" />
+      <workItem from="1757449442590" duration="6880000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -364,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757429001749</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="tried break storing thing">
+      <option name="closed" value="true" />
+      <created>1757437985107</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1757437985108</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +409,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed my timer class &#10;added formatting and stuff" />
     <MESSAGE value="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS" />
     <MESSAGE value="tried setting a pre timer countdown but it doesnt work" />
     <MESSAGE value="PRE TIMER WORKS" />
@@ -425,7 +433,8 @@
     <MESSAGE value="replace reminders working" />
     <MESSAGE value="confused" />
     <MESSAGE value="fasfasf" />
-    <option name="LAST_COMMIT_MESSAGE" value="fasfasf" />
+    <MESSAGE value="tried break storing thing" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried break storing thing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

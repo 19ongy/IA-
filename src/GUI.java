@@ -5,8 +5,8 @@ import java.awt.*;
 import java.util.List;
 
 public class GUI extends JFrame{    //card layout thing
-    private CardLayout cardLayout;
-    private JPanel cardPanel;
+    public CardLayout cardLayout;
+    public JPanel cardPanel;
     private JPanel menuScreen;
     private JPanel sessionScreen;
     private JPanel bMoodScreen;
@@ -287,7 +287,7 @@ public class GUI extends JFrame{    //card layout thing
             //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
 
-        Pomodoro pomodoro = new Pomodoro(timer, timerDisplay, defaultDurations, defaultTypes);
+        Pomodoro pomodoro = new Pomodoro(this, timer, timerDisplay, defaultDurations, defaultTypes);
 
         JButton pomo = new JButton("POMODORO");
         pomo.setBounds(480, 300, 100, 40);
@@ -299,9 +299,15 @@ public class GUI extends JFrame{    //card layout thing
             if(!timer.isPaused && (timer.timeElapsed > 0) && !timer.isEnded){
                 int pomocheck = JOptionPane.showConfirmDialog(null, "There's already a timer running. Do you want to start pomo?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if(pomocheck != JOptionPane.YES_OPTION){
+                    pomodoro.index = 0;
                     return;
                 }
             }
+
+            cardLayout.show(cardPanel, "bMood");
+            //makes sure start time is set
+            sessionManager.setStartDate();
+            sessionManager.setStartTime();
             pomodoro.startPomo();
         });
 
