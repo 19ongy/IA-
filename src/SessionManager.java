@@ -37,13 +37,27 @@ public class SessionManager {
 
     //setter methods
     public String setMoodBefore(String mood){
-        this.moodBefore = MoodEntry.Mood.valueOf(mood);
+        try{
+            this.moodBefore = MoodEntry.Mood.valueOf(mood.toUpperCase());
+        }catch(Exception e){
+            this.moodBefore = MoodEntry.Mood.SKIP;
+        }
         return mood;
     }
 
     public String setMoodAfter(String mood){
-        this.moodAfter = MoodEntry.Mood.valueOf(mood);
+        try {
+            this.moodAfter = MoodEntry.Mood.valueOf(mood.toUpperCase());
+        } catch (Exception e){
+            this.moodAfter = MoodEntry.Mood.SKIP;
+        }
         return mood;
+    }
+
+    public boolean isComplete(){
+        return moodBefore!= null && moodAfter != null && subject != null && startLocalDate != null
+                && startLocalTime != null && endLocalDate != null
+                && endLocalTime != null;
     }
 
     //experiment - this one uses LocalData.now() with a capital letter
@@ -114,6 +128,10 @@ public class SessionManager {
     }
 
     public void saveSession() {
+        if (!isComplete()){
+            System.out.println("the session is not complete");
+            return;
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session

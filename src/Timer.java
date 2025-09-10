@@ -11,17 +11,16 @@ public class Timer {
 
     public int timeElapsed;
     public int timeRemaining;
-    private boolean ready;
-    private int preTimeRemaining;
-    public int setTimerDuration;
     public boolean isPaused;
     public boolean isEnded;
 
-    public int breakTimeLeft;
+    private int preTimeRemaining;
+    public int setTimerDuration;
 
     private int savedTimeRemaining;
     private int savedTimeElapsed;
-    private boolean isAStopwatch;
+
+    public int breakTimeLeft;
     private boolean onBreak = false;
 
     public String time;
@@ -34,12 +33,10 @@ public class Timer {
     public Timer(){
         this.timeElapsed = 0;
         this.timeRemaining = 0;
-        ready = false;
         preTimeRemaining = 3;
         setTimerDuration = 0;
         isPaused = false;
         isEnded = false;
-        time = "";
     }
 
     //setters and getters
@@ -74,7 +71,6 @@ public class Timer {
             System.out.println("\nTimer resumed");
         }
     }
-
 
     public void endT(JLabel label){
         manager.setEndDate();
@@ -111,7 +107,6 @@ public class Timer {
         for(ActionListener acli : stopwatchTimer.getActionListeners()){
             stopwatchTimer.removeActionListener(acli);
         }
-
 
         System.out.println("stopwatch hs begun");
         stopwatchTimer.addActionListener(e -> {

@@ -28,16 +28,11 @@ public class Pomodoro {
         timer.isPaused = false;
         timer.isEnded = false;
 
+        String type = types[index];
+        int duration = allDurations[index];
 
         if (index < allDurations.length) {
-            String type = types[index];
-            int duration = allDurations[index];
-
-            if (type.equals("Study")) {
-                //calling bMood card panel from gui class
-                gui.cardLayout.show(gui.cardPanel, "bMood");
-
-                //saving it in sessionManager data
+            if (type.equals("Study")) {                //saving it in sessionManager data
                 SessionManager sesh = new SessionManager();
                 sesh.setSessionLength(duration / 60);
                 sesh.setSubject("Pomodoro");
@@ -48,6 +43,7 @@ public class Pomodoro {
                 sesh.setMoodAfter("SKIP");
 
                 //timer starts after user selects mood
+                gui.cardLayout.show(gui.cardPanel, "bMood");
 
             } else { //if its not "Study" but "Break"
                 BreakManager breakManager = new BreakManager(duration);

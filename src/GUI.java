@@ -421,6 +421,7 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setToolTipText(moodName);
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
+
                 sessionManager.setMoodBefore(moodName.toUpperCase());
                 cardLayout.show(cardPanel, "Session");
             });
