@@ -181,21 +181,15 @@ public class Timer {
         isPaused = true;
         onBreak = true;
 
-        if (breakDuration > 0) {
-            breakTimeLeft = breakDuration;
-        }
-//        } else {
-//            breakTimeLeft = askBreakDuration();
-//            //have to change this it doesnt work anymore
-//        }
+        breakTimeLeft = breakDuration;
 
         //stops the current counter
         countdownTimer.stop();
         for (ActionListener acli : countdownTimer.getActionListeners()) {
             countdownTimer.removeActionListener(acli);
         }
-
         breakTimer.stop();
+
         breakTimer = new javax.swing.Timer(1000, e -> {
             if (breakTimeLeft > 0) {
                 label.setText("Break: " + formatTime(breakTimeLeft));
@@ -204,7 +198,7 @@ public class Timer {
                 label.setText("break over ! ");
                 breakTimer.stop();
 
-                BreakManager breakManager = new BreakManager();
+                BreakManager breakManager = new BreakManager(savedTimeElapsed + breakTimeLeft);
                 breakManager.endBreak();
                 breakManager.saveBreak();
 
@@ -213,35 +207,6 @@ public class Timer {
         });
         breakTimer.start();
     }
-
-//        if(breakDuration == 0){
-//            String input = JOptionPane.showInputDialog(null, "-How long break??? (HHMMSS, MMSS, SS)", "Break duration", JOptionPane.QUESTION_MESSAGE );
-//            if (input != null) {
-//                try {
-//                    if (input.length() <= 2) { //
-//                        breakTimeLeft = Integer.parseInt(input);
-//                    } else if ((input.length() > 2) && (input.length() <= 4)) {
-//                        int minutes = Integer.parseInt(input.substring(0, 2));
-//                        int seconds = Integer.parseInt(input.substring(2, 4));
-//                        breakTimeLeft = (minutes * 60) + (seconds); //converts it all to seconds
-//                    } else if ((input.length() > 4) && (input.length() <= 6)) { //input = HHMMSS
-//                        JOptionPane.showMessageDialog(null, "this break is too long sorry ", "too much break", JOptionPane.ERROR_MESSAGE);
-//                        breakTimeLeft = 0;
-//                    }
-//                }catch(NumberFormatException e){
-//                    JOptionPane.showMessageDialog(null, "enter an actual number", "invalid", JOptionPane.ERROR_MESSAGE);
-//                }
-//            }
-//
-//        }else{
-//            breakTimeLeft = breakDuration;
-//        }
-
-    //rn takes in an input using JOptionPane, but later on should
-//    private int askBreakDuration(){
-//
-//
-//    }
 
     //finding total amount of time in seconds, based off what the user inputted
     public int formatTime(String formattedAmt){

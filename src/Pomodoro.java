@@ -92,7 +92,7 @@ public class Pomodoro {
             javax.swing.Timer t = (javax.swing.Timer) e.getSource();
             if (!timer.isPaused && ((timer.timeRemaining - timer.timeElapsed) <= 0)) {
                 //gets mood after session
-                gui.cardLayout.show(gui.cardPanel, "pMood");
+                gui.cardLayout.show(gui.cardPanel, "Session");
                 startPomo();
 
                 t.stop();
