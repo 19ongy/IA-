@@ -128,10 +128,6 @@ public class SessionManager {
     }
 
     public void saveSession() {
-        if (!isComplete()){
-            System.out.println("the session is not complete");
-            return;
-        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session
@@ -161,6 +157,25 @@ public class SessionManager {
                     session.endLocalTime = LocalTime.parse(parts[7]);
                     sessions.add(session);
                 }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return sessions;
+    }
+
+    //maybe should have specific functions for finding specific info?
+    public static ArrayList<SessionManager> totalTime(){
+        int totalLength = 0;
+        ArrayList<SessionManager> sessions = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("session_data.txt"))){
+            String line;
+            while((line = br.readLine())!= null){
+                String[] parts = line.split(",");
+                //checks whether all the data is there
+                totalLength = totalLength + Integer.parseInt(parts[2]);
+                System.out.println("Total time studied: " + totalLength + " seconds");
+                System.out.println("Total time studied: " + totalLength/60 + " minutes");
             }
         }catch (IOException e){
             e.printStackTrace();

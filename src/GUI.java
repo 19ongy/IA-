@@ -17,7 +17,7 @@ public class GUI extends JFrame{    //card layout thing
     private JPanel dailyOverview;
     private JPanel calendarAndTrends;
 
-    private JLabel timerDisplay;
+    public JLabel timerDisplay;
     private String value;
     private int optionChoice;
 
@@ -31,7 +31,7 @@ public class GUI extends JFrame{    //card layout thing
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
     int[] defaultDurations = {5, 5, 1500, 300, 1500, 900};
     String[] defaultTypes = {"Study", "Break", "Study", "Break", "Study", "Break"};
-    private String currentMode = "normal"; //default mode
+    public boolean isPomodoro = false;
 
     //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
@@ -219,14 +219,14 @@ public class GUI extends JFrame{    //card layout thing
 
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
-        pomodoro = new Pomodoro(this, timer, timerDisplay, defaultDurations, defaultTypes);
-
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
         timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
         timerDisplay.setForeground(lightGreen);
         timerDisplay.setBackground(borderGreen);
         timerDisplay.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+
+        pomodoro = new Pomodoro(this, timer, timerDisplay, defaultDurations, defaultTypes);
 
         JButton stopwatchButton = new JButton("Stopwatch");
         stopwatchButton.setBounds(220, 30, 150, 30);
@@ -236,7 +236,7 @@ public class GUI extends JFrame{    //card layout thing
         stopwatchButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
-            currentMode = "normal";
+            isPomodoro = false;
             cardLayout.show(cardPanel, "bMood");
             sessionManager.setStartDate();
             sessionManager.setStartTime();
@@ -254,21 +254,6 @@ public class GUI extends JFrame{    //card layout thing
             System.out.println("break has started!");
             timer.startBreak(10, timerDisplay);
         });
-
-        /*
-        JButton session = new JButton("NEW");
-        session.setBounds(200, 300, 100, 40);
-        session.setFont(new Font("Arial", Font.BOLD, 17));
-        session.setBackground(darkGreen);
-        session.setForeground(lightGreen);
-        session.setFocusPainted(false);
-        session.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        session.addActionListener(e -> {
-            //changes the display on the gui
-
-        });
-
-         */
 
         JTextField timeInput = new JTextField(6);
         timeInput.setBounds(230, 300, 200, 40);
@@ -290,8 +275,6 @@ public class GUI extends JFrame{    //card layout thing
             //timer.setTime(String.valueOf(timer.setCountdownDuration(value)));
         });
 
-        Pomodoro pomodoro = new Pomodoro(this, timer, timerDisplay, defaultDurations, defaultTypes);
-
         JButton pomo = new JButton("POMODORO");
         pomo.setBounds(480, 300, 100, 40);
         pomo.setFont(new Font("Arial", Font.BOLD, 14));
@@ -299,9 +282,9 @@ public class GUI extends JFrame{    //card layout thing
         pomo.setForeground(lightGreen);
         pomo.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         pomo.addActionListener(e -> {
-            currentMode = "pomodoro";
+            isPomodoro = true;
+            cardLayout.show(cardPanel, "bMood");
             //sets the mode as pomodoro, to make it easier to differentiate later
-
             if(!timer.isPaused && (timer.timeElapsed > 0) && !timer.isEnded){
                 int pomocheck = JOptionPane.showConfirmDialog(null, "There's already a timer running. Do you want to start pomo?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if(pomocheck != JOptionPane.YES_OPTION){
@@ -309,12 +292,9 @@ public class GUI extends JFrame{    //card layout thing
                     return;
                 }
             }
-
-            cardLayout.show(cardPanel, "bMood");
             //makes sure start time is set
             sessionManager.setStartDate();
             sessionManager.setStartTime();
-            pomodoro.startPomo();
         });
 
 
@@ -327,7 +307,7 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         countdownButton.setFocusPainted(false);
         countdownButton.addActionListener(e -> {
-            currentMode = "normal";
+            isPomodoro = false;
             cardLayout.show(cardPanel, "bMood");
             sessionManager.setStartDate();
             sessionManager.setStartTime();
@@ -427,14 +407,15 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
             moodButton.setToolTipText(moodName);
             moodButton.addActionListener(e -> {
+                sessionManager.setMoodBefore(moodName.toUpperCase());
                 System.out.println("Mood selected = " + moodButton.getText());
 
-                if(currentMode.equals("pomodoro")){
-                    pomodoro.setBeforeMood(moodName.toUpperCase());
-                }else{
-                    sessionManager.setMoodBefore(moodName.toUpperCase());
-                    cardLayout.show(cardPanel, "Session");
+                if(isPomodoro){
+                    pomodoro.startPomo();
                 }
+
+                cardLayout.show(cardPanel, "Session");
+
             });
             bMoodScreen.add(moodButton);
         }
@@ -484,15 +465,10 @@ public class GUI extends JFrame{    //card layout thing
 
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
-
-                if(currentMode.equals("pomodoro")){
-                    pomodoro.setAfterMood(moodName.toUpperCase());
-                }else{
-                    sessionManager.setMoodAfter(moodName.toUpperCase());
-                    sessionManager.setEndDate();
-                    sessionManager.setEndTime();
-                    sessionManager.saveSession();
-                }
+                sessionManager.setMoodAfter(moodName.toUpperCase());
+                sessionManager.setEndDate();
+                sessionManager.setEndTime();
+                sessionManager.saveSession();
 
                 cardLayout.show(cardPanel, "Session");
             });
