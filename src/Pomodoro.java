@@ -40,42 +40,47 @@ public class Pomodoro {
         timer.isPaused = false;
         timer.isEnded = false;
 
-        if (index < allDurations.length) {
-            String type = types[index];
-            int duration = allDurations[index];
+        if (index >= allDurations.length) {
+            //the pomodoro is finished
+            gui.cardLayout.show(gui.cardPanel, "Session");
+            index = 0;
+            return;
+        }
 
-            if (type.equals("Study")) {                //saving it in sessionManager data
-                sesh = new SessionManager();
-                sesh.setSessionLength(duration / 60);
-                sesh.setSubject("Pomodoro");
-                sesh.setStartDate();
-                sesh.setStartTime();
+        String type = types[index];
+        int duration = allDurations[index];
 
-                //sesh.setMoodBefore("SKIP");
-                //sesh.setMoodAfter("SKIP");
+        if (type.equals("Study")) {                //saving it in sessionManager data
+            sesh = new SessionManager();
+            sesh.setSessionLength(duration / 60);
+            sesh.setSubject("Pomodoro");
+            sesh.setStartDate();
+            sesh.setStartTime();
 
-                //timer starts after user selects mood
-                gui.cardLayout.show(gui.cardPanel, "bMood");
+            //sesh.setMoodBefore("SKIP");
+            //sesh.setMoodAfter("SKIP");
 
-            } else { //if its not "Study" but "Break"
-                BreakManager breakManager = new BreakManager(duration);
-                timer.startBreak(duration, displayLabel);
+            //timer starts after user selects mood
+            gui.cardLayout.show(gui.cardPanel, "bMood");
 
-                new javax.swing.Timer(1000, e -> {
-                    javax.swing.Timer t = (javax.swing.Timer) e.getSource();
+        } else { //if its not "Study" but "Break"
+            BreakManager breakManager = new BreakManager(duration);
+            timer.startBreak(duration, displayLabel);
 
-                    if (!timer.isPaused && (timer.breakTimeLeft <= 0)) {
-                        breakManager.endBreak();
-                        breakManager.saveBreak();
+            new javax.swing.Timer(1000, e -> {
+                javax.swing.Timer t = (javax.swing.Timer) e.getSource();
 
-                        index = index + 1;
-                        startPomo();
+                if (!timer.isPaused && (timer.breakTimeLeft <= 0)) {
+                    breakManager.endBreak();
+                    breakManager.saveBreak();
 
-                        t.stop();
-                        //makes sure there aren't multiple instances of t
-                    }
-                }).start();
-            }
+                    index = index + 1;
+                    startPomo();
+
+                    t.stop();
+                    //makes sure there aren't multiple instances of t
+                }
+            }).start();
         }
     }
 
