@@ -88,7 +88,7 @@ public class TotalStatsPanel {
                 {"Total Break Time", totalBreakSeconds / 60 + " minutes"},
                 {"Longest Session", longestSession / 60 + " minutes"},
                 {"Average Session Length", avgSession / 60 + " minutes"},
-                {"Most Active Period", getMostActivePeriod(timePeriodMap)},
+                {"Most Active Period", mostActivePeriod},
                 {"Most Felt Mood Before", mostBefore},
                 {"Most Felt Mood After", mostAfter},
                 {"Most Studied Subject", mostStudiedSubject}
@@ -96,21 +96,21 @@ public class TotalStatsPanel {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-
         String[] columnNames = {"Total..", "Value"};
         JTable table = new JTable(data, columnNames);
+
+        //prettifying the table
+        table.setBackground(new Color(46,46,46));
+        table.setForeground(new Color(200,200,200));
+        table.setRowHeight(30);
+        table.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 13));
+
+        //TODO center the table text if time
+
         JScrollPane tableScroll = new JScrollPane(table);
         tabbedPane.addTab("Summary table", tableScroll);
 
-        //mood stats
-        JPanel moodPanel = new JPanel();
-        moodPanel.setLayout(new BoxLayout(moodPanel, BoxLayout.Y_AXIS));
-        moodPanel.add(new JLabel("Mood Before Counts: " + moodBeforeMap.toString()));
-        moodPanel.add(new JLabel("Mood After Counts: " + moodAfterMap.toString()));
-        JScrollPane moodScroll = new JScrollPane(moodPanel);
-        tabbedPane.addTab("Mood Stats", moodScroll);
-
-
+        /*
         //time stats
         JPanel timePanel = new JPanel();
         timePanel.setLayout(new BoxLayout(timePanel, BoxLayout.Y_AXIS));
@@ -119,6 +119,8 @@ public class TotalStatsPanel {
         }
         JScrollPane timeScroll = new JScrollPane(timePanel);
         tabbedPane.addTab("Time Stats", timeScroll);
+
+         */
 
         //add tabbedPane to the main panel
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
