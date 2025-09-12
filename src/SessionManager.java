@@ -118,7 +118,6 @@ public class SessionManager {
                 formattedStartTime + "," + endLocalDate.toString() + "," +
                 formattedEndTime
         );
-
     }
 
     public void saveSession() {
@@ -159,22 +158,14 @@ public class SessionManager {
         return sessions;
     }
 
-    //maybe should have specific functions for finding specific info?
-    public static ArrayList<SessionManager> totalTime(){
-        int totalLength = 0;
-        ArrayList<SessionManager> sessions = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("session_data.txt"))){
-            String line;
-            while((line = br.readLine())!= null){
-                String[] parts = line.split(",");
-                //checks whether all the data is there
-                totalLength = totalLength + Integer.parseInt(parts[2]);
-                System.out.println("Total time studied: " + totalLength + " seconds");
-                System.out.println("Total time studied: " + totalLength/60 + " minutes");
+    public static ArrayList<SessionManager> getSessionsByDate(ArrayList<SessionManager> allSessions, LocalDate date){
+        ArrayList<SessionManager> result = new ArrayList<>();
+        for(SessionManager session : allSessions){
+            if(session.startLocalDate.equals(date)){
+                result.add(session);
             }
-        }catch (IOException e){
-            e.printStackTrace();
         }
-        return sessions;
+        return result;
     }
+
 }

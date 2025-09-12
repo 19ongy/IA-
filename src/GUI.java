@@ -1,6 +1,8 @@
 //GUI CLASS
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends JFrame{    //card layout thing
@@ -42,6 +44,8 @@ public class GUI extends JFrame{    //card layout thing
     ReminderManager rs = new ReminderManager();
     //ReminderGUI rg = new ReminderGUI();
     Pomodoro pomodoro;
+    ArrayList<SessionManager> allSessions = SessionManager.readSessions();
+    ArrayList<Break> allBreaks = BreakManager.readBreaks();
 
     //constructor
     public GUI() {
@@ -128,8 +132,28 @@ public class GUI extends JFrame{    //card layout thing
         dailyOverview.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         dailyOverview.setFocusPainted(false);
         dailyOverview.addActionListener(e -> {
-            cardLayout.show(cardPanel, "statScreen");
+            LocalDate dateToShow = LocalDate.now();
+
+
+            ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, dateToShow);
+            ArrayList<Break> dayBreaks = Break.getBreaksByDate(allBreaks, dateToShow);
+
+            //filters sessions and breaks only for the day dateToShow
+            DailyOverviewPanel dayPanel = new DailyOverviewPanel(dateToShow, daySessions, dayBreaks);
+
+            //making it scrollable
+            JScrollPane scroll = new JScrollPane(dayPanel);
+            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scroll.getVerticalScrollBar().setUnitIncrement(20);
+
+            cardPanel.add(scroll, "DailyOverview");
+            cardLayout.show(cardPanel, "DailyOverview");
             System.out.println("no2");
+
+            //repaints and refreshes the GUI
+            cardPanel.revalidate();
+            cardPanel.repaint();
         });
 
         JButton calNTrends = new JButton("Calendar");
@@ -496,6 +520,8 @@ public class GUI extends JFrame{    //card layout thing
         cardPanel.add(graphMenu, "graphMenu");
     }
 
+
+    //graphing methods
     public void setTotStatScreen(){
         TotalStatsPanel totals = new TotalStatsPanel();
         statScreen = new JPanel(new BorderLayout());
@@ -538,9 +564,15 @@ public class GUI extends JFrame{    //card layout thing
     }
 
     public void setDailyOverview(){
-        dailyOverview = new JPanel(null);
-        graphButtons(dailyOverview);
-        returnBut(dailyOverview, "dailyOverview");
+        ArrayList<SessionManager> sessions = SessionManager.getSessionsByDate(SessionManager.readSessions(), LocalDate.now());
+        ArrayList<Break> breaks = Break.getBreaksByDate(Break.readBreaks(), LocalDate.now());
+
+        JScrollPane scrollPane = DailyOverviewPanel.createSingleDayScroll(LocalDate.now(), sessions, breaks);
+
+        dailyOverview = new JPanel(new BorderLayout());
+        dailyOverview.add(scrollPane, BorderLayout.CENTER);
+
+        returnBut(dailyOverview, "graphMenu");
         defaultLook(dailyOverview, "dailyOverview");
         cardPanel.add(dailyOverview, "dailyOverview");
     }
