@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixed the own broken i broke">
-      <change afterPath="$PROJECT_DIR$/src/StatsPanel.java" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="tried to fix some session manager things didnt work, starting graphs now">
+      <change afterPath="$PROJECT_DIR$/src/Break.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StatsPanel.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,8 @@
       <workItem from="1757544672004" duration="4842000" />
       <workItem from="1757582466781" duration="304000" />
       <workItem from="1757594439116" duration="848000" />
-      <workItem from="1757623505170" duration="16092000" />
+      <workItem from="1757623505170" duration="18591000" />
+      <workItem from="1757668931159" duration="3002000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -435,7 +436,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757632230347</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="tried to fix some session manager things didnt work, starting graphs now">
+      <option name="closed" value="true" />
+      <created>1757644100937</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1757644100937</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -471,7 +480,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed the menu problem, made some more methods to check whether array list has anything, fixed the get time thing, delete reminder, replace reminder &#10;is too hot to fix delete all reminders &#10;trying to make a verification method&#10;not sure to split it up between methods or just to keep it in delete all reminders" />
     <MESSAGE value="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted" />
     <MESSAGE value="add tool tip text fromwinter and &quot;!anguishied!&quot;" />
     <MESSAGE value="fixed the stopwatch issue, changed a lot of the timer class things in setTimer" />
@@ -496,7 +504,8 @@
     <MESSAGE value="fixed the saveBreak() issue, pomos aren't running after clicking on mood" />
     <MESSAGE value="why broken" />
     <MESSAGE value="fixed the own broken i broke" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the own broken i broke" />
+    <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried to fix some session manager things didnt work, starting graphs now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

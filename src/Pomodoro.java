@@ -31,6 +31,8 @@ public class Pomodoro {
         timer.isPaused = false;
         timer.isEnded = false;
 
+        gui.cardLayout.show(gui.cardPanel, "bMood");
+
         if (index >= allDurations.length) {
             //makes sure that the pomodoro loop is reset after all sessions are done
             index = 0;
@@ -48,7 +50,6 @@ public class Pomodoro {
             sesh.setStartTime();
 
             System.out.println("Index: " + index + ", Type: " + types[index] + ", Duration: " + allDurations[index]);
-
 
             //timer starts after user selects mood
             gui.cardLayout.show(gui.cardPanel, "Session");

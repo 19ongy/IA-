@@ -20,12 +20,12 @@ public class SessionManager {
     private MoodEntry.Mood moodAfter;
     //private String moodBefore;
     //private String moodAfter;
-    private LocalDate startLocalDate;
-    private LocalDate endLocalDate;
-    private LocalTime startLocalTime;
-    private LocalTime endLocalTime;
+    public LocalDate startLocalDate;
+    public LocalDate endLocalDate;
+    public LocalTime startLocalTime;
+    public LocalTime endLocalTime;
     private String subject;
-    private int sessionLength;
+    public int sessionLength;
 
     //constructor
     public SessionManager(){
