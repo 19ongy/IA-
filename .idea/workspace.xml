@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="trying to do the tables">
-      <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="ugly graph done for total stats (overview of studying times, not the subject specific ones">
+      <change afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +124,7 @@
       <workItem from="1757582466781" duration="304000" />
       <workItem from="1757594439116" duration="848000" />
       <workItem from="1757623505170" duration="18591000" />
-      <workItem from="1757668931159" duration="10550000" />
+      <workItem from="1757668931159" duration="11209000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -453,7 +454,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757709208047</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="ugly graph done for total stats (overview of studying times, not the subject specific ones">
+      <option name="closed" value="true" />
+      <created>1757709689061</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1757709689061</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,7 +498,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed the stopwatch issue, changed a lot of the timer class things in setTimer" />
     <MESSAGE value="data can be written to text file" />
     <MESSAGE value="got the thing to send water reminders every half an hour" />
     <MESSAGE value="got the scroll panel in reminders working" />
@@ -514,7 +522,8 @@
     <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
     <MESSAGE value="fixing up totalStatsPanel, getting all graph data sorted" />
     <MESSAGE value="trying to do the tables" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying to do the tables" />
+    <MESSAGE value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
+    <option name="LAST_COMMIT_MESSAGE" value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
