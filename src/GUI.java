@@ -128,7 +128,7 @@ public class GUI extends JFrame{    //card layout thing
         dailyOverview.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         dailyOverview.setFocusPainted(false);
         dailyOverview.addActionListener(e -> {
-            cardLayout.show(cardPanel, "dailyOverview");
+            cardLayout.show(cardPanel, "statScreen");
             System.out.println("no2");
         });
 
@@ -497,12 +497,44 @@ public class GUI extends JFrame{    //card layout thing
     }
 
     public void setTotStatScreen(){
-        statScreen = new JPanel(null);
-        graphButtons(statScreen);
-        returnBut(statScreen, "statScreen");
-        defaultLook(statScreen, "statScreen");
-        cardPanel.add(statScreen, "statScreen");
+        TotalStatsPanel totals = new TotalStatsPanel();
+        statScreen = new JPanel(new BorderLayout());
 
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(darkGreen);
+        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
+
+        JButton totalStatsBut = new JButton("Total Stats");
+        totalStatsBut.setBounds(50, 30, 150, 30);
+        totalStatsBut.setBackground(darkGreen);
+        totalStatsBut.setForeground(lightGreen);
+        totalStatsBut.setFont(new Font("Arial", Font.BOLD, 14));
+        totalStatsBut.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        totalStatsBut.setFocusPainted(false);
+        totalStatsBut.addActionListener(e -> {
+            cardLayout.show(cardPanel, "statScreen");
+
+        });
+        topPanel.add(totalStatsBut);
+
+        statScreen.add(topPanel, BorderLayout.NORTH);
+
+        //adds the total stats table
+        statScreen.add(totals.getPanel(), BorderLayout.CENTER);
+
+        JButton returnButton = new JButton("⏎");
+        returnButton.setBackground(darkGreen);
+        returnButton.setForeground(lightGreen);
+        returnButton.setFocusPainted(false);
+        returnButton.addActionListener(e ->
+                cardLayout.show(cardPanel, "graphMenu"));
+
+        JPanel returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        returnPanel.setBackground(darkGreen);
+        returnPanel.add(returnButton);
+        statScreen.add(returnPanel, BorderLayout.SOUTH);
+
+        cardPanel.add(statScreen, "statScreen");
     }
 
     public void setDailyOverview(){
