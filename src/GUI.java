@@ -149,7 +149,7 @@ public class GUI extends JFrame{    //card layout thing
 
             cardPanel.add(scroll, "DailyOverview");
             cardLayout.show(cardPanel, "DailyOverview");
-            System.out.println("no2");
+            //System.out.println("no2");
 
             //repaints and refreshes the GUI
             cardPanel.revalidate();
@@ -163,9 +163,12 @@ public class GUI extends JFrame{    //card layout thing
         calNTrends.setFont(new Font("Arial", Font.BOLD, 14));
         calNTrends.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         calNTrends.setFocusPainted(false);
+
+        //creating the calendarpanel
+        CalendarPanel calendarPanel = new CalendarPanel(allSessions, this);
+        cardPanel.add(calendarPanel, "calendar");
         calNTrends.addActionListener(e -> {
-            cardLayout.show(cardPanel, "CalendarAndTrends");
-            System.out.println("No3");
+            cardLayout.show(cardPanel, "calendar");
         });
 
         panel.add(dailyOverview);

@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="old daily overview">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons">
+      <change afterPath="$PROJECT_DIR$/src/CalendarPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Break.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Break.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +125,7 @@
       <workItem from="1757582466781" duration="304000" />
       <workItem from="1757594439116" duration="848000" />
       <workItem from="1757623505170" duration="18591000" />
-      <workItem from="1757668931159" duration="15749000" />
+      <workItem from="1757668931159" duration="17830000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -476,7 +471,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757710289364</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons">
+      <option name="closed" value="true" />
+      <created>1757715069300</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1757715069300</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +515,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="got the thing to send water reminders every half an hour" />
     <MESSAGE value="got the scroll panel in reminders working" />
     <MESSAGE value="lowkey forgot what i added" />
     <MESSAGE value="added helper methods in GUI class to not have repetition" />
@@ -537,7 +539,8 @@
     <MESSAGE value="trying to do the tables" />
     <MESSAGE value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
     <MESSAGE value="old daily overview" />
-    <option name="LAST_COMMIT_MESSAGE" value="old daily overview" />
+    <MESSAGE value="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
