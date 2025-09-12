@@ -32,7 +32,6 @@ public class SessionManager {
         this.moodBefore = null;
         this.moodAfter = null;
         this.subject = null;
-        this.sessionLength = 0;
     }
 
     //setter methods
@@ -101,10 +100,6 @@ public class SessionManager {
         return this.subject;
     }
 
-    public int getLength(){
-        return sessionLength;
-    }
-
     public MoodEntry.Mood getMoodBefore(){
         return moodBefore;
     }
@@ -113,12 +108,11 @@ public class SessionManager {
         return moodAfter;
     }
 
-
-
     public String toFileString() {
         String formattedStartTime = String.format("%02d:%02d", startLocalTime.getHour(), startLocalTime.getMinute());
         String formattedEndTime = String.format("%02d:%02d", endLocalTime.getHour(), endLocalTime.getMinute());
 
+        System.out.println("lol" + sessionLength);
         return(moodBefore.toString() + "," + moodAfter.toString() + "," +
                 sessionLength + "," + subject + "," + startLocalDate.toString() + "," +
                 formattedStartTime + "," + endLocalDate.toString() + "," +
@@ -128,6 +122,7 @@ public class SessionManager {
     }
 
     public void saveSession() {
+        System.out.println("Saving session with length: " + sessionLength);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session

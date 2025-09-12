@@ -470,6 +470,11 @@ public class GUI extends JFrame{    //card layout thing
                 sessionManager.setEndTime();
                 sessionManager.saveSession();
 
+                if(isPomodoro){
+                    pomodoro.index = pomodoro.index +1;
+                    pomodoro.startPomo();
+                }
+
                 cardLayout.show(cardPanel, "Session");
             });
             pMoodScreen.add(moodButton);

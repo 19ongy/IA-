@@ -33,7 +33,6 @@ public class Pomodoro {
 
         if (index >= allDurations.length) {
             //makes sure that the pomodoro loop is reset after all sessions are done
-            System.out.println("this is working");
             index = 0;
             return;
         }
@@ -43,13 +42,13 @@ public class Pomodoro {
 
         if (type.equals("Study")) {                //saving it in sessionManager data
             sesh = new SessionManager();
-            sesh.setSessionLength(duration / 60);
+            sesh.setSessionLength(duration);
             sesh.setSubject("Pomodoro");
             sesh.setStartDate();
             sesh.setStartTime();
 
-            //sesh.setMoodBefore("SKIP");
-            //sesh.setMoodAfter("SKIP");
+            System.out.println("Index: " + index + ", Type: " + types[index] + ", Duration: " + allDurations[index]);
+
 
             //timer starts after user selects mood
             gui.cardLayout.show(gui.cardPanel, "Session");
@@ -59,13 +58,10 @@ public class Pomodoro {
             timer.startCountdown(duration, timerLabel);
 
             new javax.swing.Timer(1000, e -> {
-                javax.swing.Timer t = (javax.swing.Timer) e.getSource();
-                if (!timer.isPaused && ((timer.timeRemaining - timer.timeElapsed) <= 0)) {
-
-                    index = index + 1;
+                if(timer.timeRemaining - timer.timeElapsed <= 0){
+                    ((javax.swing.Timer) e.getSource()).stop();
                     //gets mood after session
                     gui.cardLayout.show(gui.cardPanel, "pMood");
-                    t.stop();
                 }
             }).start();
         } else { //if its not "Study" but "Break"
@@ -74,17 +70,13 @@ public class Pomodoro {
             timer.startBreak(duration, timerLabel);
 
             new javax.swing.Timer(1000, e -> {
-                javax.swing.Timer t = (javax.swing.Timer) e.getSource();
-
-                if (!timer.isPaused && (timer.breakTimeLeft <= 0)) {
+                if(timer.breakTimeLeft <= 0){
+                    ((javax.swing.Timer) e.getSource()).stop();
                     breakManager.endBreak();
                     breakManager.saveBreak();
 
                     index = index + 1;
                     startPomo();
-
-                    t.stop();
-                    //makes sure there aren't multiple instances of t
                 }
             }).start();
         }

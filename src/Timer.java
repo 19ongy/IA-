@@ -160,10 +160,11 @@ public class Timer {
                     timeElapsed = timeElapsed + 1;
                     //increments by 1 second
                 } else {
-                    label.setText("Good job!! Timer finished!");
+                    countdownTimer.stop();
                     manager.setEndDate();
                     manager.setEndTime();
-                    countdownTimer.stop();
+                    label.setText("Good job!! Timer finished!");
+
                 }
             }
         });
