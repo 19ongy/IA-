@@ -32,6 +32,7 @@ public class CalendarPanel extends JPanel{
         //creates the header with the month in it
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(27,77,62));
+
         JButton prevMonth = new JButton("<");
         JButton nextMonth = new JButton(">");
         JLabel monthLabel = new JLabel(currentMonth.getMonth().toString() + " " + currentMonth.getYear(), SwingConstants.CENTER);
@@ -39,7 +40,22 @@ public class CalendarPanel extends JPanel{
         monthLabel.setForeground(Color.WHITE);
         topPanel.add(prevMonth, BorderLayout.WEST);
         topPanel.add(monthLabel, BorderLayout.CENTER);
-        topPanel.add(nextMonth, BorderLayout.EAST);
+
+        JPanel rightButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
+        rightButtons.setBackground(new Color(27,77,62));
+        rightButtons.add(nextMonth);
+
+        JButton returnButton = new JButton("Return");
+        returnButton.setFocusPainted(false);
+        returnButton.setBackground(new Color(27, 77, 62));
+        returnButton.setForeground(Color.WHITE);
+        returnButton.addActionListener(e-> {
+            gui.cardLayout.show(gui.cardPanel, "graphMenu");
+        });
+
+        rightButtons.add(returnButton);
+
+        topPanel.add(rightButtons, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
 
         //calendar grid
@@ -60,15 +76,6 @@ public class CalendarPanel extends JPanel{
             monthLabel.setText(currentMonth.getMonth().toString() + " " + currentMonth.getYear());
             populateCalendar();
         });
-
-        JButton returnButton = new JButton("Return");
-        returnButton.setFocusPainted(false);
-        returnButton.setBackground(new Color(27,77,62));
-        returnButton.setForeground(Color.WHITE);
-        returnButton.addActionListener(e -> {
-            gui.setGraphMenu();
-        });
-        add(returnButton, BorderLayout.SOUTH);
     }
 
     //filling up the calendar with the average moods
