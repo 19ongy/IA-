@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GUI extends JFrame{    //card layout thing
@@ -28,6 +29,7 @@ public class GUI extends JFrame{    //card layout thing
     private static final Color lightGreen = new Color(200, 200, 200);
     private static final Color borderGreen = new Color(15, 50, 40);
     private static final Color backgroundGrey = new Color(46, 46, 46);
+    public static HashMap<String, Color> subjectColors = new HashMap<>();
 
     //pomodoro stuff
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
@@ -283,11 +285,104 @@ public class GUI extends JFrame{    //card layout thing
         });
 
         JTextField timeInput = new JTextField(6);
-        timeInput.setBounds(230, 300, 200, 40);
+        timeInput.setBounds(280, 300, 150, 40);
         timeInput.setFont(new Font("Arial", Font.BOLD, 17));
         timeInput.setBackground(lightGreen);
         timeInput.setForeground(borderGreen);
         timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+
+        JButton subjectButton = new JButton("S");
+        subjectButton.setToolTipText("Set subject and colour");
+        subjectButton.setBounds(230, 300, 40, 40);
+        subjectButton.setFont(new Font("Arial", Font.BOLD, 14));
+        subjectButton.setBackground(Color.GRAY);
+        subjectButton.setForeground(lightGreen);
+        subjectButton.setFocusPainted(false);
+        subjectButton.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+        subjectButton.addActionListener(e -> {
+            JDialog dialog = new JDialog((Frame) null, "Choose Subject", true);
+            dialog.setLayout(null);
+            dialog.setSize(400, 300);
+            dialog.setLocationRelativeTo(null);
+            dialog.getContentPane().setBackground(new Color(46, 46, 46));
+
+            JLabel label = new JLabel("Enter subject: ");
+            label.setBounds(20, 20, 100, 30);
+            label.setForeground(Color.WHITE);
+            JTextField subjectField = new JTextField();
+            subjectField.setBounds(130, 20, 200, 30);
+
+            Color[] presetColours = {
+                    Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE,
+                    Color.MAGENTA, Color.CYAN, Color.PINK, Color.YELLOW,
+                    new Color(128, 0, 128), new Color(0, 128, 128),
+                    new Color(255, 165, 0), new Color(75, 0, 130)
+            };
+
+            JButton[] colourButtons = new JButton[presetColours.length];
+            Color[] selectedColour = {Color.GRAY}; //the default colour
+
+            for(int i = 0; i< presetColours.length; i++){
+                colourButtons[i] = new JButton();
+                colourButtons[i].setBackground(presetColours[i]);
+                colourButtons[i].setBounds(20 + (i % 6) * 60, 70 + (i / 6) * 50, 40, 40);
+                colourButtons[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                int finalI = i;
+
+                colourButtons[i].addActionListener(k-> {
+                    selectedColour[0] = presetColours[finalI];
+                    for (JButton b : colourButtons) {
+                        b.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    }
+                    colourButtons[finalI].setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+
+                    //checks whether the colour is already mapped to a subject
+                    //makes sure there's no overlaps where there are multiple subjects assigned to one colour
+                    for(String subj : subjectColors.keySet()){
+                        if(subjectColors.get(subj).equals(selectedColour[0])){
+                            subjectField.setText(subj);
+                            break;
+                        }
+                    }
+                });
+
+
+                dialog.add(colourButtons[i]);
+            }
+
+            JButton confirm = new JButton("✓");
+            confirm.setBounds(150, 200, 100, 40);
+            confirm.setFont(new Font("Arial", Font.BOLD, 14));
+            confirm.setBackground(selectedColour[0]);
+            confirm.setForeground(lightGreen);
+            confirm.addActionListener(j-> {
+                String subjectName =  subjectField.getText().trim();
+                if(!subjectName.isEmpty()){
+                    sessionManager.setSubject(subjectName);
+                    subjectColors.put(subjectName, selectedColour[0]);
+                    subjectButton.setBackground(selectedColour[0]);
+                    subjectButton.setText(subjectName);
+
+
+                }
+                dialog.dispose();
+                //closes the popup
+            });
+
+            subjectField.addActionListener(z -> {
+                confirm.doClick();
+            });
+
+            dialog.add(label);
+            dialog.add(subjectField);
+            dialog.add(confirm);
+            dialog.setVisible(true);
+
+
+
+
+        });
+
 
         //confirmation check for inputting text
         JButton tick = new JButton("✓");
@@ -389,6 +484,7 @@ public class GUI extends JFrame{    //card layout thing
         //sessionScreen.add(session);
         sessionScreen.add(timeInput);
         sessionScreen.add(pomo);
+        sessionScreen.add(subjectButton);
         defaultLook(sessionScreen, "Session");
 
         cardPanel.add(sessionScreen, "Session");
