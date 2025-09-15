@@ -11,6 +11,9 @@ public class BreakManager {
     private LocalTime endTime;
     private int breakDuration;
 
+    //formatter for saving and reading the times
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     //la constructor
     public BreakManager(int duration) {
         this.startDate = LocalDate.now();
@@ -27,8 +30,9 @@ public class BreakManager {
 
     //converts it to the file
     public String toFileString(){
-        String startTimeStr = startTime.getHour() + ":" + startTime.getMinute();
-        String endTimeStr = endTime.getHour() + ":" + endTime.getMinute();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String startTimeStr = startTime.format(formatter);
+        String endTimeStr = endTime.format(formatter);
         return breakDuration + "," + startDate + "," + startTimeStr + "," + endDate + "," + endTimeStr;
     }
 
@@ -53,10 +57,10 @@ public class BreakManager {
                 if(parts.length == 5){
                     int breakLength = Integer.parseInt(parts[0]);
                     LocalDate startDate = LocalDate.parse(parts[1]);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-                    LocalTime startTime = LocalTime.parse(parts[2], formatter);
+                    LocalTime startTime = LocalTime.parse(parts[2], TIME_FORMATTER);
                     LocalDate endDate = LocalDate.parse(parts[3]);
-                    LocalTime endTime = LocalTime.parse(parts[4], formatter);
+                    LocalTime endTime = LocalTime.parse(parts[4], TIME_FORMATTER);
+
                     result.add(new Break(breakLength, startDate, startTime, endDate, endTime));
                 }
             }

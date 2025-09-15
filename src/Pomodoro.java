@@ -22,65 +22,62 @@ public class Pomodoro {
         this.gui = gui;
     }
 
-    //pomo start
-    public void startPomo() {
-        //makes sure there aren't multiple timers
-        timer.stopwatchTimer.stop();
-        timer.countdownTimer.stop();
-        timer.breakTimer.stop();
-        timer.isPaused = false;
-        timer.isEnded = false;
-
-        gui.cardLayout.show(gui.cardPanel, "bMood");
-
-        if (index >= allDurations.length) {
-            //makes sure that the pomodoro loop is reset after all sessions are done
+    public void prepareStudySession(){
+        if(index >= allDurations.length) {
             index = 0;
             return;
         }
-
         String type = types[index];
-        int duration = allDurations[index];
-
-        if (type.equals("Study")) {                //saving it in sessionManager data
+        if (type.equals("Study")) {
             sesh = new SessionManager();
-            sesh.setSessionLength(duration);
+            sesh.setSessionLength(allDurations[index]);
             sesh.setSubject("Pomodoro");
             sesh.setStartDate();
             sesh.setStartTime();
-
-            System.out.println("Index: " + index + ", Type: " + types[index] + ", Duration: " + allDurations[index]);
-
-            //timer starts after user selects mood
-            gui.cardLayout.show(gui.cardPanel, "Session");
-            gui.cardPanel.revalidate();
-            gui.cardPanel.repaint();
-
-            timer.startCountdown(duration, timerLabel);
-
-            new javax.swing.Timer(1000, e -> {
-                if(timer.timeRemaining - timer.timeElapsed <= 0){
-                    ((javax.swing.Timer) e.getSource()).stop();
-                    //gets mood after session
-                    gui.cardLayout.show(gui.cardPanel, "pMood");
-                }
-            }).start();
-        } else { //if its not "Study" but "Break"
-            BreakManager breakManager = new BreakManager(duration);
-
-            timer.startBreak(duration, timerLabel);
-
-            new javax.swing.Timer(1000, e -> {
-                if(timer.breakTimeLeft <= 0){
-                    ((javax.swing.Timer) e.getSource()).stop();
-                    breakManager.endBreak();
-                    breakManager.saveBreak();
-
-                    index = index + 1;
-                    startPomo();
-                }
-            }).start();
+            gui.cardLayout.show(gui.cardPanel, "bMood");
+        }else{
+            startBreakSession();
         }
+    }
+
+    public void startStudySession(){
+        int duration = allDurations[index];
+        gui.cardLayout.show(gui.cardPanel, "Session");
+        gui.cardPanel.revalidate();
+        gui.cardPanel.repaint();
+
+        timer.startCountdown(duration, timerLabel);
+
+        new javax.swing.Timer(1000, e -> {
+            if (timer.timeRemaining - timer.timeElapsed <= 0) {
+                ((javax.swing.Timer) e.getSource()).stop();
+                gui.cardLayout.show(gui.cardPanel, "pMood");
+            }
+        }).start();
+    }
+
+    public void startBreakSession(){
+        int duration = allDurations[index];
+        BreakManager breakManager = new BreakManager(duration);
+        timer.startBreak(duration, timerLabel);
+        gui.cardLayout.show(gui.cardPanel, "Session");
+
+        new javax.swing.Timer(1000, e -> {
+            if (timer.breakTimeLeft <= 0) {
+                ((javax.swing.Timer) e.getSource()).stop();
+                breakManager.endBreak();
+                breakManager.saveBreak();
+                index = index + 1;
+
+                if (index < types.length) {
+                    if (types[index].equals("Study")) {
+                        prepareStudySession();
+                    } else {
+                        startBreakSession();
+                    }
+                }
+            }
+        }}.start();
     }
 
     //change pomodoro settings
@@ -106,5 +103,4 @@ public class Pomodoro {
         types = listOfTypes.toArray(new String[0]);
         index = 0;
     }
-
 }
