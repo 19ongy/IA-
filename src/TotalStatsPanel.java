@@ -95,32 +95,56 @@ public class TotalStatsPanel {
         };
 
         JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setBackground(new Color(27, 77, 62));
 
-        String[] columnNames = {"Total..", "Value"};
-        JTable table = new JTable(data, columnNames);
-
-        //prettifying the table
+        //creating a table to display info, with a not white background
+        JTable table = new JTable(data, new String[]{"Total..", "Value"});
         table.setBackground(new Color(46,46,46));
         table.setForeground(new Color(200,200,200));
         table.setRowHeight(30);
         table.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 13));
 
-        //TODO center the table text if time
-
         JScrollPane tableScroll = new JScrollPane(table);
+        tableScroll.getViewport().setBackground(new Color(46,46,46));
         tabbedPane.addTab("Summary table", tableScroll);
 
-        /*
-        //time stats
-        JPanel timePanel = new JPanel();
-        timePanel.setLayout(new BoxLayout(timePanel, BoxLayout.Y_AXIS));
-        for (Map.Entry<String, Integer> entry : timePeriodMap.entrySet()) {
-            timePanel.add(new JLabel(entry.getKey() + ": " + entry.getValue() + " sessions"));
-        }
-        JScrollPane timeScroll = new JScrollPane(timePanel);
-        tabbedPane.addTab("Time Stats", timeScroll);
+        //subjects time breakdown
+        Map<String, Integer> weekMap = new HashMap<>();
+        Map<String, Integer> monthMap = new HashMap<>();
 
-         */
+        Map<String, Integer> totalMap = new HashMap<>();
+        LocalDate now = LocalDate.now();
+
+        for(SessionManager session : sessions) {
+            String subject = session.getSubject();
+            int length = session.sessionLength;
+
+            totalMap.put(subject, totalMap.getOrDefault(subject, 0) + length);
+            if (session.startLocalDate.isAfter(now.minusDays(7))) {
+                weekMap.put(subject, weekMap.getOrDefault(subject, 0) + length);
+            }
+            if(session.startLocalDate.getMonth() == now.getMonth()){
+                monthMap.put(subject, monthMap.getOrDefault(subject, 0) + length);
+            }
+        }
+
+        String[] subjectsCols = {"Color", "Subject", "This Week", "This Month", "Total"};
+        String[][] subjectData = new String[totalMap.size()][5];
+
+        int i = 0;
+
+        for (String subject : totalMap.keySet()) {
+            Color c = GUI.subjectColors.getOrDefault(subject, new Color(27, 77, 62));
+            String colorHex = String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
+
+            subjectData[i][0] = colorHex;
+
+            subjectData[i][1] = subject;
+            subjectData[i][2] = subject;
+            subjectData[i][3] = subject;
+            subjectData[i][4] = subject;
+            i = i + 1
+        }
 
         //add tabbedPane to the main panel
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
