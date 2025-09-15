@@ -433,11 +433,31 @@ public class GUI extends JFrame{    //card layout thing
         countdownButton.setFocusPainted(false);
         countdownButton.addActionListener(e -> {
             isPomodoro = false;
+            String valueStr = timeInput.getText().trim();
+
+            //makes sure that you set a time before asking mood
+            if(valueStr.isEmpty()){
+                JOptionPane.showMessageDialog(null, "You haven't set a time yet! ");
+                return;
+            }
+
+            int value;
+            try{
+                value = Integer.parseInt(valueStr);
+                if(value <= 0){
+                    JOptionPane.showMessageDialog(null, "Please enter a time first");
+                    return;
+                }
+            }catch(NumberFormatException j){
+                JOptionPane.showMessageDialog(null, "Please enter a time first");
+                return;
+            }
+
             cardLayout.show(cardPanel, "bMood");
             sessionManager.setStartDate();
             sessionManager.setStartTime();
-            System.out.println("test thing: " + timer.formatTime(value));
-            timer.startCountdown(timer.formatTime(value), timerDisplay);
+            System.out.println("test thing: " + timer.formatTime(String.valueOf(value)));
+            timer.startCountdown(timer.formatTime(String.valueOf(value)), timerDisplay);
 
         });
 
@@ -701,17 +721,14 @@ public class GUI extends JFrame{    //card layout thing
         topPanel.setBackground(darkGreen);
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 
-        JButton totalStatsBut = new JButton("Total Stats");
-        totalStatsBut.setBounds(50, 30, 150, 30);
+        JPanel totalStatsBut = new JPanel();
+        JLabel title = new JLabel("Total Stats");
+        title.setForeground(Color.WHITE);
         totalStatsBut.setBackground(darkGreen);
         totalStatsBut.setForeground(lightGreen);
         totalStatsBut.setFont(new Font("Arial", Font.BOLD, 14));
         totalStatsBut.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-        totalStatsBut.setFocusPainted(false);
-        totalStatsBut.addActionListener(e -> {
-            cardLayout.show(cardPanel, "statScreen");
-
-        });
+        totalStatsBut.add(title);
         topPanel.add(totalStatsBut);
 
         statScreen.add(topPanel, BorderLayout.NORTH);

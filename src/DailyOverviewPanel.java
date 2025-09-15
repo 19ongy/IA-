@@ -32,8 +32,8 @@ public class DailyOverviewPanel extends JPanel {
         JPanel banner = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         banner.setBackground(new Color(27, 77, 62));
 
-        JButton returnBut = new JButton("\u23CE");
-        returnBut.setPreferredSize(new Dimension(40, 30));
+        JButton returnBut = new JButton("Return");
+        returnBut.setPreferredSize(new Dimension(80, 30));
         returnBut.setBackground(new Color(27, 77, 62));
         returnBut.setForeground(Color.WHITE);
         returnBut.setFocusPainted(false);

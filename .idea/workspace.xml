@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="dgohje;wgidfksd">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subjects_colours.json" beforeDir="false" afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,15 +131,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="11354000" />
-    </task>
-    <task id="LOCAL-00003" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1741183591646</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1741183591646</updated>
+      <workItem from="1757890209264" duration="16551000" />
     </task>
     <task id="LOCAL-00004" summary="added classes">
       <option name="closed" value="true" />
@@ -521,7 +517,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757902353188</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too">
+      <option name="closed" value="true" />
+      <created>1757902829523</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1757902829523</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="delete al button works" />
     <MESSAGE value="replace reminders working" />
     <MESSAGE value="confused" />
     <MESSAGE value="fasfasf" />
@@ -582,7 +585,8 @@
     <MESSAGE value="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session" />
     <MESSAGE value="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject" />
     <MESSAGE value="dgohje;wgidfksd" />
-    <option name="LAST_COMMIT_MESSAGE" value="dgohje;wgidfksd" />
+    <MESSAGE value="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

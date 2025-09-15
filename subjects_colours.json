@@ -1,5 +1,8 @@
 {
-  "maths": [255, 0, 0],
+  "Maths": [255, 0, 0],
+  "English": [255, 165, 0],
+  "Chemistry": [0, 255, 0],
+  "History": [255, 200, 0],
   "Physics": [0, 0, 255],
-  "veggie studies": [0, 255, 0]
+  "Sea water": [0, 255, 255]
 }
