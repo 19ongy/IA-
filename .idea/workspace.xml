@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="dgohje;wgidfksd">
       <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,15 +127,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="11036000" />
-    </task>
-    <task id="LOCAL-00002" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1741100468186</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1741100468186</updated>
+      <workItem from="1757890209264" duration="11354000" />
     </task>
     <task id="LOCAL-00003" summary="aaa">
       <option name="closed" value="true" />
@@ -522,7 +513,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757900208708</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="dgohje;wgidfksd">
+      <option name="closed" value="true" />
+      <created>1757902353188</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1757902353188</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,7 +557,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added delete function FINALYY" />
     <MESSAGE value="delete al button works" />
     <MESSAGE value="replace reminders working" />
     <MESSAGE value="confused" />
@@ -583,7 +581,8 @@
     <MESSAGE value="dsagdsagdsa;g;jklsa" />
     <MESSAGE value="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session" />
     <MESSAGE value="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject" />
+    <MESSAGE value="dgohje;wgidfksd" />
+    <option name="LAST_COMMIT_MESSAGE" value="dgohje;wgidfksd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

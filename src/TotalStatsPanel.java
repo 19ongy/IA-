@@ -140,11 +140,22 @@ public class TotalStatsPanel {
             subjectData[i][0] = colorHex;
 
             subjectData[i][1] = subject;
-            subjectData[i][2] = subject;
-            subjectData[i][3] = subject;
-            subjectData[i][4] = subject;
-            i = i + 1
+            subjectData[i][2] = String.format("%.1f", weekMap.getOrDefault(subject, 0) / 3600.0);;
+            subjectData[i][3] = String.format("%.1f", monthMap.getOrDefault(subject, 0) / 3600.0);
+
+            subjectData[i][4] = String.format("%.1f", totalMap.getOrDefault(subject, 0) / 3600.0);
+            i = i + 1;
         }
+
+        JTable subjectTable = new JTable(subjectData, subjectsCols);
+        subjectTable.setBackground(new Color(46,46,46));
+        subjectTable.setForeground(Color.WHITE);
+        subjectTable.setRowHeight(30);
+        subjectTable.setFont(new Font("Segeo UI Emoji", Font.PLAIN, 13));
+
+        JScrollPane subjectScroll = new JScrollPane(subjectTable);
+        subjectScroll.getViewport().setBackground(new Color(46,46,46));
+        tabbedPane.addTab("Subject Time Breakdown", subjectScroll);
 
         //add tabbedPane to the main panel
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
@@ -206,4 +217,7 @@ public class TotalStatsPanel {
 
         }
     }
+
+    //creating the colours in the table
+
 }
