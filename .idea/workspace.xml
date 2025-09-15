@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment=":(">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Break.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Break.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
-    </list>
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="starting this thingy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,15 +125,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="22612000" />
-    </task>
-    <task id="LOCAL-00008" summary="tried setting a pre timer countdown but it doesnt work">
-      <option name="closed" value="true" />
-      <created>1743379437521</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1743379437522</updated>
+      <workItem from="1757890209264" duration="22911000" />
     </task>
     <task id="LOCAL-00009" summary="PRE TIMER WORKS">
       <option name="closed" value="true" />
@@ -527,7 +511,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757913738331</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="starting this thingy">
+      <option name="closed" value="true" />
+      <created>1757914906014</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1757914906015</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +555,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
     <MESSAGE value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
     <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input" />
     <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input&#10;broke some more stuff" />
@@ -588,7 +579,8 @@
     <MESSAGE value="it works now &#10;trying to fix the pomodoro session saving" />
     <MESSAGE value=":)" />
     <MESSAGE value=":(" />
-    <option name="LAST_COMMIT_MESSAGE" value=":(" />
+    <MESSAGE value="starting this thingy" />
+    <option name="LAST_COMMIT_MESSAGE" value="starting this thingy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

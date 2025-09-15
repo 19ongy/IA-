@@ -816,8 +816,42 @@ public class GUI extends JFrame{    //card layout thing
         JTextField studyField = new JTextField("25");
         studyField.setBounds(330, 100, 60, 30);
 
+        JLabel shortBreakLabel = new JLabel("Short Break:");
+        shortBreakLabel.setBounds(200, 140, 120, 30);
+        JTextField shortBreakField = new JTextField("5");
+        shortBreakField.setBounds(330, 140, 60, 30);
 
-    }
+        JLabel longBreakLabel = new JLabel("Long Break:");
+        longBreakLabel.setBounds(200, 180, 120, 30);
+        JTextField longBreakField = new JTextField("15");
+        longBreakField.setBounds(330, 180, 60, 30);
+
+        JLabel loopLabel = new JLabel("Loops:");
+        loopLabel.setBounds(200, 220, 120, 30);
+        JTextField loopField = new JTextField("4");
+        loopField.setBounds(330, 220, 60, 30);
+
+        //button to confirm all of the options and apply them
+        JButton applyButton = new JButton("Apply");
+        applyButton.setBounds(250, 270, 100, 40);
+        applyButton.setBackground(darkGreen);
+        applyButton.setForeground(Color.BLACK);
+        applyButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        applyButton.setFocusPainted(false);
+
+        applyButton.addActionListener(e-> {
+            try {
+                int study = Integer.parseInt(studyField.getText());
+                int shortBreak = Integer.parseInt(shortBreakField.getText());
+                int longBreak = Integer.parseInt(longBreakField.getText());
+                int loops = Integer.parseInt(loopField.getText());
+
+                pomodoro.changePomo(study, shortBreak, longBreak, loops);
+                JOptionPane.showMessageDialog(null, "Pomodoro settings updated!");
+            }catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Please enter valid numbers.");
+            }
+        });
 
 
 
