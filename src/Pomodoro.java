@@ -7,7 +7,7 @@ public class Pomodoro {
     private GUI gui;
     private JLabel timerLabel;
     private int[] allDurations;
-    private String[] types;
+    public String[] types;
     public int index = 0;
     public SessionManager sesh;
 
@@ -77,7 +77,7 @@ public class Pomodoro {
                     }
                 }
             }
-        }}.start();
+        }).start();
     }
 
     //change pomodoro settings

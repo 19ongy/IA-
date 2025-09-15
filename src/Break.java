@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Break {
@@ -10,7 +11,7 @@ public class Break {
     private LocalTime endTime;
 
     public Break(int breakLength, LocalDate startDate, LocalTime startTime,
-                 LocalDate endDate, LocalTime endTime){
+                 LocalDate endDate, LocalTime endTime) {
         this.breakLength = breakLength;
         this.startDate = startDate;
         this.startTime = startTime;
@@ -40,12 +41,12 @@ public class Break {
     }
 
     public String toFileString() {
-        String formattedStart = String.format("%02d:%02d", startTime.getHour(), startTime.getMinute());
-        String formattedEnd = String.format("%02d:%02d", endTime.getHour(), endTime.getMinute());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        return breakLength + "," +
-                startDate.toString() + "," + formattedStart + "," +
-                endDate.toString() + "," + formattedEnd;
+        String formattedStart = startTime.format(formatter);
+        String formattedEnd = endTime.format(formatter);
+
+        return breakLength + "," + startDate + "," + formattedStart + "," + endDate + "," + formattedEnd;
     }
 
     public static ArrayList<Break> getBreaksByDate(ArrayList<Break> allBreaks, LocalDate date){

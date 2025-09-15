@@ -34,7 +34,7 @@ public class GUI extends JFrame{    //card layout thing
 
     //pomodoro stuff
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
-    int[] defaultDurations = {5, 5, 1500, 300, 1500, 900};
+    int[] defaultDurations = {1500, 300, 1500, 300, 1500, 900};
     String[] defaultTypes = {"Study", "Break", "Study", "Break", "Study", "Break"};
     public boolean isPomodoro = false;
 
@@ -567,7 +567,7 @@ public class GUI extends JFrame{    //card layout thing
                     pomodoro.sesh.setStartDate();
                     pomodoro.sesh.setStartTime();
                     pomodoro.sesh.setMoodBefore(moodName.toUpperCase());
-                    pomodoro.startPomo();
+                    pomodoro.startStudySession();
                 }else{
                     sessionManager.setMoodBefore(moodName.toUpperCase());
                     cardLayout.show(cardPanel, "Session");
@@ -624,7 +624,7 @@ public class GUI extends JFrame{    //card layout thing
                 String mood = moodName.toUpperCase();
                 System.out.println("Mood selected = " + moodButton.getText());
 
-                if(isPomodoro){
+                if(isPomodoro && (pomodoro.sesh != null)){
                     pomodoro.sesh.setMoodAfter(mood);
                     pomodoro.sesh.setEndDate();
                     pomodoro.sesh.setEndTime();
@@ -633,14 +633,18 @@ public class GUI extends JFrame{    //card layout thing
 
                     pomodoro.index++;
                     //starts the next round of the pomodoro timers
-                    pomodoro.startPomo();
-
-
+                    if(pomodoro.index < pomodoro.types.length) {
+                        if (pomodoro.types[pomodoro.index].equals("Study")) {
+                            pomodoro.prepareStudySession();
+                        } else {
+                            pomodoro.startBreakSession();
+                        }
+                    }else{
+                        cardLayout.show(cardPanel, "Session");
+                    }
                     //forces ui to swtich out of pMood screen / card panel
-                    cardLayout.show(cardPanel, "Session");
                     cardPanel.revalidate();
                     cardPanel.repaint();
-
                 }else{
                     sessionManager.setMoodAfter(mood);
                     sessionManager.setEndDate();
@@ -800,21 +804,22 @@ public class GUI extends JFrame{    //card layout thing
     public void setSettingMenu(){
         settingMenu = new JPanel(null);
 
-        //setting buttons
-        String[] settingOptTexts = {"User preference", "Timer settings", "Something settings"};
-        for(int i = 0; i < 3; i++){
-            JButton settingOpt = new JButton(settingOptTexts[i]);
-            settingOpt.setBounds(130, (100 + (i*50)), 200,40);
-            settingOpt.setBackground(darkGreen);
-            settingOpt.setForeground(Color.BLACK);
-            settingOpt.setFocusPainted(false);
-            settingOpt.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-            settingMenu.add(settingOpt);
-        }
-        returnBut(settingMenu, "setting menu");
-        defaultLook(settingMenu, "setting menu");
-        cardPanel.add(settingMenu, "setting menu");
+        JLabel title = new JLabel("Pomodoro Settings", SwingConstants.CENTER);
+        title.setBounds(50, 30, 700, 40);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        title.setForeground(lightGreen);
+        settingMenu.add(title);
+
+        //setting up all the labels and input fields, so that users can change their pomo times
+        JLabel studyLabel = new JLabel("Study (min):");
+        studyLabel.setBounds(200, 100, 120, 30);
+        JTextField studyField = new JTextField("25");
+        studyField.setBounds(330, 100, 60, 30);
+
+
     }
+
+
 
     public void setRemMenu(){
         remMenu = new JPanel(null);

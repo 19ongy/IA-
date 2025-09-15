@@ -25,14 +25,12 @@ public class BreakManager {
     public void endBreak(){
         this.endDate = LocalDate.now();
         this.endTime = LocalTime.now();
-        saveBreak();
     }
 
     //converts it to the file
     public String toFileString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String startTimeStr = startTime.format(formatter);
-        String endTimeStr = endTime.format(formatter);
+        String startTimeStr = startTime.format(TIME_FORMATTER);
+        String endTimeStr = endTime.format(TIME_FORMATTER);
         return breakDuration + "," + startDate + "," + startTimeStr + "," + endDate + "," + endTimeStr;
     }
 
