@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added return button in calendar properly">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="dsagdsagdsa;g;jklsa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +129,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="2240000" />
+      <workItem from="1757890209264" duration="6895000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -505,7 +507,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757877982926</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="dsagdsagdsa;g;jklsa">
+      <option name="closed" value="true" />
+      <created>1757892482864</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1757892482864</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +551,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added reminder buttons and some switch case stuff" />
     <MESSAGE value="added reminder input" />
     <MESSAGE value="set reminders screen yayyy" />
     <MESSAGE value="added delete function FINALYY" />
@@ -566,7 +575,8 @@
     <MESSAGE value="got calendar overview to work with the average moods felt&#10;need to have the numbers in the top left and the daily overviews for the days they want to click on" />
     <MESSAGE value="finishing stuff up, added calendar numbesr and daily overviews when u click on the days" />
     <MESSAGE value="added return button in calendar properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="added return button in calendar properly" />
+    <MESSAGE value="dsagdsagdsa;g;jklsa" />
+    <option name="LAST_COMMIT_MESSAGE" value="dsagdsagdsa;g;jklsa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

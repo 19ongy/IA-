@@ -141,7 +141,7 @@ public class GUI extends JFrame{    //card layout thing
             ArrayList<Break> dayBreaks = Break.getBreaksByDate(allBreaks, dateToShow);
 
             //filters sessions and breaks only for the day dateToShow
-            DailyOverviewPanel dayPanel = new DailyOverviewPanel(dateToShow, daySessions, dayBreaks);
+            DailyOverviewPanel dayPanel = new DailyOverviewPanel(dateToShow, daySessions, dayBreaks, this);
 
             //making it scrollable
             JScrollPane scroll = new JScrollPane(dayPanel);
@@ -666,14 +666,10 @@ public class GUI extends JFrame{    //card layout thing
         ArrayList<SessionManager> sessions = SessionManager.getSessionsByDate(SessionManager.readSessions(), LocalDate.now());
         ArrayList<Break> breaks = Break.getBreaksByDate(Break.readBreaks(), LocalDate.now());
 
-        JScrollPane scrollPane = DailyOverviewPanel.createSingleDayScroll(LocalDate.now(), sessions, breaks);
+        JScrollPane scrollPane = DailyOverviewPanel.createSingleDayScroll(LocalDate.now(), sessions, breaks, this);
 
-        dailyOverview = new JPanel(new BorderLayout());
-        dailyOverview.add(scrollPane, BorderLayout.CENTER);
-
-        returnBut(dailyOverview, "graphMenu");
-        defaultLook(dailyOverview, "dailyOverview");
-        cardPanel.add(dailyOverview, "dailyOverview");
+        cardPanel.add(scrollPane, "dailyOverview");
+        cardLayout.show(cardPanel, "dailyOverview");
     }
 
     public void setCalendarAndTrends(){
