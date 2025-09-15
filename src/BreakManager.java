@@ -1,6 +1,7 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BreakManager {
@@ -52,9 +53,10 @@ public class BreakManager {
                 if(parts.length == 5){
                     int breakLength = Integer.parseInt(parts[0]);
                     LocalDate startDate = LocalDate.parse(parts[1]);
-                    LocalTime startTime = LocalTime.parse(parts[2]);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+                    LocalTime startTime = LocalTime.parse(parts[2], formatter);
                     LocalDate endDate = LocalDate.parse(parts[3]);
-                    LocalTime endTime = LocalTime.parse(parts[4]);
+                    LocalTime endTime = LocalTime.parse(parts[4], formatter);
                     result.add(new Break(breakLength, startDate, startTime, endDate, endTime));
                 }
             }

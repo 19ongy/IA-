@@ -109,11 +109,13 @@ public class SessionManager {
     }
 
     public String toFileString() {
+        String moodBeforeStr = (moodBefore != null) ? moodBefore.toString() : "SKIP";
+        String moodAfterStr = (moodAfter != null) ? moodAfter.toString() : "SKIP";
+
         String formattedStartTime = String.format("%02d:%02d", startLocalTime.getHour(), startLocalTime.getMinute());
         String formattedEndTime = String.format("%02d:%02d", endLocalTime.getHour(), endLocalTime.getMinute());
 
-        System.out.println("lol" + sessionLength);
-        return(moodBefore.toString() + "," + moodAfter.toString() + "," +
+        return(moodBeforeStr + "," + moodAfterStr + "," +
                 sessionLength + "," + subject + "," + startLocalDate.toString() + "," +
                 formattedStartTime + "," + endLocalDate.toString() + "," +
                 formattedEndTime

@@ -406,7 +406,13 @@ public class GUI extends JFrame{    //card layout thing
         pomo.setBackground(darkGreen);
         pomo.setForeground(lightGreen);
         pomo.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
+
         pomo.addActionListener(e -> {
+            pomodoro.sesh = new SessionManager();
+            pomodoro.sesh.setSubject("Pomodoro");
+            pomodoro.sesh.setStartDate();
+            pomodoro.sesh.setStartTime();
+
             isPomodoro = true;
             cardLayout.show(cardPanel, "bMood");
             //sets the mode as pomodoro, to make it easier to differentiate later
@@ -420,6 +426,7 @@ public class GUI extends JFrame{    //card layout thing
             //makes sure start time is set
             sessionManager.setStartDate();
             sessionManager.setStartTime();
+            cardLayout.show(cardPanel, "bMood");
         });
 
 
@@ -522,7 +529,6 @@ public class GUI extends JFrame{    //card layout thing
         int gap = 20;
 
         bMoodScreen = new JPanel(null);
-
         JLabel labelOutput = new JLabel("How are you feeling today?", SwingConstants.CENTER);
         labelOutput.setBounds(50, 150, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
@@ -552,10 +558,14 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setFocusPainted(false);
             moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
             moodButton.setToolTipText(moodName);
+
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
 
                 if(isPomodoro){
+                    pomodoro.sesh = new SessionManager();
+                    pomodoro.sesh.setStartDate();
+                    pomodoro.sesh.setStartTime();
                     pomodoro.sesh.setMoodBefore(moodName.toUpperCase());
                     pomodoro.startPomo();
                 }else{
@@ -613,17 +623,33 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.addActionListener(e -> {
                 String mood = moodName.toUpperCase();
                 System.out.println("Mood selected = " + moodButton.getText());
-                sessionManager.setMoodAfter(moodName.toUpperCase());
-                sessionManager.setEndDate();
-                sessionManager.setEndTime();
-                sessionManager.saveSession();
 
                 if(isPomodoro){
-                    pomodoro.index = pomodoro.index +1;
-                    pomodoro.startPomo();
-                }
+                    pomodoro.sesh.setMoodAfter(mood);
+                    pomodoro.sesh.setEndDate();
+                    pomodoro.sesh.setEndTime();
+                    pomodoro.sesh.setSessionLength(timer.timeElapsed);
+                    pomodoro.sesh.saveSession();
 
-                cardLayout.show(cardPanel, "Session");
+                    pomodoro.index++;
+                    //starts the next round of the pomodoro timers
+                    pomodoro.startPomo();
+
+
+                    //forces ui to swtich out of pMood screen / card panel
+                    cardLayout.show(cardPanel, "Session");
+                    cardPanel.revalidate();
+                    cardPanel.repaint();
+
+                }else{
+                    sessionManager.setMoodAfter(mood);
+                    sessionManager.setEndDate();
+                    sessionManager.setEndTime();
+                    sessionManager.setSessionLength(timer.timeElapsed);
+                    sessionManager.saveSession();
+
+                    cardLayout.show(cardPanel, "Session");
+                }
             });
             pMoodScreen.add(moodButton);
 
