@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="dsagdsagdsa;g;jklsa">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session">
+      <change afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="package.json" />
       </list>
     </option>
   </component>
@@ -78,8 +79,8 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\yu0ii\IdeaProjects\IA-" />
-      <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
       <recent name="C:\Users\yu0ii\IdeaProjects\IA-\src" />
+      <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
     </key>
   </component>
   <component name="RunManager">
@@ -129,7 +130,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="6895000" />
+      <workItem from="1757890209264" duration="9038000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -515,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757892482864</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session">
+      <option name="closed" value="true" />
+      <created>1757897878055</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1757897878056</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +560,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added reminder input" />
     <MESSAGE value="set reminders screen yayyy" />
     <MESSAGE value="added delete function FINALYY" />
     <MESSAGE value="delete al button works" />
@@ -576,7 +584,8 @@
     <MESSAGE value="finishing stuff up, added calendar numbesr and daily overviews when u click on the days" />
     <MESSAGE value="added return button in calendar properly" />
     <MESSAGE value="dsagdsagdsa;g;jklsa" />
-    <option name="LAST_COMMIT_MESSAGE" value="dsagdsagdsa;g;jklsa" />
+    <MESSAGE value="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session" />
+    <option name="LAST_COMMIT_MESSAGE" value="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

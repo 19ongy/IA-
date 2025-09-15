@@ -1,6 +1,7 @@
 //GUI CLASS
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class GUI extends JFrame{    //card layout thing
     private static final Color lightGreen = new Color(200, 200, 200);
     private static final Color borderGreen = new Color(15, 50, 40);
     private static final Color backgroundGrey = new Color(46, 46, 46);
-    public static HashMap<String, Color> subjectColors = new HashMap<>();
+    public static HashMap<String, Color> subjectColors = loadSubjectColours();
 
     //pomodoro stuff
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
@@ -363,6 +364,8 @@ public class GUI extends JFrame{    //card layout thing
                     subjectButton.setBackground(selectedColour[0]);
                     subjectButton.setText(subjectName);
 
+                    GUI.saveSubjectColours(subjectColors);
+                    //saves it permanently so it will still be there if the user closes the app
 
                 }
                 dialog.dispose();
@@ -612,6 +615,12 @@ public class GUI extends JFrame{    //card layout thing
     public void setGraphMenu(){
         graphMenu = new JPanel(null);
 
+        ImageIcon icon = new ImageIcon("study.jpg");
+        Image scaledImage = icon.getImage().getScaledInstance(400, 250, Image.SCALE_SMOOTH);
+        JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+        imageLabel.setBounds(200, 120, 400, 300);
+        graphMenu.add(imageLabel);
+
         returnBut(graphMenu, "graphMenu");
         graphButtons(graphMenu);
         defaultLook(graphMenu, "graphMenu");
@@ -619,6 +628,69 @@ public class GUI extends JFrame{    //card layout thing
         cardPanel.add(graphMenu, "graphMenu");
     }
 
+    //using JSON
+    //allows colours to subjects key to be saved even when they leave the app
+    public static void saveSubjectColours(HashMap<String, Color> subjectColors){
+        try(PrintWriter writer = new PrintWriter("subjects_colours.json")){
+            writer.println("{");
+            int count = 0;
+            for(String subject : subjectColors.keySet()){
+                Color c = subjectColors.get(subject);
+                String entry = String.format("  \"%s\": [%d, %d, %d]", subject, c.getRed(), c.getGreen(), c.getBlue());
+
+                writer.println(entry + (count < subjectColors.size() - 1 ? "," : ""));
+                count = count + 1;
+            }
+            writer.println("}");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //reading from the json file
+    //can be loaded up and stored on the daily overview tab
+    public static HashMap<String, Color> loadSubjectColours(){
+        HashMap<String, Color> map = new HashMap<>();
+        File file = new File("subjects_colours.json");
+
+        //cheking to see if the file exists, if not to create it
+        if(!file.exists()){
+            try{
+                file.createNewFile();
+                try(PrintWriter writer = new PrintWriter(file)){
+                    writer.print("{}"); //empty JSON
+                }
+            }catch (IOException e){
+                System.out.println("failed to create");
+                e.printStackTrace();
+            }
+            return map;
+        }
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+            String line;
+            while((line = reader.readLine()) != null){
+                line = line.trim();
+
+                //splitting up the json file into colours and subjects
+                if(line.startsWith("\"")){
+                    String[] parts = line.split(":");
+                    String subject = parts[0].replace("\"", "").trim();
+                    String[] rgb = parts[1].replace("[", "").replace("]", "").trim().split(",");
+
+                    //makes sure there are no leading spaces
+                    int r = Integer.parseInt(rgb[0].trim());
+                    int g = Integer.parseInt(rgb[1].trim());
+                    int b = Integer.parseInt(rgb[2].trim());
+
+                    map.put(subject, new Color(r, g, b));
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return map;
+    }
 
     //graphing methods
     public void setTotStatScreen(){
