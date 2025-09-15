@@ -21,27 +21,14 @@ public class ReminderManager {
     private ReminderGUI reminderWindow = null;
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-    public String message;
-
-    public void setMessage(String message){
-        this.message = message;
-    }
-
-    public String getMessage(){
-        return this.message;
-    }
 
     public void loadRemindersFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", 2); // limit to 2 parts
-
+                String[] parts = line.split(",", 2);
                 String timeStr = parts[0].trim();
                 String message = parts[1].trim();
-                setMessage(message);
-
                 try {
                     LocalTime reminderTime = LocalTime.parse(timeStr, timeFormatter);
                     startStudyReminder(reminderTime, message);
@@ -49,7 +36,6 @@ public class ReminderManager {
                     System.out.println("Skipping invalid time format: " + timeStr);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +44,6 @@ public class ReminderManager {
     public void startStudyReminder(LocalTime reminderTime, String message) {
         LocalTime now = LocalTime.now();
         Duration delay = Duration.between(now, reminderTime);
-
         if (delay.isNegative()) {
             delay = delay.plusHours(24); // schedule for next day if time has passed
         }
@@ -74,54 +59,67 @@ public class ReminderManager {
             });
         }, delayMillis, TimeUnit.MILLISECONDS);
     }
-    //why this no make sense
 
-    public void shutdown(){
+    public void startWaterReminder(){
+        if (waterReminderTimer != null) {
+            waterReminderTimer.cancel(); // cancel any existing timer
+        }
+        waterReminderTimer = new Timer();
+
+        //to be scheduled first reminder after 10 seconds, then every 30 minutes
+        waterReminderTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    System.out.println("Water reminder triggered at " + LocalTime.now());
+                    if (reminderWindow != null) {
+                        reminderWindow.dispose();
+                    }
+                    reminderWindow = new ReminderGUI("waterRem", null);
+                });
+            }
+        }, 10000, 30 * 60 * 1000); // 10s delay, 30min interval
+    }
+
+    public void shutdown() {
         scheduler.shutdown();
     }
 
-    //converts user String input in format HHMM to hour and minute ints
-    public ReminderTime convertTime(String time){
-        if(time.length() != 4){
+    public ReminderTime convertTime(String time) {
+        if (time.length() != 4) {
             System.out.println("INVALID INPUT");
             return null;
-        }else{
+        } else {
             int hourInput = Integer.parseInt(time.substring(0, 2));
-            int minInput = Integer.parseInt(time.substring(2,4));
+            int minInput = Integer.parseInt(time.substring(2, 4));
 
             //checks whether hour is above 24 and min is above 60
-            if((hourInput > 24) || (minInput >= 60)){
+            if ((hourInput > 24) || (minInput >= 60)) {
                 System.out.println("INVALID INPUT");
                 return null;
-            }else{
+            } else {
                 return new ReminderTime(hourInput, minInput);
             }
         }
+
     }
 
-    //checks whether there are reminders set first
-    public boolean hasReminders(){
-        if(studyReminders.size() != 0){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean hasReminders() {
+        return !studyReminders.isEmpty();
     }
 
-    //writing to the data file
-    public String formatData(String inputTime, String message){
+    public String formatData(String inputTime, String message) {
         return inputTime + "," + message;
     }
 
-    public String formatTime(String time){
+    public String formatTime(String time) {
         ReminderTime rt = convertTime(time);
-        String formattedTime = String.format("%02d:%02d", rt.getHour(), rt.getMin());
-        return formattedTime;
+        return String.format("%02d:%02d", rt.getHour(), rt.getMin());
     }
 
     public void addReminder(String time, String message) {
         String setTime = formatTime(time);
-        if(setTime != null){
+        if (setTime != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt", true))) {
                 writer.write(formatData(setTime, message));
                 writer.newLine(); // Adds a newline after each session
@@ -132,14 +130,14 @@ public class ReminderManager {
     }
 
     //helper method to get all of the reminders into one array list
-    public List<String> loadReminders(){
+    public List<String> loadReminders() {
         List<String> reminders = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 reminders.add(line);
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return reminders;
@@ -160,44 +158,44 @@ public class ReminderManager {
         reminderPanel.repaint();
     }
 
-    public void deleteReminder(int remToDelete, JPanel reminderPanel, List<String> reminders){
-        if(remToDelete >= 1 && remToDelete <= reminders.size()){
+    public void deleteReminder(int remToDelete, JPanel reminderPanel, List<String> reminders) {
+        if (remToDelete >= 1 && remToDelete <= reminders.size()) {
             reminders.remove(remToDelete - 1);
         }
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
-            for(String reminder : reminders){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))) {
+            for (String reminder : reminders) {
                 writer.write(reminder);
                 writer.newLine();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         updateReminderList(reminderPanel, reminders);
     }
 
-    public void replaceReminder(int remToReplace, String timeReplace, String messageReplace){
+    public void replaceReminder(int remToReplace, String timeReplace, String messageReplace) {
         List<String> totReminders = loadReminders();
 
-        if(remToReplace >= 1 && remToReplace <= totReminders.size()){
+        if (remToReplace >= 1 && remToReplace <= totReminders.size()) {
             String formattedInput = formatTime(timeReplace) + "," + messageReplace;
-            totReminders.set(remToReplace -1, formattedInput);
+            totReminders.set(remToReplace - 1, formattedInput);
         }
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
-            for(String reminder : totReminders){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))) {
+            for (String reminder : totReminders) {
                 writer.write(reminder);
                 writer.newLine();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteAll(JPanel reminderPanel, List<String> reminders){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))){
+    public void deleteAll(JPanel reminderPanel, List<String> reminders) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reminder_data.txt"))) {
             writer.write("");
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         reminders.clear();
@@ -205,36 +203,15 @@ public class ReminderManager {
         updateReminderList(reminderPanel, reminders);
     }
 
-    public int getDataLength(){
+    public int getDataLength() {
         int count = 0;
-        try(BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))){
-            while(reader.readLine() != null){
+        try (BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))) {
+            while (reader.readLine() != null) {
                 count++;
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return count;
     }
-
-
-    //water reminders
-    public void startWaterReminders(){
-        if (waterReminderTimer != null) {
-            waterReminderTimer.cancel();
-        }
-        waterReminderTimer = new Timer();
-        waterReminderTimer.scheduleAtFixedRate(new TimerTask(){
-            @Override
-            public void run() {
-                SwingUtilities.invokeLater(() -> {
-                    if (reminderWindow != null) {
-                        reminderWindow.dispose();
-                    }
-                    reminderWindow = new ReminderGUI("water", null);
-                });
-            }
-        }, 10000, 60*30*1000);
-    }
-
 }

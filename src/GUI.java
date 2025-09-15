@@ -137,7 +137,6 @@ public class GUI extends JFrame{    //card layout thing
         dailyOverview.addActionListener(e -> {
             LocalDate dateToShow = LocalDate.now();
 
-
             ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, dateToShow);
             ArrayList<Break> dayBreaks = Break.getBreaksByDate(allBreaks, dateToShow);
 
@@ -230,7 +229,7 @@ public class GUI extends JFrame{    //card layout thing
         settings.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         settings.addActionListener(e -> {
             // This code will run when the button is clicked
-            cardLayout.show(cardPanel,"setting menu");
+            cardLayout.show(cardPanel,"settingMenu");
         });
 
         ImageIcon menuPic = new ImageIcon("OIP.jpg");
@@ -258,6 +257,7 @@ public class GUI extends JFrame{    //card layout thing
 
         pomodoro = new Pomodoro(this, timer, timerDisplay, defaultDurations, defaultTypes);
 
+        //setting stopwatch mode, counting up mode
         JButton stopwatchButton = new JButton("Stopwatch");
         stopwatchButton.setBounds(220, 30, 150, 30);
         stopwatchButton.setBackground(darkGreen);
@@ -272,7 +272,15 @@ public class GUI extends JFrame{    //card layout thing
             sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
         });
+//inputting the amount of time for a countdown
+        JTextField timeInput = new JTextField(6);
+        timeInput.setBounds(280, 300, 150, 40);
+        timeInput.setFont(new Font("Arial", Font.BOLD, 17));
+        timeInput.setBackground(lightGreen);
+        timeInput.setForeground(borderGreen);
+        timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
+        //break mode setting
         JButton breakButton = new JButton("Break");
         breakButton.setBounds(390, 30, 150, 30);
         breakButton.setBackground(darkGreen);
@@ -282,16 +290,27 @@ public class GUI extends JFrame{    //card layout thing
         breakButton.setFocusPainted(false);
         breakButton.addActionListener(e -> {
             System.out.println("break has started!");
-            timer.startBreak(10, timerDisplay);
+
+            //gets input from the time input , like a countdown
+            String inputText = timeInput.getText().trim();
+
+            try {
+                // Parse input as minutes and convert to seconds
+                int minutes = Integer.parseInt(inputText);
+                int durationInSeconds = minutes;
+
+                // start break with user-defined duration
+                timer.startBreak(durationInSeconds, timerDisplay);
+            } catch (NumberFormatException ex) {
+                // sends a option pane if it doesnt work
+                JOptionPane.showMessageDialog(null,
+                        "You haven't entered a valid form of break time! ",
+                        "Invalid Input",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         });
 
-        JTextField timeInput = new JTextField(6);
-        timeInput.setBounds(280, 300, 150, 40);
-        timeInput.setFont(new Font("Arial", Font.BOLD, 17));
-        timeInput.setBackground(lightGreen);
-        timeInput.setForeground(borderGreen);
-        timeInput.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
-
+        //opens up colour and subject selection
         JButton subjectButton = new JButton("S");
         subjectButton.setToolTipText("Set subject and colour");
         subjectButton.setBounds(230, 300, 40, 40);
@@ -313,6 +332,7 @@ public class GUI extends JFrame{    //card layout thing
             JTextField subjectField = new JTextField();
             subjectField.setBounds(130, 20, 200, 30);
 
+            //user can pick from these pre set colours
             Color[] presetColours = {
                     Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE,
                     Color.MAGENTA, Color.CYAN, Color.PINK, Color.YELLOW,
@@ -331,10 +351,15 @@ public class GUI extends JFrame{    //card layout thing
                 int finalI = i;
 
                 colourButtons[i].addActionListener(k-> {
+                    //update selected colour
                     selectedColour[0] = presetColours[finalI];
+
+                    //reset all borders to default
                     for (JButton b : colourButtons) {
                         b.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     }
+
+                    //highlights and makes the colour easier to see for the user
                     colourButtons[finalI].setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
 
                     //checks whether the colour is already mapped to a subject
@@ -451,6 +476,7 @@ public class GUI extends JFrame{    //card layout thing
             int value;
             try{
                 value = Integer.parseInt(valueStr);
+                //makes sure that values being entered are valid
                 if(value <= 0){
                     JOptionPane.showMessageDialog(null, "Please enter a time first");
                     return;
@@ -461,6 +487,8 @@ public class GUI extends JFrame{    //card layout thing
             }
 
             cardLayout.show(cardPanel, "bMood");
+
+            //record the session date and time
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             System.out.println("test thing: " + timer.formatTime(String.valueOf(value)));
@@ -468,6 +496,7 @@ public class GUI extends JFrame{    //card layout thing
 
         });
 
+        //play the pause
         JButton play = new JButton("PLAY");
         play.setBounds(250, 250, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
@@ -561,6 +590,20 @@ public class GUI extends JFrame{    //card layout thing
 
             moodButton.addActionListener(e -> {
                 System.out.println("Mood selected = " + moodButton.getText());
+                //triggers motivational reminders based on the moods that they are feeling
+                //if the person is feeling sad or anguished or tired, negative feelings, they will get a motivational reminder
+
+                if (List.of("TIRED", "SAD", "ANGUISHED").contains(moodName.toUpperCase())) {
+                    int intensity = switch (moodName.toUpperCase()) {
+                        //increases the intenstiy based on what they feel like
+
+                        case "ANGUISHED" -> 8;
+                        case "SAD" -> 6;
+                        case "TIRED" -> 4;
+                        default -> 3;
+                    };
+                    new ReminderGUI("motiv", null).sendMotivRem(intensity);
+                }
 
                 if(isPomodoro){
                     pomodoro.sesh = new SessionManager();
@@ -623,6 +666,17 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.addActionListener(e -> {
                 String mood = moodName.toUpperCase();
                 System.out.println("Mood selected = " + moodButton.getText());
+                if (List.of("TIRED", "SAD", "ANGUISHED").contains(moodName.toUpperCase())) {
+                    int intensity = switch (moodName.toUpperCase()) {
+                        //increases the intenstiy based on what they feel like
+
+                        case "ANGUISHED" -> 8;
+                        case "SAD" -> 6;
+                        case "TIRED" -> 4;
+                        default -> 3;
+                    };
+                    new ReminderGUI("motiv", null).sendMotivRem(intensity);
+                }
 
                 if(isPomodoro && (pomodoro.sesh != null)){
                     pomodoro.sesh.setMoodAfter(mood);
@@ -801,45 +855,56 @@ public class GUI extends JFrame{    //card layout thing
         cardPanel.add(calendarAndTrends, "calendarAndTrends");
     }
 
-    public void setSettingMenu(){
+    public void setSettingMenu() {
         settingMenu = new JPanel(null);
 
-        JLabel title = new JLabel("Pomodoro Settings", SwingConstants.CENTER);
+        JLabel title = new JLabel("Settings", SwingConstants.CENTER);
         title.setBounds(50, 30, 700, 40);
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setForeground(lightGreen);
         settingMenu.add(title);
 
+
+        //pomo box to make things easy to read and separated
+        JPanel pomoBox = new JPanel(null);
+        pomoBox.setBounds(80, 100, 300, 300);
+        pomoBox.setBackground(new Color(30, 30, 30));
+        pomoBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(lightGreen, 2), "Pomodoro Settings", 0, 0, new Font("Arial", Font.BOLD, 16), lightGreen));
+
         //setting up all the labels and input fields, so that users can change their pomo times
         JLabel studyLabel = new JLabel("Study (min):");
-        studyLabel.setBounds(200, 100, 120, 30);
+        studyLabel.setBounds(20, 30, 120, 30);
+        studyLabel.setForeground(Color.WHITE);
         JTextField studyField = new JTextField("25");
-        studyField.setBounds(330, 100, 60, 30);
+        studyField.setBounds(150, 30, 60, 30);
 
         JLabel shortBreakLabel = new JLabel("Short Break:");
-        shortBreakLabel.setBounds(200, 140, 120, 30);
+        shortBreakLabel.setBounds(20, 70, 120, 30);
+        shortBreakLabel.setForeground(Color.WHITE);
         JTextField shortBreakField = new JTextField("5");
-        shortBreakField.setBounds(330, 140, 60, 30);
+        shortBreakField.setBounds(150, 70, 60, 30);
 
         JLabel longBreakLabel = new JLabel("Long Break:");
-        longBreakLabel.setBounds(200, 180, 120, 30);
+        longBreakLabel.setBounds(20, 110, 120, 30);
+        longBreakLabel.setForeground(Color.WHITE);
         JTextField longBreakField = new JTextField("15");
-        longBreakField.setBounds(330, 180, 60, 30);
+        longBreakField.setBounds(150, 110, 60, 30);
 
         JLabel loopLabel = new JLabel("Loops:");
-        loopLabel.setBounds(200, 220, 120, 30);
+        loopLabel.setBounds(20, 150, 120, 30);
+        loopLabel.setForeground(Color.WHITE);
         JTextField loopField = new JTextField("4");
-        loopField.setBounds(330, 220, 60, 30);
+        loopField.setBounds(150, 150, 60, 30);
 
         //button to confirm all of the options and apply them
         JButton applyButton = new JButton("Apply");
-        applyButton.setBounds(250, 270, 100, 40);
+        applyButton.setBounds(90, 200, 100, 40);
         applyButton.setBackground(darkGreen);
-        applyButton.setForeground(Color.BLACK);
+        applyButton.setForeground(Color.WHITE);
         applyButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
         applyButton.setFocusPainted(false);
 
-        applyButton.addActionListener(e-> {
+        applyButton.addActionListener(e -> {
             try {
                 int study = Integer.parseInt(studyField.getText());
                 int shortBreak = Integer.parseInt(shortBreakField.getText());
@@ -848,12 +913,78 @@ public class GUI extends JFrame{    //card layout thing
 
                 pomodoro.changePomo(study, shortBreak, longBreak, loops);
                 JOptionPane.showMessageDialog(null, "Pomodoro settings updated!");
-            }catch (NumberFormatException ex) {
+            } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter valid numbers.");
             }
         });
 
+        pomoBox.add(studyLabel);
+        pomoBox.add(studyField);
+        pomoBox.add(shortBreakLabel);
+        pomoBox.add(shortBreakField);
+        pomoBox.add(longBreakLabel);
+        pomoBox.add(longBreakField);
+        pomoBox.add(loopLabel);
+        pomoBox.add(loopField);
+        pomoBox.add(applyButton);
+        settingMenu.add(pomoBox);
 
+        //box for reset buttons
+        JPanel resetBox = new JPanel(null);
+        resetBox.setBounds(420, 100, 300, 300);
+        resetBox.setBackground(new Color(30, 30, 30));
+        resetBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED, 2), "Reset Options", 0, 0, new Font("Arial", Font.BOLD, 16), Color.RED));
+
+        //button to restart stat, by clearing the study and break text files
+        JButton resetStatsButton = new JButton("Reset stats");
+        resetStatsButton.setBounds(80, 40, 140, 40);
+        resetStatsButton.setBackground(new Color(200, 50, 50));
+        resetStatsButton.setForeground(Color.WHITE);
+        resetStatsButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        resetStatsButton.setFocusPainted(false);
+
+        resetStatsButton.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to reset all stats?", "Confirm Reset", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                clearFile("session_data.txt");
+                clearFile("break_data.txt");
+                allSessions.clear();
+                allBreaks.clear();
+                JOptionPane.showMessageDialog(null, "All stats cleared.");
+            }
+        });
+
+        JButton resetColorsButton = new JButton("Reset Colors");
+        resetColorsButton.setBounds(80, 100, 140, 40);
+        resetColorsButton.setBackground(new Color(100, 100, 255));
+        resetColorsButton.setForeground(Color.WHITE);
+        resetColorsButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
+        resetColorsButton.setFocusPainted(false);
+
+        resetColorsButton.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(null, "Reset all color settings to default?", "Confirm Color Reset", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Placeholder: implement your color reset logic here
+                JOptionPane.showMessageDialog(null, "Color settings reset.");
+            }
+        });
+        resetBox.add(resetStatsButton);
+        resetBox.add(resetColorsButton);
+        settingMenu.add(resetBox);
+
+        returnBut(settingMenu, "settingMenu");
+        defaultLook(settingMenu, "settingMenu");
+        cardPanel.add(settingMenu, "settingMenu");
+    }
+
+    public void clearFile(String filename){
+        try(PrintWriter writer = new PrintWriter(filename)){
+            writer.print("");
+            System.out.println(filename + "cleared.");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public void setRemMenu(){
         remMenu = new JPanel(null);
