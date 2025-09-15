@@ -9,7 +9,7 @@ public class Pomodoro {
     private int[] allDurations;
     private String[] types;
     public int index = 0;
-    private SessionManager sesh;
+    public SessionManager sesh;
 
     private String moodBefore;
     private String moodAfter;

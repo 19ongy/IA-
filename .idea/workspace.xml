@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="why wont it work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subjects_colours.json" beforeDir="false" afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,15 +130,7 @@
       <workItem from="1757668931159" duration="19333000" />
       <workItem from="1757795610284" duration="6497000" />
       <workItem from="1757882626881" duration="1623000" />
-      <workItem from="1757890209264" duration="16551000" />
-    </task>
-    <task id="LOCAL-00004" summary="added classes">
-      <option name="closed" value="true" />
-      <created>1742309669275</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1742309669275</updated>
+      <workItem from="1757890209264" duration="18711000" />
     </task>
     <task id="LOCAL-00005" summary="changed timer class to setTimer&#10;started working on timer countdown">
       <option name="closed" value="true" />
@@ -525,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757902829523</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="why wont it work">
+      <option name="closed" value="true" />
+      <created>1757907808758</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1757907808760</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +560,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="replace reminders working" />
     <MESSAGE value="confused" />
     <MESSAGE value="fasfasf" />
     <MESSAGE value="tried break storing thing" />
@@ -586,7 +584,8 @@
     <MESSAGE value="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject" />
     <MESSAGE value="dgohje;wgidfksd" />
     <MESSAGE value="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too" />
+    <MESSAGE value="why wont it work" />
+    <option name="LAST_COMMIT_MESSAGE" value="why wont it work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

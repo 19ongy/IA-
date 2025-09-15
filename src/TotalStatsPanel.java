@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 //where all study stat overview graphs made
@@ -175,18 +178,20 @@ public class TotalStatsPanel {
                         }
                     }
 
-                    //the squares on the heatmap
-                    for(int week = 0; week < 52; week++){
-                        LocalDate labelDate = start.plusDays(week * 7);
+                    Month currentMonth = null;
+                    for(int week =0; week<52; week++){
+                        LocalDate weekStartDate = start.plusDays(week * 7);
+                        Month weekMonth = weekStartDate.getMonth();
+
                         int x = week * (boxSize + padding) + xOffset;
 
-                        //adding the labels for the months above columns
-                        if (labelDate.getDayOfMonth() == 1) {
-                            String month = labelDate.getMonth().toString().substring(0, 3);
+                        if (weekMonth != currentMonth) {
+                            currentMonth = weekMonth;
+                            String monthLabel = currentMonth.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
                             g2.setColor(Color.WHITE);
-                            g2.drawString(month, x, 15);
-                        }
+                            g2.drawString(monthLabel, x, 15);
 
+                        }
                         for (int day = 0; day < 7; day++) {
                             LocalDate date = start.plusDays(week * 7 + day);
                             int count = studyMap.getOrDefault(date, 0);
@@ -196,7 +201,6 @@ public class TotalStatsPanel {
 
                             g.setColor(colour);
                             g.fillRect(x, y, boxSize, boxSize);
-
                         }
                     }
                 }
@@ -210,6 +214,7 @@ public class TotalStatsPanel {
                 }
             };
 
+        //adding it to my tabbed pane
             JScrollPane heatmapScroll = new JScrollPane(heatmapPanel);
             heatmapScroll.setPreferredSize(new Dimension(800, 160));
             heatmapScroll.getViewport().setBackground(new Color(46,46,46));

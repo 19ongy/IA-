@@ -553,14 +553,15 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
             moodButton.setToolTipText(moodName);
             moodButton.addActionListener(e -> {
-                sessionManager.setMoodBefore(moodName.toUpperCase());
                 System.out.println("Mood selected = " + moodButton.getText());
 
                 if(isPomodoro){
+                    pomodoro.sesh.setMoodBefore(moodName.toUpperCase());
                     pomodoro.startPomo();
+                }else{
+                    sessionManager.setMoodBefore(moodName.toUpperCase());
+                    cardLayout.show(cardPanel, "Session");
                 }
-
-                cardLayout.show(cardPanel, "Session");
 
             });
             bMoodScreen.add(moodButton);
@@ -610,6 +611,7 @@ public class GUI extends JFrame{    //card layout thing
             moodButton.setToolTipText(moodName);
 
             moodButton.addActionListener(e -> {
+                String mood = moodName.toUpperCase();
                 System.out.println("Mood selected = " + moodButton.getText());
                 sessionManager.setMoodAfter(moodName.toUpperCase());
                 sessionManager.setEndDate();
