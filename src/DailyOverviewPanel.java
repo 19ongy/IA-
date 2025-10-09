@@ -79,7 +79,7 @@ public class DailyOverviewPanel extends JPanel {
             //draw hour lines on the graph
             g.setColor(Color.GRAY);
             for (int hour = 0; hour <= 23; hour++) {
-                int y = yOffset + (hour * 60);
+                int y = yOffset + (hour * 30);  // 30 px per hour, not 60
                 g.drawLine(50, y, getWidth(), y);
                 g.drawString(String.format("%02d:00", hour), 5, y + 5);
             }
@@ -100,7 +100,7 @@ public class DailyOverviewPanel extends JPanel {
         }
 
         private void drawBlock(Graphics g, LocalTime startTime, int lengthSeconds, Color color, String label) {
-            int yStart = 50 + (int) ((startTime.getHour() + startTime.getMinute() / 60.0) * 30);
+            int yStart = bannerHeight + (int) ((startTime.getHour() + startTime.getMinute() / 60.0) * 30);
             int height = (int) (lengthSeconds / 60.0 * 0.5);
             //0.5 px per minutee
 
