@@ -54,7 +54,7 @@ public class DailyOverviewPanel extends JPanel {
     //class inside DailyOverviewPanel for drawing the timeline
     private class GraphPanel extends JPanel{
         public GraphPanel(){
-            setPreferredSize(new Dimension(700, (24 * 60) / 2));
+            setPreferredSize(new Dimension(700, 50 + (24 * 60) / 2));
             //0.5 px per minute
             setBackground(backgroundGrey);
         }
@@ -83,6 +83,7 @@ public class DailyOverviewPanel extends JPanel {
                 g.drawLine(50, y, getWidth(), y);
                 g.drawString(String.format("%02d:00", hour), 5, y + 5);
             }
+
 
             //draw study blocks
             for (SessionManager session : sessions) {
