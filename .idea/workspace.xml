@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="changing so the subject thing doesnt overlap">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="graph panel class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GraphPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,15 +141,7 @@
       <workItem from="1764065206858" duration="148000" />
       <workItem from="1764069162921" duration="3477000" />
       <workItem from="1764116665393" duration="76000" />
-      <workItem from="1764116756361" duration="6134000" />
-    </task>
-    <task id="LOCAL-00011" summary="did more user stuff and other thingies">
-      <option name="closed" value="true" />
-      <created>1743736689113</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1743736689113</updated>
+      <workItem from="1764116756361" duration="8440000" />
     </task>
     <task id="LOCAL-00012" summary="added replaceReminder and delete all reminders methods in setReminder class">
       <option name="closed" value="true" />
@@ -534,7 +527,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764125223453</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="graph panel class">
+      <option name="closed" value="true" />
+      <created>1764126359556</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1764126359557</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,7 +571,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input&#10;broke some more stuff" />
     <MESSAGE value="fixed the saveBreak() issue, pomos aren't running after clicking on mood" />
     <MESSAGE value="why broken" />
     <MESSAGE value="fixed the own broken i broke" />
@@ -595,7 +595,8 @@
     <MESSAGE value="starting this thingy" />
     <MESSAGE value="added the pomo changing thing from plane" />
     <MESSAGE value="changing so the subject thing doesnt overlap" />
-    <option name="LAST_COMMIT_MESSAGE" value="changing so the subject thing doesnt overlap" />
+    <MESSAGE value="graph panel class" />
+    <option name="LAST_COMMIT_MESSAGE" value="graph panel class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -94,14 +94,18 @@ public class Timer {
             return;
         }
 
-        timeElapsed = 0;
-        isEnded = false;
-        isPaused = false;
-
+        countdownTimer.stop();
         //clears all previous action listeners/ timers so it doesn't overlap
         for(ActionListener acli : stopwatchTimer.getActionListeners()){
             stopwatchTimer.removeActionListener(acli);
         }
+
+
+        timeElapsed = 0;
+        isEnded = false;
+        isPaused = false;
+
+
 
         System.out.println("stopwatch hs begun");
         stopwatchTimer.addActionListener(e -> {
@@ -121,7 +125,7 @@ public class Timer {
     }
 
     //setting up the countdown
-    public void startCountdown(int timeRemaining, JLabel label){
+    public void startCountdown(int timeRemaining, JLabel label, Runnable onFinish){
         if(label == null){
             return;
         }
@@ -140,7 +144,6 @@ public class Timer {
 
         //stops the timer
         countdownTimer.stop();
-
         //removes all the previous action listeners so it counts down at 1 second intervals after a new countdown
         for (ActionListener al : countdownTimer.getActionListeners()) {
             countdownTimer.removeActionListener(al);
@@ -153,6 +156,9 @@ public class Timer {
                 manager.setEndDate();
                 manager.setEndTime();
                 countdownTimer.stop();
+                if(onFinish != null){
+                    onFinish.run();
+                }
             } else if (!isPaused) {
                 int timeLeft = this.timeRemaining - this.timeElapsed;
                 if (timeLeft > 0) {
@@ -164,7 +170,9 @@ public class Timer {
                     manager.setEndDate();
                     manager.setEndTime();
                     label.setText("Good job!! Timer finished!");
-
+                    if(onFinish != null){
+                        onFinish.run();
+                    }
                 }
             }
         });
@@ -172,7 +180,7 @@ public class Timer {
     }
 
     //setting up a break
-    public void startBreak(int breakDuration, JLabel label) {
+    public void startBreak(int breakDuration, JLabel label, Runnable onFinish) {
         if (label == null) {
             return;
         }
@@ -181,7 +189,6 @@ public class Timer {
         savedTimeElapsed = this.timeElapsed;
         isPaused = true;
         onBreak = true;
-
         breakTimeLeft = breakDuration;
 
         //stops the current counter
@@ -204,6 +211,9 @@ public class Timer {
                 breakManager.saveBreak();
 
                 resumeStudy(label);
+                if(onFinish != null){
+                    onFinish.run();
+                }
             }
         });
         breakTimer.start();
@@ -283,9 +293,4 @@ public class Timer {
 
         return((hourStudied*60) + minStudied);
     }
-
-    //pomodoro stuff
-
-
-
 }
