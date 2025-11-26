@@ -24,6 +24,9 @@ public class Pomodoro {
 
     //prepare for the next session (study or break)
     public void prepareNextSession() {
+        timer.stopCountdown();
+        timer.stopBreak();
+
         if(index >= allDurations.length) {
             index = 0;
             return; // finished all sessions
@@ -37,6 +40,8 @@ public class Pomodoro {
 
     //starting a study session
     public void startStudySession() {
+        timer.stopCountdown();
+        timer.stopBreak();
         int duration = allDurations[index];
 
         sesh = new SessionManager();
@@ -70,6 +75,8 @@ public class Pomodoro {
 
 
     public void startBreakSession() {
+        timer.stopCountdown();
+        timer.stopBreak();
         int duration = allDurations[index];
         BreakManager breakManager = new BreakManager(duration);
 

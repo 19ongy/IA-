@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="graph panel class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
     </list>
@@ -142,6 +145,7 @@
       <workItem from="1764069162921" duration="3477000" />
       <workItem from="1764116665393" duration="76000" />
       <workItem from="1764116756361" duration="8440000" />
+      <workItem from="1764146466177" duration="1921000" />
     </task>
     <task id="LOCAL-00012" summary="added replaceReminder and delete all reminders methods in setReminder class">
       <option name="closed" value="true" />

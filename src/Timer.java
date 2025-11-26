@@ -55,6 +55,7 @@ public class Timer {
         }
     }
 
+    //ending timer on the label
     public void endT(JLabel label){
         if(manager != null){
             manager.setEndDate();
@@ -65,6 +66,19 @@ public class Timer {
             label.setText("timer ended");
         }
     }
+
+    //method for ending the timer internally
+    public void stopCountdown(){
+        countdownTimer.stop();
+    }
+
+    //stopping break timers safely
+    public void stopBreak() {
+        if (breakTimer != null) {
+            breakTimer.stop();
+        }
+    }
+
 
     //starting timer countdown
     public void preTimer(JLabel label){
@@ -123,6 +137,7 @@ public class Timer {
         });
         stopwatchTimer.start();
     }
+
 
     //setting up the countdown
     public void startCountdown(int timeRemaining, JLabel label, Runnable onFinish){
@@ -264,11 +279,10 @@ public class Timer {
     }
 
     //starts the normal countdown/stopwatch timer again after break
-
     private void resumeStudy(JLabel label){
         isPaused = false;
         onBreak = false;
-        startCountdown(savedTimeRemaining, label);
+        startCountdown(savedTimeRemaining, label, ()-> {});
         this.timeElapsed = savedTimeElapsed;
     }
 

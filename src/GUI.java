@@ -295,12 +295,11 @@ public class GUI extends JFrame{
             String inputText = timeInput.getText().trim();
 
             try {
-                // Parse input as minutes and convert to seconds
-                int minutes = Integer.parseInt(inputText);
-                int durationInSeconds = minutes;
+                int durationInSeconds;
+                durationInSeconds = timer.formatTime(inputText);
 
                 // start break with user-defined duration
-                timer.startBreak(durationInSeconds, timerDisplay);
+                timer.startBreak(durationInSeconds, timerDisplay, () -> {});
             } catch (NumberFormatException ex) {
                 // sends a option pane if it doesnt work
                 JOptionPane.showMessageDialog(null,
@@ -492,7 +491,7 @@ public class GUI extends JFrame{
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             System.out.println("test thing: " + timer.formatTime(String.valueOf(value)));
-            timer.startCountdown(timer.formatTime(String.valueOf(value)), timerDisplay);
+            timer.startCountdown(timer.formatTime(String.valueOf(value)), timerDisplay, () -> {});
 
         });
 
@@ -689,7 +688,7 @@ public class GUI extends JFrame{
                     //starts the next round of the pomodoro timers
                     if(pomodoro.index < pomodoro.types.length) {
                         if (pomodoro.types[pomodoro.index].equals("Study")) {
-                            pomodoro.prepareStudySession();
+                            pomodoro.prepareNextSession();
                         } else {
                             pomodoro.startBreakSession();
                         }
