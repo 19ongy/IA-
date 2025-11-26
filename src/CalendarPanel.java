@@ -80,7 +80,6 @@ public class CalendarPanel extends JPanel{
 
     //filling up the calendar with the average moods
     private void populateCalendar(){
-        int totalSeconds = 0;
         calendarGrid.removeAll(); //clears the calendar
         LocalDate firstDay = currentMonth.atDay(1);
         int startDay = firstDay.getDayOfWeek().getValue();
@@ -95,6 +94,13 @@ public class CalendarPanel extends JPanel{
 
             //finding the average mood
             ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, date);
+
+            int totalSecondsForButton = 0;
+            for(SessionManager session : daySessions){
+                totalSecondsForButton += session.sessionLength;
+            }
+            double hoursForButton = totalSecondsForButton / 3600.0;
+            String hoursStudied = String.format("%.1f hrs", hoursForButton);
             String avgMoodEmoji = calculateAverageMood(daySessions);
 
             //GUI stuff for specific buttons representing days
@@ -113,12 +119,7 @@ public class CalendarPanel extends JPanel{
             dateLabel.setForeground(Color.WHITE);
             dateLabel.setBounds(5, 5, 30, 20);
             dayButton.add(dateLabel);
-            //total study time of the day summary
-            for(SessionManager session : daySessions){
-                totalSeconds = session.sessionLength + totalSeconds;
-            }
-            double hours = totalSeconds/3600.0;
-            String hoursStudied = String.format("%.1f hrs", hours);
+
             JLabel timeLabel = new JLabel(hoursStudied, SwingConstants.CENTER);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 11));
             timeLabel.setForeground(Color.WHITE);
@@ -133,35 +134,36 @@ public class CalendarPanel extends JPanel{
 
             //action listener, they can click on the calendar panel and get a daily overview of that day
             dayButton.addActionListener( e-> {
-                int totSeconds = 0;
-                String subject;
-                String mood;
+                int totSecondsForPopup = 0;
                 HashMap<String, Integer> subjectTimeMap = new HashMap<>();
                 HashMap<String, Integer> moodMap = new HashMap<>();
 
                 //subject time aggregation
                 for(SessionManager session : daySessions){
-                    totSeconds = totSeconds + session.sessionLength;
-                    if(session.getSubject() != null){
+                    totSecondsForPopup += session.sessionLength;
+
+                    String subject;
+                    if (session.getSubject() != null) {
                         subject = session.getSubject();
-                    }else{
-                        subject = "Unknwon";
+                    } else {
+                        subject = "Unknown";
                     }
                     subjectTimeMap.put(subject, subjectTimeMap.getOrDefault(subject, 0) + session.sessionLength);
 
-                    //mood aggregation
-                    if(session.getMoodBefore() != null){
+                    String mood;
+                    if (session.getMoodBefore() != null) {
                         mood = session.getMoodBefore().toString();
-                    }else{
+                    } else {
                         mood = "SKIP";
                     }
                     moodMap.put(mood, moodMap.getOrDefault(mood, 0) + 1);
+
                 }
 
                 //displays the stats of the day in a op up
                 StringBuilder tableBuilder = new StringBuilder();
                 tableBuilder.append(date.toString() + "\n");
-                tableBuilder.append(" Total Studied: " + String.format("%.1f hrs", totSeconds / 3600.0) + "\n\n");
+                tableBuilder.append(" Total Studied: " + String.format("%.1f hrs", totSecondsForPopup / 3600.0) + "\n\n");
                 tableBuilder.append("Subjects:\n");
 
                 for(String subj : subjectTimeMap.keySet()){

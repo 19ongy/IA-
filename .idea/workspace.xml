@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="tryring to fizx">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="trying to get the break thing to work but it doesnt &#10;fixed the set pomo lengths issue &#10;fixed the pomo timer threads issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GraphPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,15 +142,7 @@
       <workItem from="1764069162921" duration="3477000" />
       <workItem from="1764116665393" duration="76000" />
       <workItem from="1764116756361" duration="8440000" />
-      <workItem from="1764146466177" duration="9893000" />
-    </task>
-    <task id="LOCAL-00014" summary="fixed the menu problem, made some more methods to check whether array list has anything, fixed the get time thing, delete reminder, replace reminder &#10;is too hot to fix delete all reminders &#10;trying to make a verification method&#10;not sure to split it up between methods or just to keep it in delete all reminders">
-      <option name="closed" value="true" />
-      <created>1748734126581</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1748734126581</updated>
+      <workItem from="1764146466177" duration="12235000" />
     </task>
     <task id="LOCAL-00015" summary="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted">
       <option name="closed" value="true" />
@@ -541,7 +528,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764152789539</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="trying to get the break thing to work but it doesnt &#10;fixed the set pomo lengths issue &#10;fixed the pomo timer threads issue">
+      <option name="closed" value="true" />
+      <created>1764158253462</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1764158253462</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -577,7 +572,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed the own broken i broke" />
     <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
     <MESSAGE value="fixing up totalStatsPanel, getting all graph data sorted" />
     <MESSAGE value="trying to do the tables" />
@@ -602,7 +596,8 @@
     <MESSAGE value="graph panel class" />
     <MESSAGE value="fixed countdown issue, new pomodoro problem" />
     <MESSAGE value="tryring to fizx" />
-    <option name="LAST_COMMIT_MESSAGE" value="tryring to fizx" />
+    <MESSAGE value="trying to get the break thing to work but it doesnt &#10;fixed the set pomo lengths issue &#10;fixed the pomo timer threads issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying to get the break thing to work but it doesnt &#10;fixed the set pomo lengths issue &#10;fixed the pomo timer threads issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
