@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added the pomo changing thing from plane">
-      <change afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="changing so the subject thing doesnt overlap">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Break.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Break.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subjects_colours.json" beforeDir="false" afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,15 +140,7 @@
       <workItem from="1764065206858" duration="148000" />
       <workItem from="1764069162921" duration="3477000" />
       <workItem from="1764116665393" duration="76000" />
-      <workItem from="1764116756361" duration="5039000" />
-    </task>
-    <task id="LOCAL-00010" summary="created session manager">
-      <option name="closed" value="true" />
-      <created>1743725707209</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1743725707209</updated>
+      <workItem from="1764116756361" duration="6134000" />
     </task>
     <task id="LOCAL-00011" summary="did more user stuff and other thingies">
       <option name="closed" value="true" />
@@ -545,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757915119677</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="changing so the subject thing doesnt overlap">
+      <option name="closed" value="true" />
+      <created>1764125223452</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1764125223453</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,7 +570,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input" />
     <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input&#10;broke some more stuff" />
     <MESSAGE value="fixed the saveBreak() issue, pomos aren't running after clicking on mood" />
     <MESSAGE value="why broken" />
@@ -606,7 +594,8 @@
     <MESSAGE value=":(" />
     <MESSAGE value="starting this thingy" />
     <MESSAGE value="added the pomo changing thing from plane" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the pomo changing thing from plane" />
+    <MESSAGE value="changing so the subject thing doesnt overlap" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing so the subject thing doesnt overlap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

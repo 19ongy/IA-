@@ -4,6 +4,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class GraphPanel extends JPanel {
@@ -32,6 +33,9 @@ public class GraphPanel extends JPanel {
         super.paintComponent(g);
         drawDate(g);
         drawHourLines(g);
+        drawStudySessions(g);
+        drawBreaks(g);
+        drawKey(g);
     }
 
     private void drawDate(Graphics g){
@@ -56,6 +60,56 @@ public class GraphPanel extends JPanel {
         }
 
     }
+
+    private void drawBlock(Graphics g, LocalTime start, int lengthSeconds, Color colour, String label){
+        //draws the block for study session, converts the start time and length to y and height
+        int startMinutes = (start.getHour() * 60) + start.getMinute();
+        int yStart = topGap + (int)(lengthSeconds* minuteScale);
+        int height = (int)((lengthSeconds / 60.0)* minuteScale);
+
+        //box filled with colour and outline
+        g.setColor(colour);
+        g.fillRect(100, yStart, 400, height);
+        g.setColor(Color.WHITE);
+        g.drawRect(100, yStart, 400, height);
+
+        //label
+        //g.drawString(label, 100, yStart + 15);
+    }
+
+    private void drawBreaks(Graphics g){
+        for(Break b: breaks){
+            drawBlock(g, b.getStartTime(), b.getLength(), breakColour, "Break");
+        }
+    }
+
+    //draws entire study session
+    private void drawStudySessions(Graphics g) {
+        for (SessionManager session : sessions) {
+            Color subjectColour = GUI.subjectColors.getOrDefault(session.getSubject(), new Color(27, 77, 62));
+            drawBlock(g, session.startLocalTime, session.sessionLength, subjectColour, session.getSubject());
+        }
+    }
+
+
+    //key for subjects and their colours
+    private void drawKey(Graphics g){
+        g.setColor(Color.WHITE);
+        g.drawString("Subjects:  ", getWidth() - 150, 20);
+        int y = 40;
+
+        for(String subject : GUI.subjectColors.keySet()){
+            Color c = GUI.subjectColors.get(subject);
+
+            g.setColor(c);
+            g.fillRect(getWidth() - 150, y, 12, 12);
+            g.setColor(Color.WHITE);
+            g.drawRect(getWidth() - 150, y, 12, 12);
+            g.drawString(subject, getWidth() - 130, y + 11);
+            y += 20;
+        }
+    }
+
 
 
 }
