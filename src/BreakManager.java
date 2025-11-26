@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.Timer;
+import javax.swing.*;
+
 
 public class BreakManager {
     private LocalDate startDate;
@@ -10,7 +13,8 @@ public class BreakManager {
     private LocalTime startTime;
     private LocalTime endTime;
     private int breakDuration;
-
+    private Timer timer;
+    private Timer breakTimer;
     //formatter for saving and reading the times
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -21,10 +25,31 @@ public class BreakManager {
         this.breakDuration = duration;
     }
 
+    public void startBreak(){
+        final int[] remaining = {breakDuration};
+        timer = new Timer(1000, e -> {
+            remaining[0]--;
+            System.out.println("Minutes left: " + remaining[0]);
+
+            if (remaining[0] <= 0) {
+                endBreak();
+                ((Timer) e.getSource()).stop();
+            }
+        });
+        timer.start();
+        System.out.println("Break started for " + breakDuration + " minutes");
+    }
+
     //ending the break
     public void endBreak(){
         this.endDate = LocalDate.now();
         this.endTime = LocalTime.now();
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+
+        saveBreak();
+        System.out.println("Break ended at " + endTime);
     }
 
     //converts it to the file

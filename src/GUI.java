@@ -905,7 +905,7 @@ public class GUI extends JFrame{
 
         applyButton.addActionListener(e -> {
             try {
-                int study = Integer.parseInt(studyField.getText());
+                int study = Integer.parseInt(studyField.getText()) * 60;
                 int shortBreak = Integer.parseInt(shortBreakField.getText());
                 int longBreak = Integer.parseInt(longBreakField.getText());
                 int loops = Integer.parseInt(loopField.getText());

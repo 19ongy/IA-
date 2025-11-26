@@ -123,6 +123,10 @@ public class SessionManager {
     }
 
     public void saveSession() {
+        if(!isComplete()){
+            System.out.println("session incomplete, not saved");
+            return;
+        }
         System.out.println("Saving session with length: " + sessionLength);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());

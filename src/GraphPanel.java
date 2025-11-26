@@ -64,7 +64,7 @@ public class GraphPanel extends JPanel {
     private void drawBlock(Graphics g, LocalTime start, int lengthSeconds, Color colour, String label){
         //draws the block for study session, converts the start time and length to y and height
         int startMinutes = (start.getHour() * 60) + start.getMinute();
-        int yStart = topGap + (int)(lengthSeconds* minuteScale);
+        int yStart = topGap + (int)(startMinutes* minuteScale);
         int height = (int)((lengthSeconds / 60.0)* minuteScale);
 
         //box filled with colour and outline

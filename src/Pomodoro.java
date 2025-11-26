@@ -10,7 +10,6 @@ public class Pomodoro {
     public String[] types;
     public int index = 0;
     public SessionManager sesh;
-    private final int MAX_INDEX = 9;
 
     private String moodBefore;
     private String moodAfter;
@@ -34,6 +33,7 @@ public class Pomodoro {
         }
         // reset index if you want to allow restart
         index = 0;
+        gui.cardLayout.show(gui.cardPanel, "pMood");
         System.out.println("All Pomodoro sessions complete!");
     }
 
@@ -72,6 +72,9 @@ public class Pomodoro {
         gui.cardPanel.repaint();
 
         timer.startCountdown(duration, timerLabel, () -> {
+            sesh.setEndDate();
+            sesh.setEndTime();
+            sesh.saveSession();
             index = index + 1;
             if(index >= allDurations.length) {
                 SwingUtilities.invokeLater(() -> {
@@ -85,29 +88,37 @@ public class Pomodoro {
         });
     }
 
+    //starting break loop
     public void startBreakSession() {
         timer.stopCountdown();
         timer.stopBreak();
         int duration = allDurations[index];
-        BreakManager breakManager = new BreakManager(duration);
+
+        //creates sessionmanager for the break
+        sesh = new SessionManager();
+        sesh.setSessionLength(duration);
+        sesh.setSubject("Break");
+        sesh.setStartDate();
+        sesh.setStartTime();
 
         gui.cardLayout.show(gui.cardPanel, "Session");
 
         timer.startBreak(duration, timerLabel, () -> {
-            breakManager.endBreak();
-            breakManager.saveBreak();
+            sesh.setEndDate();
+            sesh.setEndTime();
+            sesh.saveSession();
+
             index++; //increment before starting the next session
             //checks whether it's the final break
-            if(index < allDurations.length){
+            if(index >= allDurations.length) {
+                SwingUtilities.invokeLater(() -> {
+                    endPomodoro();
+                });
+            }else{
                 SwingUtilities.invokeLater(() -> {
                     prepareNextSession();
 
                 });
-            } else {
-                timer.stopBreak();
-                //final time displaying mood
-                gui.cardLayout.show(gui.cardPanel, "pMood");
-                System.out.println("All Pomodoro loops complete!");
             }
         });
     }
