@@ -114,12 +114,14 @@ public class Timer {
             stopwatchTimer.removeActionListener(acli);
         }
 
+        if(manager != null){
+            manager.setStartDate();
+            manager.setStartTime();
+        }
 
         timeElapsed = 0;
         isEnded = false;
         isPaused = false;
-
-
 
         System.out.println("stopwatch hs begun");
         stopwatchTimer.addActionListener(e -> {
@@ -147,7 +149,7 @@ public class Timer {
 
         this.timeRemaining = timeRemaining;
         System.out.println(timeRemaining);
-        timeElapsed = 0;
+        this.timeElapsed = 0;
         isEnded = false;
         isPaused = false;
 
@@ -162,6 +164,11 @@ public class Timer {
         //removes all the previous action listeners so it counts down at 1 second intervals after a new countdown
         for (ActionListener al : countdownTimer.getActionListeners()) {
             countdownTimer.removeActionListener(al);
+        }
+
+        if(manager != null){
+            manager.setStartDate();
+            manager.setStartTime();
         }
 
         countdownTimer.addActionListener(e -> {
@@ -181,6 +188,7 @@ public class Timer {
                     timeElapsed = timeElapsed + 1;
                     //increments by 1 second
                 } else {
+                    timeElapsed = timeRemaining;
                     countdownTimer.stop();
                     manager.setEndDate();
                     manager.setEndTime();
@@ -199,33 +207,35 @@ public class Timer {
         if (label == null) {
             return;
         }
+
+        breakTimeLeft = breakDuration;
+        onBreak = true;
+
         //saves all the previous timer data
         savedTimeRemaining = this.timeRemaining;
         savedTimeElapsed = this.timeElapsed;
-        isPaused = true;
-        onBreak = true;
-        breakTimeLeft = breakDuration;
 
         //stops the current counter
-        countdownTimer.stop();
-        for (ActionListener acli : countdownTimer.getActionListeners()) {
-            countdownTimer.removeActionListener(acli);
+        if (breakTimer != null) {
+            breakTimer.stop();
+            for(ActionListener al : breakTimer.getActionListeners()) {
+                breakTimer.removeActionListener(al);
+            }
         }
-        breakTimer.stop();
-
+        BreakManager breakManager = new BreakManager(breakDuration);
         breakTimer = new javax.swing.Timer(1000, e -> {
             if (breakTimeLeft > 0) {
                 label.setText("Break: " + formatTime(breakTimeLeft));
                 breakTimeLeft = breakTimeLeft - 1;
             } else {
-                label.setText("break over ! ");
                 breakTimer.stop();
-
-                BreakManager breakManager = new BreakManager(savedTimeElapsed + breakTimeLeft);
+                label.setText("break over ! ");
                 breakManager.endBreak();
                 breakManager.saveBreak();
+                onBreak = false;
 
-                resumeStudy(label);
+                //resumeStudy(label);
+                //checks whether there's a next session
                 if(onFinish != null){
                     onFinish.run();
                 }
@@ -282,8 +292,10 @@ public class Timer {
     private void resumeStudy(JLabel label){
         isPaused = false;
         onBreak = false;
-        startCountdown(savedTimeRemaining, label, ()-> {});
-        this.timeElapsed = savedTimeElapsed;
+        if(savedTimeRemaining > 0){
+            startCountdown(savedTimeRemaining, label, ()-> {});
+            this.timeElapsed = savedTimeElapsed;
+        }
     }
 
     //gets the amount of time studied for an already existing schedule

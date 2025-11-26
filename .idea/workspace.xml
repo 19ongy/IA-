@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="graph panel class">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixed countdown issue, new pomodoro problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
@@ -145,15 +144,7 @@
       <workItem from="1764069162921" duration="3477000" />
       <workItem from="1764116665393" duration="76000" />
       <workItem from="1764116756361" duration="8440000" />
-      <workItem from="1764146466177" duration="1921000" />
-    </task>
-    <task id="LOCAL-00012" summary="added replaceReminder and delete all reminders methods in setReminder class">
-      <option name="closed" value="true" />
-      <created>1748649169569</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1748649169569</updated>
+      <workItem from="1764146466177" duration="6193000" />
     </task>
     <task id="LOCAL-00013" summary="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working">
       <option name="closed" value="true" />
@@ -539,7 +530,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764126359557</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="fixed countdown issue, new pomodoro problem">
+      <option name="closed" value="true" />
+      <created>1764148674696</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1764148674696</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +574,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed the saveBreak() issue, pomos aren't running after clicking on mood" />
     <MESSAGE value="why broken" />
     <MESSAGE value="fixed the own broken i broke" />
     <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
@@ -600,7 +598,8 @@
     <MESSAGE value="added the pomo changing thing from plane" />
     <MESSAGE value="changing so the subject thing doesnt overlap" />
     <MESSAGE value="graph panel class" />
-    <option name="LAST_COMMIT_MESSAGE" value="graph panel class" />
+    <MESSAGE value="fixed countdown issue, new pomodoro problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed countdown issue, new pomodoro problem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -10,6 +10,7 @@ public class Pomodoro {
     public String[] types;
     public int index = 0;
     public SessionManager sesh;
+    private final int MAX_INDEX = 9;
 
     private String moodBefore;
     private String moodAfter;
@@ -22,13 +23,29 @@ public class Pomodoro {
         this.gui = gui;
     }
 
+    private void endPomodoro() {
+        // stopS everything
+        timer.stopCountdown();
+        timer.stopBreak();
+        // reset timer display
+        if (timerLabel != null) {
+            timerLabel.setText("Pomodoro finished!");
+            System.out.println("stopping everything");
+        }
+        // reset index if you want to allow restart
+        index = 0;
+        System.out.println("All Pomodoro sessions complete!");
+    }
+
     //prepare for the next session (study or break)
     public void prepareNextSession() {
+        System.out.println("this is working");
         timer.stopCountdown();
         timer.stopBreak();
 
+        //hard code it so when it gets to the last point in the array, the timer stops afterwards
         if(index >= allDurations.length) {
-            index = 0;
+            endPomodoro();
             return; // finished all sessions
         }
         if(types[index].equals("Study")) {
@@ -55,24 +72,18 @@ public class Pomodoro {
         gui.cardPanel.repaint();
 
         timer.startCountdown(duration, timerLabel, () -> {
-            gui.cardLayout.show(gui.cardPanel, "pMood");
             index = index + 1;
-            prepareNextSession();
+            if(index >= allDurations.length) {
+                SwingUtilities.invokeLater(() -> {
+                    endPomodoro();
+                });
+            } else{
+                SwingUtilities.invokeLater(() -> {
+                    prepareNextSession();
+                });
+            }
         });
     }
-
-        /*
-        timer.startCountdown(duration, timerLabel);
-
-        new javax.swing.Timer(1000, e -> {
-            if (timer.timeRemaining - timer.timeElapsed <= 0) {
-                ((javax.swing.Timer) e.getSource()).stop();
-                gui.cardLayout.show(gui.cardPanel, "pMood");
-            }
-        }).start();
-
-         */
-
 
     public void startBreakSession() {
         timer.stopCountdown();
@@ -85,31 +96,21 @@ public class Pomodoro {
         timer.startBreak(duration, timerLabel, () -> {
             breakManager.endBreak();
             breakManager.saveBreak();
-            index++;
-            prepareNextSession();
+            index++; //increment before starting the next session
+            //checks whether it's the final break
+            if(index < allDurations.length){
+                SwingUtilities.invokeLater(() -> {
+                    prepareNextSession();
+
+                });
+            } else {
+                timer.stopBreak();
+                //final time displaying mood
+                gui.cardLayout.show(gui.cardPanel, "pMood");
+                System.out.println("All Pomodoro loops complete!");
+            }
         });
     }
-
-    /*
-        new javax.swing.Timer(1000, e -> {
-            if (timer.breakTimeLeft <= 0) {
-                ((javax.swing.Timer) e.getSource()).stop();
-                breakManager.endBreak();
-                breakManager.saveBreak();
-                index = index + 1;
-
-                if (index < types.length) {
-                    if (types[index].equals("Study")) {
-                        prepareStudySession();
-                    } else {
-                        startBreakSession();
-                    }
-                }
-            }
-        }).start();
-    }
-
-     */
 
     //change pomodoro settings
     public void changePomo(int sessionLength, int shortBreak, int longBreak, int numLoops){

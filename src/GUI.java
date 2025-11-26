@@ -1091,6 +1091,4 @@ public class GUI extends JFrame{
         cardPanel.add(remMenu, "reminders");
     }
 
-
-
 }
