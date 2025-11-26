@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="IA:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fdsf">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/IA_jar.xml" afterDir="false" />
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="added the pomo changing thing from plane">
+      <change afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Break.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Break.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BreakManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BreakManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DailyOverviewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DailyOverviewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TotalStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TotalStatsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subjects_colours.json" beforeDir="false" afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package.json" />
         <option value="Class" />
       </list>
     </option>
@@ -46,7 +52,7 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2ta4PoZM4GFY5p92j6om5gSBP7i" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -63,13 +69,13 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/19ong_y/IdeaProjects/IA-/out/artifacts/IA_jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/19ong_y/IdeaProjects/IA-&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;,
@@ -78,13 +84,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\19ong_y\IdeaProjects\IA-\out\artifacts\IA_jar" />
       <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\yu0ii\IdeaProjects\IA-" />
-      <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
       <recent name="C:\Users\yu0ii\IdeaProjects\IA-\src" />
+      <recent name="C:\Users\19ong_y\IdeaProjects\IA-" />
     </key>
   </component>
   <component name="RunManager">
@@ -97,6 +102,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -119,79 +132,26 @@
       <workItem from="1756814698873" duration="4843000" />
       <workItem from="1757428824725" duration="8588000" />
       <workItem from="1757449442590" duration="10180000" />
-      <workItem from="1757544672004" duration="4619000" />
-    </task>
-    <task id="LOCAL-00001" summary="start">
-      <option name="closed" value="true" />
-      <created>1740576903986</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1740576903986</updated>
-    </task>
-    <task id="LOCAL-00002" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1741100468186</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1741100468186</updated>
-    </task>
-    <task id="LOCAL-00003" summary="aaa">
-      <option name="closed" value="true" />
-      <created>1741183591646</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1741183591646</updated>
-    </task>
-    <task id="LOCAL-00004" summary="added classes">
-      <option name="closed" value="true" />
-      <created>1742309669275</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1742309669275</updated>
-    </task>
-    <task id="LOCAL-00005" summary="changed timer class to setTimer&#10;started working on timer countdown">
-      <option name="closed" value="true" />
-      <created>1742915438285</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1742915438285</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fixed my timer class &#10;added formatting and stuff">
-      <option name="closed" value="true" />
-      <created>1743375207831</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1743375207831</updated>
-    </task>
-    <task id="LOCAL-00007" summary="added option to choose stopwatch or countdown &#10;input format can be HHMMSS MMSS or SS">
-      <option name="closed" value="true" />
-      <created>1743377991116</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1743377991116</updated>
-    </task>
-    <task id="LOCAL-00008" summary="tried setting a pre timer countdown but it doesnt work">
-      <option name="closed" value="true" />
-      <created>1743379437521</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1743379437522</updated>
-    </task>
-    <task id="LOCAL-00009" summary="PRE TIMER WORKS">
-      <option name="closed" value="true" />
-      <created>1743544264760</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1743544264760</updated>
+      <workItem from="1757544672004" duration="4842000" />
+      <workItem from="1757582466781" duration="304000" />
+      <workItem from="1757594439116" duration="848000" />
+      <workItem from="1757623505170" duration="18591000" />
+      <workItem from="1757668931159" duration="19333000" />
+      <workItem from="1757795610284" duration="6497000" />
+      <workItem from="1757882626881" duration="1623000" />
+      <workItem from="1757890209264" duration="29243000" />
+      <workItem from="1761406212841" duration="3970000" />
+      <workItem from="1763079762599" duration="24000" />
+      <workItem from="1764063723495" duration="131000" />
+      <workItem from="1764063865157" duration="186000" />
+      <workItem from="1764064082800" duration="451000" />
+      <workItem from="1764064547868" duration="58000" />
+      <workItem from="1764064626188" duration="405000" />
+      <workItem from="1764065055963" duration="132000" />
+      <workItem from="1764065206858" duration="148000" />
+      <workItem from="1764069162921" duration="3477000" />
+      <workItem from="1764116665393" duration="76000" />
+      <workItem from="1764116756361" duration="5039000" />
     </task>
     <task id="LOCAL-00010" summary="created session manager">
       <option name="closed" value="true" />
@@ -409,15 +369,183 @@
       <option name="project" value="LOCAL" />
       <updated>1757548411764</updated>
     </task>
-    <task id="LOCAL-00037" summary="fdasfdsafdsafsdafasf">
+    <task id="LOCAL-00037" summary="why broken">
       <option name="closed" value="true" />
-      <created>1760001420118</created>
+      <created>1757549517949</created>
       <option name="number" value="00037" />
       <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1760001420118</updated>
+      <updated>1757549517949</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fixed the own broken i broke">
+      <option name="closed" value="true" />
+      <created>1757632230346</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1757632230347</updated>
+    </task>
+    <task id="LOCAL-00039" summary="tried to fix some session manager things didnt work, starting graphs now">
+      <option name="closed" value="true" />
+      <created>1757644100937</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1757644100937</updated>
+    </task>
+    <task id="LOCAL-00040" summary="fixing up totalStatsPanel, getting all graph data sorted">
+      <option name="closed" value="true" />
+      <created>1757679927075</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1757679927075</updated>
+    </task>
+    <task id="LOCAL-00041" summary="trying to do the tables">
+      <option name="closed" value="true" />
+      <created>1757709208047</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1757709208047</updated>
+    </task>
+    <task id="LOCAL-00042" summary="ugly graph done for total stats (overview of studying times, not the subject specific ones">
+      <option name="closed" value="true" />
+      <created>1757709689061</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1757709689061</updated>
+    </task>
+    <task id="LOCAL-00043" summary="old daily overview">
+      <option name="closed" value="true" />
+      <created>1757710289364</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1757710289364</updated>
+    </task>
+    <task id="LOCAL-00044" summary="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons">
+      <option name="closed" value="true" />
+      <created>1757715069300</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1757715069300</updated>
+    </task>
+    <task id="LOCAL-00045" summary="got calendar overview to work with the average moods felt&#10;need to have the numbers in the top left and the daily overviews for the days they want to click on">
+      <option name="closed" value="true" />
+      <created>1757717118958</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1757717118958</updated>
+    </task>
+    <task id="LOCAL-00046" summary="finishing stuff up, added calendar numbesr and daily overviews when u click on the days">
+      <option name="closed" value="true" />
+      <created>1757877667758</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1757877667758</updated>
+    </task>
+    <task id="LOCAL-00047" summary="added return button in calendar properly">
+      <option name="closed" value="true" />
+      <created>1757877982925</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1757877982926</updated>
+    </task>
+    <task id="LOCAL-00048" summary="dsagdsagdsa;g;jklsa">
+      <option name="closed" value="true" />
+      <created>1757892482864</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1757892482864</updated>
+    </task>
+    <task id="LOCAL-00049" summary="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session">
+      <option name="closed" value="true" />
+      <created>1757897878055</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1757897878056</updated>
+    </task>
+    <task id="LOCAL-00050" summary="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject">
+      <option name="closed" value="true" />
+      <created>1757900208708</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1757900208708</updated>
+    </task>
+    <task id="LOCAL-00051" summary="dgohje;wgidfksd">
+      <option name="closed" value="true" />
+      <created>1757902353188</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1757902353188</updated>
+    </task>
+    <task id="LOCAL-00052" summary="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too">
+      <option name="closed" value="true" />
+      <created>1757902829523</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1757902829523</updated>
+    </task>
+    <task id="LOCAL-00053" summary="why wont it work">
+      <option name="closed" value="true" />
+      <created>1757907808758</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1757907808760</updated>
+    </task>
+    <task id="LOCAL-00054" summary="it works now &#10;trying to fix the pomodoro session saving">
+      <option name="closed" value="true" />
+      <created>1757910111593</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1757910111594</updated>
+    </task>
+    <task id="LOCAL-00055" summary=":)">
+      <option name="closed" value="true" />
+      <created>1757912688582</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1757912688583</updated>
+    </task>
+    <task id="LOCAL-00056" summary=":(">
+      <option name="closed" value="true" />
+      <created>1757913738329</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1757913738331</updated>
+    </task>
+    <task id="LOCAL-00057" summary="starting this thingy">
+      <option name="closed" value="true" />
+      <created>1757914906014</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1757914906015</updated>
+    </task>
+    <task id="LOCAL-00058" summary="added the pomo changing thing from plane">
+      <option name="closed" value="true" />
+      <created>1757915119676</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1757915119677</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,32 +581,32 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="splitting setReminder class into ReminderManager and ReminderModule &#10;finished displayReminders() &amp; addReminder()&#10;menu() is kinda working" />
-    <MESSAGE value="fixed the menu problem, made some more methods to check whether array list has anything, fixed the get time thing, delete reminder, replace reminder &#10;is too hot to fix delete all reminders &#10;trying to make a verification method&#10;not sure to split it up between methods or just to keep it in delete all reminders" />
-    <MESSAGE value="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted" />
-    <MESSAGE value="add tool tip text fromwinter and &quot;!anguishied!&quot;" />
-    <MESSAGE value="fixed the stopwatch issue, changed a lot of the timer class things in setTimer" />
-    <MESSAGE value="data can be written to text file" />
-    <MESSAGE value="got the thing to send water reminders every half an hour" />
-    <MESSAGE value="got the scroll panel in reminders working" />
-    <MESSAGE value="lowkey forgot what i added" />
-    <MESSAGE value="added helper methods in GUI class to not have repetition" />
-    <MESSAGE value="added reminder buttons and some switch case stuff" />
-    <MESSAGE value="added reminder input" />
-    <MESSAGE value="set reminders screen yayyy" />
-    <MESSAGE value="added delete function FINALYY" />
-    <MESSAGE value="delete al button works" />
-    <MESSAGE value="replace reminders working" />
-    <MESSAGE value="confused" />
-    <MESSAGE value="fasfasf" />
-    <MESSAGE value="tried break storing thing" />
-    <MESSAGE value="sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
-    <MESSAGE value="2sorted out a lot of gui stuff, trying to debug the set mood for each pomo session, without any thread.sleep() and with just buttons" />
     <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input" />
     <MESSAGE value="rewrote pomo and gui classes, have a way to classify beteween normal and pomodoro study sessions, still trying to get it to save &#10;work on saveBreak() next in timer class so that it reads the timer from the list and then also the text box input&#10;broke some more stuff" />
     <MESSAGE value="fixed the saveBreak() issue, pomos aren't running after clicking on mood" />
-    <MESSAGE value="fdasfdsafdsafsdafasf" />
-    <option name="LAST_COMMIT_MESSAGE" value="fdasfdsafdsafsdafasf" />
+    <MESSAGE value="why broken" />
+    <MESSAGE value="fixed the own broken i broke" />
+    <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
+    <MESSAGE value="fixing up totalStatsPanel, getting all graph data sorted" />
+    <MESSAGE value="trying to do the tables" />
+    <MESSAGE value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
+    <MESSAGE value="old daily overview" />
+    <MESSAGE value="daily overview kinda broken &#10;card panels are created in their separate classes when clicking on the graphing buttons" />
+    <MESSAGE value="got calendar overview to work with the average moods felt&#10;need to have the numbers in the top left and the daily overviews for the days they want to click on" />
+    <MESSAGE value="finishing stuff up, added calendar numbesr and daily overviews when u click on the days" />
+    <MESSAGE value="added return button in calendar properly" />
+    <MESSAGE value="dsagdsagdsa;g;jklsa" />
+    <MESSAGE value="making subject key and colours akjdgkl;asgdjkjkla;g&#10;have to try and save the colours so that they carry over to the next session" />
+    <MESSAGE value="added the saving mood with json, mixed up subjects_colours.json with subject_colours.json it wasnt even the color colours thing it was the damn subject" />
+    <MESSAGE value="dgohje;wgidfksd" />
+    <MESSAGE value="getting the different tabs in total stats &lt;3 &#10;to do is to make the colours appear, and the github heat map, the line chart too" />
+    <MESSAGE value="why wont it work" />
+    <MESSAGE value="it works now &#10;trying to fix the pomodoro session saving" />
+    <MESSAGE value=":)" />
+    <MESSAGE value=":(" />
+    <MESSAGE value="starting this thingy" />
+    <MESSAGE value="added the pomo changing thing from plane" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the pomo changing thing from plane" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

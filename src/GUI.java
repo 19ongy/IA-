@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GUI extends JFrame{    //card layout thing
+public class GUI extends JFrame{
     public CardLayout cardLayout;
     public JPanel cardPanel;
     private JPanel menuScreen;

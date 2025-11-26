@@ -33,6 +33,7 @@ public class CalendarPanel extends JPanel{
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(27,77,62));
 
+        //access buttons to switch between the different months
         JButton prevMonth = new JButton("<");
         JButton nextMonth = new JButton(">");
         JLabel monthLabel = new JLabel(currentMonth.getMonth().toString() + " " + currentMonth.getYear(), SwingConstants.CENTER);
@@ -45,6 +46,7 @@ public class CalendarPanel extends JPanel{
         rightButtons.setBackground(new Color(27,77,62));
         rightButtons.add(nextMonth);
 
+        //return button
         JButton returnButton = new JButton("Return");
         returnButton.setFocusPainted(false);
         returnButton.setBackground(new Color(27, 77, 62));
@@ -62,13 +64,11 @@ public class CalendarPanel extends JPanel{
         calendarGrid = new JPanel(new GridLayout(0, 7, 5, 5));
         calendarGrid.setBackground(new Color(46, 46, 46));
         add(calendarGrid, BorderLayout.CENTER);
-
-        //fill the calendar with all the info
-        populateCalendar();
-
+        populateCalendar();//fill the calendar with all the info
         prevMonth.addActionListener(e -> {
             currentMonth = currentMonth.minusMonths(1);
-            monthLabel.setText(currentMonth.getMonth().toString() + " " + currentMonth.getYear());
+            monthLabel.setText(currentMonth.getMonth().toString() + " " + currentMonth.getYear()); //refreshes text at top of the screen
+            //refreshes the calendar view when they click on the previous month button
             populateCalendar();
         });
         nextMonth.addActionListener(e -> {
@@ -80,7 +80,8 @@ public class CalendarPanel extends JPanel{
 
     //filling up the calendar with the average moods
     private void populateCalendar(){
-        calendarGrid.removeAll();
+        int totalSeconds = 0;
+        calendarGrid.removeAll(); //clears the calendar
         LocalDate firstDay = currentMonth.atDay(1);
         int startDay = firstDay.getDayOfWeek().getValue();
         // monday = 1, saturday = 7
@@ -88,15 +89,15 @@ public class CalendarPanel extends JPanel{
         for(int i = 1; i<startDay; i++){
             calendarGrid.add(new JLabel(""));
         }
-
-        int daysInMonth = currentMonth.lengthOfMonth();
-        for(int day = 1; day <= daysInMonth; day++){
+        int daysInTheMonth = currentMonth.lengthOfMonth();
+        for(int day = 1; day <= daysInTheMonth; day++){
             LocalDate date = currentMonth.atDay(day);
 
             //finding the average mood
             ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, date);
             String avgMoodEmoji = calculateAverageMood(daySessions);
 
+            //GUI stuff for specific buttons representing days
             JButton dayButton = new JButton();
             dayButton.setLayout(null);
             dayButton.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 24));
@@ -112,15 +113,7 @@ public class CalendarPanel extends JPanel{
             dateLabel.setForeground(Color.WHITE);
             dateLabel.setBounds(5, 5, 30, 20);
             dayButton.add(dateLabel);
-
-            //THE MOOD ON EACH DAY PANEL
-            JLabel moodLabel = new JLabel(avgMoodEmoji, SwingConstants.CENTER);
-            moodLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 18));
-            moodLabel.setBounds(35, 30, 30, 30);
-            dayButton.add(moodLabel);
-
-            //STUDY TIME OF EACH DAY
-            int totalSeconds = 0;
+            //total study time of the day summary
             for(SessionManager session : daySessions){
                 totalSeconds = session.sessionLength + totalSeconds;
             }
@@ -131,6 +124,12 @@ public class CalendarPanel extends JPanel{
             timeLabel.setForeground(Color.WHITE);
             timeLabel.setBounds(20, 65, 60, 20);
             dayButton.add(timeLabel);
+
+            //THE MOOD ON EACH DAY PANEL
+            JLabel moodLabel = new JLabel(avgMoodEmoji, SwingConstants.CENTER);
+            moodLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 18));
+            moodLabel.setBounds(35, 30, 30, 30);
+            dayButton.add(moodLabel);
 
             //action listener, they can click on the calendar panel and get a daily overview of that day
             dayButton.addActionListener( e-> {
@@ -150,7 +149,7 @@ public class CalendarPanel extends JPanel{
                     }
                     subjectTimeMap.put(subject, subjectTimeMap.getOrDefault(subject, 0) + session.sessionLength);
 
-                    //mood aggre gation
+                    //mood aggregation
                     if(session.getMoodBefore() != null){
                         mood = session.getMoodBefore().toString();
                     }else{
@@ -159,6 +158,7 @@ public class CalendarPanel extends JPanel{
                     moodMap.put(mood, moodMap.getOrDefault(mood, 0) + 1);
                 }
 
+                //displays the stats of the day in a op up
                 StringBuilder tableBuilder = new StringBuilder();
                 tableBuilder.append(date.toString() + "\n");
                 tableBuilder.append(" Total Studied: " + String.format("%.1f hrs", totSeconds / 3600.0) + "\n\n");
@@ -169,14 +169,13 @@ public class CalendarPanel extends JPanel{
                     tableBuilder.append(" - " + subj + " : " + String.format("%.1f hrs", hrs) + "\n");
 
                 }
-
+                //creating the pop up that displays the days stats
                 JTextArea popUp = new JTextArea(tableBuilder.toString());
                 popUp.setEditable(false);
                 popUp.setFont(new Font("Arial", Font.PLAIN, 14));
                 popUp.setBackground(new Color(27,77,62));
                 popUp.setForeground(Color.WHITE);
                 popUp.setMargin(new Insets(10 ,10, 10, 10));
-
                 JScrollPane scrollPane = new JScrollPane(popUp);
                 scrollPane.setPreferredSize(new Dimension(300, 250));
 
@@ -186,6 +185,7 @@ public class CalendarPanel extends JPanel{
                 dialog.getContentPane().add(scrollPane);
                 dialog.pack();
 
+                //sets the location of pop up
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 dialog.setLocation(screenSize.width - dialog.getWidth() - 20, 20);
 
@@ -199,6 +199,7 @@ public class CalendarPanel extends JPanel{
     }
 
     private String calculateAverageMood(ArrayList<SessionManager> sessions){
+        //makes sure every day has a mood
         if(sessions.isEmpty()){
             return "⏭";
         }

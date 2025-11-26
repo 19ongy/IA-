@@ -93,6 +93,7 @@ public class TotalStatsPanel {
         };
 
         //creating a table to display info, with a not white background
+
         JTable table = new JTable(data, new String[]{"Total..", "Value"});
         table.setBackground(new Color(46, 46, 46));
         table.setForeground(new Color(200, 200, 200));

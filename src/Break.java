@@ -40,6 +40,7 @@ public class Break {
         return endTime;
     }
 
+    //formats data to be added to the CSV file
     public String toFileString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -48,6 +49,7 @@ public class Break {
 
         return breakLength + "," + startDate + "," + formattedStart + "," + endDate + "," + formattedEnd;
     }
+
 
     public static ArrayList<Break> getBreaksByDate(ArrayList<Break> allBreaks, LocalDate date){
         ArrayList<Break> result = new ArrayList<>();

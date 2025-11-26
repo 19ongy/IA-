@@ -53,6 +53,7 @@ public class BreakManager {
             while((line = reader.readLine())!= null){
                 String[] parts = line.split(",");
                 if(parts.length == 5){
+                    //splitting the line into sections
                     int breakLength = Integer.parseInt(parts[0]);
                     LocalDate startDate = LocalDate.parse(parts[1]);
                     LocalTime startTime = LocalTime.parse(parts[2], TIME_FORMATTER);
