@@ -26,9 +26,9 @@ public class BreakManager {
     }
 
     public void startBreak(){
-        final int[] remaining = {breakDuration};
-        timer = new Timer(1000, e -> {
-            remaining[0]--;
+        final int[] remaining = {breakDuration}; //remaining minutes as array to allow modification inside lambda
+        timer = new Timer(1000, e -> { //every second
+            remaining[0]--; //decreases by 1
             System.out.println("Minutes left: " + remaining[0]);
 
             if (remaining[0] <= 0) {
@@ -40,7 +40,7 @@ public class BreakManager {
         System.out.println("Break started for " + breakDuration + " minutes");
     }
 
-    //ending the break
+    //ending the break manually or when theh timer reaches zeroo
     public void endBreak(){
         this.endDate = LocalDate.now();
         this.endTime = LocalTime.now();
@@ -56,6 +56,7 @@ public class BreakManager {
     public String toFileString(){
         String startTimeStr = startTime.format(TIME_FORMATTER);
         String endTimeStr = endTime.format(TIME_FORMATTER);
+        //converts to CSV format
         return breakDuration + "," + startDate + "," + startTimeStr + "," + endDate + "," + endTimeStr;
     }
 
@@ -78,7 +79,7 @@ public class BreakManager {
             while((line = reader.readLine())!= null){
                 String[] parts = line.split(",");
                 if(parts.length == 5){
-                    //splitting the line into sections
+                    //splitting the line into sections to be used individually
                     int breakLength = Integer.parseInt(parts[0]);
                     LocalDate startDate = LocalDate.parse(parts[1]);
                     LocalTime startTime = LocalTime.parse(parts[2], TIME_FORMATTER);
@@ -89,7 +90,7 @@ public class BreakManager {
                 }
             }
         }catch(IOException e){
-            e.printStackTrace();
+            e.printStackTrace(); //handles file read errors
         }
         return result;
     }

@@ -4,12 +4,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Break {
-    private int breakLength;
+    private int breakLength; //in minutes
     private LocalDate startDate;
     private LocalTime startTime;
     private LocalDate endDate;
     private LocalTime endTime;
 
+    //constructor
     public Break(int breakLength, LocalDate startDate, LocalTime startTime,
                  LocalDate endDate, LocalTime endTime) {
         this.breakLength = breakLength;
@@ -47,20 +48,22 @@ public class Break {
         String formattedStart = startTime.format(formatter);
         String formattedEnd = endTime.format(formatter);
 
+        //CSV format length, startdate, start time, end date, end time
         return breakLength + "," + startDate + "," + formattedStart + "," + endDate + "," + formattedEnd;
     }
 
-
+//filters all breaks to only include the ones on a certain date
     public static ArrayList<Break> getBreaksByDate(ArrayList<Break> allBreaks, LocalDate date){
         ArrayList<Break> result = new ArrayList<>();
         for(Break br : allBreaks){
             if(br.getStartDate().equals(date)){
-                result.add(br);
+                result.add(br); //add to list
             }
         }
         return result;
     }
 
+    //placeholder method to read breaks from storage
     public static ArrayList<Break> readBreaks(){
         return new ArrayList<>();
     }

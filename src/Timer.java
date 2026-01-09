@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-//handles the coutndowns, stopwatches, break timers  - doesnt save sessions
-
 public class Timer {
+    private int startHour = 0;
+    private int startMin = 0;
+    private int endHour = 0;
+    private int endMin = 0;
     int hourStudied = 0;
     int minStudied = 0;
 
@@ -127,6 +129,12 @@ public class Timer {
                 //checks if the user has ended the timer
                 label.setText("Timer Ended!");
                 stopwatchTimer.stop();
+                manager.setEndDate();
+                manager.setEndTime();
+                manager.setSessionLength(timeElapsed);
+                manager.saveSession();
+
+                //making sure that sessions are saved
             } else if (!isPaused) {
                 //checks if user has paused the timer
                 label.setText(formatTime(timeElapsed));  // update label
@@ -190,7 +198,9 @@ public class Timer {
                     countdownTimer.stop();
                     manager.setEndDate();
                     manager.setEndTime();
+                    manager.setSessionLength(timeElapsed);
                     label.setText("Good job!! Timer finished!");
+                    manager.saveSession();
                     if(onFinish != null){
                         onFinish.run();
                     }

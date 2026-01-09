@@ -13,8 +13,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SessionManager {
+    private Scanner scanner = new Scanner(System.in);
+    LocalDate localDate = LocalDate.now();
+    LocalTime localTime = LocalTime.now();
     private MoodEntry.Mood moodBefore;
     private MoodEntry.Mood moodAfter;
+    //private String moodBefore;
+    //private String moodAfter;
     public LocalDate startLocalDate;
     public LocalDate endLocalDate;
     public LocalTime startLocalTime;
@@ -22,68 +27,75 @@ public class SessionManager {
     private String subject;
     public int sessionLength;
 
-    //constructor for stopwatch and countdown features
+    //constructor
     public SessionManager(){
-        this.moodBefore = MoodEntry.Mood.SKIP; //sets skip to the default
-        this.moodAfter = MoodEntry.Mood.SKIP;
+        this.moodBefore = null;
+        this.moodAfter = null;
         this.subject = null;
-        this.startLocalDate = LocalDate.now();
-        this.startLocalTime = LocalTime.now();
-    }
-
-    //constructor for pomodoro
-    public SessionManager(String subject){
-        this(); //calls the default constructor first ¬ sets everything as null or skip
-        //makes having several pomodoro sessions easier
-        this.subject = subject; // assigns subject specifically
     }
 
     //setter methods
-    public void setMoodBefore(String mood){
+    public String setMoodBefore(String mood){
         try{
             this.moodBefore = MoodEntry.Mood.valueOf(mood.toUpperCase());
         }catch(Exception e){
             this.moodBefore = MoodEntry.Mood.SKIP;
         }
+        return mood;
     }
 
-    public void setMoodAfter(String mood){
+    public String setMoodAfter(String mood){
         try {
             this.moodAfter = MoodEntry.Mood.valueOf(mood.toUpperCase());
         } catch (Exception e){
             this.moodAfter = MoodEntry.Mood.SKIP;
         }
+        return mood;
     }
 
-    public void setStartDate() {
+    public boolean isComplete(){
+        return moodBefore!= null && moodAfter != null && subject != null && startLocalDate != null
+                && startLocalTime != null && endLocalDate != null
+                && endLocalTime != null;
+    }
+
+    //experiment - this one uses LocalData.now() with a capital letter
+    public String setStartDate() {
         LocalDate date = LocalDate.now();
         this.startLocalDate = date;
+        return date.toString();
     }
 
-    public void setStartTime() {
+    public String setStartTime() {
         LocalTime time = LocalTime.now();
         this.startLocalTime = time;
+        return String.format("%02d:%02d", time.getHour(), time.getMinute());
     }
 
-    public void setEndDate(){
+    //this one uses it with a lower case
+    public String setEndDate(){
         LocalDate date = LocalDate.now();
         this.endLocalDate = date;
+        return String.valueOf(date);
     }
 
-    public void setEndTime(){
+    public String setEndTime(){
         LocalTime time = LocalTime.now();
         this.endLocalTime = time;
+        return String.format("%02d:%02d", time.getHour(), time.getMinute());
     }
 
-    public void setSessionLength(int length){
-        this.sessionLength = length;
-    }
-
-    public void setSubject(String subject){
+    public String setSubject(String subject){
         this.subject = subject;
+        return subject;
     }
 
-    //getters
+    public String setSessionLength(int length){
+        this.sessionLength = length;
+        return String.valueOf(length);
+    }
+
+    //getter methods
     public String getSubject(){
         return this.subject;
     }
@@ -96,31 +108,38 @@ public class SessionManager {
         return moodAfter;
     }
 
-    //checking to see whether its ready to save
-    public boolean isComplete(){
-        return startLocalDate != null && startLocalTime != null && endLocalDate != null
-                && endLocalTime != null && subject != null;
-    }
-
-    //converting it into the csv data file
     public String toFileString() {
+        String moodBeforeStr = (moodBefore != null) ? moodBefore.toString() : "SKIP";
+        String moodAfterStr = (moodAfter != null) ? moodAfter.toString() : "SKIP";
+
         String formattedStartTime = String.format("%02d:%02d", startLocalTime.getHour(), startLocalTime.getMinute());
         String formattedEndTime = String.format("%02d:%02d", endLocalTime.getHour(), endLocalTime.getMinute());
 
-        return(moodBefore + "," + moodAfter + "," +
-                sessionLength + "," + subject + "," + startLocalDate + "," +
-                formattedStartTime + "," + endLocalDate + "," +
+        return(moodBeforeStr + "," + moodAfterStr + "," +
+                sessionLength + "," + subject + "," + startLocalDate.toString() + "," +
+                formattedStartTime + "," + endLocalDate.toString() + "," +
                 formattedEndTime
         );
     }
 
-    //saving the session
     public void saveSession() {
-        if(!isComplete()){ //makes sure all the components are there before saving
+                //enters default values if there are any missing
+        if(moodBefore == null) moodBefore = MoodEntry.Mood.SKIP;
+        if(moodAfter == null) moodAfter = MoodEntry.Mood.SKIP;
+        if(subject == null) subject = "N/A";  // or "Generic Subject"
+        if(startLocalDate == null) setStartDate();
+        if(startLocalTime == null) setStartTime();
+        if(endLocalDate == null) setEndDate();
+        if(endLocalTime == null) setEndTime();
+
+        if(!isComplete()){
             System.out.println("session incomplete, not saved");
             return;
+        }else{
+            System.out.println("session complete and saved");
         }
 
+        System.out.println("Saving session with length: " + sessionLength);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session
@@ -156,8 +175,6 @@ public class SessionManager {
         }
         return sessions;
     }
-
-    //getting the sessions by date
 
     public static ArrayList<SessionManager> getSessionsByDate(ArrayList<SessionManager> allSessions, LocalDate date){
         ArrayList<SessionManager> result = new ArrayList<>();

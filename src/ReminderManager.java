@@ -207,7 +207,7 @@ public class ReminderManager {
         int count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader("reminder_data.txt"))) {
             while (reader.readLine() != null) {
-                count = count + 1;
+                count++;
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.time.LocalTime;
 
 //gui class for displaying different types of reminders
 //e.g. water, study, motivation
@@ -28,7 +29,7 @@ public class ReminderGUI extends JFrame{
 
         setTitle("Reminders ");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);  // quit the app when we close the window
-        setLocation(width-1050, height-630);
+        setLocation(width-1050, height-630); //near the bottom right of screen
         setSize(400, 200);
 
         //setup card layout to switch between reminder types
@@ -66,7 +67,7 @@ public class ReminderGUI extends JFrame{
         ImageIcon menuPic = new ImageIcon("new water.png");
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(50, 50, menuPic.getIconWidth(), menuPic.getIconHeight());
-        System.out.println("Image width: " + menuPic.getIconWidth());
+
 
         //sets the background of the window to like grey
         waterRem.setBackground(greenBlue);
@@ -87,7 +88,7 @@ public class ReminderGUI extends JFrame{
 
         //user already set message, is diplayed
         JLabel labelOutput = new JLabel(message);
-        labelOutput.setForeground(lightGreen);
+        labelOutput.setForeground(darkGreen);
         labelOutput.setBounds(0, 0, 700, 40);
         labelOutput.setFont(new Font("Arial", Font.BOLD, 24));
 
@@ -105,8 +106,12 @@ public class ReminderGUI extends JFrame{
     public void sendMotivRem(int intensity){
         JPanel motivRem = new JPanel(null);
 
+        //check what the time is at the moment
+        LocalTime now = LocalTime.now();
+        boolean isNight = now.isAfter(LocalTime.of(22, 0)) || now.isBefore(LocalTime.of(0, 6));
+
         //gets quote based on user mood
-        String quote = MotivationManager.getQuoteByIntensity(intensity);
+        String quote = MotivationManager.getQuoteByIntensity(intensity, isNight);
         //display with html formatting
         JLabel quoteLabel = new JLabel("<html><div style='text-align: center;'>" + quote + "</div></html>", SwingConstants.CENTER);
         quoteLabel.setBounds(20, 20, 360, 60);

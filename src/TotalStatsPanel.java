@@ -15,7 +15,7 @@ import java.util.Map;
 
 //where all study stat overview graphs made
 public class TotalStatsPanel {
-    private JPanel mainPanel;
+    private JPanel mainPanel; //holds all the graphs and tables
     private int totalStudySeconds;
     private int totalBreakSeconds;
 
@@ -23,11 +23,13 @@ public class TotalStatsPanel {
     public TotalStatsPanel() {
         mainPanel = new JPanel(new BorderLayout());
 
+        //reads all sessions and the breaks
         ArrayList<SessionManager> sessions = SessionManager.readSessions();
         ArrayList<Break> breaks = readBreaks();
         totalStudySeconds = 0;
         totalBreakSeconds = 0;
 
+        //making maps for tracking mood counts, subject counts, and times
         Map<String, Integer> moodBeforeMap = new HashMap<>();
         Map<String, Integer> moodAfterMap = new HashMap<>();
         Map<String, Integer> timePeriodMap = new HashMap<>();
@@ -39,6 +41,7 @@ public class TotalStatsPanel {
 
         int longestSession = 0;
 
+        //iterates through sessions for aggregation
         for (SessionManager session : sessions) {
             int sessionLength = session.sessionLength;
             totalStudySeconds = totalStudySeconds + session.sessionLength;

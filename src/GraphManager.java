@@ -8,8 +8,10 @@ public class GraphManager{
     private JPanel mainDisplay;
     private CardLayout cardLayout;
 
+    //manages relationship between the different buttons
+    //allows graphs and diagrams to be added dynamically without hard coding them in
     public GraphManager(JPanel tabPanel, JPanel mainDisplay){
-        this.tabPanel = tabPanel;
+        this.tabPanel = tabPanel; //
         tabPanel.setLayout(new BoxLayout(tabPanel, BoxLayout.Y_AXIS));
         this.mainDisplay = mainDisplay;
         this.cardLayout = (CardLayout) mainDisplay.getLayout();

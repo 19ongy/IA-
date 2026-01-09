@@ -9,7 +9,7 @@ public class CalendarPanel extends JPanel{
     private YearMonth currentMonth;
     private JPanel calendarGrid;
     private ArrayList<SessionManager> allSessions;
-    private GUI gui;
+    private GUI gui; //references the main GUI for switching screens
 
     //the mood emojis and their meanings, to be displayed as heat map on calendar
     private static final HashMap<String, String> moodEmojis = new HashMap<>() {{
@@ -21,6 +21,7 @@ public class CalendarPanel extends JPanel{
         put("SKIP", "⏭");
     }};
 
+    //constructor
     public CalendarPanel(ArrayList<SessionManager> sessions, GUI gui){
         this.allSessions = sessions;
         this.gui = gui;
@@ -42,6 +43,7 @@ public class CalendarPanel extends JPanel{
         topPanel.add(prevMonth, BorderLayout.WEST);
         topPanel.add(monthLabel, BorderLayout.CENTER);
 
+        //panel to hold right side buttons
         JPanel rightButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         rightButtons.setBackground(new Color(27,77,62));
         rightButtons.add(nextMonth);
@@ -52,7 +54,7 @@ public class CalendarPanel extends JPanel{
         returnButton.setBackground(new Color(27, 77, 62));
         returnButton.setForeground(Color.WHITE);
         returnButton.addActionListener(e-> {
-            gui.cardLayout.show(gui.cardPanel, "graphMenu");
+            gui.cardLayout.show(gui.cardPanel, "graphMenu"); //siwtch back to the graph menu
         });
 
         rightButtons.add(returnButton);
@@ -60,11 +62,12 @@ public class CalendarPanel extends JPanel{
         topPanel.add(rightButtons, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
 
-        //calendar grid
+        //calendar grid - holds the buttons for each day
         calendarGrid = new JPanel(new GridLayout(0, 7, 5, 5));
         calendarGrid.setBackground(new Color(46, 46, 46));
         add(calendarGrid, BorderLayout.CENTER);
         populateCalendar();//fill the calendar with all the info
+
         prevMonth.addActionListener(e -> {
             currentMonth = currentMonth.minusMonths(1);
             monthLabel.setText(currentMonth.getMonth().toString() + " " + currentMonth.getYear()); //refreshes text at top of the screen
@@ -78,29 +81,25 @@ public class CalendarPanel extends JPanel{
         });
     }
 
-    //filling up the calendar with the average moods
+    //filling up the calendar with the average moods and total study time
     private void populateCalendar(){
+        int totalSeconds = 0;
         calendarGrid.removeAll(); //clears the calendar
         LocalDate firstDay = currentMonth.atDay(1);
         int startDay = firstDay.getDayOfWeek().getValue();
         // monday = 1, saturday = 7
 
+        //blank spaces before the first day
         for(int i = 1; i<startDay; i++){
             calendarGrid.add(new JLabel(""));
         }
+
         int daysInTheMonth = currentMonth.lengthOfMonth();
         for(int day = 1; day <= daysInTheMonth; day++){
             LocalDate date = currentMonth.atDay(day);
 
             //finding the average mood
             ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, date);
-
-            int totalSecondsForButton = 0;
-            for(SessionManager session : daySessions){
-                totalSecondsForButton += session.sessionLength;
-            }
-            double hoursForButton = totalSecondsForButton / 3600.0;
-            String hoursStudied = String.format("%.1f hrs", hoursForButton);
             String avgMoodEmoji = calculateAverageMood(daySessions);
 
             //GUI stuff for specific buttons representing days
@@ -119,7 +118,12 @@ public class CalendarPanel extends JPanel{
             dateLabel.setForeground(Color.WHITE);
             dateLabel.setBounds(5, 5, 30, 20);
             dayButton.add(dateLabel);
-
+            //total study time of the day summary
+            for(SessionManager session : daySessions){
+                totalSeconds = session.sessionLength + totalSeconds;
+            }
+            double hours = totalSeconds/3600.0;
+            String hoursStudied = String.format("%.1f hrs", hours);
             JLabel timeLabel = new JLabel(hoursStudied, SwingConstants.CENTER);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 11));
             timeLabel.setForeground(Color.WHITE);
@@ -134,36 +138,35 @@ public class CalendarPanel extends JPanel{
 
             //action listener, they can click on the calendar panel and get a daily overview of that day
             dayButton.addActionListener( e-> {
-                int totSecondsForPopup = 0;
+                int totSeconds = 0;
+                String subject;
+                String mood;
                 HashMap<String, Integer> subjectTimeMap = new HashMap<>();
                 HashMap<String, Integer> moodMap = new HashMap<>();
 
                 //subject time aggregation
                 for(SessionManager session : daySessions){
-                    totSecondsForPopup += session.sessionLength;
-
-                    String subject;
-                    if (session.getSubject() != null) {
+                    totSeconds = totSeconds + session.sessionLength;
+                    if(session.getSubject() != null){
                         subject = session.getSubject();
-                    } else {
-                        subject = "Unknown";
+                    }else{
+                        subject = "Unknwon";
                     }
                     subjectTimeMap.put(subject, subjectTimeMap.getOrDefault(subject, 0) + session.sessionLength);
 
-                    String mood;
-                    if (session.getMoodBefore() != null) {
+                    //mood aggregation
+                    if(session.getMoodBefore() != null){
                         mood = session.getMoodBefore().toString();
-                    } else {
+                    }else{
                         mood = "SKIP";
                     }
                     moodMap.put(mood, moodMap.getOrDefault(mood, 0) + 1);
-
                 }
 
                 //displays the stats of the day in a op up
                 StringBuilder tableBuilder = new StringBuilder();
                 tableBuilder.append(date.toString() + "\n");
-                tableBuilder.append(" Total Studied: " + String.format("%.1f hrs", totSecondsForPopup / 3600.0) + "\n\n");
+                tableBuilder.append(" Total Studied: " + String.format("%.1f hrs", totSeconds / 3600.0) + "\n\n");
                 tableBuilder.append("Subjects:\n");
 
                 for(String subj : subjectTimeMap.keySet()){
