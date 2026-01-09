@@ -83,7 +83,6 @@ public class CalendarPanel extends JPanel{
 
     //filling up the calendar with the average moods and total study time
     private void populateCalendar(){
-        int totalSeconds = 0;
         calendarGrid.removeAll(); //clears the calendar
         LocalDate firstDay = currentMonth.atDay(1);
         int startDay = firstDay.getDayOfWeek().getValue();
@@ -100,6 +99,17 @@ public class CalendarPanel extends JPanel{
 
             //finding the average mood
             ArrayList<SessionManager> daySessions = SessionManager.getSessionsByDate(allSessions, date);
+
+            //daily aggregation
+            int totalSeconds = 0; //resets the amount per day
+            for(SessionManager session : daySessions){
+                totalSeconds = session.sessionLength + totalSeconds;
+            }
+
+            double hoursStudied = totalSeconds / 3600.0;
+            String hourText = String.format("%.1f hrs", hoursStudied);
+
+            //calculate most frequent felt mood for the day
             String avgMoodEmoji = calculateAverageMood(daySessions);
 
             //GUI stuff for specific buttons representing days
@@ -119,12 +129,9 @@ public class CalendarPanel extends JPanel{
             dateLabel.setBounds(5, 5, 30, 20);
             dayButton.add(dateLabel);
             //total study time of the day summary
-            for(SessionManager session : daySessions){
-                totalSeconds = session.sessionLength + totalSeconds;
-            }
-            double hours = totalSeconds/3600.0;
-            String hoursStudied = String.format("%.1f hrs", hours);
-            JLabel timeLabel = new JLabel(hoursStudied, SwingConstants.CENTER);
+
+            //time studied label
+            JLabel timeLabel = new JLabel(hourText, SwingConstants.CENTER);
             timeLabel.setFont(new Font("Arial", Font.PLAIN, 11));
             timeLabel.setForeground(Color.WHITE);
             timeLabel.setBounds(20, 65, 60, 20);
