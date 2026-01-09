@@ -248,7 +248,6 @@ public class GUI extends JFrame{
 
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
-        JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
         timerDisplay.setBounds(150, 120, 500, 120);
         timerDisplay.setFont(new Font("Arial", Font.BOLD, 60));
         timerDisplay.setForeground(lightGreen);
@@ -484,14 +483,24 @@ public class GUI extends JFrame{
                 JOptionPane.showMessageDialog(null, "Please enter a time first");
                 return;
             }
-
+//before mood page
             cardLayout.show(cardPanel, "bMood");
 
             //record the session date and time
             sessionManager.setStartDate();
             sessionManager.setStartTime();
-            System.out.println("test thing: " + timer.formatTime(String.valueOf(value)));
-            timer.startCountdown(timer.formatTime(String.valueOf(value)), timerDisplay, () -> {});
+
+            //start the countdown
+            timer.startCountdown(timer.formatTime(String.valueOf(value)), timerDisplay, () -> {
+                sessionManager.setEndDate();
+                sessionManager.setEndTime();
+                sessionManager.setSessionLength(timer.timeElapsed);
+                sessionManager.saveSession();
+
+                //post moood
+                cardLayout.show(cardPanel, "pMood");
+
+            });
 
         });
 
@@ -526,8 +535,18 @@ public class GUI extends JFrame{
         end.setFocusPainted(false);
         end.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         end.addActionListener(e -> {
-            timer.endT(timerDisplay);
-            cardLayout.show(cardPanel, "pMood");
+            if(isPomodoro){
+                pomodoro.forceEndingCurrentSession("SKIP"); //stops the pomodoro
+            }else{
+                timer.endT(timerDisplay);
+                sessionManager.setMoodAfter("SKIP");
+                sessionManager.setEndDate();
+                sessionManager.setEndTime();
+                sessionManager.setSessionLength(timer.timeElapsed);
+                sessionManager.saveSession();
+                cardLayout.show(cardPanel, "pMood");
+            }
+
         });
 
         returnBut(sessionScreen, "Session");
@@ -604,15 +623,11 @@ public class GUI extends JFrame{
                     new ReminderGUI("motiv", null).sendMotivRem(intensity);
                 }
 
-                if(isPomodoro){
-                    pomodoro.sesh = new SessionManager();
-                    pomodoro.sesh.setStartDate();
-                    pomodoro.sesh.setStartTime();
+                if(isPomodoro && pomodoro.sesh != null){
                     pomodoro.sesh.setMoodBefore(moodName.toUpperCase());
-                    pomodoro.startStudySession();
-                }else{
-                    sessionManager.setMoodBefore(moodName.toUpperCase());
+                    pomodoro.prepareNextSession(); //prompts the next session to begin
                     cardLayout.show(cardPanel, "Session");
+                    //sets the mood and continues
                 }
 
             });
@@ -623,6 +638,7 @@ public class GUI extends JFrame{
         cardPanel.add(bMoodScreen, "bMood");
     }
 
+    //asking user for their mood prior to timer
     public void setPMoodScreen(){
         pMoodScreen = new JPanel(null);
 
@@ -650,6 +666,7 @@ public class GUI extends JFrame{
         int startY = 220;
         int gap = 20;
 
+        //organising buttons on the screen
         for(int i = 0; i< moods.length; i++){
             String moodName = moods[i];
             String butText = moodImages[i];
@@ -667,7 +684,7 @@ public class GUI extends JFrame{
                 System.out.println("Mood selected = " + moodButton.getText());
                 if (List.of("TIRED", "SAD", "ANGUISHED").contains(moodName.toUpperCase())) {
                     int intensity = switch (moodName.toUpperCase()) {
-                        //increases the intenstiy based on what they feel like
+                        //increases the intensity based on what they feel like
 
                         case "ANGUISHED" -> 8;
                         case "SAD" -> 6;
@@ -678,26 +695,11 @@ public class GUI extends JFrame{
                 }
 
                 if(isPomodoro && (pomodoro.sesh != null)){
-                    pomodoro.sesh.setMoodAfter(mood);
-                    pomodoro.sesh.setEndDate();
-                    pomodoro.sesh.setEndTime();
-                    pomodoro.sesh.setSessionLength(timer.timeElapsed);
-                    pomodoro.sesh.saveSession();
-
-                    pomodoro.index++;
-                    //starts the next round of the pomodoro timers
-                    if(pomodoro.index < pomodoro.types.length) {
-                        if (pomodoro.types[pomodoro.index].equals("Study")) {
-                            pomodoro.prepareNextSession();
-                        } else {
-                            pomodoro.startBreakSession();
-                        }
-                    }else{
-                        cardLayout.show(cardPanel, "Session");
-                    }
-                    //forces ui to swtich out of pMood screen / card panel
+                    //uses method in pomodoro class to save and finish current session
+                    pomodoro.finishCurrentSession(mood, timer.timeElapsed);
                     cardPanel.revalidate();
-                    cardPanel.repaint();
+                    cardPanel.repaint();//refreshes the ui
+
                 }else{
                     sessionManager.setMoodAfter(mood);
                     sessionManager.setEndDate();
@@ -709,7 +711,6 @@ public class GUI extends JFrame{
                 }
             });
             pMoodScreen.add(moodButton);
-
         }
 
         pMoodScreen.add(labelOutput);

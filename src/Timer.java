@@ -1,11 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+//handles the coutndowns, stopwatches, break timers  - doesnt save sessions
+
 public class Timer {
-    private int startHour = 0;
-    private int startMin = 0;
-    private int endHour = 0;
-    private int endMin = 0;
     int hourStudied = 0;
     int minStudied = 0;
 

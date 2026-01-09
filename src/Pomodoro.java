@@ -16,6 +16,7 @@ public class Pomodoro {
     public int index = 0;
     public SessionManager sesh;
 
+
     public Pomodoro(GUI gui, Timer timer, JLabel timerLabel, int[] allDurations, String[] studyOrBreak ){
         this.timer = timer;
         this.timerLabel = timerLabel;
@@ -34,17 +35,13 @@ public class Pomodoro {
         }
         // reset index if you want to allow restart
         index = 0;
-        gui.cardLayout.show(gui.cardPanel, "pMood");
+        gui.cardLayout.show(gui.cardPanel, "Session");
         System.out.println("All Pomodoro sessions complete!");
     }
 
     //prepare for the next session (study or break)
     public void prepareNextSession() {
-        System.out.println("this is working");
-        timer.stopCountdown();
-        timer.stopBreak();
-
-        //hard code it so when it gets to the last point in the array, the timer stops afterwards
+              //hard code it so when it gets to the last point in the array, the timer stops afterwards
         if(index >= allDurations.length) {
             endPomodoro();
             return; // finished all sessions
@@ -62,6 +59,7 @@ public class Pomodoro {
         timer.stopBreak();
         int duration = allDurations[index];
 
+        //create new not yet saved session
         sesh = new SessionManager();
         sesh.setSubject("Pomodoro");
         sesh.setSessionLength(duration);
@@ -71,21 +69,33 @@ public class Pomodoro {
         gui.cardLayout.show(gui.cardPanel, "Session");
 
         timer.startCountdown(duration, timerLabel, () -> {
-
-            sesh.setEndDate();
-            sesh.setEndTime();
-            sesh.saveSession();
-            index = index + 1;
-            if(index >= allDurations.length) {
-                SwingUtilities.invokeLater(() -> {
-                    endPomodoro();
-                });
-            } else{
-                SwingUtilities.invokeLater(() -> {
-                    prepareNextSession();
-                });
-            }
+            System.out.println("such a skill issue");
+//will go to post mood screen and save there
+            SwingUtilities.invokeLater(() ->
+                    gui.cardLayout.show(gui.cardPanel, "pMood")
+            );
         });
+    }
+
+    //saving all the data
+    public void finishCurrentSession(String moodAfter, int actualLength){
+        //safety check
+        if(sesh == null){
+            return;
+        }
+
+        sesh.setMoodAfter(moodAfter);
+        sesh.setEndDate();
+        sesh.setEndTime();
+        sesh.setSessionLength(actualLength);
+        sesh.saveSession();
+
+        index = index + 1;
+        if(index >= allDurations.length){
+            endPomodoro();
+        }else{
+            prepareNextSession();
+        }
     }
 
     //starting break loop
@@ -104,22 +114,8 @@ public class Pomodoro {
         gui.cardLayout.show(gui.cardPanel, "Session");
 
         timer.startBreak(duration, timerLabel, () -> {
-            sesh.setEndDate();
-            sesh.setEndTime();
-            sesh.saveSession();
-
-            index++; //increment before starting the next session
-            //checks whether it's the final break
-            if(index >= allDurations.length) {
-                SwingUtilities.invokeLater(() -> {
-                    endPomodoro();
-                });
-            }else{
-                SwingUtilities.invokeLater(() -> {
-                    prepareNextSession();
-
-                });
-            }
+            SwingUtilities.invokeLater(() ->
+                    gui.cardLayout.show(gui.cardPanel, "pMood"));
         });
     }
 
@@ -145,5 +141,22 @@ public class Pomodoro {
         allDurations = listOfDurations.stream().mapToInt(Integer::intValue).toArray();
         types = listOfTypes.toArray(new String[0]);
         index = 0;
+    }
+
+    //forcefully ending the session
+    public void forceEndingCurrentSession(String mood){
+        if(sesh!= null){
+            if(mood == null){
+                mood = "SKIP"; //safety level
+            }
+            sesh.setMoodAfter(mood);
+            sesh.setEndDate();
+            sesh.setEndTime();
+            sesh.setSessionLength(timer.timeElapsed);
+            sesh.saveSession();
+        }
+
+        index = allDurations.length;// stops the next session from starting if there is one
+        endPomodoro();
     }
 }

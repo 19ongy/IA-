@@ -9,13 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixed the calendar issue">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="pre last minute changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,15 +170,7 @@
       <workItem from="1765158081591" duration="1157000" />
       <workItem from="1765930499069" duration="1884000" />
       <workItem from="1767722890981" duration="750000" />
-      <workItem from="1767847843889" duration="3935000" />
-    </task>
-    <task id="LOCAL-00016" summary="add tool tip text fromwinter and &quot;!anguishied!&quot;">
-      <option name="closed" value="true" />
-      <created>1751451165936</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1751451165936</updated>
+      <workItem from="1767847843889" duration="11226000" />
     </task>
     <task id="LOCAL-00017" summary="fixed the stopwatch issue, changed a lot of the timer class things in setTimer">
       <option name="closed" value="true" />
@@ -564,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764163009328</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="pre last minute changes">
+      <option name="closed" value="true" />
+      <created>1767903785307</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1767903785308</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +600,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixing up totalStatsPanel, getting all graph data sorted" />
     <MESSAGE value="trying to do the tables" />
     <MESSAGE value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
     <MESSAGE value="old daily overview" />
@@ -625,7 +624,8 @@
     <MESSAGE value="tryring to fizx" />
     <MESSAGE value="trying to get the break thing to work but it doesnt &#10;fixed the set pomo lengths issue &#10;fixed the pomo timer threads issue" />
     <MESSAGE value="fixed the calendar issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the calendar issue" />
+    <MESSAGE value="pre last minute changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="pre last minute changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
