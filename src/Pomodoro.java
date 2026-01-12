@@ -14,6 +14,7 @@ public class Pomodoro {
     private String moodBefore;
     private String moodAfter;
 
+    //constructor
     public Pomodoro(GUI gui, Timer timer, JLabel timerLabel, int[] allDurations, String[] studyOrBreak ){
         this.timer = timer;
         this.timerLabel = timerLabel;
@@ -72,6 +73,7 @@ public class Pomodoro {
         gui.cardPanel.repaint();
 
         timer.startCountdown(duration, timerLabel, () -> {
+            //saving the details for later to be stored
             sesh.setEndDate();
             sesh.setEndTime();
             sesh.saveSession();
@@ -79,10 +81,12 @@ public class Pomodoro {
             if(index >= allDurations.length) {
                 SwingUtilities.invokeLater(() -> {
                     endPomodoro();
+                    //if the number of sessions has ended, end all the timers
                 });
             } else{
                 SwingUtilities.invokeLater(() -> {
                     prepareNextSession();
+                    //if there are still sessions reamining, continue preparing for the next one
                 });
             }
         });
@@ -123,7 +127,7 @@ public class Pomodoro {
         });
     }
 
-    //change pomodoro settings
+    //change pomodoro settings for test plan 6th point
     public void changePomo(int sessionLength, int shortBreak, int longBreak, int numLoops){
         List<Integer> listOfDurations = new ArrayList<>();
         List<String> listOfTypes = new ArrayList<>();

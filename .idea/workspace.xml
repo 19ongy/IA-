@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="adding comments and fixing saving">
+    <list default="true" id="d9ed50dc-2266-4990-9a25-a3e904e410f3" name="Changes" comment="fixing calendar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/break_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/break_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reminder_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/reminder_data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/session_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/session_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MoodEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MoodEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MotivationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MotivationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pomodoro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pomodoro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PomodoroManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReminderGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReminderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReminderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ToDoList.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/subjects_colours.json" beforeDir="false" afterPath="$PROJECT_DIR$/subjects_colours.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,15 +157,10 @@
       <workItem from="1764116665393" duration="76000" />
       <workItem from="1764116756361" duration="8440000" />
       <workItem from="1764146466177" duration="9893000" />
-      <workItem from="1767987639720" duration="2404000" />
-    </task>
-    <task id="LOCAL-00015" summary="completely fixed and tested the reminder stuff from 1 - 5 &#10;6 needs new app launcher class &#10;7 is redundant and will be deleted">
-      <option name="closed" value="true" />
-      <created>1748806660711</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1748806660711</updated>
+      <workItem from="1767987639720" duration="8341000" />
+      <workItem from="1767997176534" duration="3932000" />
+      <workItem from="1768045891726" duration="25729000" />
+      <workItem from="1768190985953" duration="2709000" />
     </task>
     <task id="LOCAL-00016" summary="add tool tip text fromwinter and &quot;!anguishied!&quot;">
       <option name="closed" value="true" />
@@ -541,7 +546,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767942168530</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="fixing calendar">
+      <option name="closed" value="true" />
+      <created>1767990283603</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1767990283605</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -577,7 +590,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="tried to fix some session manager things didnt work, starting graphs now" />
     <MESSAGE value="fixing up totalStatsPanel, getting all graph data sorted" />
     <MESSAGE value="trying to do the tables" />
     <MESSAGE value="ugly graph done for total stats (overview of studying times, not the subject specific ones" />
@@ -602,7 +614,8 @@
     <MESSAGE value="fixed countdown issue, new pomodoro problem" />
     <MESSAGE value="tryring to fizx" />
     <MESSAGE value="adding comments and fixing saving" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding comments and fixing saving" />
+    <MESSAGE value="fixing calendar" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing calendar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

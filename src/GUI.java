@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GUI extends JFrame{
+    //initialising all the JPanels
     public CardLayout cardLayout;
     public JPanel cardPanel;
     private JPanel menuScreen;
@@ -32,11 +33,11 @@ public class GUI extends JFrame{
     private static final Color backgroundGrey = new Color(46, 46, 46);
     public static HashMap<String, Color> subjectColors = loadSubjectColours();
 
-    //pomodoro stuff
+    //setting default times for pomodoros
     //25, 5, 25, 5, 25, 15 pomo session in seconds for default
     int[] defaultDurations = {1500, 300, 1500, 300, 1500, 900};
     String[] defaultTypes = {"Study", "Break", "Study", "Break", "Study", "Break"};
-    public boolean isPomodoro = false;
+    public boolean isPomodoro = false; //differentiate between normal and set timers
 
     //calling instances of other classes
     SessionManager sessionManager = new SessionManager();
@@ -54,13 +55,16 @@ public class GUI extends JFrame{
     public GUI() {
         setTitle("Grindset");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // quit the app when we close the window
+        //setting a fixed location on screen
         setLocation(25, 25);
         setSize(800, 500);
 
+        //helps to manage and switch between all of the different card panels
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         add(cardPanel);
 
+        //Initialise and add all of the individual screens to the card panel
         setMenuScreen();
         setSessionScreen();
         setBMoodScreen();
@@ -73,7 +77,6 @@ public class GUI extends JFrame{
         setCalendarAndTrends();
 
         setVisible(true);
-
         cardLayout.show(cardPanel,"Menu");
         timerDisplay = new JLabel("00:00:00");
         value = "0";
@@ -127,6 +130,7 @@ public class GUI extends JFrame{
 
         });
 
+        //setting up the button for accessing the daily overview graph
         JButton dailyOverview = new JButton("Daily Overview");
         dailyOverview.setBounds(220, 30, 150, 30);
         dailyOverview.setBackground(darkGreen);
@@ -158,6 +162,7 @@ public class GUI extends JFrame{
             cardPanel.repaint();
         });
 
+        //acess button for calendar overview
         JButton calNTrends = new JButton("Calendar");
         calNTrends.setBounds(390, 30, 150, 30);
         calNTrends.setBackground(darkGreen);
@@ -178,6 +183,7 @@ public class GUI extends JFrame{
         panel.add(totalStats);
     }
 
+    //main menu, first thing you see when you open the project
     public void setMenuScreen(){
         menuScreen = new JPanel(null);
 
@@ -195,9 +201,11 @@ public class GUI extends JFrame{
         setSesh.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
         setSesh.addActionListener(e -> {
             cardLayout.show(cardPanel, "Session");
+            //switches the current active screen to the session one where you set timers
         });
 
         JButton setRem = new JButton("Set Reminder");
+        //changing its aesthetic features and positioning
         setRem.setBounds(70, 190, 300, 35);
         setRem.setFont(new Font("Arial", Font.BOLD, 17));
         setRem.setBackground(darkGreen);
@@ -232,20 +240,24 @@ public class GUI extends JFrame{
             cardLayout.show(cardPanel,"settingMenu");
         });
 
+        //loading an image in
         ImageIcon menuPic = new ImageIcon("OIP.jpg");
         JLabel imageLabel = new JLabel(menuPic);
         imageLabel.setBounds(400, 100, menuPic.getIconWidth(), menuPic.getIconHeight());
 
+        //adding the individual components onto your card panel
         menuScreen.add(labelOutput);
         menuScreen.add(setSesh);
         menuScreen.add(setRem);
         menuScreen.add(studyStats);
         menuScreen.add(settings);
         menuScreen.add(imageLabel);
+        //using helper methods to set a consistent image
         defaultLook(menuScreen, "Menu");
         cardPanel.add(menuScreen, "Menu");
     }
 
+    //screen where you access all the timers
     public void setSessionScreen() {
         sessionScreen = new JPanel(null);
         JLabel timerDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
@@ -267,7 +279,9 @@ public class GUI extends JFrame{
         stopwatchButton.setFocusPainted(false);
         stopwatchButton.addActionListener(e -> {
             isPomodoro = false;
+            //prompts the mood screen that asks you how you are before starting the stopwatch
             cardLayout.show(cardPanel, "bMood");
+            //saving details about the session to be saved later on
             sessionManager.setStartDate();
             sessionManager.setStartTime();
             timer.startStopwatch(timerDisplay);
@@ -322,7 +336,9 @@ public class GUI extends JFrame{
             JDialog dialog = new JDialog((Frame) null, "Choose Subject", true);
             dialog.setLayout(null);
             dialog.setSize(400, 300);
-            dialog.setLocationRelativeTo(null);
+
+            dialog.setLocationRelativeTo(null); //centering
+            //sets the background colour of the table background to grey
             dialog.getContentPane().setBackground(new Color(46, 46, 46));
 
             JLabel label = new JLabel("Enter subject: ");
@@ -383,6 +399,7 @@ public class GUI extends JFrame{
             confirm.addActionListener(j-> {
                 String subjectName =  subjectField.getText().trim();
                 if(!subjectName.isEmpty()){
+                    //saving more details before being stored in the CSV
                     sessionManager.setSubject(subjectName);
                     subjectColors.put(subjectName, selectedColour[0]);
                     subjectButton.setBackground(selectedColour[0]);
@@ -404,9 +421,6 @@ public class GUI extends JFrame{
             dialog.add(subjectField);
             dialog.add(confirm);
             dialog.setVisible(true);
-
-
-
 
         });
 
@@ -432,6 +446,7 @@ public class GUI extends JFrame{
         pomo.setBorder(BorderFactory.createLineBorder(borderGreen, 2));
 
         pomo.addActionListener(e -> {
+            //sets the pomodoro pre session data
             pomodoro.sesh = new SessionManager();
             pomodoro.sesh.setSubject("Pomodoro");
             pomodoro.sesh.setStartDate();
@@ -441,6 +456,7 @@ public class GUI extends JFrame{
             cardLayout.show(cardPanel, "bMood");
             //sets the mode as pomodoro, to make it easier to differentiate later
             if(!timer.isPaused && (timer.timeElapsed > 0) && !timer.isEnded){
+                //check
                 int pomocheck = JOptionPane.showConfirmDialog(null, "There's already a timer running. Do you want to start pomo?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if(pomocheck != JOptionPane.YES_OPTION){
                     pomodoro.index = 0;
@@ -480,7 +496,7 @@ public class GUI extends JFrame{
                     JOptionPane.showMessageDialog(null, "Please enter a time first");
                     return;
                 }
-            }catch(NumberFormatException j){
+            }catch(NumberFormatException j){ //safety net for different errors
                 JOptionPane.showMessageDialog(null, "Please enter a time first");
                 return;
             }
@@ -495,7 +511,7 @@ public class GUI extends JFrame{
 
         });
 
-        //play the pause
+        //different timer manipulator buttons
         JButton play = new JButton("PLAY");
         play.setBounds(250, 250, 100, 40);
         play.setFont(new Font("Arial", Font.BOLD, 17));
@@ -528,6 +544,7 @@ public class GUI extends JFrame{
         end.addActionListener(e -> {
             timer.endT(timerDisplay);
             cardLayout.show(cardPanel, "pMood");
+            //prompts the app to ask for mood after the session ends
         });
 
         returnBut(sessionScreen, "Session");
@@ -548,6 +565,7 @@ public class GUI extends JFrame{
         cardPanel.add(sessionScreen, "Session");
     }
 
+    //setting up of the mood screen that is called before the user starts a study period
     public void setBMoodScreen(){
         //button numbers
         int width = 80;
@@ -575,6 +593,7 @@ public class GUI extends JFrame{
                 new Color(17, 77, 55)
         };
 
+        //drawing out the mood images and tool tips so they are easier to understand
         for(int i = 0; i< moods.length; i++){
             String moodName = moods[i];
             String butText = moodImages[i];
@@ -594,7 +613,7 @@ public class GUI extends JFrame{
 
                 if (List.of("TIRED", "SAD", "ANGUISHED").contains(moodName.toUpperCase())) {
                     int intensity = switch (moodName.toUpperCase()) {
-                        //increases the intenstiy based on what they feel like
+                        //intensity of the different moods are rated so that motivation messages are tailored to their current mood
 
                         case "ANGUISHED" -> 8;
                         case "SAD" -> 6;
@@ -605,9 +624,13 @@ public class GUI extends JFrame{
                 }
 
                 if(isPomodoro){
-                    pomodoro.sesh = new SessionManager();
-                    pomodoro.sesh.setStartDate();
-                    pomodoro.sesh.setStartTime();
+                    if(pomodoro.sesh == null){
+                        pomodoro.sesh = new SessionManager();
+                        //only sets the data after confirming there is nothing there already, and that it is a pmodoro timer
+                        pomodoro.sesh.setStartDate();
+                        pomodoro.sesh.setStartTime();
+                    }
+
                     pomodoro.sesh.setMoodBefore(moodName.toUpperCase());
                     pomodoro.startStudySession();
                 }else{
@@ -667,7 +690,7 @@ public class GUI extends JFrame{
                 System.out.println("Mood selected = " + moodButton.getText());
                 if (List.of("TIRED", "SAD", "ANGUISHED").contains(moodName.toUpperCase())) {
                     int intensity = switch (moodName.toUpperCase()) {
-                        //increases the intenstiy based on what they feel like
+                        //increases the intensity based on what they feel like
 
                         case "ANGUISHED" -> 8;
                         case "SAD" -> 6;
@@ -678,6 +701,7 @@ public class GUI extends JFrame{
                 }
 
                 if(isPomodoro && (pomodoro.sesh != null)){
+                    //inputting all of the post session details so there are non missing
                     pomodoro.sesh.setMoodAfter(mood);
                     pomodoro.sesh.setEndDate();
                     pomodoro.sesh.setEndTime();
@@ -688,6 +712,7 @@ public class GUI extends JFrame{
                     //starts the next round of the pomodoro timers
                     if(pomodoro.index < pomodoro.types.length) {
                         if (pomodoro.types[pomodoro.index].equals("Study")) {
+                            //compares whether it's a study session
                             pomodoro.prepareNextSession();
                         } else {
                             pomodoro.startBreakSession();
@@ -840,6 +865,7 @@ public class GUI extends JFrame{
         ArrayList<SessionManager> sessions = SessionManager.getSessionsByDate(SessionManager.readSessions(), LocalDate.now());
         ArrayList<Break> breaks = Break.getBreaksByDate(Break.readBreaks(), LocalDate.now());
 
+        //allows user to access information not just smooched into a pay to read website
         JScrollPane scrollPane = DailyOverviewPanel.createSingleDayScroll(LocalDate.now(), sessions, breaks, this);
 
         cardPanel.add(scrollPane, "dailyOverview");
@@ -905,6 +931,7 @@ public class GUI extends JFrame{
 
         applyButton.addActionListener(e -> {
             try {
+                //makes sure they're all in the same unit so that the website worked
                 int study = Integer.parseInt(studyField.getText()) * 60;
                 int shortBreak = Integer.parseInt(shortBreakField.getText());
                 int longBreak = Integer.parseInt(longBreakField.getText());
@@ -917,6 +944,7 @@ public class GUI extends JFrame{
             }
         });
 
+        //add the different componentsto the card panel
         pomoBox.add(studyLabel);
         pomoBox.add(studyField);
         pomoBox.add(shortBreakLabel);
@@ -943,6 +971,7 @@ public class GUI extends JFrame{
         resetStatsButton.setFocusPainted(false);
 
         resetStatsButton.addActionListener(e -> {
+            //asks safety confusion questions
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to reset all stats?", "Confirm Reset", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 clearFile("session_data.txt");
@@ -976,6 +1005,7 @@ public class GUI extends JFrame{
         cardPanel.add(settingMenu, "settingMenu");
     }
 
+    //wipes it clean
     public void clearFile(String filename){
         try(PrintWriter writer = new PrintWriter(filename)){
             writer.print("");
@@ -997,6 +1027,7 @@ public class GUI extends JFrame{
         reminderPanel.setLayout(new BoxLayout(reminderPanel, BoxLayout.Y_AXIS));
         reminderPanel.setBackground(new Color(35, 35, 35)); // actual scroll content background
 
+        //displaying the list of reminders on the actual menu
         List<String> allReminders = reminder.loadReminders();
         for (int i = 0; i < allReminders.size(); i++) {
             String data = allReminders.get(i);
@@ -1027,6 +1058,7 @@ public class GUI extends JFrame{
                 optionChoice = index + 1;
                 switch(optionChoice){
                     case 1:
+                        //all the different optionson what culd hav h
                         System.out.println("adding..");
                         String timeInput = JOptionPane.showInputDialog(null, "Enter reminder time in format HHMM");
                         String messageInput = JOptionPane.showInputDialog(null, "Set reminder message");

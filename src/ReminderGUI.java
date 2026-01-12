@@ -49,6 +49,7 @@ public class ReminderGUI extends JFrame{
         setVisible(true);
     }
 
+    //water reminders at set time intervals
     public void sendWaterRem(){
         if(waterRem != null){
             return;

@@ -109,6 +109,7 @@ public class SessionManager {
     }
 
     public String toFileString() {
+        //makes sure that there is always a mood set
         String moodBeforeStr = (moodBefore != null) ? moodBefore.toString() : "SKIP";
         String moodAfterStr = (moodAfter != null) ? moodAfter.toString() : "SKIP";
 
@@ -123,7 +124,8 @@ public class SessionManager {
     }
 
     public void saveSession() {
-                //enters default values if there are any missing
+        //enters default values if there are any missing
+        /*
         if(moodBefore == null) moodBefore = MoodEntry.Mood.SKIP;
         if(moodAfter == null) moodAfter = MoodEntry.Mood.SKIP;
         if(subject == null) subject = "N/A";  // or "Generic Subject"
@@ -132,14 +134,7 @@ public class SessionManager {
         if(endLocalDate == null) setEndDate();
         if(endLocalTime == null) setEndTime();
 
-        if(!isComplete()){
-            System.out.println("session incomplete, not saved");
-            return;
-        }else{
-            System.out.println("session complete and saved");
-        }
-
-        System.out.println("Saving session with length: " + sessionLength);
+         */
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("session_data.txt", true))) {
             writer.write(this.toFileString());
             writer.newLine(); // Adds a newline after each session
@@ -158,6 +153,7 @@ public class SessionManager {
                 String[] parts = line.split(",");
                 //checks whether all the data is there
                 if(parts.length == 8){
+                    //removing specific parts
                     SessionManager session = new SessionManager();
                     session.setMoodBefore(parts[0]);
                     session.setMoodAfter(parts[1]);

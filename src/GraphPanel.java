@@ -28,6 +28,7 @@ public class GraphPanel extends JPanel {
         setPreferredSize(new Dimension(700,totalHeight));
     }
 
+    //provides compile time error checking which makes sure there are no mistakes
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -72,18 +73,16 @@ public class GraphPanel extends JPanel {
         g.fillRect(100, yStart, 400, height);
         g.setColor(Color.WHITE);
         g.drawRect(100, yStart, 400, height);
-
-        //label
-        //g.drawString(label, 100, yStart + 15);
     }
 
+    //draw the grey block
     private void drawBreaks(Graphics g){
         for(Break b: breaks){
             drawBlock(g, b.getStartTime(), b.getLength(), breakColour, "Break");
         }
     }
 
-    //draws entire study session
+    //draws study session block
     private void drawStudySessions(Graphics g) {
         for (SessionManager session : sessions) {
             Color subjectColour = GUI.subjectColors.getOrDefault(session.getSubject(), new Color(27, 77, 62));
@@ -98,6 +97,7 @@ public class GraphPanel extends JPanel {
         g.drawString("Subjects:  ", getWidth() - 150, 20);
         int y = 40;
 
+        //for every colour and subject inside the hashmap, a new row is formed
         for(String subject : GUI.subjectColors.keySet()){
             Color c = GUI.subjectColors.get(subject);
 

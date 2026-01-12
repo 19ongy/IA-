@@ -1,11 +1,10 @@
-//i dont know if this class is necessary anymore
-
+//old class for asking mood inside of the terminal
 import java.util.Scanner;
 
 public class MoodEntry {
     enum Mood{
         HAPPY, SAD, TIRED, DETERMINED, ANGUISHED, SKIP
-    }
+    } //enum final values so you can't change them
 
     Scanner scanner = new Scanner(System.in);
 
@@ -17,6 +16,7 @@ public class MoodEntry {
         int num = scanner.nextInt();
         System.out.println("-----------------------------------------------");
 
+        //highlightst he boundaries
         if((num < 1) || (num > 6)){
             System.out.println("Invalid input :( ");
             return Mood.SKIP;
@@ -33,8 +33,6 @@ public class MoodEntry {
             System.out.println("You are feeling " + mood + " today.");
         }
     }
-
-
 
 
 }

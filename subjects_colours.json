@@ -1,14 +1,18 @@
 {
-  "English": [255, 200, 0],
-  "ComputerScience": [255, 192, 203],
-  "Maths": [255, 0, 0],
-  "Art": [255, 0, 255],
-  "Chemistry": [0, 128, 128],
-  "Drama": [255, 165, 0],
-  "Music": [0, 255, 255],
   "Biology": [0, 255, 0],
   "Math": [0, 0, 255],
   "History": [75, 0, 130],
   "Physics": [255, 255, 0],
+  "English": [255, 200, 0],
+  "Computer Science": [255, 192, 203],
+  "Chemistry": [0, 128, 128],
+  "Drama": [255, 165, 0],
+  "Music": [0, 255, 255],
+  "Elephant": [255, 200, 0],
   "Philosophy": [128, 0, 128]
 }
+
+
+
+
+
